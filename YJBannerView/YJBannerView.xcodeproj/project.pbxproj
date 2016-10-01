@@ -65,8 +65,16 @@
 				6318EEC01D9FEC0E00A4C12F /* YJBannerView.m */,
 				6318EEC21D9FEC3C00A4C12F /* UIView+YJBannerView.h */,
 				6318EEC31D9FEC3C00A4C12F /* UIView+YJBannerView.m */,
+				6318EEC51D9FED5000A4C12F /* YJPageControl */,
 			);
 			path = YJBannerView;
+			sourceTree = "<group>";
+		};
+		6318EEC51D9FED5000A4C12F /* YJPageControl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YJPageControl;
 			sourceTree = "<group>";
 		};
 		63390A811D9E4EF8005A4848 = {
