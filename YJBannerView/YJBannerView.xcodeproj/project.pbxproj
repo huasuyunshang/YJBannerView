@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6318EEBE1D9FEBCD00A4C12F /* YJCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EEBD1D9FEBCD00A4C12F /* YJCollectionViewCell.m */; };
+		6318EEC11D9FEC0E00A4C12F /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EEC01D9FEC0E00A4C12F /* YJBannerView.m */; };
+		6318EEC41D9FEC3C00A4C12F /* UIView+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EEC31D9FEC3C00A4C12F /* UIView+YJBannerView.m */; };
 		63390A8F1D9E4EF8005A4848 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A8E1D9E4EF8005A4848 /* main.m */; };
 		63390A921D9E4EF8005A4848 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A911D9E4EF8005A4848 /* AppDelegate.m */; };
 		63390A951D9E4EF8005A4848 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A941D9E4EF8005A4848 /* ViewController.m */; };
@@ -16,6 +19,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6318EEBC1D9FEBCD00A4C12F /* YJCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCollectionViewCell.h; sourceTree = "<group>"; };
+		6318EEBD1D9FEBCD00A4C12F /* YJCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCollectionViewCell.m; sourceTree = "<group>"; };
+		6318EEBF1D9FEC0E00A4C12F /* YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerView.h; sourceTree = "<group>"; };
+		6318EEC01D9FEC0E00A4C12F /* YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerView.m; sourceTree = "<group>"; };
+		6318EEC21D9FEC3C00A4C12F /* UIView+YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJBannerView.h"; sourceTree = "<group>"; };
+		6318EEC31D9FEC3C00A4C12F /* UIView+YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJBannerView.m"; sourceTree = "<group>"; };
 		63390A8A1D9E4EF8005A4848 /* YJBannerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJBannerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63390A8E1D9E4EF8005A4848 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63390A901D9E4EF8005A4848 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -39,6 +48,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6318EEBA1D9FEA5700A4C12F /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				6318EEBB1D9FEA5700A4C12F /* YJBannerView */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		6318EEBB1D9FEA5700A4C12F /* YJBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				6318EEBC1D9FEBCD00A4C12F /* YJCollectionViewCell.h */,
+				6318EEBD1D9FEBCD00A4C12F /* YJCollectionViewCell.m */,
+				6318EEBF1D9FEC0E00A4C12F /* YJBannerView.h */,
+				6318EEC01D9FEC0E00A4C12F /* YJBannerView.m */,
+				6318EEC21D9FEC3C00A4C12F /* UIView+YJBannerView.h */,
+				6318EEC31D9FEC3C00A4C12F /* UIView+YJBannerView.m */,
+			);
+			path = YJBannerView;
+			sourceTree = "<group>";
+		};
 		63390A811D9E4EF8005A4848 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +88,7 @@
 		63390A8C1D9E4EF8005A4848 /* YJBannerView */ = {
 			isa = PBXGroup;
 			children = (
+				6318EEBA1D9FEA5700A4C12F /* Lib */,
 				63390A901D9E4EF8005A4848 /* AppDelegate.h */,
 				63390A911D9E4EF8005A4848 /* AppDelegate.m */,
 				63390A931D9E4EF8005A4848 /* ViewController.h */,
@@ -151,9 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6318EEC41D9FEC3C00A4C12F /* UIView+YJBannerView.m in Sources */,
+				6318EEC11D9FEC0E00A4C12F /* YJBannerView.m in Sources */,
 				63390A951D9E4EF8005A4848 /* ViewController.m in Sources */,
 				63390A921D9E4EF8005A4848 /* AppDelegate.m in Sources */,
 				63390A8F1D9E4EF8005A4848 /* main.m in Sources */,
+				6318EEBE1D9FEBCD00A4C12F /* YJCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +346,7 @@
 				63390AA31D9E4EF8005A4848 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
