@@ -8,7 +8,6 @@
 
 #import "YJBannerView.h"
 #import "YJBannerViewCell.h"
-#import "YJBannerViewModel.h"
 #import "UIView+YJBannerView.h"
 
 static NSString * const bannerViewCellID = @"bannerViewCellID";
@@ -287,6 +286,160 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
     }
     return _collectionView;
 }
+
+#pragma mark - layoutSubviews
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    _flowLayout.itemSize = self.frame.size;
+    
+    self.collectionView.frame = self.bounds;
+    if (self.collectionView.contentOffset.x == 0 &&  [self _totalItemsCount]) {
+        int targetIndex = 0;
+        if ([self _isInfiniteLoop]) {
+            targetIndex = [self _totalItemsCount] * 0.5;
+        }else{
+            targetIndex = 0;
+        }
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
+    
+    CGSize size = CGSizeZero;
+//    if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
+//        TAPageControl *pageControl = (TAPageControl *)_pageControl;
+//        if (!(self.pageDotImage && self.currentPageDotImage && CGSizeEqualToSize(kCycleScrollViewInitialPageControlDotSize, self.pageControlDotSize))) {
+//            pageControl.dotSize = self.pageControlDotSize;
+//        }
+//        size = [pageControl sizeForNumberOfPages:self.imagePathsGroup.count];
+//    } else {
+//        size = CGSizeMake(self.imagePathsGroup.count * self.pageControlDotSize.width * 1.5, self.pageControlDotSize.height);
+//    }
+//    CGFloat x = (self.sd_width - size.width) * 0.5;
+//    if (self.pageControlAliment == SDCycleScrollViewPageContolAlimentRight) {
+//        x = self.mainView.sd_width - size.width - 10;
+//    }
+//    CGFloat y = self.mainView.sd_height - size.height - 10;
+//    
+//    if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
+//        TAPageControl *pageControl = (TAPageControl *)_pageControl;
+//        [pageControl sizeToFit];
+//    }
+    
+//    CGRect pageControlFrame = CGRectMake(x, y, size.width, size.height);
+//    pageControlFrame.origin.y -= self.pageControlBottomOffset;
+//    pageControlFrame.origin.x -= self.pageControlRightOffset;
+//    self.pageControl.frame = pageControlFrame;
+//    self.pageControl.hidden = !_showPageControl;
+    
+    if (self.placeholderImageView) {
+        self.placeholderImageView.frame = self.bounds;
+    }
+    
+}
+
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self _showDataSource].count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    YJBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:bannerViewCellID forIndexPath:indexPath];
+    
+//    long itemIndex = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
+    
+//    NSString *imagePath = self.imagePathsGroup[itemIndex];
+//    
+//    if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
+//        if ([imagePath hasPrefix:@"http"]) {
+//            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:self.placeholderImage];
+//        } else {
+//            UIImage *image = [UIImage imageNamed:imagePath];
+//            if (!image) {
+//                [UIImage imageWithContentsOfFile:imagePath];
+//            }
+//            cell.imageView.image = image;
+//        }
+//    } else if (!self.onlyDisplayText && [imagePath isKindOfClass:[UIImage class]]) {
+//        cell.imageView.image = (UIImage *)imagePath;
+//    }
+//    
+//    if (_titlesGroup.count && itemIndex < _titlesGroup.count) {
+//        cell.title = _titlesGroup[itemIndex];
+//    }
+    
+//    if (!cell.hasConfigured) {
+//        cell.titleLabelBackgroundColor = self.titleLabelBackgroundColor;
+//        cell.titleLabelHeight = self.titleLabelHeight;
+//        cell.titleLabelTextColor = self.titleLabelTextColor;
+//        cell.titleLabelTextFont = self.titleLabelTextFont;
+//        cell.hasConfigured = YES;
+//        cell.imageView.contentMode = self.bannerImageViewContentMode;
+//        cell.clipsToBounds = YES;
+//        cell.onlyDisplayText = self.onlyDisplayText;
+//    }
+//    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didSelectIndex:)]) {
+        [self.delegate bannerView:self didSelectIndex:indexPath.item];
+    }
+//    if (self.clickItemOperationBlock) {
+//        self.clickItemOperationBlock([self pageControlIndexWithCurrentCellIndex:indexPath.item]);
+//    }
+}
+
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    if (!self.imagePathsGroup.count) return; // 解决清除timer时偶尔会出现的问题
+    int itemIndex = [self currentIndex];
+    int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
+    
+//    if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
+//        TAPageControl *pageControl = (TAPageControl *)_pageControl;
+//        pageControl.currentPage = indexOnPageControl;
+//    } else {
+//        UIPageControl *pageControl = (UIPageControl *)_pageControl;
+//        pageControl.currentPage = indexOnPageControl;
+//    }
+    UIPageControl *pageControl = (UIPageControl *)_pageControl;
+    pageControl.currentPage = indexOnPageControl;
+
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if ([self _isAutoScroll]) {
+        [self _invalidateTimer];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if ([self _isAutoScroll]) {
+        [self _setupTimer];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self scrollViewDidEndScrollingAnimation:self.collectionView];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    if (![self _showDataSource].count) return; // 解决清除timer时偶尔会出现的问题
+    int itemIndex = [self currentIndex];
+    int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didScrollToIndex:)]) {
+        [self.delegate bannerView:self didScrollToIndex:indexOnPageControl];
+    }
+}
+
+- (int)pageControlIndexWithCurrentCellIndex:(NSInteger)index{
+    return (int)index % [self _showDataSource].count;
+}
+
 
 
 @end

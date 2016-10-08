@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YJBannerViewModel.h"
 
 /** PageControl的位置 */
 typedef NS_ENUM(NSInteger, YJBannerViewPageControlAliment) {
@@ -23,7 +24,6 @@ typedef NS_ENUM(NSInteger, YJBannerViewPageControlStyle) {
 
 
 @class YJBannerView;
-@class YJBannerViewModel;
 // >>>>>>>>>>>>>> YJBannerViewDataSource >>>>>>>>>>>>>>
 @protocol YJBannerViewDataSource <NSObject>
 
@@ -67,6 +67,9 @@ typedef NS_ENUM(NSInteger, YJBannerViewPageControlStyle) {
 // >>>>>>>>>>>>>> YJBannerViewDelegate >>>>>>>>>>>>>>
 @protocol YJBannerViewDelegate <NSObject>
 
+@optional
+- (void)bannerView:(YJBannerView *)bannerView didSelectIndex:(NSInteger)index;
+- (void)bannerView:(YJBannerView *)bannerView didScrollToIndex:(NSInteger)index;
 
 @end
 
