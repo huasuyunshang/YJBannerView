@@ -23,10 +23,13 @@ typedef NS_ENUM(NSInteger, YJBannerViewPageControlStyle) {
 
 
 @class YJBannerView;
-
+@class YJBannerViewModel;
 // >>>>>>>>>>>>>> YJBannerViewDataSource >>>>>>>>>>>>>>
 @protocol YJBannerViewDataSource <NSObject>
 
+@required
+/** 显示数据源 */
+- (NSArray <YJBannerViewModel *>*)bannerShowDataSourceWithBannerView:(YJBannerView *)bannerView;
 
 @optional
 /** isAuto */

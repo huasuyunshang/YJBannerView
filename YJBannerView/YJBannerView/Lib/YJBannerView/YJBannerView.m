@@ -8,15 +8,21 @@
 
 #import "YJBannerView.h"
 #import "YJBannerViewCell.h"
+#import "YJBannerViewModel.h"
+#import "UIView+YJBannerView.h"
 
 static NSString * const bannerViewCellID = @"bannerViewCellID";
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, weak) UICollectionViewFlowLayout * flowLayout;
+@property (nonatomic, strong) UICollectionView * collectionView;
+@property (nonatomic, weak) UIControl * pageControl;
+
 @property (nonatomic, strong) UIImageView * placeholderImageView;
 @property (nonatomic, strong) UIImage * placeholderImage;
+
+@property (nonatomic, weak) NSTimer * bannerTimer;
 
 @end
 
@@ -57,8 +63,18 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
 - (void)_setUpBannerMianView{
     
     [self addSubview:self.collectionView];
+}
 
-
+#pragma mark - Setter
+- (void)setPlaceholderImage:(UIImage *)placeholderImage{
+    _placeholderImage = placeholderImage;
+    if (self.placeholderImageView == nil) {
+        UIImageView *bgImageView = [UIImageView new];
+        bgImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self insertSubview:bgImageView belowSubview:self.collectionView];
+        self.placeholderImageView = bgImageView;
+    }
+    self.placeholderImageView.image = placeholderImage;
 }
 
 #pragma mark - 数据设置Getter
@@ -189,8 +205,67 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
     return UIViewContentModeScaleToFill;
 }
 
+/** show Data */
+- (NSArray <YJBannerViewModel *> *)_showDataSource{
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerShowDataSourceWithBannerView:)]) {
+        NSArray <YJBannerViewModel *> * dataSource = [self.dataSource bannerShowDataSourceWithBannerView:self];
+        return dataSource;
+    }
+    return nil;
+}
 
+/** data Count */
+- (NSInteger)_totalItemsCount{
+    return [self _showDataSource].count;
+}
 
+#pragma mark - SetUp
+- (void)_setupTimer{
+    NSTimer * timer = [NSTimer scheduledTimerWithTimeInterval:[self _autoScrollTimeInterval] target:self selector:@selector(autoScrollTimerAction) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    _bannerTimer = timer;
+}
+
+- (void)_invalidateTimer{
+    if (_bannerTimer) {
+        [_bannerTimer invalidate];
+        _bannerTimer = nil;
+    }
+}
+
+- (void)autoScrollTimerAction{
+    if ([self _totalItemsCount] == 0) return;
+    
+    int currentIndex = [self currentIndex];
+    int targetIndex = currentIndex + 1;
+    [self scrollToIndex:targetIndex];
+}
+
+- (void)scrollToIndex:(int)targetIndex{
+    if (targetIndex >= [self _totalItemsCount]) {
+        if ([self _isInfiniteLoop]) {
+            targetIndex = [self _totalItemsCount] * 0.5;
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        }
+        return;
+    }
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+}
+
+- (int)currentIndex{
+    
+    if (self.collectionView.width_yj == 0 || self.collectionView.height_yj == 0) {
+        return 0;
+    }
+    
+    int index = 0;
+    if (_flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+        index = (self.collectionView.contentOffset.x + _flowLayout.itemSize.width * 0.5) / _flowLayout.itemSize.width;
+    } else {
+        index = (self.collectionView.contentOffset.y + _flowLayout.itemSize.height * 0.5) / _flowLayout.itemSize.height;
+    }
+    return MAX(0, index);
+}
 
 #pragma mark - Lazy
 - (UICollectionView *)collectionView{
