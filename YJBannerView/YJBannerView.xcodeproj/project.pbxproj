@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6318EEC11D9FEC0E00A4C12F /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EEC01D9FEC0E00A4C12F /* YJBannerView.m */; };
-		6338BD811DA88D2D00238C02 /* YJCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338BD7C1DA88D2D00238C02 /* YJCollectionViewCell.m */; };
 		6338BD821DA88D2D00238C02 /* UIView+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338BD7F1DA88D2D00238C02 /* UIView+YJBannerView.m */; };
+		6338BD881DA8C7A100238C02 /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338BD871DA8C7A100238C02 /* YJBannerViewCell.m */; };
 		63390A8F1D9E4EF8005A4848 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A8E1D9E4EF8005A4848 /* main.m */; };
 		63390A921D9E4EF8005A4848 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A911D9E4EF8005A4848 /* AppDelegate.m */; };
 		63390A951D9E4EF8005A4848 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A941D9E4EF8005A4848 /* ViewController.m */; };
@@ -21,10 +21,10 @@
 /* Begin PBXFileReference section */
 		6318EEBF1D9FEC0E00A4C12F /* YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerView.h; sourceTree = "<group>"; };
 		6318EEC01D9FEC0E00A4C12F /* YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerView.m; sourceTree = "<group>"; };
-		6338BD7B1DA88D2D00238C02 /* YJCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJCollectionViewCell.h; sourceTree = "<group>"; };
-		6338BD7C1DA88D2D00238C02 /* YJCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJCollectionViewCell.m; sourceTree = "<group>"; };
 		6338BD7E1DA88D2D00238C02 /* UIView+YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJBannerView.h"; sourceTree = "<group>"; };
 		6338BD7F1DA88D2D00238C02 /* UIView+YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJBannerView.m"; sourceTree = "<group>"; };
+		6338BD861DA8C7A100238C02 /* YJBannerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCell.h; sourceTree = "<group>"; };
+		6338BD871DA8C7A100238C02 /* YJBannerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCell.m; sourceTree = "<group>"; };
 		63390A8A1D9E4EF8005A4848 /* YJBannerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJBannerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63390A8E1D9E4EF8005A4848 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63390A901D9E4EF8005A4848 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,8 +71,8 @@
 		6338BD7A1DA88D2D00238C02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6338BD7B1DA88D2D00238C02 /* YJCollectionViewCell.h */,
-				6338BD7C1DA88D2D00238C02 /* YJCollectionViewCell.m */,
+				6338BD861DA8C7A100238C02 /* YJBannerViewCell.h */,
+				6338BD871DA8C7A100238C02 /* YJBannerViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,11 +207,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6338BD821DA88D2D00238C02 /* UIView+YJBannerView.m in Sources */,
+				6338BD881DA8C7A100238C02 /* YJBannerViewCell.m in Sources */,
 				6318EEC11D9FEC0E00A4C12F /* YJBannerView.m in Sources */,
 				63390A951D9E4EF8005A4848 /* ViewController.m in Sources */,
 				63390A921D9E4EF8005A4848 /* AppDelegate.m in Sources */,
 				63390A8F1D9E4EF8005A4848 /* main.m in Sources */,
-				6338BD811DA88D2D00238C02 /* YJCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,10 +7,16 @@
 //
 
 #import "YJBannerView.h"
+#import "YJBannerViewCell.h"
 
-@interface YJBannerView ()
+static NSString * const bannerViewCellID = @"bannerViewCellID";
 
-@property (nonatomic, strong) UIImage * placeholderImage; /**< 占位图，用于网络未加载到图片时 */
+@interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (nonatomic, strong) UICollectionView * collectionView;
+@property (nonatomic, weak) UICollectionViewFlowLayout * flowLayout;
+@property (nonatomic, strong) UIImageView * placeholderImageView;
+@property (nonatomic, strong) UIImage * placeholderImage;
 
 @end
 
@@ -49,6 +55,9 @@
 }
 
 - (void)_setUpBannerMianView{
+    
+    [self addSubview:self.collectionView];
+
 
 }
 
@@ -183,7 +192,26 @@
 
 
 
-
+#pragma mark - Lazy
+- (UICollectionView *)collectionView{
+    if (_collectionView == nil) {
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 0.0f;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _flowLayout = flowLayout;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.pagingEnabled = YES;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        [_collectionView registerClass:[YJBannerViewCell class] forCellWithReuseIdentifier:bannerViewCellID];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.scrollsToTop = NO;
+    }
+    return _collectionView;
+}
 
 
 @end
