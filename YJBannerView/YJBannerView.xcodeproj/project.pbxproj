@@ -11,6 +11,10 @@
 		6338BD821DA88D2D00238C02 /* UIView+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338BD7F1DA88D2D00238C02 /* UIView+YJBannerView.m */; };
 		6338BD881DA8C7A100238C02 /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338BD871DA8C7A100238C02 /* YJBannerViewCell.m */; };
 		6338BD8C1DA8CEC000238C02 /* YJBannerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338BD8B1DA8CEC000238C02 /* YJBannerViewModel.m */; };
+		6338BD921DA8DF5C00238C02 /* h1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6338BD8E1DA8DF5C00238C02 /* h1.jpg */; };
+		6338BD931DA8DF5C00238C02 /* h2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6338BD8F1DA8DF5C00238C02 /* h2.jpg */; };
+		6338BD941DA8DF5C00238C02 /* h3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6338BD901DA8DF5C00238C02 /* h3.jpg */; };
+		6338BD951DA8DF5C00238C02 /* h4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6338BD911DA8DF5C00238C02 /* h4.jpg */; };
 		63390A8F1D9E4EF8005A4848 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A8E1D9E4EF8005A4848 /* main.m */; };
 		63390A921D9E4EF8005A4848 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A911D9E4EF8005A4848 /* AppDelegate.m */; };
 		63390A951D9E4EF8005A4848 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63390A941D9E4EF8005A4848 /* ViewController.m */; };
@@ -28,6 +32,10 @@
 		6338BD871DA8C7A100238C02 /* YJBannerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCell.m; sourceTree = "<group>"; };
 		6338BD8A1DA8CEC000238C02 /* YJBannerViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewModel.h; sourceTree = "<group>"; };
 		6338BD8B1DA8CEC000238C02 /* YJBannerViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewModel.m; sourceTree = "<group>"; };
+		6338BD8E1DA8DF5C00238C02 /* h1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h1.jpg; sourceTree = "<group>"; };
+		6338BD8F1DA8DF5C00238C02 /* h2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h2.jpg; sourceTree = "<group>"; };
+		6338BD901DA8DF5C00238C02 /* h3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h3.jpg; sourceTree = "<group>"; };
+		6338BD911DA8DF5C00238C02 /* h4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h4.jpg; sourceTree = "<group>"; };
 		63390A8A1D9E4EF8005A4848 /* YJBannerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJBannerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63390A8E1D9E4EF8005A4848 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63390A901D9E4EF8005A4848 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -106,6 +114,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6338BD8D1DA8DF5C00238C02 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6338BD8E1DA8DF5C00238C02 /* h1.jpg */,
+				6338BD8F1DA8DF5C00238C02 /* h2.jpg */,
+				6338BD901DA8DF5C00238C02 /* h3.jpg */,
+				6338BD911DA8DF5C00238C02 /* h4.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		63390A811D9E4EF8005A4848 = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +144,7 @@
 		63390A8C1D9E4EF8005A4848 /* YJBannerView */ = {
 			isa = PBXGroup;
 			children = (
+				6338BD8D1DA8DF5C00238C02 /* Images */,
 				6318EEBA1D9FEA5700A4C12F /* Lib */,
 				63390A901D9E4EF8005A4848 /* AppDelegate.h */,
 				63390A911D9E4EF8005A4848 /* AppDelegate.m */,
@@ -206,8 +226,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6338BD931DA8DF5C00238C02 /* h2.jpg in Resources */,
 				63390A9D1D9E4EF8005A4848 /* LaunchScreen.storyboard in Resources */,
+				6338BD941DA8DF5C00238C02 /* h3.jpg in Resources */,
 				63390A9A1D9E4EF8005A4848 /* Assets.xcassets in Resources */,
+				6338BD951DA8DF5C00238C02 /* h4.jpg in Resources */,
+				6338BD921DA8DF5C00238C02 /* h1.jpg in Resources */,
 				63390A981D9E4EF8005A4848 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -277,8 +277,8 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.pagingEnabled = YES;
-        _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.showsVerticalScrollIndicator = NO;
+//        _collectionView.showsHorizontalScrollIndicator = NO;
+//        _collectionView.showsVerticalScrollIndicator = NO;
         [_collectionView registerClass:[YJBannerViewCell class] forCellWithReuseIdentifier:bannerViewCellID];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
@@ -378,7 +378,9 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
 //        cell.clipsToBounds = YES;
 //        cell.onlyDisplayText = self.onlyDisplayText;
 //    }
-//    
+//
+    YJBannerViewModel * model = [self _showDataSource][indexPath.item];
+    [cell bannerViewCellWithDataSource:model];
     return cell;
 }
 

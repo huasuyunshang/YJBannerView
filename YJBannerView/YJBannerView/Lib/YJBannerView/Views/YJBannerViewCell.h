@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class YJBannerViewModel;
 @interface YJBannerViewCell : UICollectionViewCell
+
+- (void)bannerViewCellWithDataSource:(YJBannerViewModel *)model;
 
 @end
