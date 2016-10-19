@@ -26,9 +26,7 @@
 }
 
 - (void)_setUpBannerViewCellMian{
-    
     [self.contentView addSubview:self.imgView];
-
 }
 
 - (void)bannerViewCellWithDataSource:(YJBannerViewModel *)model{
