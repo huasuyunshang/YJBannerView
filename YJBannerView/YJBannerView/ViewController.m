@@ -33,6 +33,7 @@
     return _bannerView;
 }
 
+#pragma mark - YJBannerViewDataSource
 - (NSArray<YJBannerViewModel *> *)bannerShowDataSourceWithBannerView:(YJBannerView *)bannerView{
     
     NSMutableArray * array = [NSMutableArray array];

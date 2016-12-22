@@ -89,9 +89,6 @@ typedef NS_ENUM(NSInteger, YJBannerViewPageControlStyle) {
 /** Delegate */
 @property (nonatomic, weak) id<YJBannerViewDelegate> delegate;
 
-
-
-
 /** 初始化方法 */
 + (instancetype)bannerViewWithFrame:(CGRect)frame placeholderImage:(UIImage *)placeholderImage;
 

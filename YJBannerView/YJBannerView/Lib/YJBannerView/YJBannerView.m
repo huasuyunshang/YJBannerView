@@ -2,7 +2,7 @@
 //  YJBannerView.m
 //  YJBannerView
 //
-//  Created by YJHou on 2016/10/1.
+//  Created by YJHou on 2013/10/1.
 //  Copyright © 2016年 YJHou. All rights reserved.
 //
 
@@ -42,7 +42,6 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
     [self _setUpBannerMianView];
 }
 
-
 - (void)_initialization{
     
     _pageControlAliment = YJBannerViewPageControlAlimentCenter;
@@ -50,6 +49,10 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
     self.backgroundColor = [UIColor lightGrayColor];
 }
 
+- (void)_setUpBannerMianView{
+    
+    [self addSubview:self.collectionView];
+}
 
 + (instancetype)bannerViewWithFrame:(CGRect)frame placeholderImage:(UIImage *)placeholderImage{
     
@@ -57,11 +60,6 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
     bannerView.placeholderImage = placeholderImage;
     return bannerView;
     
-}
-
-- (void)_setUpBannerMianView{
-    
-    [self addSubview:self.collectionView];
 }
 
 #pragma mark - Setter
@@ -429,7 +427,7 @@ static NSString * const bannerViewCellID = @"bannerViewCellID";
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    if (![self _showDataSource].count) return; // 解决清除timer时偶尔会出现的问题
+    if ([self _showDataSource].count == 0) return; // 解决清除timer时偶尔会出现的问题
     int itemIndex = [self currentIndex];
     int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
     
