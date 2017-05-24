@@ -1,9 +1,9 @@
 //
 //  AppDelegate.m
-//  YJBannerView
+//  YJBannerViewDemo
 //
-//  Created by YJHou on 16/9/30.
-//  Copyright © 2016年 YJHou. All rights reserved.
+//  Created by YJHou on 2017/5/24.
+//  Copyright © 2017年 YJHou. All rights reserved.
 //
 
 #import "AppDelegate.h"
