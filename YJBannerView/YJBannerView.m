@@ -259,6 +259,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     // 解决当timer释放后 回调scrollViewDidScroll时访问野指针导致崩溃
     _collectionView.delegate = nil;
     _collectionView.dataSource = nil;
+    NSLog(@"-->%@", @"------------");
 }
 
 - (void)adjustBannerViewWhenViewWillAppear{

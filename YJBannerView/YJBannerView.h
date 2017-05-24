@@ -36,9 +36,10 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 @class YJBannerView;
 @protocol YJBannerViewDataSource <NSObject>
 
+@required
 /** 显示图片的数据源 兼容http:// https:// 和本地图片名字 */
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView;
-
+@optional
 /** 显示文字数据源 */
 - (NSArray *)bannerViewTitles:(YJBannerView *)bannerView;
 
@@ -47,6 +48,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 ///////////////////////////////////// 代理方法部分 包括: 滚动的回调 和 点击的回调 ////////////////////////////
 @protocol YJBannerViewDelegate <NSObject>
 
+@optional
 /** 滚动回调 */
 - (void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index;
 

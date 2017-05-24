@@ -21,6 +21,7 @@
 		631C284E1ED5837100F31057 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28481ED5837100F31057 /* TAAnimatedDotView.m */; };
 		631C284F1ED5837100F31057 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C284A1ED5837100F31057 /* TADotView.m */; };
 		631C28501ED5837100F31057 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C284C1ED5837100F31057 /* TAPageControl.m */; };
+		631C28531ED5947600F31057 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 631C28521ED5947600F31057 /* placeholder@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		631C284A1ED5837100F31057 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
 		631C284B1ED5837100F31057 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
 		631C284C1ED5837100F31057 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		631C28521ED5947600F31057 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		631C28541ED5952800F31057 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YJBannerViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +98,7 @@
 		631C281C1ED55D3B00F31057 /* YJBannerViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				631C28511ED5947600F31057 /* Resources */,
 				631C28201ED55D3B00F31057 /* AppDelegate.h */,
 				631C28211ED55D3B00F31057 /* AppDelegate.m */,
 				631C28341ED55E7500F31057 /* MainViewController.h */,
@@ -112,6 +116,7 @@
 				631C282B1ED55D3B00F31057 /* LaunchScreen.storyboard */,
 				631C282E1ED55D3B00F31057 /* Info.plist */,
 				631C281E1ED55D3B00F31057 /* main.m */,
+				631C28541ED5952800F31057 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -167,6 +172,14 @@
 				631C284C1ED5837100F31057 /* TAPageControl.m */,
 			);
 			path = TAPageControl;
+			sourceTree = "<group>";
+		};
+		631C28511ED5947600F31057 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				631C28521ED5947600F31057 /* placeholder@2x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6AC03DC18FC0A9FC3BFB5F02 /* Pods */ = {
@@ -242,6 +255,7 @@
 			files = (
 				631C282D1ED55D3B00F31057 /* LaunchScreen.storyboard in Resources */,
 				631C282A1ED55D3B00F31057 /* Assets.xcassets in Resources */,
+				631C28531ED5947600F31057 /* placeholder@2x.png in Resources */,
 				631C28281ED55D3B00F31057 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +447,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 33JZ8ZWGJN;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = YJBannerViewDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = YJBannerViewDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -449,6 +465,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 33JZ8ZWGJN;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = YJBannerViewDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = YJBannerViewDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
