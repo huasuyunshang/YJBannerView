@@ -6,5 +6,6 @@ target 'YJBannerViewDemo' do
   # use_frameworks!
 
   # Pods for YJBannerViewDemo
+  pod 'SDWebImage'
 
 end

@@ -15,6 +15,12 @@
 		631C282D1ED55D3B00F31057 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 631C282B1ED55D3B00F31057 /* LaunchScreen.storyboard */; };
 		631C28361ED55E7500F31057 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28351ED55E7500F31057 /* MainViewController.m */; };
 		631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28391ED55F8900F31057 /* YJBannerView.m */; };
+		631C283E1ED578CC00F31057 /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C283D1ED578CC00F31057 /* YJBannerViewCell.m */; };
+		631C28421ED57F5D00F31057 /* UIView+YJBannerViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */; };
+		631C284D1ED5837100F31057 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28461ED5837100F31057 /* TAAbstractDotView.m */; };
+		631C284E1ED5837100F31057 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28481ED5837100F31057 /* TAAnimatedDotView.m */; };
+		631C284F1ED5837100F31057 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C284A1ED5837100F31057 /* TADotView.m */; };
+		631C28501ED5837100F31057 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C284C1ED5837100F31057 /* TAPageControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +37,18 @@
 		631C28351ED55E7500F31057 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		631C28381ED55F8900F31057 /* YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerView.h; sourceTree = "<group>"; };
 		631C28391ED55F8900F31057 /* YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerView.m; sourceTree = "<group>"; };
+		631C283C1ED578CC00F31057 /* YJBannerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCell.h; sourceTree = "<group>"; };
+		631C283D1ED578CC00F31057 /* YJBannerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCell.m; sourceTree = "<group>"; };
+		631C28401ED57F5D00F31057 /* UIView+YJBannerViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJBannerViewExt.h"; sourceTree = "<group>"; };
+		631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJBannerViewExt.m"; sourceTree = "<group>"; };
+		631C28451ED5837100F31057 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		631C28461ED5837100F31057 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		631C28471ED5837100F31057 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		631C28481ED5837100F31057 /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		631C28491ED5837100F31057 /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		631C284A1ED5837100F31057 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		631C284B1ED5837100F31057 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		631C284C1ED5837100F31057 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
 		96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YJBannerViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,10 +119,54 @@
 		631C28371ED55EA200F31057 /* YJBannerView */ = {
 			isa = PBXGroup;
 			children = (
+				631C28431ED5830300F31057 /* PageControls */,
+				631C283F1ED57F2100F31057 /* Tools */,
+				631C283B1ED578AC00F31057 /* Views */,
 				631C28381ED55F8900F31057 /* YJBannerView.h */,
 				631C28391ED55F8900F31057 /* YJBannerView.m */,
 			);
 			path = YJBannerView;
+			sourceTree = "<group>";
+		};
+		631C283B1ED578AC00F31057 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				631C283C1ED578CC00F31057 /* YJBannerViewCell.h */,
+				631C283D1ED578CC00F31057 /* YJBannerViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		631C283F1ED57F2100F31057 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				631C28401ED57F5D00F31057 /* UIView+YJBannerViewExt.h */,
+				631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		631C28431ED5830300F31057 /* PageControls */ = {
+			isa = PBXGroup;
+			children = (
+				631C28441ED5837100F31057 /* TAPageControl */,
+			);
+			path = PageControls;
+			sourceTree = "<group>";
+		};
+		631C28441ED5837100F31057 /* TAPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				631C28451ED5837100F31057 /* TAAbstractDotView.h */,
+				631C28461ED5837100F31057 /* TAAbstractDotView.m */,
+				631C28471ED5837100F31057 /* TAAnimatedDotView.h */,
+				631C28481ED5837100F31057 /* TAAnimatedDotView.m */,
+				631C28491ED5837100F31057 /* TADotView.h */,
+				631C284A1ED5837100F31057 /* TADotView.m */,
+				631C284B1ED5837100F31057 /* TAPageControl.h */,
+				631C284C1ED5837100F31057 /* TAPageControl.m */,
+			);
+			path = TAPageControl;
 			sourceTree = "<group>";
 		};
 		6AC03DC18FC0A9FC3BFB5F02 /* Pods */ = {
@@ -239,9 +301,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631C284E1ED5837100F31057 /* TAAnimatedDotView.m in Sources */,
+				631C284F1ED5837100F31057 /* TADotView.m in Sources */,
+				631C28421ED57F5D00F31057 /* UIView+YJBannerViewExt.m in Sources */,
 				631C28221ED55D3B00F31057 /* AppDelegate.m in Sources */,
 				631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */,
+				631C284D1ED5837100F31057 /* TAAbstractDotView.m in Sources */,
 				631C281F1ED55D3B00F31057 /* main.m in Sources */,
+				631C28501ED5837100F31057 /* TAPageControl.m in Sources */,
+				631C283E1ED578CC00F31057 /* YJBannerViewCell.m in Sources */,
 				631C28361ED55E7500F31057 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
