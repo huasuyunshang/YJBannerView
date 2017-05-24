@@ -10,10 +10,11 @@
 		23FAAC23B313EE8EFABF932C /* libPods-YJBannerViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */; };
 		631C281F1ED55D3B00F31057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C281E1ED55D3B00F31057 /* main.m */; };
 		631C28221ED55D3B00F31057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28211ED55D3B00F31057 /* AppDelegate.m */; };
-		631C28251ED55D3B00F31057 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28241ED55D3B00F31057 /* ViewController.m */; };
 		631C28281ED55D3B00F31057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 631C28261ED55D3B00F31057 /* Main.storyboard */; };
 		631C282A1ED55D3B00F31057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631C28291ED55D3B00F31057 /* Assets.xcassets */; };
 		631C282D1ED55D3B00F31057 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 631C282B1ED55D3B00F31057 /* LaunchScreen.storyboard */; };
+		631C28361ED55E7500F31057 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28351ED55E7500F31057 /* MainViewController.m */; };
+		631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28391ED55F8900F31057 /* YJBannerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +23,14 @@
 		631C281E1ED55D3B00F31057 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		631C28201ED55D3B00F31057 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		631C28211ED55D3B00F31057 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		631C28231ED55D3B00F31057 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		631C28241ED55D3B00F31057 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		631C28271ED55D3B00F31057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		631C28291ED55D3B00F31057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		631C282C1ED55D3B00F31057 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		631C282E1ED55D3B00F31057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		631C28341ED55E7500F31057 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		631C28351ED55E7500F31057 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		631C28381ED55F8900F31057 /* YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerView.h; sourceTree = "<group>"; };
+		631C28391ED55F8900F31057 /* YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerView.m; sourceTree = "<group>"; };
 		96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YJBannerViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,6 +58,7 @@
 		631C28111ED55D3B00F31057 = {
 			isa = PBXGroup;
 			children = (
+				631C28371ED55EA200F31057 /* YJBannerView */,
 				631C281C1ED55D3B00F31057 /* YJBannerViewDemo */,
 				631C281B1ED55D3B00F31057 /* Products */,
 				6AC03DC18FC0A9FC3BFB5F02 /* Pods */,
@@ -75,8 +79,8 @@
 			children = (
 				631C28201ED55D3B00F31057 /* AppDelegate.h */,
 				631C28211ED55D3B00F31057 /* AppDelegate.m */,
-				631C28231ED55D3B00F31057 /* ViewController.h */,
-				631C28241ED55D3B00F31057 /* ViewController.m */,
+				631C28341ED55E7500F31057 /* MainViewController.h */,
+				631C28351ED55E7500F31057 /* MainViewController.m */,
 				631C281D1ED55D3B00F31057 /* Supporting Files */,
 			);
 			path = YJBannerViewDemo;
@@ -92,6 +96,15 @@
 				631C281E1ED55D3B00F31057 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		631C28371ED55EA200F31057 /* YJBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				631C28381ED55F8900F31057 /* YJBannerView.h */,
+				631C28391ED55F8900F31057 /* YJBannerView.m */,
+			);
+			path = YJBannerView;
 			sourceTree = "<group>";
 		};
 		6AC03DC18FC0A9FC3BFB5F02 /* Pods */ = {
@@ -133,7 +146,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = YJHou;
+				ORGANIZATIONNAME = "地址:https://github.com/YJManager/YJBannerViewOC .";
 				TargetAttributes = {
 					631C28191ED55D3B00F31057 = {
 						CreatedOnToolsVersion = 8.3.1;
@@ -226,9 +239,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				631C28251ED55D3B00F31057 /* ViewController.m in Sources */,
 				631C28221ED55D3B00F31057 /* AppDelegate.m in Sources */,
+				631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */,
 				631C281F1ED55D3B00F31057 /* main.m in Sources */,
+				631C28361ED55E7500F31057 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +409,7 @@
 				631C28331ED55D3B00F31057 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

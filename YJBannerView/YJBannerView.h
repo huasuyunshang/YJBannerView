@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  YJBannerView.h
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2014/5/24.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface YJBannerView : UIView
 
 @end
-
