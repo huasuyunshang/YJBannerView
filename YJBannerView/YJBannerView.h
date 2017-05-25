@@ -7,7 +7,11 @@
 //
 
 /** 版本:1.0 */
-/** 待优化:1.支持左右间距设置 */
+
+/** 发现BUG感谢及时通知我修复, GitHub地址:https://github.com/YJManager/YJBannerViewOC 邮箱: houmanager@hotamil.com */
+
+/** 待优化 */
+/** 1.支持左右间距设置 */
 
 #import <UIKit/UIKit.h>
 
