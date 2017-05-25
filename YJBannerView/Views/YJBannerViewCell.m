@@ -8,78 +8,115 @@
 
 #import "YJBannerViewCell.h"
 #import "UIView+YJBannerViewExt.h"
+#import <UIImageView+WebCache.h>
 
-@implementation YJBannerViewCell{
-    __weak UILabel *_titleLabel;
-}
+@interface YJBannerViewCell ()
+
+@property (nonatomic, strong) UIImageView *showImageView; /**< 显示图片 */
+@property (nonatomic, strong) UILabel *titleLabel; /**< 标题头 */
+
+@end
+
+@implementation YJBannerViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        [self setupImageView];
-        [self setupTitleLabel];
+        [self _setUpMainView];
     }
-    
     return self;
+}
+
+- (void)_setUpMainView{
+    [self.contentView addSubview:self.showImageView];
+    [self.contentView addSubview:self.titleLabel];
 }
 
 - (void)setTitleLabelBackgroundColor:(UIColor *)titleLabelBackgroundColor{
     _titleLabelBackgroundColor = titleLabelBackgroundColor;
-    _titleLabel.backgroundColor = titleLabelBackgroundColor;
+    self.titleLabel.backgroundColor = titleLabelBackgroundColor;
 }
 
 - (void)setTitleLabelTextColor:(UIColor *)titleLabelTextColor{
     _titleLabelTextColor = titleLabelTextColor;
-    _titleLabel.textColor = titleLabelTextColor;
+    self.titleLabel.textColor = titleLabelTextColor;
 }
 
 - (void)setTitleLabelTextFont:(UIFont *)titleLabelTextFont{
     _titleLabelTextFont = titleLabelTextFont;
-    _titleLabel.font = titleLabelTextFont;
-}
-
-- (void)setupImageView{
-    UIImageView *imageView = [[UIImageView alloc] init];
-    _imageView = imageView;
-    [self.contentView addSubview:imageView];
-}
-
-- (void)setupTitleLabel{
-    UILabel *titleLabel = [[UILabel alloc] init];
-    _titleLabel = titleLabel;
-    _titleLabel.hidden = YES;
-    [self.contentView addSubview:titleLabel];
-}
-
-- (void)setTitle:(NSString *)title{
-    if (title) {
-        _title = [title copy];
-        _titleLabel.text = [NSString stringWithFormat:@"   %@", title];
-        if (_titleLabel.hidden) {
-            _titleLabel.hidden = NO;
-        }
-    }else{
-        _titleLabel.hidden = YES;
-    }
+    self.titleLabel.font = titleLabelTextFont;
 }
 
 -(void)setTitleLabelTextAlignment:(NSTextAlignment)titleLabelTextAlignment{
     _titleLabelTextAlignment = titleLabelTextAlignment;
-    _titleLabel.textAlignment = titleLabelTextAlignment;
+    self.titleLabel.textAlignment = titleLabelTextAlignment;
+}
+
+- (void)setShowImageViewContentMode:(UIViewContentMode)showImageViewContentMode{
+    _showImageViewContentMode = showImageViewContentMode;
+    self.showImageView.contentMode = showImageViewContentMode;
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
     if (self.onlyDisplayText) {
-        _titleLabel.frame = self.bounds;
+        self.titleLabel.frame = self.bounds;
     } else {
-        _imageView.frame = self.bounds;
+        self.showImageView.frame = self.bounds;
         CGFloat titleLabelW = self.width_bannerView;
-        CGFloat titleLabelH = _titleLabelHeight;
+        CGFloat titleLabelH = self.titleLabelHeight;
         CGFloat titleLabelX = 0;
         CGFloat titleLabelY = self.height_bannerView - titleLabelH;
         _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
     }
+}
+
+#pragma mark - 刷新数据
+- (void)cellWithBannerViewImagePath:(NSString *)imagePath placeholderImage:(UIImage *)placeholderImage title:(NSString *)title{
+
+    if (imagePath) {
+        self.showImageView.hidden = NO;
+        if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
+            if ([imagePath hasPrefix:@"http"]) {
+                [self.showImageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:placeholderImage];
+            } else {
+                UIImage *image = [UIImage imageNamed:imagePath];
+                if (!image) {
+                    image = [UIImage imageWithContentsOfFile:imagePath];
+                }
+                self.showImageView.image = image;
+            }
+        } else if (!self.onlyDisplayText && [imagePath isKindOfClass:[UIImage class]]) {
+            self.showImageView.image = (UIImage *)imagePath;
+        }else{
+            self.showImageView.image = placeholderImage;
+        }
+    }else{
+        self.showImageView.hidden = YES;
+    }
+    
+    if (title.length > 0) {
+        self.titleLabel.text = title;
+        self.titleLabel.hidden = NO;
+    }else{
+        self.titleLabel.hidden = YES;
+    }
+}
+
+#pragma mark - Lazy
+- (UIImageView *)showImageView{
+    if (!_showImageView) {
+        _showImageView = [[UIImageView alloc] init];
+    }
+    return _showImageView;
+}
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.hidden = YES;
+    }
+    return _titleLabel;
 }
 
 

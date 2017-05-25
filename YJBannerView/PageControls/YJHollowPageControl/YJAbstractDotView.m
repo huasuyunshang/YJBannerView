@@ -1,27 +1,23 @@
 //
-//  TAAbstractDotView.m
-//  TAPageControl
+//  YJAbstractDotView.m
+//  YJBannerViewDemo
 //
-//  Created by Tanguy Aladenise on 2015-01-22.
-//  Copyright (c) 2015 Tanguy Aladenise. All rights reserved.
+//  Created by YJHou on 2014/5/25.
+//  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
-#import "TAAbstractDotView.h"
+#import "YJAbstractDotView.h"
 
+@implementation YJAbstractDotView
 
-@implementation TAAbstractDotView
-
-
-- (id)init
-{
+- (id)init{
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in %@", NSStringFromSelector(_cmd), self.class]
                                  userInfo:nil];
 }
 
 
-- (void)changeActivityState:(BOOL)active
-{
+- (void)changeActivityState:(BOOL)active{
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in %@", NSStringFromSelector(_cmd), self.class]
                                  userInfo:nil];

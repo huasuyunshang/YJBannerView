@@ -1,103 +1,56 @@
 //
-//  TAPageControl.m
-//  TAPageControl
+//  YJHollowPageControl.m
+//  YJBannerViewDemo
 //
-//  Created by Tanguy Aladenise on 2015-01-21.
-//  Copyright (c) 2015 Tanguy Aladenise. All rights reserved.
+//  Created by YJHou on 2014/5/25.
+//  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
-#import "TAPageControl.h"
-#import "TAAbstractDotView.h"
-#import "TAAnimatedDotView.h"
-#import "TADotView.h"
+#import "YJHollowPageControl.h"
+#import "YJAnimatedDotView.h"
 
-/**
- *  Default number of pages for initialization
- */
+static CGSize const kDefaultDotSize = {8, 8};
 static NSInteger const kDefaultNumberOfPages = 0;
-
-/**
- *  Default current page for initialization
- */
 static NSInteger const kDefaultCurrentPage = 0;
-
-/**
- *  Default setting for hide for single page feature. For initialization
- */
 static BOOL const kDefaultHideForSinglePage = NO;
-
-/**
- *  Default setting for shouldResizeFromCenter. For initialiation
- */
 static BOOL const kDefaultShouldResizeFromCenter = YES;
-
-/**
- *  Default spacing between dots
- */
 static NSInteger const kDefaultSpacingBetweenDots = 8;
 
-/**
- *  Default dot size
- */
-static CGSize const kDefaultDotSize = {8, 8};
+@interface YJHollowPageControl ()
 
-
-@interface TAPageControl()
-
-
-/**
- *  Array of dot views for reusability and touch events.
- */
-@property (strong, nonatomic) NSMutableArray *dots;
-
+@property (nonatomic, strong) NSMutableArray *dots; /**< 保存所有的点 */
 
 @end
 
-@implementation TAPageControl
+@implementation YJHollowPageControl
 
-
-#pragma mark - Lifecycle
-
-
-- (id)init
-{
+- (id)init{
     self = [super init];
     if (self) {
-        [self initialization];
+        [self _initializationSetting];
     }
-    
     return self;
 }
 
-
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        [self initialization];
+        [self _initializationSetting];
     }
     return self;
 }
 
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self initialization];
+        [self _initializationSetting];
     }
-    
     return self;
 }
 
-
-/**
- *  Default setup when initiating control
- */
-- (void)initialization
-{
-    self.dotViewClass           = [TAAnimatedDotView class];
-    self.spacingBetweenDots     = kDefaultSpacingBetweenDots;
+- (void)_initializationSetting{
+    self.dotViewClass           = [YJAnimatedDotView class];
+    self.spacing                = kDefaultSpacingBetweenDots;
     self.numberOfPages          = kDefaultNumberOfPages;
     self.currentPage            = kDefaultCurrentPage;
     self.hidesForSinglePage     = kDefaultHideForSinglePage;
@@ -106,44 +59,27 @@ static CGSize const kDefaultDotSize = {8, 8};
 
 
 #pragma mark - Touch event
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     if (touch.view != self) {
         NSInteger index = [self.dots indexOfObject:touch.view];
-        if ([self.delegate respondsToSelector:@selector(TAPageControl:didSelectPageAtIndex:)]) {
-            [self.delegate TAPageControl:self didSelectPageAtIndex:index];
+        if ([self.delegate respondsToSelector:@selector(yjHollowPageControl:didSelectPageAtIndex:)]) {
+            [self.delegate yjHollowPageControl:self didSelectPageAtIndex:index];
         }
     }
 }
 
-#pragma mark - Layout
-
-
-/**
- *  Resizes and moves the receiver view so it just encloses its subviews.
- */
-- (void)sizeToFit
-{
+- (void)sizeToFit{
     [self updateFrame:YES];
 }
 
-
-- (CGSize)sizeForNumberOfPages:(NSInteger)pageCount
-{
-    return CGSizeMake((self.dotSize.width + self.spacingBetweenDots) * pageCount - self.spacingBetweenDots , self.dotSize.height);
+- (CGSize)sizeForNumberOfPages:(NSInteger)pageCount{
+    return CGSizeMake((self.dotSize.width + self.spacing) * pageCount - self.spacing , self.dotSize.height);
 }
 
 
-/**
- *  Will update dots display and frame. Reuse existing views or instantiate one if required. Update their position in case frame changed.
- */
-- (void)updateDots
-{
-    if (self.numberOfPages == 0) {
-        return;
-    }
+- (void)updateDots{
+    if (self.numberOfPages == 0) {return;}
     
     for (NSInteger i = 0; i < self.numberOfPages; i++) {
         
@@ -153,23 +89,19 @@ static CGSize const kDefaultDotSize = {8, 8};
         } else {
             dot = [self generateDotView];
         }
-        
         [self updateDotFrame:dot atIndex:i];
     }
-    
     [self changeActivity:YES atIndex:self.currentPage];
     
     [self hideForSinglePage];
 }
-
 
 /**
  *  Update frame control to fit current number of pages. It will apply required size if authorize and required.
  *
  *  @param overrideExistingFrame BOOL to allow frame to be overriden. Meaning the required size will be apply no mattter what.
  */
-- (void)updateFrame:(BOOL)overrideExistingFrame
-{
+- (void)updateFrame:(BOOL)overrideExistingFrame{
     CGPoint center = self.center;
     CGSize requiredSize = [self sizeForNumberOfPages:self.numberOfPages];
     
@@ -180,10 +112,8 @@ static CGSize const kDefaultDotSize = {8, 8};
             self.center = center;
         }
     }
-    
     [self resetDotViews];
 }
-
 
 /**
  *  Update the frame of a specific dot at a specific index
@@ -191,32 +121,44 @@ static CGSize const kDefaultDotSize = {8, 8};
  *  @param dot   Dot view
  *  @param index Page index of dot
  */
-- (void)updateDotFrame:(UIView *)dot atIndex:(NSInteger)index
-{
+- (void)updateDotFrame:(UIView *)dot atIndex:(NSInteger)index{
     // Dots are always centered within view
-    CGFloat x = (self.dotSize.width + self.spacingBetweenDots) * index + ( (CGRectGetWidth(self.frame) - [self sizeForNumberOfPages:self.numberOfPages].width) / 2);
+    CGFloat x = (self.dotSize.width + self.spacing) * index + ( (CGRectGetWidth(self.frame) - [self sizeForNumberOfPages:self.numberOfPages].width) / 2);
     CGFloat y = (CGRectGetHeight(self.frame) - self.dotSize.height) / 2;
     
     dot.frame = CGRectMake(x, y, self.dotSize.width, self.dotSize.height);
 }
 
+- (void)setCurrentDotColor:(UIColor *)currentDotColor{
+    _currentDotColor = currentDotColor;
+}
+
+- (void)setDotColor:(UIColor *)dotColor{
+    _dotColor = dotColor;
+}
+
 
 #pragma mark - Utils
-
-
 /**
  *  Generate a dot view and add it to the collection
  *
  *  @return The UIView object representing a dot
  */
-- (UIView *)generateDotView
-{
+- (UIView *)generateDotView{
     UIView *dotView;
     
     if (self.dotViewClass) {
         dotView = [[self.dotViewClass alloc] initWithFrame:CGRectMake(0, 0, self.dotSize.width, self.dotSize.height)];
-        if ([dotView isKindOfClass:[TAAnimatedDotView class]] && self.dotColor) {
-            ((TAAnimatedDotView *)dotView).dotColor = self.dotColor;
+        if ([dotView isKindOfClass:[YJAnimatedDotView class]]) {
+            if (self.resizeScale > 0) {
+                ((YJAnimatedDotView *)dotView).resizeScale = self.resizeScale;
+            }
+            if (self.dotColor) {
+                ((YJAnimatedDotView *)dotView).dotColor = self.dotColor;
+            }
+            if (self.currentDotColor){
+                ((YJAnimatedDotView *)dotView).currentDotColor = self.currentDotColor;
+            }
         }
     } else {
         dotView = [[UIImageView alloc] initWithImage:self.dotImage];
@@ -228,7 +170,7 @@ static CGSize const kDefaultDotSize = {8, 8};
         [self.dots addObject:dotView];
     }
     
-    dotView.userInteractionEnabled = YES;    
+    dotView.userInteractionEnabled = YES;
     return dotView;
 }
 
@@ -239,14 +181,13 @@ static CGSize const kDefaultDotSize = {8, 8};
  *  @param active Active state to apply
  *  @param index  Index of dot for state update
  */
-- (void)changeActivity:(BOOL)active atIndex:(NSInteger)index
-{
+- (void)changeActivity:(BOOL)active atIndex:(NSInteger)index{
     if (self.dotViewClass) {
-        TAAbstractDotView *abstractDotView = (TAAbstractDotView *)[self.dots objectAtIndex:index];
+        YJAbstractDotView *abstractDotView = (YJAbstractDotView *)[self.dots objectAtIndex:index];
         if ([abstractDotView respondsToSelector:@selector(changeActivityState:)]) {
             [abstractDotView changeActivityState:active];
         } else {
-            NSLog(@"Custom view : %@ must implement an 'changeActivityState' method or you can subclass %@ to help you.", self.dotViewClass, [TAAbstractDotView class]);
+            NSLog(@"Custom view : %@ must implement an 'changeActivityState' method or you can subclass %@ to help you.", self.dotViewClass, [YJAbstractDotView class]);
         }
     } else if (self.dotImage && self.currentDotImage) {
         UIImageView *dotView = (UIImageView *)[self.dots objectAtIndex:index];
@@ -254,20 +195,15 @@ static CGSize const kDefaultDotSize = {8, 8};
     }
 }
 
-
-- (void)resetDotViews
-{
+- (void)resetDotViews{
     for (UIView *dotView in self.dots) {
         [dotView removeFromSuperview];
     }
-    
     [self.dots removeAllObjects];
     [self updateDots];
 }
 
-
-- (void)hideForSinglePage
-{
+- (void)hideForSinglePage{
     if (self.dots.count == 1 && self.hidesForSinglePage) {
         self.hidden = YES;
     } else {
@@ -276,27 +212,18 @@ static CGSize const kDefaultDotSize = {8, 8};
 }
 
 #pragma mark - Setters
-
-
-- (void)setNumberOfPages:(NSInteger)numberOfPages
-{
+- (void)setNumberOfPages:(NSInteger)numberOfPages{
     _numberOfPages = numberOfPages;
-    
     // Update dot position to fit new number of pages
     [self resetDotViews];
 }
 
-
-- (void)setSpacingBetweenDots:(NSInteger)spacingBetweenDots
-{
-    _spacingBetweenDots = spacingBetweenDots;
-    
+- (void)setSpacing:(CGFloat)spacing{
+    _spacing = spacing;
     [self resetDotViews];
 }
 
-
-- (void)setCurrentPage:(NSInteger)currentPage
-{
+- (void)setCurrentPage:(NSInteger)currentPage{
     // If no pages, no current page to treat.
     if (self.numberOfPages == 0 || currentPage == _currentPage) {
         _currentPage = currentPage;
@@ -310,55 +237,41 @@ static CGSize const kDefaultDotSize = {8, 8};
     [self changeActivity:YES atIndex:_currentPage];
 }
 
-
-- (void)setDotImage:(UIImage *)dotImage
-{
+- (void)setDotImage:(UIImage *)dotImage{
     _dotImage = dotImage;
     [self resetDotViews];
     self.dotViewClass = nil;
 }
 
-
-- (void)setCurrentDotImage:(UIImage *)currentDotimage
-{
+- (void)setCurrentDotImage:(UIImage *)currentDotimage{
     _currentDotImage = currentDotimage;
     [self resetDotViews];
     self.dotViewClass = nil;
 }
 
-
-- (void)setDotViewClass:(Class)dotViewClass
-{
+- (void)setDotViewClass:(Class)dotViewClass{
     _dotViewClass = dotViewClass;
     self.dotSize = CGSizeZero;
     [self resetDotViews];
 }
 
-
-#pragma mark - Getters
-
-
-- (NSMutableArray *)dots
-{
-    if (!_dots) {
-        _dots = [[NSMutableArray alloc] init];
-    }
-    
-    return _dots;
-}
-
-
-- (CGSize)dotSize
-{
-    // Dot size logic depending on the source of the dot view
+#pragma mark - Getter
+- (CGSize)dotSize{
     if (self.dotImage && CGSizeEqualToSize(_dotSize, CGSizeZero)) {
         _dotSize = self.dotImage.size;
     } else if (self.dotViewClass && CGSizeEqualToSize(_dotSize, CGSizeZero)) {
         _dotSize = kDefaultDotSize;
         return _dotSize;
     }
-    
     return _dotSize;
+}
+
+#pragma mark - Lazy
+- (NSMutableArray *)dots{
+    if (!_dots) {
+        _dots = [NSMutableArray array];
+    }
+    return _dots;
 }
 
 @end

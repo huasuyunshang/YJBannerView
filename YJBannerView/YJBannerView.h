@@ -73,9 +73,8 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 @property (nonatomic, assign) YJBannerViewDirection bannerViewScrollDirection; /**< 滚动方向 默认水平向左 */
 
-/** 解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法 */
+/** 卡在一半的问题, 在控制器viewWillAppear时调用此方法 */
 - (void)adjustBannerViewWhenViewWillAppear;
-
 
 ////////////////////////////////////////////  自定义样式接口  //////////////////////////////////////////////
 @property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */
@@ -92,7 +91,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 @property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin; /**< 分页控件水平方向上的边缘间距 默认10 */
 
-@property (nonatomic, assign) CGSize pageControlDotSize; /**< 分页控件小圆标大小 */
+@property (nonatomic, assign) CGSize pageControlDotSize; /**< 分页控件小圆标大小 默认8*8*/
 
 @property (nonatomic, strong) UIColor *pageControlNormalColor; /**< 分页控件正常颜色 */
 

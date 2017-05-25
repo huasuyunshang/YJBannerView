@@ -40,11 +40,11 @@ static CGFloat const midMargin = 15.0f;
     [self.view addSubview:containerScrollView];
 
     [containerScrollView addSubview:self.defaultBannerView];
-    [containerScrollView addSubview:self.secondBannerView];
-    [containerScrollView addSubview:self.custompageControlBannerView];
-    [containerScrollView addSubview:self.onlyShowTextBannerView];
+//    [containerScrollView addSubview:self.secondBannerView];
+//    [containerScrollView addSubview:self.custompageControlBannerView];
+//    [containerScrollView addSubview:self.onlyShowTextBannerView];
     
-    containerScrollView.contentSize = CGSizeMake(self.view.frame.size.width, CGRectGetMaxY(self.onlyShowTextBannerView.frame) + midMargin);
+    containerScrollView.contentSize = CGSizeMake(self.view.frame.size.width, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin);
 }
 
 - (void)_loadDataSources{
@@ -71,9 +71,9 @@ static CGFloat const midMargin = 15.0f;
     }
     
     [self.defaultBannerView reloadData];
-    [self.secondBannerView reloadData];
-    [self.custompageControlBannerView reloadData];
-    [self.onlyShowTextBannerView reloadData];
+//    [self.secondBannerView reloadData];
+//    [self.custompageControlBannerView reloadData];
+//    [self.onlyShowTextBannerView reloadData];
 
 }
 
@@ -84,6 +84,9 @@ static CGFloat const midMargin = 15.0f;
 
 #pragma mark - DataSources
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
+//    if (bannerView == self.secondBannerView) {
+//        return @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495632321411&di=64bf3fc35875ec65793777c9aaeb2738&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F71%2F39%2F42b1OOOPICe8.jpg"];
+//    }
     return self.imageDataSources;
 }
 
@@ -121,6 +124,12 @@ static CGFloat const midMargin = 15.0f;
 - (YJBannerView *)defaultBannerView{
     if (!_defaultBannerView) {
         _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 200) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        _defaultBannerView.bannerViewScrollDirection = YJBannerViewDirectionLeft;
+        _defaultBannerView.pageControlStyle = YJBannerViewPageControlCustom;
+        _defaultBannerView.pageControlHighlightColor = [UIColor redColor];
+        _defaultBannerView.pageControlNormalColor = [UIColor orangeColor];
+        _defaultBannerView.pageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+        _defaultBannerView.pageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
     }
     return _defaultBannerView;
 }
@@ -132,6 +141,7 @@ static CGFloat const midMargin = 15.0f;
         _secondBannerView.pageControlAliment = YJBannerViewPageControlAlimentCenter;
         _secondBannerView.autoDuration = 3.0f;
         _secondBannerView.bannerViewScrollDirection = YJBannerViewDirectionTop;
+        _secondBannerView.titleAlignment = NSTextAlignmentRight;
     }
     return _secondBannerView;
 }
