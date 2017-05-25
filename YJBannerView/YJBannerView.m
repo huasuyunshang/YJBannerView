@@ -15,54 +15,58 @@
 static NSString *const bannerViewCellId = @"YJBannerViewCell";
 #define kBannerViewPageControlDotSize CGSizeMake(10, 10)
 
-@interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, weak) UICollectionViewFlowLayout *flowLayout; /**< 流程控制 */
-@property (nonatomic, weak) UICollectionView *collectionView; /**< 主视图 */
-@property (nonatomic, weak) UIControl *pageControl;
-@property (nonatomic, weak) NSTimer *timer;
-@property (nonatomic, assign) NSInteger totalItemsCount;
-
-@property (nonatomic, strong) UIImageView *backgroundImageView; /**< 数据为空时的背景图 */
+@property (nonatomic, weak) UICollectionViewFlowLayout *flowLayout;     /**< 流程控制 */
+@property (nonatomic, weak) UICollectionView *collectionView;           /**< 主视图 */
+@property (nonatomic, weak) UIControl *pageControl;                     /**< 分页指示器 */
+@property (nonatomic, weak) NSTimer *timer;                             /**< 定时器 */
+@property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
+@property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
 
 @end
 
 @implementation YJBannerView
 
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame dataSource:(id<YJBannerViewDataSource>)dataSource delegate:(id<YJBannerViewDelegate>)delegate placeholderImage:(UIImage *)placeholderImage{
+    
     YJBannerView *bannerView = [[YJBannerView alloc] initWithFrame:frame];
     bannerView.dataSource = dataSource;
     bannerView.delegate = delegate;
-    bannerView.placeholderImage = placeholderImage;
+    if (placeholderImage) {
+        bannerView.placeholderImage = placeholderImage;
+    }
     return bannerView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        
         [self _initSetting];
-        [self _setupMainView];
+        [self _setupBannerMainView];
     }
     return self;
 }
 
 - (void)awakeFromNib{
     [super awakeFromNib];
+    
     [self _initSetting];
-    [self _setupMainView];
+    [self _setupBannerMainView];
 }
 
+/** 初始化默认设置 */
 - (void)_initSetting{
     
     self.backgroundColor = [UIColor whiteColor];
-    
     _autoDuration = 2.0;
     _autoScroll = YES;
     _pageControlStyle = YJBannerViewPageControlSystem;
     _pageControlAliment = YJBannerViewPageControlAlimentCenter;
     _pageControlDotSize = kBannerViewPageControlDotSize;
-    _pageControlBottomMargin = 0.0;
-    _pageControlHorizontalEdgeMargin = 0.0;
+    _pageControlBottomMargin = 10.0f;
+    _pageControlHorizontalEdgeMargin = 10.0f;
     _pageControlNormalColor = [UIColor lightGrayColor];
     _pageControlHighlightColor = [UIColor whiteColor];
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
@@ -70,33 +74,14 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     _onlyDisplayText = NO;
     _titleFont = [UIFont systemFontOfSize:14.0f];
     _titleTextColor = [UIColor whiteColor];
-    _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]; // 黑0.5
     _titleHeight = 30.0f;
     _titleAlignment = NSTextAlignmentLeft;
 }
 
-- (void)_setupMainView{
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.minimumLineSpacing = 0.0f;
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _flowLayout = flowLayout;
-    
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
-    collectionView.backgroundColor = [UIColor clearColor];
-    collectionView.pagingEnabled = YES;
-    collectionView.showsHorizontalScrollIndicator = NO;
-    collectionView.showsVerticalScrollIndicator = NO;
-    [collectionView registerClass:[YJBannerViewCell class] forCellWithReuseIdentifier:bannerViewCellId];
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.scrollsToTop = NO;
-    [self addSubview:collectionView];
-    _collectionView = collectionView;
-}
-
 #pragma mark - Setter && Getter
 - (void)setPlaceholderImage:(UIImage *)placeholderImage{
+    
     _placeholderImage = placeholderImage;
     
     if (!self.backgroundImageView) {
@@ -109,7 +94,9 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)setPageControlDotSize:(CGSize)pageControlDotSize{
+    
     _pageControlDotSize = pageControlDotSize;
+    
     [self _setupPageControl];
     if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
         TAPageControl *pageContol = (TAPageControl *)_pageControl;
@@ -118,12 +105,16 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)setPageControlStyle:(YJBannerViewPageControlStyle)pageControlStyle{
+    
     _pageControlStyle = pageControlStyle;
+    
     [self _setupPageControl];
 }
 
 - (void)setPageControlNormalColor:(UIColor *)pageControlNormalColor{
+    
     _pageControlNormalColor = pageControlNormalColor;
+    
     if ([self.pageControl isKindOfClass:[UIPageControl class]]) {
         UIPageControl *pageControl = (UIPageControl *)_pageControl;
         pageControl.pageIndicatorTintColor = pageControlNormalColor;
@@ -131,7 +122,9 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)setPageControlHighlightColor:(UIColor *)pageControlHighlightColor{
+    
     _pageControlHighlightColor = pageControlHighlightColor;
+    
     if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
         TAPageControl *pageControl = (TAPageControl *)_pageControl;
         pageControl.dotColor = pageControlHighlightColor;
@@ -142,7 +135,9 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)setPageControlNormalImage:(UIImage *)pageControlNormalImage{
+    
     _pageControlNormalImage = pageControlNormalImage;
+    
     if (self.pageControlStyle != YJBannerViewPageControlAnimated) {
         self.pageControlStyle = YJBannerViewPageControlAnimated;
     }
@@ -150,6 +145,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)setPageControlHighlightImage:(UIImage *)pageControlHighlightImage{
+    
     _pageControlHighlightImage = pageControlHighlightImage;
     
     if (self.pageControlStyle != YJBannerViewPageControlAnimated) {
@@ -159,6 +155,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)setCustomPageControlDotImage:(UIImage *)image isCurrentPageDot:(BOOL)isCurrentPageDot{
+    
     if (!image || !self.pageControl) return;
     
     if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
@@ -172,26 +169,31 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)setAutoScroll:(BOOL)autoScroll{
+    
     _autoScroll = autoScroll;
     
     [self invalidateTimer];
-    if (_autoScroll) {
+    
+    if (autoScroll) {
         [self _setupTimer];
     }
 }
 
-- (void)setScrollDirection:(YJBannerViewDirection)scrollDirection{
-    _scrollDirection = scrollDirection;
+-(void)setBannerViewScrollDirection:(YJBannerViewDirection)bannerViewScrollDirection{
+
+    _bannerViewScrollDirection = bannerViewScrollDirection;
     
-    if (scrollDirection == YJBannerViewDirectionLeft || scrollDirection == YJBannerViewDirectionRight) {
+    if (bannerViewScrollDirection == YJBannerViewDirectionLeft || bannerViewScrollDirection == YJBannerViewDirectionRight) {
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    }else if (scrollDirection == YJBannerViewDirectionTop || scrollDirection == YJBannerViewDirectionBottom){
+    }else if (bannerViewScrollDirection == YJBannerViewDirectionTop || bannerViewScrollDirection == YJBannerViewDirectionBottom){
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     }
 }
 
 - (void)setAutoDuration:(CGFloat)autoDuration{
+    
     _autoDuration = autoDuration;
+    
     [self setAutoScroll:self.autoScroll];
 }
 
@@ -202,6 +204,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     _flowLayout.itemSize = self.frame.size;
     
     _collectionView.frame = self.bounds;
+    
     if (_collectionView.contentOffset.x == 0 &&  _totalItemsCount) {
         int targetIndex = 0;
         targetIndex = _totalItemsCount * 0.5;
@@ -209,40 +212,51 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     }
     
     CGSize size = CGSizeZero;
+    
     if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
+        
         TAPageControl *pageControl = (TAPageControl *)_pageControl;
+        
         if (!(self.pageControlNormalImage && self.pageControlHighlightImage && CGSizeEqualToSize(kBannerViewPageControlDotSize, self.pageControlDotSize))) {
             pageControl.dotSize = self.pageControlDotSize;
         }
+        
         size = [pageControl sizeForNumberOfPages:[self _imageDataSources].count];
     } else {
         size = CGSizeMake([self _imageDataSources].count * self.pageControlDotSize.width * 1.5, self.pageControlDotSize.height);
     }
     CGFloat x = (self.width_bannerView - size.width) * 0.5;
     if (self.pageControlAliment == YJBannerViewPageControlAlimentLeft) { // 靠左
-        x = 10.0f;
+        
+        x = 0.0f;
+        
     }else if (self.pageControlAliment == YJBannerViewPageControlAlimentCenter){ // 居中
     
     }else if (self.pageControlAliment == YJBannerViewPageControlAlimentRight){ // 靠右
-        x = self.collectionView.width_bannerView - size.width - 10;
+        
+        x = self.collectionView.width_bannerView - size.width;
+        
     }
     
-    CGFloat y = self.collectionView.height_bannerView - size.height - 10;
+    CGFloat y = self.collectionView.height_bannerView - size.height;
     
     if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
+        
         TAPageControl *pageControl = (TAPageControl *)_pageControl;
         [pageControl sizeToFit];
     }
     
     CGRect pageControlFrame = CGRectMake(x, y, size.width, size.height);
-    pageControlFrame.origin.y -= self.pageControlBottomMargin;
-    pageControlFrame.origin.x -= self.pageControlHorizontalEdgeMargin;
-    self.pageControl.frame = pageControlFrame;
-    if (self.pageControlStyle == YJBannerViewPageControlNone) {
-        self.pageControl.hidden = YES;
-    }else{
-        self.pageControl.hidden = NO;
+    if (self.pageControlAliment == YJBannerViewPageControlAlimentLeft) {
+        pageControlFrame.origin.x += self.pageControlHorizontalEdgeMargin;
+    }else if (self.pageControlAliment == YJBannerViewPageControlAlimentRight){
+        pageControlFrame.origin.x -= self.pageControlHorizontalEdgeMargin;
     }
+    pageControlFrame.origin.y -= self.pageControlBottomMargin;
+    self.pageControl.frame = pageControlFrame;
+    
+    self.pageControl.hidden = self.pageControlStyle == YJBannerViewPageControlNone;
+    
     if (self.backgroundImageView) {
         self.backgroundImageView.frame = self.bounds;
     }
@@ -250,6 +264,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 
 #pragma mark - 解决兼容优化问题
 - (void)willMoveToSuperview:(UIView *)newSuperview{
+    
     if (!newSuperview) { // 当父类释放 因定时器引用而无法释放的问题
         [self invalidateTimer];
     }
@@ -259,10 +274,10 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     // 解决当timer释放后 回调scrollViewDidScroll时访问野指针导致崩溃
     _collectionView.delegate = nil;
     _collectionView.dataSource = nil;
-    NSLog(@"-->%@", @"------------");
 }
 
 - (void)adjustBannerViewWhenViewWillAppear{
+    
     long targetIndex = [self _currentIndex];
     if (targetIndex < _totalItemsCount) {
         [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
@@ -275,6 +290,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     YJBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:bannerViewCellId forIndexPath:indexPath];
     long itemIndex = [self _pageControlIndexWithCurrentCellIndex:indexPath.item];
     
@@ -294,8 +310,14 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
         cell.imageView.image = (UIImage *)imagePath;
     }
     
-    if ([self _titlesDataSources].count && itemIndex < [self _titlesDataSources].count) {
-        cell.title = [self _titlesDataSources][itemIndex];
+    if ([self _titlesDataSources].count > 0) {
+        if (itemIndex < [self _titlesDataSources].count) {
+            cell.title = [self _titlesDataSources][itemIndex];
+        }else{
+            cell.title = nil;
+        }
+    }else{
+        cell.title = nil;
     }
     
     if (!cell.hasConfigured) {
@@ -311,6 +333,11 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     }
     return cell;
 }
+
+/** 设置Item的大小 */
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+//    return CGSizeMake(90, 130);
+//}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didSelectItemAtIndex:)]) {
@@ -365,7 +392,27 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     }
 }
 
-#pragma mark - Supporting
+#pragma mark - 私有功能方法
+/** 安装主视图 */
+- (void)_setupBannerMainView{
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumLineSpacing = 0.0f;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    _flowLayout = flowLayout;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+    collectionView.backgroundColor = [UIColor clearColor];
+    collectionView.pagingEnabled = YES;
+    collectionView.showsHorizontalScrollIndicator = NO;
+    collectionView.showsVerticalScrollIndicator = NO;
+    [collectionView registerClass:[YJBannerViewCell class] forCellWithReuseIdentifier:bannerViewCellId];
+    collectionView.dataSource = self;
+    collectionView.delegate = self;
+    collectionView.scrollsToTop = NO;
+    [self addSubview:collectionView];
+    _collectionView = collectionView;
+}
 /** 安装PageControl */
 - (void)_setupPageControl{
     
@@ -419,7 +466,9 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     }
 }
 
+/** 安装定时器 */
 - (void)_setupTimer{
+    
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoDuration target:self selector:@selector(automaticScrollAction) userInfo:nil repeats:YES];
     _timer = timer;
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
@@ -427,11 +476,13 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 
 /** 停止定时器 */
 - (void)invalidateTimer{
+    
     [_timer invalidate];
     _timer = nil;
 }
 
 - (void)automaticScrollAction{
+    
     if (0 == _totalItemsCount) return;
     int currentIndex = [self _currentIndex];
     int targetIndex = currentIndex + 1;
@@ -439,6 +490,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (void)_scrollToIndex:(int)targetIndex{
+    
     if (targetIndex >= _totalItemsCount) {
         targetIndex = _totalItemsCount * 0.5;
         [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
@@ -461,6 +513,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 }
 
 - (int)_pageControlIndexWithCurrentCellIndex:(NSInteger)index{
+    
     return (int)index % [self _imageDataSources].count;
 }
 
@@ -481,7 +534,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     return @[];
 }
 
-/** 显示的标题 */
+/** 显示的标题数组 */
 - (NSArray *)_titlesDataSources{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewTitles:)]) {
         NSArray *titles = [self.dataSource bannerViewTitles:self];
@@ -490,8 +543,8 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     return @[];
 }
 
-#pragma mark - 刷新View
-- (void)reloadView{
+#pragma mark - 刷新数据
+- (void)reloadData{
     
     [self invalidateTimer];
     

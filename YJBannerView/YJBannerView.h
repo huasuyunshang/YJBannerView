@@ -6,6 +6,9 @@
 //  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
+/** 版本:1.0 */
+/** 待优化:1.支持左右间距设置 */
+
 #import <UIKit/UIKit.h>
 
 /////////////////////////////////// 可以根据选择以下枚举, 配置不同的显示效果。包括: 指示器的位置 和 指示器的样式 /////////////////////////
@@ -57,7 +60,6 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 @end
 
-
 @interface YJBannerView : UIView
 
 @property (nonatomic, weak) id<YJBannerViewDataSource> dataSource; /**< 数据源代理 */
@@ -69,7 +71,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 @property (nonatomic, assign, getter=isAutoScroll) BOOL autoScroll; /**< 是否自动 默认YES */
 
-@property (nonatomic, assign) YJBannerViewDirection scrollDirection; /**< 滚动方向 默认水平向左 */
+@property (nonatomic, assign) YJBannerViewDirection bannerViewScrollDirection; /**< 滚动方向 默认水平向左 */
 
 /** 解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法 */
 - (void)adjustBannerViewWhenViewWillAppear;
@@ -86,9 +88,9 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 @property (nonatomic, assign) YJBannerViewPageControlStyle pageControlStyle; /**< 分页控件样式 默认System */
 
-@property (nonatomic, assign) CGFloat pageControlBottomMargin; /**< 分页控件距离底部的间距 默认0*/
+@property (nonatomic, assign) CGFloat pageControlBottomMargin; /**< 分页控件距离底部的间距 默认10 */
 
-@property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin; /**< 分页控件水平方向上的边缘间距 默认0 */
+@property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin; /**< 分页控件水平方向上的边缘间距 默认10 */
 
 @property (nonatomic, assign) CGSize pageControlDotSize; /**< 分页控件小圆标大小 */
 
@@ -115,7 +117,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 @property (nonatomic, copy) void(^didSelectItemAtIndexBlock)(NSInteger index);
 
 /** 刷新BannerView */
-- (void)reloadView;
+- (void)reloadData;
 
 //////////////////////////////// 实例化方法 /////////////////////////
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame dataSource:(id<YJBannerViewDataSource>)dataSource delegate:(id<YJBannerViewDelegate>)delegate placeholderImage:(UIImage *)placeholderImage;
