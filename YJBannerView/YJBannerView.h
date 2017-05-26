@@ -6,12 +6,16 @@
 //  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
-/** 版本:1.0 */
+/** a.版本:1.0  ***************** 依赖 SDWebImage 4.0.0 ****************** */
 
-/** 发现BUG感谢及时通知我修复, GitHub地址:https://github.com/YJManager/YJBannerViewOC 邮箱: houmanager@hotamil.com */
+/** b.注意事项: 该控件依赖于 SDWebImage 请在工程中自行导入 */
+/** c.联系方式: 发现BUG感谢及时通知我修复, 邮箱: houmanager@hotamil.com 或者GitHub上明示 */
 
-/** 待优化 */
-/** 1.支持左右间距设置 */
+/** d.待优化 
+        1.支持左右间距设置
+ */
+
+//#define SDWEBIMAGE_ENABLE
 
 #import <UIKit/UIKit.h>
 

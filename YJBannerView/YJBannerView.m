@@ -422,6 +422,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
             pageControl.currentDotColor = self.pageControlHighlightColor;
             pageControl.userInteractionEnabled = NO;
             pageControl.resizeScale = 0.8;
+            pageControl.spacing = 5.0f;
             pageControl.currentPage = indexOnPageControl;
             [self addSubview:pageControl];
             _pageControl = pageControl;
