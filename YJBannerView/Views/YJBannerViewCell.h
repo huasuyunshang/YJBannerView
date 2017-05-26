@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIFont *titleLabelTextFont;
 @property (nonatomic, strong) UIColor *titleLabelBackgroundColor;
 @property (nonatomic, assign) CGFloat titleLabelHeight;
+@property (nonatomic, assign) CGFloat titleLabelEdgeMargin;
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
 @property (nonatomic, assign) UIViewContentMode showImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */
 @property (nonatomic, assign) BOOL isConfigured;

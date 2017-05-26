@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UIImageView *showImageView; /**< 显示图片 */
 @property (nonatomic, strong) UILabel *titleLabel; /**< 标题头 */
+@property (nonatomic, strong) UIView *titleLabelBgView; /**< 标题背景 */
 
 @end
 
@@ -28,12 +29,13 @@
 
 - (void)_setUpMainView{
     [self.contentView addSubview:self.showImageView];
+    [self.contentView addSubview:self.titleLabelBgView];
     [self.contentView addSubview:self.titleLabel];
 }
 
 - (void)setTitleLabelBackgroundColor:(UIColor *)titleLabelBackgroundColor{
     _titleLabelBackgroundColor = titleLabelBackgroundColor;
-    self.titleLabel.backgroundColor = titleLabelBackgroundColor;
+    self.titleLabelBgView.backgroundColor = titleLabelBackgroundColor;
 }
 
 - (void)setTitleLabelTextColor:(UIColor *)titleLabelTextColor{
@@ -59,16 +61,25 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
+    CGFloat titleBgViewlH = self.titleLabelHeight;
     if (self.onlyDisplayText) {
-        self.titleLabel.frame = self.bounds;
+        self.showImageView.frame = CGRectZero;
+        titleBgViewlH = self.height_bannerView;
     } else {
         self.showImageView.frame = self.bounds;
-        CGFloat titleLabelW = self.width_bannerView;
-        CGFloat titleLabelH = self.titleLabelHeight;
-        CGFloat titleLabelX = 0;
-        CGFloat titleLabelY = self.height_bannerView - titleLabelH;
-        _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
+        titleBgViewlH = self.titleLabelHeight;
     }
+    
+    CGFloat titlBgViewX   = 0.0f;
+    CGFloat titleBgViewY = self.height_bannerView - titleBgViewlH;
+    CGFloat titleBgViewW = self.width_bannerView - 2 * titlBgViewX;
+    _titleLabelBgView.frame = CGRectMake(titlBgViewX, titleBgViewY, titleBgViewW, titleBgViewlH);
+    
+    CGFloat titleLabelH = titleBgViewlH;
+    CGFloat titleLabelX = self.titleLabelEdgeMargin;
+    CGFloat titleLabelY = titleBgViewY;
+    CGFloat titleLabelW = self.width_bannerView - 2 * titleLabelX;
+    _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
 }
 
 #pragma mark - 刷新数据
@@ -99,8 +110,10 @@
     if (title.length > 0) {
         self.titleLabel.text = title;
         self.titleLabel.hidden = NO;
+        self.titleLabelBgView.hidden = NO;
     }else{
         self.titleLabel.hidden = YES;
+        self.titleLabelBgView.hidden = YES;
     }
 }
 
@@ -116,8 +129,17 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.hidden = YES;
+        _titleLabel.backgroundColor = [UIColor clearColor];
     }
     return _titleLabel;
+}
+
+- (UIView *)titleLabelBgView{
+    if (!_titleLabelBgView) {
+        _titleLabelBgView = [[UIView alloc] init];
+        _titleLabelBgView.hidden = YES;
+    }
+    return _titleLabelBgView;
 }
 
 

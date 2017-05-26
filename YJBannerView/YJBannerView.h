@@ -6,13 +6,19 @@
 //  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
-/** a.版本:2.0  ***************** 依赖 SDWebImage 版本 4.0.0 ****************** */
+/** a.当前版本:2.1  ***************** 依赖 SDWebImage 版本 4.0.0 ****************** */
 
 /** b.注意事项: 该控件依赖于 SDWebImage 请在工程中自行导入 */
 /** c.联系方式: 发现BUG感谢及时通知我修复, 邮箱: houmanager@hotamil.com 或者GitHub上明示 */
 
 /** d.待优化 
         1.支持左右间距设置
+ */
+
+/** 版本记录:
+    2015/2/10   版本1.0   是以静态库的方式使用 Cocoapods 引入功能
+    2016/10/17  版本2.0   是以源码的方式使用 Cocoapods 引入功能
+    2017/5/29   版本2.1   自动滚动时间间隔调整为3s、动画变化比例调整为1.0、设置标题默认边间距为10, 可任意设置
  */
 
 #import <UIKit/UIKit.h>
@@ -73,7 +79,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 
 ///////////////////////////////////////////////// 动态控制部分 ////////////////////////////////////////////////
-@property (nonatomic, assign) CGFloat autoDuration; /**< 自动滚动时间间隔 默认2s */
+@property (nonatomic, assign) CGFloat autoDuration; /**< 自动滚动时间间隔 默认3s */
 
 @property (nonatomic, assign, getter=isAutoScroll) BOOL autoScroll; /**< 是否自动 默认YES */
 
@@ -116,6 +122,8 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 @property (nonatomic, strong) UIColor *titleBackgroundColor; /**< 文字背景颜色 */
 
 @property (nonatomic, assign) CGFloat titleHeight; /**< 文字高度 */
+
+@property (nonatomic, assign) CGFloat titleEdgeMargin; /**< 文字边缘间距 默认是10*/
 
 ////////////////////////// bannerView Block 回调部分 ////////////////////////
 @property (nonatomic, copy) void(^didScroll2IndexBlock)(NSInteger index);

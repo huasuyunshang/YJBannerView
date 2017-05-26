@@ -59,7 +59,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 - (void)_initSetting{
     
     self.backgroundColor = [UIColor whiteColor];
-    _autoDuration = 2.0;
+    _autoDuration = 3.0;
     _autoScroll = YES;
     _pageControlStyle = YJBannerViewPageControlSystem;
     _pageControlAliment = YJBannerViewPageControlAlimentCenter;
@@ -75,6 +75,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     _titleTextColor = [UIColor whiteColor];
     _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]; // 黑0.5
     _titleHeight = 30.0f;
+    _titleEdgeMargin = 10.0f;
     _titleAlignment = NSTextAlignmentLeft;
 }
 
@@ -301,6 +302,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     if (!cell.isConfigured) {
         cell.titleLabelBackgroundColor = self.titleBackgroundColor;
         cell.titleLabelHeight = self.titleHeight;
+        cell.titleLabelEdgeMargin = self.titleEdgeMargin;
         cell.titleLabelTextAlignment = self.titleAlignment;
         cell.titleLabelTextColor = self.titleTextColor;
         cell.titleLabelTextFont = self.titleFont;
@@ -421,7 +423,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
             pageControl.dotColor = self.pageControlNormalColor;
             pageControl.currentDotColor = self.pageControlHighlightColor;
             pageControl.userInteractionEnabled = NO;
-            pageControl.resizeScale = 0.8;
+            pageControl.resizeScale = 1.0;
             pageControl.spacing = 5.0f;
             pageControl.currentPage = indexOnPageControl;
             [self addSubview:pageControl];

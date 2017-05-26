@@ -18,7 +18,6 @@ static CGFloat const midMargin = 15.0f;
 @property (nonatomic, strong) YJBannerView *defaultBannerView; /**< 默认设置banner */
 @property (nonatomic, strong) YJBannerView *secondBannerView; /**< 演示banner */
 @property (nonatomic, strong) YJBannerView *custompageControlBannerView; /**< 自定义pageControl样式演示banner */
-@property (nonatomic, strong) YJBannerView *onlyShowTextBannerView; /**< 只显示文字演示banner */
 
 @end
 
@@ -40,40 +39,31 @@ static CGFloat const midMargin = 15.0f;
     [self.view addSubview:containerScrollView];
 
     [containerScrollView addSubview:self.defaultBannerView];
-//    [containerScrollView addSubview:self.secondBannerView];
-//    [containerScrollView addSubview:self.custompageControlBannerView];
-//    [containerScrollView addSubview:self.onlyShowTextBannerView];
+    [containerScrollView addSubview:self.secondBannerView];
+    [containerScrollView addSubview:self.custompageControlBannerView];
     
-    containerScrollView.contentSize = CGSizeMake(self.view.frame.size.width, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin);
+    containerScrollView.contentSize = CGSizeMake(self.view.frame.size.width, CGRectGetMaxY(self.custompageControlBannerView.frame) + midMargin);
 }
 
 - (void)_loadDataSources{
     
-    NSArray *imagesURLStrings = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495632076185&di=2e7f3813f688d7b9f936b21cc767392e&imgtype=0&src=http%3A%2F%2Fpic31.nipic.com%2F20130727%2F6949918_163332595163_2.jpg",
-                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495632229617&di=f990b7e2d3da3b53e682f0582fbd1ed3&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F03%2F52%2F38F58PICJKV_1024.jpg",
-                                  
-                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495632258681&di=ab24dd72e9d1a926a85c043777bcc773&imgtype=0&src=http%3A%2F%2Fpic15.nipic.com%2F20110812%2F5456365_114059382181_2.jpg",
-                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495632303259&di=22f439df66883699a32125bc49d25bf5&imgtype=0&src=http%3A%2F%2Fpic.qiantucdn.com%2F58pic%2F17%2F89%2F25%2F55a5fd7fa6c16_1024.jpg",
-                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495632321411&di=64bf3fc35875ec65793777c9aaeb2738&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F71%2F39%2F42b1OOOPICe8.jpg",
-                                  @"placeholder"
+    NSArray *imagesURLStrings = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788490274&di=0b9453aab06d2ea5a77a47d0d78cfa83&imgtype=0&src=http%3A%2F%2Fwww.16sucai.com%2Fuploadfile%2F2013%2F0407%2F20130407085208429.jpg",
+                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788516621&di=4efa056fe4234193736eb7d4dd48a262&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F87%2F10%2F42N58PICFdP_1024.jpg",
+                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788546756&di=2a5e74dcbf61882752005d729c07d39b&imgtype=0&src=http%3A%2F%2Fwww.djhnjllm.com%2Fstatic%2Fupload%2Fimage%2F2013%2F2%2F25%2F0039716899204936.jpg",
+                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788599948&di=d6cef2c314498aa0d78202753a6b2493&imgtype=0&src=http%3A%2F%2Fimg3.redocn.com%2Ftupian%2F20151216%2Fshishangnvzhuangwangzhanbanner_5607161.jpg",
+                                  @"localImage01.jpeg"
                                   ];
-    
-    NSArray *titles = @[@"我是一只小青蛙",
-                        @"我的地址是"
-                        ];
-    
     for (NSInteger i = 0; i < imagesURLStrings.count; i++) {
         [self.imageDataSources addObject:imagesURLStrings[i]];
     }
     
-    for (NSInteger i = 0; i < titles.count; i++) {
-        [self.titlesDataSources addObject:titles[i]];
+    for (NSInteger i = 0; i < imagesURLStrings.count; i++) {
+        [self.titlesDataSources addObject:[NSString stringWithFormat:@"标题%ld", i]];
     }
     
     [self.defaultBannerView reloadData];
-//    [self.secondBannerView reloadData];
-//    [self.custompageControlBannerView reloadData];
-//    [self.onlyShowTextBannerView reloadData];
+    [self.secondBannerView reloadData];
+    [self.custompageControlBannerView reloadData];
 
 }
 
@@ -84,9 +74,6 @@ static CGFloat const midMargin = 15.0f;
 
 #pragma mark - DataSources
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
-//    if (bannerView == self.secondBannerView) {
-//        return @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495632321411&di=64bf3fc35875ec65793777c9aaeb2738&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F71%2F39%2F42b1OOOPICe8.jpg"];
-//    }
     return self.imageDataSources;
 }
 
@@ -95,14 +82,10 @@ static CGFloat const midMargin = 15.0f;
 }
 
 #pragma mark - Delegate
--(void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index{
-//    NSLog(@"index-->%ld", index);
-}
-
 -(void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
-    NSLog(@"didSelectItemAtIndex-->%ld", index);
+    NSString *title = [self.titlesDataSources objectAtIndex:index];
+    NSLog(@"当前%@-->%@", bannerView, title);
 }
-
 
 
 #pragma mark - lazy
@@ -123,46 +106,34 @@ static CGFloat const midMargin = 15.0f;
 /** 第一个 默认 */
 - (YJBannerView *)defaultBannerView{
     if (!_defaultBannerView) {
-        _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 200) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        _defaultBannerView.bannerViewScrollDirection = YJBannerViewDirectionLeft;
-        _defaultBannerView.pageControlStyle = YJBannerViewPageControlCustom;
-        _defaultBannerView.pageControlHighlightColor = [UIColor redColor];
-        _defaultBannerView.pageControlNormalColor = [UIColor orangeColor];
-        _defaultBannerView.pageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-        _defaultBannerView.pageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
+        _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 160) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
     return _defaultBannerView;
 }
 
 - (YJBannerView *)secondBannerView{
     if (!_secondBannerView) {
-        _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 200) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        _secondBannerView.pageControlStyle = YJBannerViewPageControlSystem;
-        _secondBannerView.pageControlAliment = YJBannerViewPageControlAlimentCenter;
-        _secondBannerView.autoDuration = 3.0f;
-        _secondBannerView.bannerViewScrollDirection = YJBannerViewDirectionTop;
-        _secondBannerView.titleAlignment = NSTextAlignmentRight;
+        _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        _secondBannerView.pageControlStyle = YJBannerViewPageControlSystem;   // PageControl 系统样式
+        _secondBannerView.pageControlAliment = YJBannerViewPageControlAlimentRight;  // 位置居中
+        _secondBannerView.autoDuration = 2.0f;    // 时间间隔
+        _secondBannerView.bannerViewScrollDirection = YJBannerViewDirectionTop; // 向上滚动
+        _secondBannerView.pageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+        _secondBannerView.pageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
+        _secondBannerView.titleAlignment = NSTextAlignmentLeft;
     }
     return _secondBannerView;
 }
 
 - (YJBannerView *)custompageControlBannerView{
     if (!_custompageControlBannerView) {
-        _custompageControlBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.secondBannerView.frame) + midMargin, kSCREEN_WIDTH, 200) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        _custompageControlBannerView.pageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-        _custompageControlBannerView.pageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
+        _custompageControlBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.secondBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        _custompageControlBannerView.bannerViewScrollDirection = YJBannerViewDirectionRight;
+        _custompageControlBannerView.pageControlStyle = YJBannerViewPageControlAnimated;
+        _custompageControlBannerView.pageControlNormalColor = [UIColor cyanColor];
+        _custompageControlBannerView.pageControlHighlightColor = [UIColor redColor];
     }
     return _custompageControlBannerView;
-}
-
-- (YJBannerView *)onlyShowTextBannerView{
-    if (!_onlyShowTextBannerView) {
-        _onlyShowTextBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.custompageControlBannerView.frame) + midMargin, kSCREEN_WIDTH, 40) dataSource:self delegate:self placeholderImage:nil];
-        _onlyShowTextBannerView.onlyDisplayText = YES;
-        _onlyShowTextBannerView.bannerViewScrollDirection = YJBannerViewDirectionTop;
-        _onlyShowTextBannerView.titleBackgroundColor = [UIColor orangeColor];
-    }
-    return _onlyShowTextBannerView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,14 +141,5 @@ static CGFloat const midMargin = 15.0f;
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
