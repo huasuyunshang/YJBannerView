@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		031719509DF64E8623B4EA8B /* Pods-YJBannerViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		630DFEF81ED7C5D2002661A4 /* LibrarySDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrarySDWebImage.h; sourceTree = "<group>"; };
 		631C281A1ED55D3B00F31057 /* YJBannerViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJBannerViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		631C281E1ED55D3B00F31057 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		631C28201ED55D3B00F31057 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -155,6 +156,7 @@
 			children = (
 				631C28401ED57F5D00F31057 /* UIView+YJBannerViewExt.h */,
 				631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */,
+				630DFEF81ED7C5D2002661A4 /* LibrarySDWebImage.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";

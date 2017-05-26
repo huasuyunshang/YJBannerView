@@ -8,7 +8,7 @@
 
 #import "YJBannerViewCell.h"
 #import "UIView+YJBannerViewExt.h"
-#import <UIImageView+WebCache.h>
+#import "LibrarySDWebImage.h"
 
 @interface YJBannerViewCell ()
 
@@ -78,6 +78,7 @@
         self.showImageView.hidden = NO;
         if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
             if ([imagePath hasPrefix:@"http"]) {
+                
                 [self.showImageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:placeholderImage];
             } else {
                 UIImage *image = [UIImage imageNamed:imagePath];
