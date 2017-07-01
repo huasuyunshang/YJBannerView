@@ -1,5 +1,10 @@
 # YJBannerViewOC
 
+[![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg)](https://github.com/YJManager/YJBannerViewOC.git)
+[![CocoaPods](https://img.shields.io/cocoapods/v/YJBannerView.svg)](https://github.com/YJManager/YJBannerViewOC.git)
+[![GitHub tag](https://img.shields.io/github/tag/YJManager/YJBannerViewOC.svg)](https://github.com/YJManager/YJBannerViewOC.git)
+[![license](https://img.shields.io/github/license/YJManager/YJBannerViewOC.svg)](https://github.com/YJManager/YJBannerViewOC.git)
+
 `YJBannerView` YJAutoScrollBanner. Objective-C版 无限循环Banner、文字轮播器。
 
 ## Adding YJBannerView to your project (添加 YJBannerView 到你的项目)
