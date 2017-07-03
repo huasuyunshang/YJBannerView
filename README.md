@@ -1,9 +1,11 @@
 # YJBannerViewOC
 
-[![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg)](https://github.com/YJManager/YJBannerViewOC.git)
-[![CocoaPods](https://img.shields.io/cocoapods/v/YJBannerView.svg)](https://github.com/YJManager/YJBannerViewOC.git)
-[![GitHub tag](https://img.shields.io/github/tag/YJManager/YJBannerViewOC.svg)](https://github.com/YJManager/YJBannerViewOC.git)
-[![license](https://img.shields.io/github/license/YJManager/YJBannerViewOC.svg)](https://github.com/YJManager/YJBannerViewOC.git)
+
+[![CocoaPods](https://img.shields.io/badge/language-objective--C-00EE00.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
+[![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
+[![CocoaPods](https://img.shields.io/cocoapods/v/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
+[![GitHub tag](https://img.shields.io/github/tag/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
+[![license](https://img.shields.io/github/license/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 
 `YJBannerView` YJAutoScrollBanner. Objective-C版 无限循环Banner、文字轮播器。
 

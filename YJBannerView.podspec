@@ -1,4 +1,4 @@
-version = "2.1";
+version = "2.1.1";
 
 Pod::Spec.new do |s|
 
