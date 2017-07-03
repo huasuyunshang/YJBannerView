@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		23FAAC23B313EE8EFABF932C /* libPods-YJBannerViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */; };
-		6307D73F1F0A389000CF1EAD /* YJBannerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6307D7381F0A389000CF1EAD /* YJBannerView.framework */; };
-		6307D7401F0A389000CF1EAD /* YJBannerView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6307D7381F0A389000CF1EAD /* YJBannerView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6307D7451F0A38AB00CF1EAD /* YJBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 631C28381ED55F8900F31057 /* YJBannerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6307D7461F0A38C300CF1EAD /* YJHollowPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741221ED6C5F800D9A282 /* YJHollowPageControl.m */; };
 		6307D7471F0A38C300CF1EAD /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */; };
@@ -42,30 +40,6 @@
 		63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */; };
 		63B7412C1ED6CDF900D9A282 /* YJDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7412B1ED6CDF900D9A282 /* YJDotView.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		6307D73D1F0A389000CF1EAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 631C28121ED55D3B00F31057 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6307D7371F0A389000CF1EAD;
-			remoteInfo = YJBannerViewFramework;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		6307D7441F0A389000CF1EAD /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6307D7401F0A389000CF1EAD /* YJBannerView.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		031719509DF64E8623B4EA8B /* Pods-YJBannerViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +98,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				23FAAC23B313EE8EFABF932C /* libPods-YJBannerViewDemo.a in Frameworks */,
-				6307D73F1F0A389000CF1EAD /* YJBannerView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,12 +289,10 @@
 				631C28181ED55D3B00F31057 /* Resources */,
 				4B9F942BA6A9DB8C98D7B555 /* [CP] Embed Pods Frameworks */,
 				A677284EB908269119F9A43A /* [CP] Copy Pods Resources */,
-				6307D7441F0A389000CF1EAD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6307D73E1F0A389000CF1EAD /* PBXTargetDependency */,
 			);
 			name = YJBannerViewDemo;
 			productName = YJBannerViewDemo;
@@ -479,14 +450,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6307D73E1F0A389000CF1EAD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6307D7371F0A389000CF1EAD /* YJBannerViewFramework */;
-			targetProxy = 6307D73D1F0A389000CF1EAD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		631C28261ED55D3B00F31057 /* Main.storyboard */ = {
