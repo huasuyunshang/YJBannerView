@@ -4,6 +4,7 @@
 [![CocoaPods](https://img.shields.io/badge/language-objective--C-00EE00.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![CocoaPods](https://img.shields.io/cocoapods/v/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![GitHub tag](https://img.shields.io/github/tag/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![license](https://img.shields.io/github/license/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 
@@ -44,10 +45,11 @@
 
 代码及效果如下:
 
+创建代码:
 ```objc
 - (YJBannerView *)secondBannerView{
 if (!_secondBannerView) {
-    _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
     _secondBannerView.pageControlStyle = YJBannerViewPageControlSystem;   // PageControl 系统样式
     _secondBannerView.pageControlAliment = YJBannerViewPageControlAlimentRight;  // 位置居中
     _secondBannerView.autoDuration = 2.0f;    // 时间间隔
@@ -55,8 +57,25 @@ if (!_secondBannerView) {
     _secondBannerView.pageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
     _secondBannerView.pageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
     _secondBannerView.titleAlignment = NSTextAlignmentLeft;
-    }
+}
     return _secondBannerView;
+}
+```
+数据源方法和代理:
+```objc
+#pragma mark - DataSources
+- (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
+    return self.imageDataSources;
+}
+
+- (NSArray *)bannerViewTitles:(YJBannerView *)bannerView{
+    return self.titlesDataSources;
+}
+
+#pragma mark - Delegate
+-(void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
+    NSString *title = [self.titlesDataSources objectAtIndex:index];
+    NSLog(@"当前%@-->%@", bannerView, title);
 }
 ```
 

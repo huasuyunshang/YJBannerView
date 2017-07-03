@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6307D7371F0A389000CF1EAD"
-               BuildableName = "YJBannerViewFramework.framework"
+               BuildableName = "YJBannerView.framework"
                BlueprintName = "YJBannerViewFramework"
                ReferencedContainer = "container:YJBannerViewDemo.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6307D7371F0A389000CF1EAD"
-            BuildableName = "YJBannerViewFramework.framework"
+            BuildableName = "YJBannerView.framework"
             BlueprintName = "YJBannerViewFramework"
             ReferencedContainer = "container:YJBannerViewDemo.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6307D7371F0A389000CF1EAD"
-            BuildableName = "YJBannerViewFramework.framework"
+            BuildableName = "YJBannerView.framework"
             BlueprintName = "YJBannerViewFramework"
             ReferencedContainer = "container:YJBannerViewDemo.xcodeproj">
          </BuildableReference>
