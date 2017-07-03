@@ -8,7 +8,6 @@
 
 #import "YJBannerViewCell.h"
 #import "UIView+YJBannerViewExt.h"
-#import "UIImageView+WebCache.h"
 
 @interface YJBannerViewCell ()
 
@@ -83,14 +82,21 @@
 }
 
 #pragma mark - 刷新数据
-- (void)cellWithBannerViewImagePath:(NSString *)imagePath placeholderImage:(UIImage *)placeholderImage title:(NSString *)title{
+- (void)cellWithSetImageURLPlaceholderImageSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImage:(UIImage *)placeholderImage title:(NSString *)title{
 
     if (imagePath) {
         self.showImageView.hidden = NO;
         if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
             if ([imagePath hasPrefix:@"http"]) {
                 
-                    [self.showImageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:placeholderImage];
+                // 检验方法是否可用
+                SEL selector = NSSelectorFromString(selectorString);
+                if ([self.showImageView respondsToSelector:selector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                    [self.showImageView performSelector:selector withObject:[NSURL URLWithString:imagePath] withObject:placeholderImage];
+#pragma clang diagnostic pop
+                }
             } else {
                 UIImage *image = [UIImage imageNamed:imagePath];
                 if (!image) {

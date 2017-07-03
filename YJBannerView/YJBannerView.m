@@ -22,16 +22,18 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 @property (nonatomic, weak) NSTimer *timer;                             /**< 定时器 */
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
+@property (nonatomic, copy) NSString *setImageViewPlaceholderString;    /**< 自定义设置网络和默认图片的方法 */
 
 @end
 
 @implementation YJBannerView
 
-+ (YJBannerView *)bannerViewWithFrame:(CGRect)frame dataSource:(id<YJBannerViewDataSource>)dataSource delegate:(id<YJBannerViewDelegate>)delegate placeholderImage:(UIImage *)placeholderImage{
++ (YJBannerView *)bannerViewWithFrame:(CGRect)frame dataSource:(id<YJBannerViewDataSource>)dataSource delegate:(id<YJBannerViewDelegate>)delegate selectorString:(NSString *)selectorString placeholderImage:(UIImage *)placeholderImage{
     
     YJBannerView *bannerView = [[YJBannerView alloc] initWithFrame:frame];
     bannerView.dataSource = dataSource;
     bannerView.delegate = delegate;
+    bannerView.setImageViewPlaceholderString = selectorString;
     if (placeholderImage) {
         bannerView.placeholderImage = placeholderImage;
     }
@@ -312,7 +314,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
         cell.onlyDisplayText = self.onlyDisplayText;
     }
     
-    [cell cellWithBannerViewImagePath:imagePath placeholderImage:self.placeholderImage title:title];
+    [cell cellWithSetImageURLPlaceholderImageSelectorString:self.setImageViewPlaceholderString imagePath:imagePath placeholderImage:self.placeholderImage title:title];
 
     return cell;
 }

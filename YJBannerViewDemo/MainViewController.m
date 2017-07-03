@@ -103,17 +103,17 @@ static CGFloat const midMargin = 15.0f;
     return _titlesDataSources;
 }
 
-/** 第一个 默认 */
+/** 第一个 默认 */ // @selector(sd_setImageWithURL:placeholderImage:)
 - (YJBannerView *)defaultBannerView{
     if (!_defaultBannerView) {
-        _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 160) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
     return _defaultBannerView;
 }
 
 - (YJBannerView *)secondBannerView{
     if (!_secondBannerView) {
-        _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
         _secondBannerView.pageControlStyle = YJBannerViewPageControlSystem;   // PageControl 系统样式
         _secondBannerView.pageControlAliment = YJBannerViewPageControlAlimentRight;  // 位置居中
         _secondBannerView.autoDuration = 2.0f;    // 时间间隔
@@ -127,7 +127,7 @@ static CGFloat const midMargin = 15.0f;
 
 - (YJBannerView *)custompageControlBannerView{
     if (!_custompageControlBannerView) {
-        _custompageControlBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.secondBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        _custompageControlBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.secondBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
         _custompageControlBannerView.bannerViewScrollDirection = YJBannerViewDirectionRight;
         _custompageControlBannerView.pageControlStyle = YJBannerViewPageControlAnimated;
         _custompageControlBannerView.pageControlNormalColor = [UIColor cyanColor];
