@@ -11,7 +11,7 @@
 #import "UIView+YJBannerViewExt.h"
 #import "YJHollowPageControl.h"
 
-static NSString *const bannerViewCellId = @"YJBannerViewCell";
+static NSString *const bannerViewCellId = @"YJBannerView";
 #define kBannerViewPageControlDotSize CGSizeMake(8, 8)
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -79,6 +79,15 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     _titleHeight = 30.0f;
     _titleEdgeMargin = 10.0f;
     _titleAlignment = NSTextAlignmentLeft;
+}
+
+#pragma mark - register Custom Cell
+- (void)setDataSource:(id<YJBannerViewDataSource>)dataSource{
+    _dataSource = dataSource;
+    
+    if (dataSource && [dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [dataSource bannerViewCustomCellClass:self]) {
+        [self.collectionView registerClass:[dataSource bannerViewCustomCellClass:self] forCellWithReuseIdentifier:bannerViewCellId];
+    }
 }
 
 #pragma mark - Setter && Getter
@@ -204,6 +213,8 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 
 #pragma mark - Lazy
 - (void)layoutSubviews{
+    
+    self.dataSource = self.dataSource;
     [super layoutSubviews];
     
     _flowLayout.itemSize = self.frame.size;
@@ -288,6 +299,18 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     }
 }
 
+
+- (void)disableScrollGesture {
+    
+    self.collectionView.canCancelContentTouches = NO;
+    
+    for (UIGestureRecognizer *gesture in self.collectionView.gestureRecognizers) {
+        if ([gesture isKindOfClass:[UIPanGestureRecognizer class]]) {
+            [self.collectionView removeGestureRecognizer:gesture];
+        }
+    }
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _totalItemsCount;
@@ -297,6 +320,11 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
     
     YJBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:bannerViewCellId forIndexPath:indexPath];
     long itemIndex = [self _pageControlIndexWithCurrentCellIndex:indexPath.item];
+    
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)] && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self]) {
+        [self.dataSource bannerView:self customCell:cell index:itemIndex];
+        return cell;
+    }
     
     NSString *imagePath = (itemIndex < [self _imageDataSources].count)?[self _imageDataSources][itemIndex]:nil;
     NSString *title = (itemIndex < [self _titlesDataSources].count)?[self _titlesDataSources][itemIndex]:nil;
@@ -451,6 +479,7 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
 /** 安装定时器 */
 - (void)_setupTimer{
     
+    [self invalidateTimer];
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoDuration target:self selector:@selector(automaticScrollAction) userInfo:nil repeats:YES];
     _timer = timer;
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
@@ -538,11 +567,12 @@ static NSString *const bannerViewCellId = @"YJBannerViewCell";
         _totalItemsCount = [self _imageDataSources].count * 1000;
     }
     
-    if ([self _imageDataSources].count != 1) {
+    if ([self _imageDataSources].count > 1) {
         self.collectionView.scrollEnabled = YES;
         [self setAutoScroll:self.autoScroll];
     } else {
         self.collectionView.scrollEnabled = NO;
+        [self setAutoScroll:NO];
     }
     
     [self _setupPageControl];

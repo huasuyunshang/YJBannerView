@@ -6,7 +6,7 @@
 //  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
-/** a.当前版本:2.1.1  */
+/** a.当前版本:2.1.2  */
 
 /** b.联系方式: 发现BUG感谢及时通知我修复, 邮箱: houmanager@hotamil.com 或者GitHub上明示 */
 
@@ -58,6 +58,12 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 /** 显示文字数据源 */
 - (NSArray *)bannerViewTitles:(YJBannerView *)bannerView;
 
+/** 自定义cell的方法 */
+- (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView;
+
+/** 自定义cell数据刷新 设置 */
+- (void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index;
+
 @end
 
 ///////////////////////////////////// 代理方法部分 包括: 滚动的回调 和 点击的回调 ////////////////////////////
@@ -87,6 +93,9 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 /** 卡在一半的问题, 在控制器viewWillAppear时调用此方法 */
 - (void)adjustBannerViewWhenViewWillAppear;
+
+/** 滚动手势禁用（文字轮播较实用） */
+- (void)disableScrollGesture;
 
 ////////////////////////////////////////////  自定义样式接口  //////////////////////////////////////////////
 @property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */

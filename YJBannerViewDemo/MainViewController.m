@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "YJBannerView.h"
+#import "CustomCollectionViewCell.h"
 
 static CGFloat const midMargin = 15.0f;
 
@@ -79,6 +80,15 @@ static CGFloat const midMargin = 15.0f;
 
 - (NSArray *)bannerViewTitles:(YJBannerView *)bannerView{
     return self.titlesDataSources;
+}
+
+- (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView{
+    return nil;//[CustomCollectionViewCell class];
+}
+
+-(void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
+    CustomCollectionViewCell *showCell = (CustomCollectionViewCell *)customCell;
+    showCell.imageView.backgroundColor = [UIColor redColor];
 }
 
 #pragma mark - Delegate
