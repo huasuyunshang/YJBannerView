@@ -1,6 +1,6 @@
 # YJBannerViewOC
 
-
+[![Travis](https://img.shields.io/travis/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![CocoaPods](https://img.shields.io/badge/language-objective--C-00EE00.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![CocoaPods](https://img.shields.io/cocoapods/v/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
