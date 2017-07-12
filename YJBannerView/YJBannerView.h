@@ -23,15 +23,13 @@
 
 #import <UIKit/UIKit.h>
 
-/////////////////////////////////// 可以根据选择以下枚举, 配置不同的显示效果。包括: 指示器的位置 和 指示器的样式 /////////////////////////
-/** PageControl的位置 */
+//////////// 可以根据选择以下枚举, 配置不同的显示效果。包括: 指示器的位置 和 指示器的样式 /////////////////////////
 typedef NS_ENUM(NSInteger, YJBannerViewPageControlAliment) {
     YJBannerViewPageControlAlimentLeft = 0,     // 居左
     YJBannerViewPageControlAlimentCenter,       // 居中
     YJBannerViewPageControlAlimentRight         // 居右
 };
 
-/** PageControl的样式 */
 typedef NS_ENUM(NSInteger, YJBannerViewPageControlStyle) {
     YJBannerViewPageControlNone = 0,    // 无
     YJBannerViewPageControlSystem,      // 系统自带
@@ -39,7 +37,6 @@ typedef NS_ENUM(NSInteger, YJBannerViewPageControlStyle) {
     YJBannerViewPageControlCustom       // 自定义
 };
 
-/** 滚动方向 */
 typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
     YJBannerViewDirectionLeft = 0,      // 水平向左
     YJBannerViewDirectionRight,         // 水平向右
@@ -52,7 +49,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 @protocol YJBannerViewDataSource <NSObject>
 
 @required
-/** 显示图片的数据源 兼容http:// https:// 和本地图片名字 */
+/** 显示图片的数据源 兼容http:// https:// 和 本地图片名字 */
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView;
 @optional
 /** 显示文字数据源 */
@@ -66,7 +63,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 
 @end
 
-///////////////////////////////////// 代理方法部分 包括: 滚动的回调 和 点击的回调 ////////////////////////////
+///////////////// 代理方法部分 包括: 滚动的回调 和 点击的回调 ////////////////////////////
 @protocol YJBannerViewDelegate <NSObject>
 
 @optional
@@ -84,7 +81,7 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 @property (nonatomic, weak) id<YJBannerViewDelegate> delegate; /**< 代理 */
 
 
-///////////////////////////////////////////////// 动态控制部分 ////////////////////////////////////////////////
+/////////////////////// 动态控制部分 ////////////////////////////////////////////////
 @property (nonatomic, assign) CGFloat autoDuration; /**< 自动滚动时间间隔 默认3s */
 
 @property (nonatomic, assign, getter=isAutoScroll) BOOL autoScroll; /**< 是否自动 默认YES */
@@ -97,12 +94,10 @@ typedef NS_ENUM(NSInteger, YJBannerViewDirection) {
 /** 滚动手势禁用（文字轮播较实用） */
 - (void)disableScrollGesture;
 
-////////////////////////////////////////////  自定义样式接口  //////////////////////////////////////////////
+////////////////////////  自定义样式接口  /////////////////////////////
 @property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */
 
 @property (nonatomic, strong) UIImage *placeholderImage; /**< placeholderImage */
-
-@property (nonatomic, assign, getter=isOnlyDisplayText) BOOL onlyDisplayText; /**< 是否只显示文字 默认NO */
 
 @property (nonatomic, assign) YJBannerViewPageControlAliment pageControlAliment; /**< 分页控件的位置 默认是Center */
 

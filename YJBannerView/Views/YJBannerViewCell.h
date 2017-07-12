@@ -18,7 +18,6 @@
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
 @property (nonatomic, assign) UIViewContentMode showImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */
 @property (nonatomic, assign) BOOL isConfigured;
-@property (nonatomic, assign) BOOL onlyDisplayText; /**< 只展示文字轮播 */
 
 - (void)cellWithSetImageURLPlaceholderImageSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImage:(UIImage *)placeholderImage title:(NSString *)title;
 

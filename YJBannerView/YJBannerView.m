@@ -72,7 +72,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _pageControlHighlightColor = [UIColor whiteColor];
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
     
-    _onlyDisplayText = NO;
     _titleFont = [UIFont systemFontOfSize:14.0f];
     _titleTextColor = [UIColor whiteColor];
     _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]; // 黑0.5
@@ -339,7 +338,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         cell.isConfigured = YES;
         cell.showImageViewContentMode = self.bannerImageViewContentMode;
         cell.clipsToBounds = YES;
-        cell.onlyDisplayText = self.onlyDisplayText;
     }
     
     [cell cellWithSetImageURLPlaceholderImageSelectorString:self.setImageViewPlaceholderString imagePath:imagePath placeholderImage:self.placeholderImage title:title];
@@ -426,7 +424,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     if (_pageControl) [_pageControl removeFromSuperview];
     
-    if ([self _imageDataSources].count == 0 || self.onlyDisplayText) {return;}
+    if ([self _imageDataSources].count == 0) {return;}
     
     if ([self _imageDataSources].count == 1) {return;}
     
@@ -533,16 +531,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 /** 显示图片的数组 */
 - (NSArray *)_imageDataSources{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewImages:)]) {
-        NSArray *images = [self.dataSource bannerViewImages:self];
-        if (self.onlyDisplayText) {
-            NSMutableArray *temp = [NSMutableArray new];
-            for (int i = 0; i < [self _titlesDataSources].count; i++) {
-                [temp addObject:@""];
-            }
-            return temp;
-        }else{
-            return images;
-        }
+        return [self.dataSource bannerViewImages:self];
     }
     return @[];
 }
@@ -561,11 +550,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     [self invalidateTimer];
     
-    if (self.onlyDisplayText) {
-        _totalItemsCount = [self _titlesDataSources].count * 1000;
-    }else{
-        _totalItemsCount = [self _imageDataSources].count * 1000;
-    }
+    _totalItemsCount = [self _imageDataSources].count * 1000;
     
     if ([self _imageDataSources].count > 1) {
         self.collectionView.scrollEnabled = YES;

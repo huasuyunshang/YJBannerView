@@ -61,13 +61,8 @@
     [super layoutSubviews];
     
     CGFloat titleBgViewlH = self.titleLabelHeight;
-    if (self.onlyDisplayText) {
-        self.showImageView.frame = CGRectZero;
-        titleBgViewlH = self.height_bannerView;
-    } else {
-        self.showImageView.frame = self.bounds;
-        titleBgViewlH = self.titleLabelHeight;
-    }
+    self.showImageView.frame = self.bounds;
+    titleBgViewlH = self.titleLabelHeight;
     
     CGFloat titlBgViewX   = 0.0f;
     CGFloat titleBgViewY = self.height_bannerView - titleBgViewlH;
@@ -86,7 +81,7 @@
 
     if (imagePath) {
         self.showImageView.hidden = NO;
-        if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
+        if ([imagePath isKindOfClass:[NSString class]]) {
             if ([imagePath hasPrefix:@"http"]) {
                 
                 // 检验方法是否可用
@@ -104,7 +99,7 @@
                 }
                 self.showImageView.image = image;
             }
-        } else if (!self.onlyDisplayText && [imagePath isKindOfClass:[UIImage class]]) {
+        } else if ([imagePath isKindOfClass:[UIImage class]]) {
             self.showImageView.image = (UIImage *)imagePath;
         }else{
             self.showImageView.image = placeholderImage;
