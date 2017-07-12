@@ -17,6 +17,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    /**
+     运行后，用两个手指头在状态栏上同时点击下就可以显示出这个调试的悬浮层。
+     可以看到大概有这样几个选项，
+     *     View Hierarchy（查看View的层级关系）
+     *     VC Hierarchy（查看ViewController层级关系）
+     *     Ivar Explorer（查看UIApplication 的成员属性）
+     *     Measure （测量View的尺寸）
+     *     Spec Compare （对比设计图）
+     */
+    id overlayClass = NSClassFromString(@"UIDebuggingInformationOverlay");
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [overlayClass performSelector:NSSelectorFromString(@"prepareDebuggingOverlay")];
+#pragma clang diagnostic pop
+
     return YES;
 }
 
