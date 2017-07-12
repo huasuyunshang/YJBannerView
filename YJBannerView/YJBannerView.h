@@ -6,7 +6,7 @@
 //  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
-/** a.当前版本:2.1.2  */
+/** a.当前版本:2.1.3  */
 
 /** b.联系方式: 发现BUG感谢及时通知我修复, 邮箱: houmanager@hotamil.com 或者GitHub上明示 */
 
