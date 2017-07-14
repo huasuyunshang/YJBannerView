@@ -12,7 +12,7 @@
 #import "YJHollowPageControl.h"
 
 static NSString *const bannerViewCellId = @"YJBannerView";
-#define kBannerViewPageControlDotSize CGSizeMake(8, 8)
+#define kPageControlDotDefaultSize CGSizeMake(8, 8)
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -23,19 +23,20 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
 @property (nonatomic, copy) NSString *setImageViewPlaceholderString;    /**< 自定义设置网络和默认图片的方法 */
+@property (nonatomic, copy) NSString *placeholderImageName;
 
 @end
 
 @implementation YJBannerView
 
-+ (YJBannerView *)bannerViewWithFrame:(CGRect)frame dataSource:(id<YJBannerViewDataSource>)dataSource delegate:(id<YJBannerViewDelegate>)delegate selectorString:(NSString *)selectorString placeholderImage:(UIImage *)placeholderImage{
++ (YJBannerView *)bannerViewWithFrame:(CGRect)frame dataSource:(id<YJBannerViewDataSource>)dataSource delegate:(id<YJBannerViewDelegate>)delegate selectorString:(NSString *)selectorString placeholderImageName:(NSString *)placeholderImageName{
     
     YJBannerView *bannerView = [[YJBannerView alloc] initWithFrame:frame];
     bannerView.dataSource = dataSource;
     bannerView.delegate = delegate;
     bannerView.setImageViewPlaceholderString = selectorString;
-    if (placeholderImage) {
-        bannerView.placeholderImage = placeholderImage;
+    if (placeholderImageName) {
+        bannerView.placeholderImageName = placeholderImageName;
     }
     return bannerView;
 }
@@ -43,7 +44,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self _initSetting];
         [self _setupBannerMainView];
     }
@@ -52,7 +52,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    
     [self _initSetting];
     [self _setupBannerMainView];
 }
@@ -63,9 +62,9 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     self.backgroundColor = [UIColor whiteColor];
     _autoDuration = 3.0;
     _autoScroll = YES;
-    _pageControlStyle = YJBannerViewPageControlSystem;
-    _pageControlAliment = YJBannerViewPageControlAlimentCenter;
-    _pageControlDotSize = kBannerViewPageControlDotSize;
+    _pageControlStyle = PageControlSystem;
+    _pageControlAliment = PageControlAlimentCenter;
+    _pageControlDotSize = kPageControlDotDefaultSize;
     _pageControlBottomMargin = 10.0f;
     _pageControlHorizontalEdgeMargin = 10.0f;
     _pageControlNormalColor = [UIColor lightGrayColor];
@@ -90,17 +89,9 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 }
 
 #pragma mark - Setter && Getter
-- (void)setPlaceholderImage:(UIImage *)placeholderImage{
-    
-    _placeholderImage = placeholderImage;
-    
-    if (!self.backgroundImageView) {
-        UIImageView *bgImageView = [UIImageView new];
-        bgImageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self insertSubview:bgImageView belowSubview:self.collectionView];
-        self.backgroundImageView = bgImageView;
-    }
-    self.backgroundImageView.image = placeholderImage;
+- (void)setPlaceholderImageName:(NSString *)placeholderImageName{
+    _placeholderImageName = placeholderImageName;
+    self.backgroundImageView.image = [UIImage imageNamed:placeholderImageName];
 }
 
 - (void)setPageControlDotSize:(CGSize)pageControlDotSize{
@@ -114,7 +105,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     }
 }
 
-- (void)setPageControlStyle:(YJBannerViewPageControlStyle)pageControlStyle{
+- (void)setPageControlStyle:(PageControlStyle)pageControlStyle{
     
     _pageControlStyle = pageControlStyle;
     
@@ -151,8 +142,8 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     _pageControlNormalImage = pageControlNormalImage;
     
-    if (self.pageControlStyle != YJBannerViewPageControlAnimated) {
-        self.pageControlStyle = YJBannerViewPageControlAnimated;
+    if (self.pageControlStyle != PageControlAnimated) {
+        self.pageControlStyle = PageControlAnimated;
     }
     [self setCustomPageControlDotImage:pageControlNormalImage isCurrentPageDot:NO];
 }
@@ -161,8 +152,8 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     _pageControlHighlightImage = pageControlHighlightImage;
     
-    if (self.pageControlStyle != YJBannerViewPageControlAnimated) {
-        self.pageControlStyle = YJBannerViewPageControlAnimated;
+    if (self.pageControlStyle != PageControlAnimated) {
+        self.pageControlStyle = PageControlAnimated;
     }
     [self setCustomPageControlDotImage:pageControlHighlightImage isCurrentPageDot:YES];
 }
@@ -192,13 +183,13 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     }
 }
 
--(void)setBannerViewScrollDirection:(YJBannerViewDirection)bannerViewScrollDirection{
+-(void)setBannerViewScrollDirection:(BannerViewDirection)bannerViewScrollDirection{
 
     _bannerViewScrollDirection = bannerViewScrollDirection;
     
-    if (bannerViewScrollDirection == YJBannerViewDirectionLeft || bannerViewScrollDirection == YJBannerViewDirectionRight) {
+    if (bannerViewScrollDirection == BannerViewDirectionLeft || bannerViewScrollDirection == BannerViewDirectionRight) {
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    }else if (bannerViewScrollDirection == YJBannerViewDirectionTop || bannerViewScrollDirection == YJBannerViewDirectionBottom){
+    }else if (bannerViewScrollDirection == BannerViewDirectionTop || bannerViewScrollDirection == BannerViewDirectionBottom){
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     }
 }
@@ -211,7 +202,17 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 }
 
 #pragma mark - Lazy
+- (UIImageView *)backgroundImageView{
+    if (!_backgroundImageView) {
+        _backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self insertSubview:_backgroundImageView belowSubview:self.collectionView];
+    }
+    return _backgroundImageView;
+}
+
 - (void)layoutSubviews{
+    [super layoutSubviews];
     
     self.dataSource = self.dataSource;
     [super layoutSubviews];
@@ -232,7 +233,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         
         YJHollowPageControl *pageControl = (YJHollowPageControl *)_pageControl;
         
-        if (!(self.pageControlNormalImage && self.pageControlHighlightImage && CGSizeEqualToSize(kBannerViewPageControlDotSize, self.pageControlDotSize))) {
+        if (!(self.pageControlNormalImage && self.pageControlHighlightImage && CGSizeEqualToSize(kPageControlDotDefaultSize, self.pageControlDotSize))) {
             pageControl.dotSize = self.pageControlDotSize;
         }
         
@@ -241,13 +242,13 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         size = CGSizeMake([self _imageDataSources].count * self.pageControlDotSize.width * 1.5, self.pageControlDotSize.height);
     }
     CGFloat x = (self.width_bannerView - size.width) * 0.5;
-    if (self.pageControlAliment == YJBannerViewPageControlAlimentLeft) { // 靠左
+    if (self.pageControlAliment == PageControlAlimentLeft) { // 靠左
         
         x = 0.0f;
         
-    }else if (self.pageControlAliment == YJBannerViewPageControlAlimentCenter){ // 居中
+    }else if (self.pageControlAliment == PageControlAlimentCenter){ // 居中
     
-    }else if (self.pageControlAliment == YJBannerViewPageControlAlimentRight){ // 靠右
+    }else if (self.pageControlAliment == PageControlAlimentRight){ // 靠右
         
         x = self.collectionView.width_bannerView - size.width;
         
@@ -262,15 +263,15 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     }
     
     CGRect pageControlFrame = CGRectMake(x, y, size.width, size.height);
-    if (self.pageControlAliment == YJBannerViewPageControlAlimentLeft) {
+    if (self.pageControlAliment == PageControlAlimentLeft) {
         pageControlFrame.origin.x += self.pageControlHorizontalEdgeMargin;
-    }else if (self.pageControlAliment == YJBannerViewPageControlAlimentRight){
+    }else if (self.pageControlAliment == PageControlAlimentRight){
         pageControlFrame.origin.x -= self.pageControlHorizontalEdgeMargin;
     }
     pageControlFrame.origin.y -= self.pageControlBottomMargin;
     self.pageControl.frame = pageControlFrame;
     
-    self.pageControl.hidden = self.pageControlStyle == YJBannerViewPageControlNone;
+    self.pageControl.hidden = self.pageControlStyle == PageControlNone;
     
     if (self.backgroundImageView) {
         self.backgroundImageView.frame = self.bounds;
@@ -295,18 +296,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     long targetIndex = [self _currentIndex];
     if (targetIndex < _totalItemsCount) {
         [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-    }
-}
-
-
-- (void)disableScrollGesture {
-    
-    self.collectionView.canCancelContentTouches = NO;
-    
-    for (UIGestureRecognizer *gesture in self.collectionView.gestureRecognizers) {
-        if ([gesture isKindOfClass:[UIPanGestureRecognizer class]]) {
-            [self.collectionView removeGestureRecognizer:gesture];
-        }
     }
 }
 
@@ -340,7 +329,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         cell.clipsToBounds = YES;
     }
     
-    [cell cellWithSetImageURLPlaceholderImageSelectorString:self.setImageViewPlaceholderString imagePath:imagePath placeholderImage:self.placeholderImage title:title];
+    [cell cellWithSelectorString:self.setImageViewPlaceholderString imagePath:imagePath placeholderImageName:self.placeholderImageName title:title];
 
     return cell;
 }
@@ -431,10 +420,10 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     int indexOnPageControl = [self _pageControlIndexWithCurrentCellIndex:[self _currentIndex]];
     
     switch (self.pageControlStyle) {
-        case YJBannerViewPageControlNone:{
+        case PageControlNone:{
             break;
         }
-        case YJBannerViewPageControlSystem:{
+        case PageControlSystem:{
             UIPageControl *pageControl = [[UIPageControl alloc] init];
             pageControl.numberOfPages = [self _imageDataSources].count;
             pageControl.currentPageIndicatorTintColor = self.pageControlHighlightColor;
@@ -445,7 +434,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
             _pageControl = pageControl;
             break;
         }
-        case YJBannerViewPageControlAnimated:{
+        case PageControlAnimated:{
             YJHollowPageControl *pageControl = [[YJHollowPageControl alloc] init];
             pageControl.numberOfPages = [self _imageDataSources].count;
             pageControl.dotColor = self.pageControlNormalColor;
@@ -458,7 +447,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
             _pageControl = pageControl;
             break;
         }
-        case YJBannerViewPageControlCustom:{
+        case PageControlCustom:{
         
         }
         default:
@@ -494,9 +483,9 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     if (_totalItemsCount == 0) return;
     int currentIndex = [self _currentIndex];
-    if (self.bannerViewScrollDirection == YJBannerViewDirectionLeft || self.bannerViewScrollDirection == YJBannerViewDirectionTop) {
+    if (self.bannerViewScrollDirection == BannerViewDirectionLeft || self.bannerViewScrollDirection == BannerViewDirectionTop) {
         [self _scrollToIndex:currentIndex + 1];
-    }else if (self.bannerViewScrollDirection == YJBannerViewDirectionRight || self.bannerViewScrollDirection == YJBannerViewDirectionBottom){
+    }else if (self.bannerViewScrollDirection == BannerViewDirectionRight || self.bannerViewScrollDirection == BannerViewDirectionBottom){
         [self _scrollToIndex:currentIndex - 1];
     }
 }
