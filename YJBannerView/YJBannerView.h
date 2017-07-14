@@ -21,6 +21,7 @@
     2016/10/17  版本2.0   是以源码的方式使用 Cocoapods 引入功能
     2017/5/29   版本2.1   自动滚动时间间隔调整为3s、动画变化比例调整为1.0、设置标题默认边间距为10, 可任意设置
     2017/7/3    版本2.1.1  修改通过传递UIImageView设置网络图片的方法给BannerView设置图片, 不再依赖 SDWebImage
+    2017/7/14   版本2.1.4  代码功能及结构优化
  */
 
 /** 指示器的位置 */
@@ -69,7 +70,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @protocol YJBannerViewDelegate <NSObject>
 
 @optional
-/** 滚动回调 */
+/** 滚动到 index */
 - (void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index;
 
 /** 点击回调 */
@@ -100,6 +101,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 - (void)adjustBannerViewWhenViewWillAppear;
 
 //////////////  自定义样式接口  //////////////////
+
+@property (nonatomic, copy) NSString *placeholderImageName;  /** 默认图片名 */
+
 @property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */
 
 @property (nonatomic, assign) PageControlAliment pageControlAliment; /**< 分页控件的位置 默认是Center */
@@ -110,7 +114,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 @property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin; /**< 分页控件水平方向上的边缘间距 默认10 */
 
-@property (nonatomic, assign) CGSize pageControlDotSize; /**< 分页控件小圆标大小 默认8*8*/
+@property (nonatomic, assign) CGFloat pageControlPadding; /**< 分页控件水平方向上间距 默认 5 */
+
+@property (nonatomic, assign) CGSize pageControlDotSize; /**< 分页控件小圆标大小 默认 8*8*/
 
 @property (nonatomic, strong) UIColor *pageControlNormalColor; /**< 分页控件正常颜色 */
 
@@ -142,11 +148,11 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 /**
  * 创建bannerView实例的方法
  *
- * @frame               banner的大小
- * @dataSource          数据源代理
- * @delegate            普通代理
- * @selectorString      必须是 UIImageView 设置图片和placeholderImage的方法 如: @"sd_setImageWithURL:placeholderImage:"
- * @placeholderImage    默认图片
+ * @frame                   banner的大小
+ * @dataSource              数据源代理
+ * @delegate                普通代理
+ * @selectorString          必须是 UIImageView 设置图片和placeholderImage的方法 如: @"sd_setImageWithURL:placeholderImage:"
+ * @placeholderImageName    默认图片
  *
  * @return bannerView的实例
  */

@@ -23,7 +23,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
 @property (nonatomic, copy) NSString *setImageViewPlaceholderString;    /**< 自定义设置网络和默认图片的方法 */
-@property (nonatomic, copy) NSString *placeholderImageName;
 
 @end
 
@@ -67,6 +66,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _pageControlDotSize = kPageControlDotDefaultSize;
     _pageControlBottomMargin = 10.0f;
     _pageControlHorizontalEdgeMargin = 10.0f;
+    _pageControlPadding = 5.0f;
     _pageControlNormalColor = [UIColor lightGrayColor];
     _pageControlHighlightColor = [UIColor whiteColor];
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
@@ -191,6 +191,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     [self setAutoScroll:self.autoScroll];
 }
 
+#pragma mark - layoutSubviews
 - (void)layoutSubviews{
     [super layoutSubviews];
     
@@ -396,7 +397,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
             pageControl.currentDotColor = self.pageControlHighlightColor;
             pageControl.userInteractionEnabled = NO;
             pageControl.resizeScale = 1.0;
-            pageControl.spacing = 5.0f;
+            pageControl.spacing = self.pageControlPadding;
             pageControl.currentPage = indexOnPageControl;
             [self addSubview:pageControl];
             _pageControl = pageControl;
@@ -410,7 +411,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
             pageControl.currentDotColor = self.pageControlHighlightColor;
             pageControl.userInteractionEnabled = NO;
             pageControl.resizeScale = 1.0;
-            pageControl.spacing = 5.0f;
+            pageControl.spacing = self.pageControlPadding;
             pageControl.currentPage = indexOnPageControl;
             [self addSubview:pageControl];
             _pageControl = pageControl;
