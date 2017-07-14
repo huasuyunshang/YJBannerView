@@ -34,8 +34,8 @@ typedef NS_ENUM(NSInteger, PageControlAliment) {
 typedef NS_ENUM(NSInteger, PageControlStyle) {
     PageControlNone = 0,    // 无
     PageControlSystem,      // 系统自带
-    PageControlAnimated,    // 动画
-    PageControlCustom       // 自定义
+    PageControlHollow,      // 空心的
+    PageControlCustom       // 自定义 需要图片Dot
 };
 
 /** 滚动方向 */
@@ -116,9 +116,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 @property (nonatomic, strong) UIColor *pageControlHighlightColor; /**< 前分页控件小圆标颜色 */
 
-@property (nonatomic, strong) UIImage *pageControlNormalImage; /**< 分页小圆点正常的图片 */
+@property (nonatomic, strong) UIImage *customPageControlNormalImage; /**< 分页小圆点正常的图片 */
 
-@property (nonatomic, strong) UIImage *pageControlHighlightImage; /**< 当前分页控件图片 */
+@property (nonatomic, strong) UIImage *customPageControlHighlightImage; /**< 当前分页控件图片 */
 
 @property (nonatomic, strong) UIFont *titleFont; /**< 文字大小 */
 
