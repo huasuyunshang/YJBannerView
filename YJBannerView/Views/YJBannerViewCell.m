@@ -77,7 +77,7 @@
 }
 
 #pragma mark - 刷新数据
-- (void)cellWithSetImageURLPlaceholderImageSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImage:(UIImage *)placeholderImage title:(NSString *)title{
+- (void)cellWithSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImageName:(NSString *)placeholderImageName title:(NSString *)title{
 
     if (imagePath) {
         self.showImageView.hidden = NO;
@@ -89,7 +89,7 @@
                 if ([self.showImageView respondsToSelector:selector]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                    [self.showImageView performSelector:selector withObject:[NSURL URLWithString:imagePath] withObject:placeholderImage];
+                    [self.showImageView performSelector:selector withObject:[NSURL URLWithString:imagePath] withObject:[UIImage imageNamed:placeholderImageName]];
 #pragma clang diagnostic pop
                 }
             } else {
@@ -102,7 +102,7 @@
         } else if ([imagePath isKindOfClass:[UIImage class]]) {
             self.showImageView.image = (UIImage *)imagePath;
         }else{
-            self.showImageView.image = placeholderImage;
+            self.showImageView.image = [UIImage imageNamed:placeholderImageName];
         }
     }else{
         self.showImageView.hidden = YES;

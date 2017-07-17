@@ -59,7 +59,7 @@ static CGFloat const midMargin = 15.0f;
     }
     
     for (NSInteger i = 0; i < imagesURLStrings.count; i++) {
-        [self.titlesDataSources addObject:[NSString stringWithFormat:@"标题%ld", i]];
+        [self.titlesDataSources addObject:[NSString stringWithFormat:@"标题%ld", (long)i]];
     }
     
     [self.defaultBannerView reloadData];
@@ -116,30 +116,31 @@ static CGFloat const midMargin = 15.0f;
 /** 第一个 默认 */ // @selector(sd_setImageWithURL:placeholderImage:)
 - (YJBannerView *)defaultBannerView{
     if (!_defaultBannerView) {
-        _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImageName:@"placeholder"];
+        _defaultBannerView.userInteractionEnabled = NO;
     }
     return _defaultBannerView;
 }
 
 - (YJBannerView *)secondBannerView{
     if (!_secondBannerView) {
-        _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        _secondBannerView.pageControlStyle = YJBannerViewPageControlSystem;   // PageControl 系统样式
-        _secondBannerView.pageControlAliment = YJBannerViewPageControlAlimentRight;  // 位置居中
+        _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImageName:@"placeholder"];
+        _secondBannerView.pageControlAliment = PageControlAlimentRight;  // 位置居中
         _secondBannerView.autoDuration = 2.0f;    // 时间间隔
-        _secondBannerView.bannerViewScrollDirection = YJBannerViewDirectionTop; // 向上滚动
-        _secondBannerView.pageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-        _secondBannerView.pageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
+        _secondBannerView.bannerViewScrollDirection = BannerViewDirectionTop; // 向上滚动
+        _secondBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+        _secondBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
         _secondBannerView.titleAlignment = NSTextAlignmentLeft;
+        _secondBannerView.pageControlStyle = PageControlCustom;   // PageControl 系统样式
     }
     return _secondBannerView;
 }
 
 - (YJBannerView *)custompageControlBannerView{
     if (!_custompageControlBannerView) {
-        _custompageControlBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.secondBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        _custompageControlBannerView.bannerViewScrollDirection = YJBannerViewDirectionRight;
-        _custompageControlBannerView.pageControlStyle = YJBannerViewPageControlAnimated;
+        _custompageControlBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.secondBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImageName:@"placeholder"];
+        _custompageControlBannerView.bannerViewScrollDirection = BannerViewDirectionRight;
+        _custompageControlBannerView.pageControlStyle = PageControlHollow;
         _custompageControlBannerView.pageControlNormalColor = [UIColor cyanColor];
         _custompageControlBannerView.pageControlHighlightColor = [UIColor redColor];
     }
