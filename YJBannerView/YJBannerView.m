@@ -283,7 +283,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     YJBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:bannerViewCellId forIndexPath:indexPath];
-    long itemIndex = [self _pageControlIndexWithCurrentCellIndex:indexPath.item];
+    long itemIndex = [self _showIndexWithCurrentCellIndex:indexPath.item];
     
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)] && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self]) {
         [self.dataSource bannerView:self customCell:cell index:itemIndex];
@@ -312,18 +312,18 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didSelectItemAtIndex:)]) {
-        [self.delegate bannerView:self didSelectItemAtIndex:[self _pageControlIndexWithCurrentCellIndex:indexPath.item]];
+        [self.delegate bannerView:self didSelectItemAtIndex:[self _showIndexWithCurrentCellIndex:indexPath.item]];
     }
     if (self.didSelectItemAtIndexBlock) {
-        self.didSelectItemAtIndexBlock([self _pageControlIndexWithCurrentCellIndex:indexPath.item]);
+        self.didSelectItemAtIndexBlock([self _showIndexWithCurrentCellIndex:indexPath.item]);
     }
 }
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (![self _imageDataSources].count) return; // 解决清除timer时偶尔会出现的问题
+    if (![self _imageDataSources].count) return;
     int itemIndex = [self _currentIndex];
-    int indexOnPageControl = [self _pageControlIndexWithCurrentCellIndex:itemIndex];
+    int indexOnPageControl = [self _showIndexWithCurrentCellIndex:itemIndex];
     
     if ([self.pageControl isKindOfClass:[YJHollowPageControl class]]) {
         YJHollowPageControl *pageControl = (YJHollowPageControl *)_pageControl;
@@ -351,9 +351,9 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    if (![self _imageDataSources].count) return; // 解决清除timer时偶尔会出现的问题
+    if (![self _imageDataSources].count) return;
     int itemIndex = [self _currentIndex];
-    int indexOnPageControl = [self _pageControlIndexWithCurrentCellIndex:itemIndex];
+    int indexOnPageControl = [self _showIndexWithCurrentCellIndex:itemIndex];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didScroll2Index:)]) {
         [self.delegate bannerView:self didScroll2Index:indexOnPageControl];
@@ -373,7 +373,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     if ([self _imageDataSources].count == 1) {return;}
     
-    int indexOnPageControl = [self _pageControlIndexWithCurrentCellIndex:[self _currentIndex]];
+    int indexOnPageControl = [self _showIndexWithCurrentCellIndex:[self _currentIndex]];
     
     switch (self.pageControlStyle) {
         case PageControlNone:{
@@ -433,7 +433,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (void)_setupTimer{
     
     [self invalidateTimer];
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoDuration target:self selector:@selector(automaticScrollAction) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoDuration target:self selector:@selector(_automaticScrollAction) userInfo:nil repeats:YES];
     _timer = timer;
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
@@ -445,7 +445,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _timer = nil;
 }
 
-- (void)automaticScrollAction{
+- (void)_automaticScrollAction{
     
     if (_totalItemsCount == 0) return;
     int currentIndex = [self _currentIndex];
@@ -479,8 +479,9 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     return MAX(0, index);
 }
 
-- (int)_pageControlIndexWithCurrentCellIndex:(NSInteger)index{
-    return (int)index % [self _imageDataSources].count;
+/** 当前是排第几个 */
+- (int)_showIndexWithCurrentCellIndex:(NSInteger)cellIndex{
+    return (int)cellIndex % [self _imageDataSources].count;
 }
 
 /** 显示图片的数组 */
@@ -494,8 +495,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 /** 显示的标题数组 */
 - (NSArray *)_titlesDataSources{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewTitles:)]) {
-        NSArray *titles = [self.dataSource bannerViewTitles:self];
-        return titles;
+        return [self.dataSource bannerViewTitles:self];
     }
     return @[];
 }
@@ -505,7 +505,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     [self invalidateTimer];
     
-    _totalItemsCount = [self _imageDataSources].count * 1000;
+    _totalItemsCount = [self _imageDataSources].count * 500;
     
     if ([self _imageDataSources].count > 1) {
         self.collectionView.scrollEnabled = YES;
