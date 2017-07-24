@@ -14,65 +14,74 @@
 [CocoaPods](http://cocoapods.org) is the recommended way to add `YJBannerView` to your project.
 
 1. Add a pod entry for `YJBannerView` to your Podfile </br>
-```bash
+```ruby
     pod 'YJBannerView'
 ```
 2. Install the pod(s) by running </br>
-```bash
+```ruby
     pod install
 ```
 3. Include `YJBannerView` wherever you need it with </br>
-```bash
+```ruby
     #import "YJBannerView.h"
 ```
 
 ### Carthage
 
 1. Add YJBannerView to your Cartfile. </br>
-```bash
+```ruby
     github "YJManager/YJBannerViewOC"
 ```
 2. Run 
-```bash
+```ruby
     carthage update
 ```
 3. Follow the rest of the [standard Carthage installation instructions](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application) to add YJBannerView to your project.
 
-### 使用举例
+### 使用方法
 
-代码及效果如下:
-
-创建代码:
+#### 1.创建BannerView:
 ```objc
-- (YJBannerView *)secondBannerView{
-if (!_secondBannerView) {
-    _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    _secondBannerView.pageControlStyle = YJBannerViewPageControlSystem;   // PageControl 系统样式
-    _secondBannerView.pageControlAliment = YJBannerViewPageControlAlimentRight;  // 位置居中
-    _secondBannerView.autoDuration = 2.0f;    // 时间间隔
-    _secondBannerView.bannerViewScrollDirection = YJBannerViewDirectionTop; // 向上滚动
-    _secondBannerView.pageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-    _secondBannerView.pageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
-    _secondBannerView.titleAlignment = NSTextAlignmentLeft;
+-(YJBannerView *)normalBannerView{
+if (!_normalBannerView) {
+_normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+_normalBannerView.pageControlAliment = PageControlAlimentRight;
+_normalBannerView.autoDuration = 2.5f;
 }
-    return _secondBannerView;
+return _normalBannerView;
 }
 ```
-数据源方法和代理:
+#### 2.实现数据源方法和代理:
 ```objc
-#pragma mark - DataSources
+// 将网络图片或者本地图片 或者混合数组
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
     return self.imageDataSources;
 }
 
+// 将标题对应数组传递给bannerView 如果不需要, 可以不实现该方法
 - (NSArray *)bannerViewTitles:(YJBannerView *)bannerView{
     return self.titlesDataSources;
 }
 
-#pragma mark - Delegate
+// 代理方法 点击了哪个bannerView 的 第几个元素
 -(void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
     NSString *title = [self.titlesDataSources objectAtIndex:index];
     NSLog(@"当前%@-->%@", bannerView, title);
+}
+```
+
+### 扩展方法
+```objc
+// 自定义Cell方法
+- (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView{
+    return [HeadLinesCell class];
+}
+
+// 自定义Cell的数据刷新方法
+- (void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
+
+    HeadLinesCell *cell = (HeadLinesCell *)customCell;
+    [cell cellWithHeadHotLineCellData:@"打折活动开始了~~快来抢购啊"];
 }
 ```
 
@@ -82,4 +91,4 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 
 ## Change-log
 
-A brief summary of each YJBannerViewOC release can be found in the [CHANGELOG](CHANGELOG.mdown). 
+A brief summary of each YJBannerView release can be found in the [CHANGELOG](CHANGELOG.mdown). 
