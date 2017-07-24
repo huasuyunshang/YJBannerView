@@ -97,6 +97,12 @@ static CGFloat const midMargin = 15.0f;
     NSLog(@"当前%@-->%@", bannerView, title);
 }
 
+- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex{
+    if (bannerView == self.defaultBannerView) {
+        NSLog(@"-->%ld", (long)currentIndex);
+    }
+}
+
 
 #pragma mark - lazy
 - (NSMutableArray *)imageDataSources{

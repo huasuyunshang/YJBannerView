@@ -22,19 +22,22 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 @property (nonatomic, weak) NSTimer *timer;                             /**< 定时器 */
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
-@property (nonatomic, copy) NSString *setImageViewPlaceholderString;    /**< 自定义设置网络和默认图片的方法 */
 @property (nonatomic, strong) NSArray *saveScrollViewGestures; /**< 保存手势 */
 
 @end
 
 @implementation YJBannerView
 
-+ (YJBannerView *)bannerViewWithFrame:(CGRect)frame dataSource:(id<YJBannerViewDataSource>)dataSource delegate:(id<YJBannerViewDelegate>)delegate selectorString:(NSString *)selectorString placeholderImageName:(NSString *)placeholderImageName{
++ (YJBannerView *)bannerViewWithFrame:(CGRect)frame
+                           dataSource:(id<YJBannerViewDataSource>)dataSource
+                             delegate:(id<YJBannerViewDelegate>)delegate
+                 placeholderImageName:(NSString *)placeholderImageName
+                       selectorString:(NSString *)selectorString{
     
     YJBannerView *bannerView = [[YJBannerView alloc] initWithFrame:frame];
     bannerView.dataSource = dataSource;
     bannerView.delegate = delegate;
-    bannerView.setImageViewPlaceholderString = selectorString;
+    bannerView.bannerViewSelectorString = selectorString;
     if (placeholderImageName) {
         bannerView.placeholderImageName = placeholderImageName;
     }
@@ -325,7 +328,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         cell.clipsToBounds = YES;
     }
     
-    [cell cellWithSelectorString:self.setImageViewPlaceholderString imagePath:imagePath placeholderImageName:self.placeholderImageName title:title];
+    [cell cellWithSelectorString:self.bannerViewSelectorString imagePath:imagePath placeholderImageName:self.placeholderImageName title:title];
 
     return cell;
 }
@@ -341,6 +344,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
     if (![self _imageDataSources].count) return;
     int itemIndex = [self _currentIndex];
     int indexOnPageControl = [self _showIndexWithCurrentCellIndex:itemIndex];
@@ -352,6 +356,11 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         UIPageControl *pageControl = (UIPageControl *)_pageControl;
         pageControl.currentPage = indexOnPageControl;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didScrollCurrentIndex:)]) {
+        [self.delegate bannerView:self didScrollCurrentIndex:indexOnPageControl];
+    }
+    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
