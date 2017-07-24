@@ -1,5 +1,6 @@
-# [YJBannerViewOC](https://github.com/YJManager/YJBannerViewOC) &middot; 
+# [YJBannerViewOC](https://github.com/YJManager/YJBannerViewOC) 
 
+<!--&middot;--> 
 [![Travis](https://img.shields.io/travis/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)[![Language](https://img.shields.io/badge/Language-Objective--C-FF7F24.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)[![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)[![CocoaPods](https://img.shields.io/cocoapods/v/YJBannerView.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)[![GitHub tag](https://img.shields.io/github/tag/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)[![license](https://img.shields.io/github/license/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 
 `YJBannerView` YJAutoScrollBanner. Objective-C版 无限循环Banner、文字轮播器。
@@ -43,12 +44,12 @@
 #### 1.创建BannerView:
 ```objc
 -(YJBannerView *)normalBannerView{
-if (!_normalBannerView) {
-_normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
-_normalBannerView.pageControlAliment = PageControlAlimentRight;
-_normalBannerView.autoDuration = 2.5f;
-}
-return _normalBannerView;
+    if (!_normalBannerView) {
+        _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _normalBannerView.pageControlAliment = PageControlAlimentRight;
+        _normalBannerView.autoDuration = 2.5f;
+    }
+    return _normalBannerView;
 }
 ```
 #### 2.实现数据源方法和代理:
@@ -70,7 +71,7 @@ return _normalBannerView;
 }
 ```
 
-### 扩展方法
+### 扩展自定义方法
 ```objc
 // 自定义Cell方法
 - (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView{
