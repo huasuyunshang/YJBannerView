@@ -117,9 +117,12 @@ static CGFloat const midMargin = 15.0f;
 - (YJBannerView *)defaultBannerView{
     if (!_defaultBannerView) {
         _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImageName:@"placeholder"];
-        _defaultBannerView.userInteractionEnabled = NO;
     }
     return _defaultBannerView;
+}
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    self.defaultBannerView.bannerGestureEnable = !self.defaultBannerView.bannerGestureEnable;
 }
 
 - (YJBannerView *)secondBannerView{

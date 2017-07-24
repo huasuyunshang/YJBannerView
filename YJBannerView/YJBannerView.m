@@ -23,6 +23,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
 @property (nonatomic, copy) NSString *setImageViewPlaceholderString;    /**< 自定义设置网络和默认图片的方法 */
+@property (nonatomic, strong) NSArray *saveScrollViewGestures; /**< 保存手势 */
 
 @end
 
@@ -77,6 +78,8 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _titleHeight = 30.0f;
     _titleEdgeMargin = 10.0f;
     _titleAlignment = NSTextAlignmentLeft;
+    _bannerGestureEnable = YES;
+    _saveScrollViewGestures = self.collectionView.gestureRecognizers;
 }
 
 #pragma mark - register Custom Cell
@@ -189,6 +192,23 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _autoDuration = autoDuration;
     
     [self setAutoScroll:self.autoScroll];
+}
+
+- (void)setBannerGestureEnable:(BOOL)bannerGestureEnable{
+    if (_bannerGestureEnable && bannerGestureEnable) { // 不操作
+    }else if (!_bannerGestureEnable && bannerGestureEnable){
+        self.collectionView.canCancelContentTouches = YES;
+        for (NSInteger i = 0; i < self.saveScrollViewGestures.count; i++) {
+            UIGestureRecognizer *gesture = self.saveScrollViewGestures[i];
+            [self.collectionView addGestureRecognizer:gesture];
+        }
+    }else if (_bannerGestureEnable && !bannerGestureEnable){
+        self.collectionView.canCancelContentTouches = NO;
+        for (UIGestureRecognizer *gesture in self.collectionView.gestureRecognizers) {
+            [self.collectionView removeGestureRecognizer:gesture];
+        }
+    }
+    _bannerGestureEnable = bannerGestureEnable;
 }
 
 #pragma mark - layoutSubviews

@@ -96,11 +96,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 @property (nonatomic, assign) BannerViewDirection bannerViewScrollDirection; /**< 滚动方向 默认水平向左 */
 
-/** 卡在一半的问题, 在控制器viewWillAppear时调用此方法 */
-- (void)adjustBannerViewWhenViewWillAppear;
+@property (nonatomic, assign, getter=isBannerGestureEnable) BOOL bannerGestureEnable; /**< 手势是否可用 默认可用YES */
 
 //////////////  自定义样式接口  //////////////////
-
 @property (nonatomic, copy) NSString *placeholderImageName;  /** 默认图片名 */
 
 @property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */
@@ -143,6 +141,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 /** 刷新BannerView */
 - (void)reloadData;
+
+/** 卡在一半的问题, 在控制器viewWillAppear时调用此方法 */
+- (void)adjustBannerViewWhenViewWillAppear;
 
 /**
  * 创建bannerView实例的方法
