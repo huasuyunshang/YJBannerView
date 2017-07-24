@@ -4,6 +4,10 @@
 
 `YJBannerView` YJAutoScrollBanner. Objective-C版 无限循环Banner、文字轮播器。
 
+## 效果
+<img src="https://github.com/YJManager/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/Effect.gif" width="300" height="533" />
+<img src="https://github.com/YJManager/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/Effect.gif" width="300" height="533" />
+
 ## Adding YJBannerView to your project (添加 YJBannerView 到你的项目)
 
 ### CocoaPods
@@ -72,9 +76,6 @@ if (!_secondBannerView) {
     NSLog(@"当前%@-->%@", bannerView, title);
 }
 ```
-
-### 效果如下所示
-<img src="https://github.com/YJManager/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/Effect.gif" width="300" height="533" />
 
 ## License
 
