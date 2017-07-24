@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "YJBannerView.h"
-#import "CustomCollectionViewCell.h"
 #import "HeadLinesCell.h"
 
 static CGFloat const midMargin = 15.0f;
@@ -20,6 +19,8 @@ static CGFloat const midMargin = 15.0f;
 @property (nonatomic, strong) YJBannerView *normalBannerView; /**< 普通的banner */
 @property (nonatomic, strong) UILabel *headlinesLabel; /**< 头条tag*/
 @property (nonatomic, strong) YJBannerView *headlinesBannerView; /**< 头条BannerView */
+@property (nonatomic, strong) YJBannerView *goodDetailBannerView; /**< 商品详情 */
+@property (nonatomic, strong) YJBannerView *customBannerView; /**< 自定义 */
 
 @end
 
@@ -40,10 +41,12 @@ static CGFloat const midMargin = 15.0f;
     [self.view addSubview:containerScrollView];
 
     [containerScrollView addSubview:self.normalBannerView];
-//    [containerScrollView addSubview:self.headlinesBannerView];
+    [containerScrollView addSubview:self.headlinesLabel];
+    [containerScrollView addSubview:self.headlinesBannerView];
+    [containerScrollView addSubview:self.goodDetailBannerView];
+    [containerScrollView addSubview:self.customBannerView];
     
-    
-    containerScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, CGRectGetMaxY(self.headlinesBannerView.frame) + midMargin);
+    containerScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, CGRectGetMaxY(self.customBannerView.frame) + midMargin);
 }
 
 - (void)_loadDataSources{
@@ -64,6 +67,9 @@ static CGFloat const midMargin = 15.0f;
 
     // 刷新数据
     [self.normalBannerView reloadData];
+    [self.headlinesBannerView reloadData];
+    [self.goodDetailBannerView reloadData];
+    [self.customBannerView reloadData];
 }
 
 
@@ -80,27 +86,33 @@ static CGFloat const midMargin = 15.0f;
     if (bannerView == self.headlinesBannerView) {
         return [HeadLinesCell class];
     }
-    return nil;//[CustomCollectionViewCell class];
+    return nil;
 }
 
 -(void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
     
     if (bannerView == self.headlinesBannerView) {
         HeadLinesCell *cell = (HeadLinesCell *)customCell;
-        [cell cellWithHeadHotLineCellData:@"打折活动开始了~~"];
+        [cell cellWithHeadHotLineCellData:@"打折活动开始了~~快来抢购啊"];
     }else{
     
-    CustomCollectionViewCell *showCell = (CustomCollectionViewCell *)customCell;
-    showCell.imageView.backgroundColor = [UIColor redColor];
     }
 }
 
 #pragma mark - Delegate
 - (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
+    NSString *titleString = @"";
+    NSString *showMessage = [NSString stringWithFormat:@"点击了第%ld个", index];
     if (bannerView == self.normalBannerView) {
-        UIAlertView *alertView =  [[UIAlertView alloc] initWithTitle:@"normalBannerView" message:[NSString stringWithFormat:@"点击了第%ld个", index] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-        [alertView show];
+        titleString = @"第一个BannerView";
+    }else if (bannerView == self.headlinesBannerView){
+        titleString = @"今日头条";
+    }else if (bannerView == self.goodDetailBannerView){
+        titleString = @"商品详情";
     }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:titleString message:showMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+    [alert show];
 }
 
 #pragma mark - lazy
@@ -123,30 +135,53 @@ static CGFloat const midMargin = 15.0f;
         _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _normalBannerView.pageControlAliment = PageControlAlimentRight;
         _normalBannerView.autoDuration = 2.5f;
-        _normalBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-        _normalBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
     }
     return _normalBannerView;
 }
 
 - (UILabel *)headlinesLabel{
     if (!_headlinesLabel) {
-        _headlinesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.normalBannerView.frame), 60, 40)];
-        _headlinesLabel.font = [UIFont systemFontOfSize:15];
+        _headlinesLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.normalBannerView.frame) + 5, 70, 30)];
+        _headlinesLabel.font = [UIFont boldSystemFontOfSize:15];
         _headlinesLabel.textAlignment = NSTextAlignmentLeft;
         _headlinesLabel.backgroundColor = [UIColor clearColor];
         _headlinesLabel.textColor = [UIColor redColor];
-        _headlinesLabel.text = @"今日头条";
+        _headlinesLabel.text = @" 今日头条 ";
+        _headlinesLabel.layer.cornerRadius = 5.0f;
+        _headlinesLabel.layer.borderWidth = 1.0f;
+        _headlinesLabel.layer.borderColor = [UIColor redColor].CGColor;
     }
     return _headlinesLabel;
 }
 
 - (YJBannerView *)headlinesBannerView{
     if (!_headlinesBannerView) {
-        _headlinesBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(60, CGRectGetMaxY(self.normalBannerView.frame), kSCREEN_WIDTH - 60, 40) dataSource:self delegate:self placeholderImageName:@"" selectorString:@"sd_setImageWithURL:placeholderImage:"];
-//        _headlinesBannerView.bannerGestureEnable = NO;
+        _headlinesBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(90, CGRectGetMaxY(self.normalBannerView.frame), kSCREEN_WIDTH - 60, 40) dataSource:self delegate:self placeholderImageName:nil selectorString:nil];
+        _headlinesBannerView.bannerViewScrollDirection = BannerViewDirectionTop;
+        _headlinesBannerView.bannerGestureEnable = NO;
+        _headlinesBannerView.pageControlStyle = PageControlNone;
     }
     return _headlinesBannerView;
+}
+
+- (YJBannerView *)goodDetailBannerView{
+    if (!_goodDetailBannerView) {
+        _goodDetailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.headlinesBannerView.frame), kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _goodDetailBannerView.pageControlStyle = PageControlCustom;
+        _goodDetailBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+        _goodDetailBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
+        _goodDetailBannerView.cycleScrollEnable = NO;
+        _goodDetailBannerView.autoScroll = NO;
+    }
+    return _goodDetailBannerView;
+}
+
+- (YJBannerView *)customBannerView{
+    if (!_customBannerView) {
+        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _customBannerView.pageControlStyle = PageControlCustom;
+    }
+    return _customBannerView;
 }
 
 @end

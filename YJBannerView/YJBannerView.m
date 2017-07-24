@@ -61,6 +61,12 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     }
     
     [self _setupPageControl];
+    
+    // 注册自定义cell
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self]) {
+        [self.collectionView registerClass:[self.dataSource bannerViewCustomCellClass:self] forCellWithReuseIdentifier:bannerViewCellId];
+    }
+    
     [self.collectionView reloadData];
 }
 
@@ -105,15 +111,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _saveScrollViewGestures = self.collectionView.gestureRecognizers;
     _cycleScrollEnable = YES;
     _bannerViewBounces = YES;
-}
-
-#pragma mark - register Custom Cell
-- (void)setDataSource:(id<YJBannerViewDataSource>)dataSource{
-    _dataSource = dataSource;
-    
-    if (dataSource && [dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [dataSource bannerViewCustomCellClass:self]) {
-        [self.collectionView registerClass:[dataSource bannerViewCustomCellClass:self] forCellWithReuseIdentifier:bannerViewCellId];
-    }
 }
 
 #pragma mark - Setter && Getter
@@ -582,8 +579,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
-        NSLog(@"-->%@", NSStringFromCGRect(self.bounds));
-        NSLog(@"-->%@", self.flowLayout);
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.pagingEnabled = YES;

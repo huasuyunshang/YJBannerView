@@ -39,12 +39,12 @@
 - (UILabel *)headTagLabel{
     if (!_headTagLabel) {
         _headTagLabel = [[UILabel alloc] init];
-        _headTagLabel.font = [UIFont systemFontOfSize:13];
-        _headTagLabel.textAlignment = NSTextAlignmentLeft;
-        _headTagLabel.backgroundColor = [UIColor clearColor];
-        _headTagLabel.textColor = [UIColor orangeColor];
+        _headTagLabel.font = [UIFont boldSystemFontOfSize:14];
+        _headTagLabel.textAlignment = NSTextAlignmentCenter;
+        _headTagLabel.backgroundColor = [UIColor orangeColor];
+        _headTagLabel.textColor = [UIColor whiteColor];
         _headTagLabel.text = @"打折";
-        [_headTagLabel.layer setCornerRadius:20.0f];
+        [_headTagLabel.layer setCornerRadius:8.0f];
         _headTagLabel.layer.masksToBounds = YES;
     }
     return _headTagLabel;
@@ -64,9 +64,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    self.headTagLabel.frame = CGRectMake(0, 0, 60, 40);
+    self.headTagLabel.frame = CGRectMake(0, 8, 40, 24);
     
-    self.contentLabel.frame = CGRectMake(60, 0, self.bounds.size.width - 60, 40);
+    self.contentLabel.frame = CGRectMake(45, 0, self.bounds.size.width - 45, 40);
 }
 
 @end
