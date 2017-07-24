@@ -2,8 +2,8 @@
 //  YJBannerView.m
 //  YJBannerViewDemo
 //
-//  Created by YJHou on 2014/5/24.
-//  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
+//  Created by YJHou on 2015/5/24.
+//  Copyright © 2015年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
 #import "YJBannerView.h"
@@ -28,6 +28,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 @implementation YJBannerView
 
+#pragma mark - Public
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame
                            dataSource:(id<YJBannerViewDataSource>)dataSource
                              delegate:(id<YJBannerViewDelegate>)delegate
@@ -42,6 +43,25 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         bannerView.placeholderImageName = placeholderImageName;
     }
     return bannerView;
+}
+
+
+- (void)reloadData{
+    
+    [self invalidateTimer];
+    
+    _totalItemsCount = self.cycleScrollEnable?([self _imageDataSources].count * 500):([self _imageDataSources].count);
+    
+    if ([self _imageDataSources].count > 1) {
+        self.collectionView.scrollEnabled = YES;
+        [self setAutoScroll:self.autoScroll];
+    } else {
+        self.collectionView.scrollEnabled = NO;
+        [self setAutoScroll:NO];
+    }
+    
+    [self _setupPageControl];
+    [self.collectionView reloadData];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -83,6 +103,8 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _titleAlignment = NSTextAlignmentLeft;
     _bannerGestureEnable = YES;
     _saveScrollViewGestures = self.collectionView.gestureRecognizers;
+    _cycleScrollEnable = YES;
+    _bannerViewBounces = YES;
 }
 
 #pragma mark - register Custom Cell
@@ -214,6 +236,16 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _bannerGestureEnable = bannerGestureEnable;
 }
 
+- (void)setBannerViewBounces:(BOOL)bannerViewBounces{
+    _bannerViewBounces = bannerViewBounces;
+    self.collectionView.bounces = bannerViewBounces;
+}
+
+- (void)setBannerImageViewContentMode:(UIViewContentMode)bannerImageViewContentMode{
+    _bannerImageViewContentMode = bannerImageViewContentMode;
+    self.backgroundImageView.contentMode = bannerImageViewContentMode;
+}
+
 #pragma mark - layoutSubviews
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -226,8 +258,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     self.collectionView.frame = self.bounds;
     
     if (self.collectionView.contentOffset.x == 0 &&  _totalItemsCount) {
-        int targetIndex = 0;
-        targetIndex = _totalItemsCount * 0.5;
+        int targetIndex = self.cycleScrollEnable?(_totalItemsCount * 0.5):(0);
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
     
@@ -488,9 +519,10 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (void)_scrollToIndex:(int)targetIndex{
     
     if (targetIndex >= _totalItemsCount) {
-        targetIndex = _totalItemsCount * 0.5;
+        targetIndex = self.cycleScrollEnable?(_totalItemsCount * 0.5):(0);
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }else{
+        targetIndex = (targetIndex > 0)?targetIndex:0;
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
     }
 }
@@ -529,30 +561,11 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     return @[];
 }
 
-#pragma mark - 刷新数据
-- (void)reloadData{
-    
-    [self invalidateTimer];
-    
-    _totalItemsCount = [self _imageDataSources].count * 500;
-    
-    if ([self _imageDataSources].count > 1) {
-        self.collectionView.scrollEnabled = YES;
-        [self setAutoScroll:self.autoScroll];
-    } else {
-        self.collectionView.scrollEnabled = NO;
-        [self setAutoScroll:NO];
-    }
-    
-    [self _setupPageControl];
-    [self.collectionView reloadData];
-}
-
 #pragma mark - Lazy
 - (UIImageView *)backgroundImageView{
     if (!_backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _backgroundImageView.contentMode = self.bannerImageViewContentMode;
         [self insertSubview:_backgroundImageView belowSubview:self.collectionView];
     }
     return _backgroundImageView;
@@ -569,6 +582,8 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
+        NSLog(@"-->%@", NSStringFromCGRect(self.bounds));
+        NSLog(@"-->%@", self.flowLayout);
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.pagingEnabled = YES;

@@ -2,13 +2,14 @@
 //  MainViewController.m
 //  YJBannerViewDemo
 //
-//  Created by YJHou on 2014/5/24.
-//  Copyright © 2014年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
+//  Created by YJHou on 2015/5/24.
+//  Copyright © 2015年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
 //
 
 #import "MainViewController.h"
 #import "YJBannerView.h"
 #import "CustomCollectionViewCell.h"
+#import "HeadLinesCell.h"
 
 static CGFloat const midMargin = 15.0f;
 
@@ -16,9 +17,9 @@ static CGFloat const midMargin = 15.0f;
 
 @property (nonatomic, strong) NSMutableArray *imageDataSources; /**< 图片数据源 */
 @property (nonatomic, strong) NSMutableArray *titlesDataSources; /**< 标题数据 */
-@property (nonatomic, strong) YJBannerView *defaultBannerView; /**< 默认设置banner */
-@property (nonatomic, strong) YJBannerView *secondBannerView; /**< 演示banner */
-@property (nonatomic, strong) YJBannerView *custompageControlBannerView; /**< 自定义pageControl样式演示banner */
+@property (nonatomic, strong) YJBannerView *normalBannerView; /**< 普通的banner */
+@property (nonatomic, strong) UILabel *headlinesLabel; /**< 头条tag*/
+@property (nonatomic, strong) YJBannerView *headlinesBannerView; /**< 头条BannerView */
 
 @end
 
@@ -27,7 +28,6 @@ static CGFloat const midMargin = 15.0f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"YJBannerViewDemo";
     
     [self _setUpMainView];
     [self _loadDataSources];
@@ -39,11 +39,11 @@ static CGFloat const midMargin = 15.0f;
     UIScrollView *containerScrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:containerScrollView];
 
-    [containerScrollView addSubview:self.defaultBannerView];
-    [containerScrollView addSubview:self.secondBannerView];
-    [containerScrollView addSubview:self.custompageControlBannerView];
+    [containerScrollView addSubview:self.normalBannerView];
+//    [containerScrollView addSubview:self.headlinesBannerView];
     
-    containerScrollView.contentSize = CGSizeMake(self.view.frame.size.width, CGRectGetMaxY(self.custompageControlBannerView.frame) + midMargin);
+    
+    containerScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, CGRectGetMaxY(self.headlinesBannerView.frame) + midMargin);
 }
 
 - (void)_loadDataSources{
@@ -59,19 +59,13 @@ static CGFloat const midMargin = 15.0f;
     }
     
     for (NSInteger i = 0; i < imagesURLStrings.count; i++) {
-        [self.titlesDataSources addObject:[NSString stringWithFormat:@"标题%ld", (long)i]];
+        [self.titlesDataSources addObject:[NSString stringWithFormat:@"我是标题%ld", (long)i]];
     }
-    
-    [self.defaultBannerView reloadData];
-    [self.secondBannerView reloadData];
-    [self.custompageControlBannerView reloadData];
 
+    // 刷新数据
+    [self.normalBannerView reloadData];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    MainViewController *main = [[MainViewController alloc] init];
-    [self.navigationController pushViewController:main animated:YES];
-}
 
 #pragma mark - DataSources
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
@@ -83,26 +77,31 @@ static CGFloat const midMargin = 15.0f;
 }
 
 - (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView{
+    if (bannerView == self.headlinesBannerView) {
+        return [HeadLinesCell class];
+    }
     return nil;//[CustomCollectionViewCell class];
 }
 
 -(void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
+    
+    if (bannerView == self.headlinesBannerView) {
+        HeadLinesCell *cell = (HeadLinesCell *)customCell;
+        [cell cellWithHeadHotLineCellData:@"打折活动开始了~~"];
+    }else{
+    
     CustomCollectionViewCell *showCell = (CustomCollectionViewCell *)customCell;
     showCell.imageView.backgroundColor = [UIColor redColor];
-}
-
-#pragma mark - Delegate
--(void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
-    NSString *title = [self.titlesDataSources objectAtIndex:index];
-    NSLog(@"当前%@-->%@", bannerView, title);
-}
-
-- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex{
-    if (bannerView == self.defaultBannerView) {
-        NSLog(@"-->%ld", (long)currentIndex);
     }
 }
 
+#pragma mark - Delegate
+- (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
+    if (bannerView == self.normalBannerView) {
+        UIAlertView *alertView =  [[UIAlertView alloc] initWithTitle:@"normalBannerView" message:[NSString stringWithFormat:@"点击了第%ld个", index] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alertView show];
+    }
+}
 
 #pragma mark - lazy
 - (NSMutableArray *)imageDataSources{
@@ -119,47 +118,35 @@ static CGFloat const midMargin = 15.0f;
     return _titlesDataSources;
 }
 
-/** 第一个 默认 */ // @selector(sd_setImageWithURL:placeholderImage:)
-- (YJBannerView *)defaultBannerView{
-    if (!_defaultBannerView) {
-        _defaultBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImageName:@"placeholder"];
+-(YJBannerView *)normalBannerView{
+    if (!_normalBannerView) {
+        _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _normalBannerView.pageControlAliment = PageControlAlimentRight;
+        _normalBannerView.autoDuration = 2.5f;
+        _normalBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+        _normalBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
     }
-    return _defaultBannerView;
+    return _normalBannerView;
 }
 
-- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    self.defaultBannerView.bannerGestureEnable = !self.defaultBannerView.bannerGestureEnable;
-}
-
-- (YJBannerView *)secondBannerView{
-    if (!_secondBannerView) {
-        _secondBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.defaultBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImageName:@"placeholder"];
-        _secondBannerView.pageControlAliment = PageControlAlimentRight;  // 位置居中
-        _secondBannerView.autoDuration = 2.0f;    // 时间间隔
-        _secondBannerView.bannerViewScrollDirection = BannerViewDirectionTop; // 向上滚动
-        _secondBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-        _secondBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
-        _secondBannerView.titleAlignment = NSTextAlignmentLeft;
-        _secondBannerView.pageControlStyle = PageControlCustom;   // PageControl 系统样式
+- (UILabel *)headlinesLabel{
+    if (!_headlinesLabel) {
+        _headlinesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.normalBannerView.frame), 60, 40)];
+        _headlinesLabel.font = [UIFont systemFontOfSize:15];
+        _headlinesLabel.textAlignment = NSTextAlignmentLeft;
+        _headlinesLabel.backgroundColor = [UIColor clearColor];
+        _headlinesLabel.textColor = [UIColor redColor];
+        _headlinesLabel.text = @"今日头条";
     }
-    return _secondBannerView;
+    return _headlinesLabel;
 }
 
-- (YJBannerView *)custompageControlBannerView{
-    if (!_custompageControlBannerView) {
-        _custompageControlBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.secondBannerView.frame) + midMargin, kSCREEN_WIDTH, 160) dataSource:self delegate:self selectorString:@"sd_setImageWithURL:placeholderImage:" placeholderImageName:@"placeholder"];
-        _custompageControlBannerView.bannerViewScrollDirection = BannerViewDirectionRight;
-        _custompageControlBannerView.pageControlStyle = PageControlHollow;
-        _custompageControlBannerView.pageControlNormalColor = [UIColor cyanColor];
-        _custompageControlBannerView.pageControlHighlightColor = [UIColor redColor];
+- (YJBannerView *)headlinesBannerView{
+    if (!_headlinesBannerView) {
+        _headlinesBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(60, CGRectGetMaxY(self.normalBannerView.frame), kSCREEN_WIDTH - 60, 40) dataSource:self delegate:self placeholderImageName:@"" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+//        _headlinesBannerView.bannerGestureEnable = NO;
     }
-    return _custompageControlBannerView;
+    return _headlinesBannerView;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

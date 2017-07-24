@@ -2,13 +2,16 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - YJCommonMacro (0.0.4)
 
 DEPENDENCIES:
   - SDWebImage
+  - YJCommonMacro
 
 SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  YJCommonMacro: 4d62941dcf4bd89241148932cef793687c729cd6
 
-PODFILE CHECKSUM: 91b618a3ff37cdc82e6ff9276e5043ebd10d553a
+PODFILE CHECKSUM: ae6392678922ffb3ee89b14fb2f7cd5eeab06149
 
 COCOAPODS: 1.2.1
