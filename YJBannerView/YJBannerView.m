@@ -14,10 +14,11 @@
 static NSString *const bannerViewCellId = @"YJBannerView";
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
 
-@interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate> {
+    UICollectionView *_collectionView;
+    UICollectionViewFlowLayout *_flowLayout;
+}
 
-@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, weak) UIControl *pageControl;                     /**< 分页指示器 */
 @property (nonatomic, weak) NSTimer *timer;                             /**< 定时器 */
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
@@ -110,7 +111,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _bannerGestureEnable = YES;
     _saveScrollViewGestures = self.collectionView.gestureRecognizers;
     _cycleScrollEnable = YES;
-    _bannerViewBounces = YES;
 }
 
 #pragma mark - Setter && Getter
@@ -231,11 +231,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         }
     }
     _bannerGestureEnable = bannerGestureEnable;
-}
-
-- (void)setBannerViewBounces:(BOOL)bannerViewBounces{
-    _bannerViewBounces = bannerViewBounces;
-    self.collectionView.bounces = bannerViewBounces;
 }
 
 - (void)setBannerImageViewContentMode:(UIViewContentMode)bannerImageViewContentMode{

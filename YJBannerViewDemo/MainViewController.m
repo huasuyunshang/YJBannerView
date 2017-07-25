@@ -172,6 +172,8 @@ static CGFloat const midMargin = 15.0f;
         _goodDetailBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
         _goodDetailBannerView.cycleScrollEnable = NO;
         _goodDetailBannerView.autoScroll = NO;
+        
+        
     }
     return _goodDetailBannerView;
 }

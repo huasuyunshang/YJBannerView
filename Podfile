@@ -8,5 +8,6 @@ target 'YJBannerViewDemo' do
   # Pods for YJBannerViewDemo
    pod 'SDWebImage'
    pod 'YJCommonMacro'
+  # pod 'MJRefresh'
 
 end

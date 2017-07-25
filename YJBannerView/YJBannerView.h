@@ -19,7 +19,7 @@
     2017/7/3    版本2.1.1  修改通过传递UIImageView设置网络图片的方法给BannerView设置图片, 不再依赖 SDWebImage
     2017/7/14   版本2.1.4  代码功能及结构优化
     2017/7/21   版本2.1.5  代码功能优化
-    2017/7/25   版本2.1.6  1.新增cycleScrollEnable控制是否需要首尾相连; 2.新增bannerGestureEnable 手势是否可用 3.新增bannerViewBounces控制API 4.新增bannerView:didScrollCurrentIndex:代理方法, 可以自定义PageControl
+    2017/7/25   版本2.1.6  1.新增cycleScrollEnable控制是否需要首尾相连; 2.新增bannerGestureEnable 手势是否可用 3.新增bannerView:didScrollCurrentIndex:代理方法, 可以自定义PageControl
  */
 
 /** 指示器的位置 */
@@ -86,6 +86,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 ////////////////////////////////////////////////////////////
 
 @interface YJBannerView : UIView
+    
+@property (nonatomic, strong, readonly) UICollectionViewFlowLayout *flowLayout;
+@property (nonatomic, strong, readonly) UICollectionView           *collectionView;
 
 @property (nonatomic, weak) id<YJBannerViewDataSource> dataSource;  /**< 数据源代理 */
 @property (nonatomic, weak) id<YJBannerViewDelegate> delegate;      /**< 代理      */
@@ -101,8 +104,6 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, assign) BannerViewDirection bannerViewScrollDirection;            /**< 滚动方向 默认水平向左 */
 
 @property (nonatomic, assign, getter=isBannerGestureEnable) BOOL bannerGestureEnable;   /**< 手势是否可用 默认可用YES */
-
-@property (nonatomic, assign) BOOL bannerViewBounces;                                   /**< 当不是循环首尾相连时, bounces效果默认是 YES */
 
 //////////////  自定义样式接口  //////////////////
 @property (nonatomic, copy) NSString *placeholderImageName;                             /** 默认图片名 */
