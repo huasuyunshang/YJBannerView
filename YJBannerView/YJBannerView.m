@@ -10,11 +10,14 @@
 #import "YJBannerViewCell.h"
 #import "UIView+YJBannerViewExt.h"
 #import "YJHollowPageControl.h"
+#import "YJBannerViewFooter.h"
 
 static NSString *const bannerViewCellId = @"YJBannerView";
+static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
+#define BANNER_FOOTER_HEIGHT 64.0
 
-@interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate> {
+@interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     UICollectionView *_collectionView;
     UICollectionViewFlowLayout *_flowLayout;
 }
@@ -23,11 +26,14 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 @property (nonatomic, weak) NSTimer *timer;                             /**< 定时器 */
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
-@property (nonatomic, strong) NSArray *saveScrollViewGestures; /**< 保存手势 */
+@property (nonatomic, strong) NSArray *saveScrollViewGestures;          /**< 保存手势 */
+@property (nonatomic, strong) YJBannerViewFooter *bannerFooter;
 
 @end
 
 @implementation YJBannerView
+@synthesize autoScroll = _autoScroll;
+@synthesize cycleScrollEnable = _cycleScrollEnable;
 
 #pragma mark - Public
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame
@@ -50,8 +56,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (void)reloadData{
     
     [self invalidateTimer];
-    
-    _totalItemsCount = self.cycleScrollEnable?([self _imageDataSources].count * 500):([self _imageDataSources].count);
     
     if ([self _imageDataSources].count > 1) {
         self.collectionView.scrollEnabled = YES;
@@ -119,6 +123,12 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     _bannerGestureEnable = YES;
     _saveScrollViewGestures = self.collectionView.gestureRecognizers;
     _cycleScrollEnable = YES;
+    
+    _footerIndicateImageName = @"YJBannerView.bundle/yjbanner_arrow.png";
+    _footerNormalTitle = @"拖动查看详情";
+    _footerTriggerTitle = @"释放查看详情";
+    _footerTitleFont = [UIFont systemFontOfSize:12.0f];
+    _footerTitleColor = [UIColor darkGrayColor];
 }
 
 #pragma mark - Setter && Getter
@@ -246,6 +256,35 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     self.backgroundImageView.contentMode = bannerImageViewContentMode;
 }
 
+- (void)setShowFooter:(BOOL)showFooter{
+    _showFooter = showFooter;
+    
+    if (_showFooter) {
+        self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -[self _bannerViewFooterHeight]);
+    }else{
+        self.collectionView.contentInset = UIEdgeInsetsZero;
+    }
+}
+
+#pragma mark - Getter
+- (NSInteger)totalItemsCount{
+    return self.cycleScrollEnable?([self _imageDataSources].count * 500):([self _imageDataSources].count);
+}
+
+- (BOOL)autoScroll{
+    if (self.showFooter) {
+        return NO;
+    }
+    return _autoScroll;
+}
+
+- (BOOL)cycleScrollEnable{
+    if (self.showFooter) {
+        return NO;
+    }
+    return _cycleScrollEnable;
+}
+
 #pragma mark - layoutSubviews
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -257,8 +296,8 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     
     self.collectionView.frame = self.bounds;
     
-    if (self.collectionView.contentOffset.x == 0 &&  _totalItemsCount) {
-        int targetIndex = self.cycleScrollEnable?(_totalItemsCount * 0.5):(0);
+    if (self.collectionView.contentOffset.x == 0 &&  self.totalItemsCount) {
+        int targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
     
@@ -324,14 +363,14 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (void)adjustBannerViewWhenViewWillAppear{
     
     long targetIndex = [self _currentIndex];
-    if (targetIndex < _totalItemsCount) {
+    if (targetIndex < self.totalItemsCount) {
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
 }
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return _totalItemsCount;
+    return self.totalItemsCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -371,6 +410,34 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     return cell;
 }
 
+// 设置Footer的尺寸
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    return CGSizeMake([self _bannerViewFooterHeight], self.frame.size.height);
+}
+
+// Footer
+- (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath{
+    
+    if(kind == UICollectionElementKindSectionFooter){
+        
+        YJBannerViewFooter *footer = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:bannerViewFooterId forIndexPath:theIndexPath];
+        self.bannerFooter = footer;
+        
+        footer.IndicateImageName = self.footerIndicateImageName;
+        footer.footerTitleFont = self.footerTitleFont;
+        footer.footerTitleColor = self.footerTitleColor;
+        footer.idleTitle = self.footerNormalTitle;
+        footer.triggerTitle = self.footerTriggerTitle;
+
+        footer.hidden = !self.showFooter;
+        
+        return footer;
+    }
+    
+    return nil;
+}
+
+#pragma mark - UIScrollViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didSelectItemAtIndex:)]) {
         [self.delegate bannerView:self didSelectItemAtIndex:[self _showIndexWithCurrentCellIndex:indexPath.item]];
@@ -380,7 +447,6 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     }
 }
 
-#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     if (![self _imageDataSources].count) return;
@@ -399,6 +465,22 @@ static NSString *const bannerViewCellId = @"YJBannerView";
         [self.delegate bannerView:self didScrollCurrentIndex:indexOnPageControl];
     }
     
+    // Footer
+    if (self.showFooter) {
+        static CGFloat lastOffset;
+        CGFloat footerDisplayOffset = (self.collectionView.contentOffset.x - (self.flowLayout.itemSize.width * (self.totalItemsCount - 1)));
+        
+        if (footerDisplayOffset > 0){
+            if (footerDisplayOffset > [self _bannerViewFooterHeight]) {
+                if (lastOffset > 0) return;
+                self.bannerFooter.state = YJBannerViewStatusTrigger;
+            } else {
+                if (lastOffset < 0) return;
+                self.bannerFooter.state = YJBannerViewStatusIdle;
+            }
+            lastOffset = footerDisplayOffset - [self _bannerViewFooterHeight];
+        }
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
@@ -410,6 +492,20 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (self.autoScroll) {
         [self _setupTimer];
+    }
+    
+    if (self.showFooter) {
+        CGFloat footerDisplayOffset = (self.collectionView.contentOffset.x - (self.flowLayout.itemSize.width * (self.totalItemsCount - 1)));
+        
+        if (footerDisplayOffset > [self _bannerViewFooterHeight]) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(bannerViewFooterDidEndTrigger:)]) {
+                [self.delegate bannerViewFooterDidEndTrigger:self];
+            }
+            
+            if (self.didEndTriggerFooterBlock) {
+                self.didEndTriggerFooterBlock();
+            }
+        }
     }
 }
 
@@ -514,7 +610,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 - (void)_automaticScrollAction{
     
-    if (_totalItemsCount == 0) return;
+    if (self.totalItemsCount == 0) return;
     int currentIndex = [self _currentIndex];
     if (self.bannerViewScrollDirection == BannerViewDirectionLeft || self.bannerViewScrollDirection == BannerViewDirectionTop) {
         [self _scrollToIndex:currentIndex + 1];
@@ -525,8 +621,8 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 
 - (void)_scrollToIndex:(int)targetIndex{
     
-    if (targetIndex >= _totalItemsCount) {
-        targetIndex = self.cycleScrollEnable?(_totalItemsCount * 0.5):(0);
+    if (targetIndex >= self.totalItemsCount) {
+        targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }else{
         targetIndex = (targetIndex > 0)?targetIndex:0;
@@ -568,6 +664,14 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     return @[];
 }
 
+/** Footer Height */
+- (CGFloat)_bannerViewFooterHeight{
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewFooterViewHeight:)]) {
+        return [self.dataSource bannerViewFooterViewHeight:self];
+    }
+    return BANNER_FOOTER_HEIGHT;
+}
+
 #pragma mark - Lazy
 - (UIImageView *)backgroundImageView{
     if (!_backgroundImageView) {
@@ -590,11 +694,14 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
-        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.pagingEnabled = YES;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.backgroundColor = [UIColor clearColor];
+
         [_collectionView registerClass:[YJBannerViewCell class] forCellWithReuseIdentifier:bannerViewCellId];
+        [_collectionView registerClass:[YJBannerViewFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:bannerViewFooterId];
+        
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.scrollsToTop = NO;

@@ -10,7 +10,7 @@
 
 /** 
  
- ********* 当前版本: 2.1.6 ********
+ ********* 当前版本: 2.1.7 ********
 
 版本记录:
     2015/5/10   版本1.0   是以静态库.a的方式使用 Cocoapods 引入功能
@@ -20,6 +20,7 @@
     2017/7/14   版本2.1.4  代码功能及结构优化
     2017/7/21   版本2.1.5  代码功能优化
     2017/7/25   版本2.1.6  1.新增cycleScrollEnable控制是否需要首尾相连; 2.新增bannerGestureEnable 手势是否可用 3.新增bannerView:didScrollCurrentIndex:代理方法, 可以自定义PageControl
+    2017/7/26   版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
  */
 
 /** 指示器的位置 */
@@ -59,15 +60,17 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 
 //////////// 动态控制部分 //////////////////
-@property (nonatomic, assign, getter=isAutoScroll) IBInspectable BOOL autoScroll;                     /**< 是否自动 默认YES */
+@property (nonatomic, assign) IBInspectable BOOL autoScroll;                        /**< 是否自动 默认YES */
 
-@property (nonatomic, assign) IBInspectable CGFloat autoDuration;                                     /**< 自动滚动时间间隔 默认3s */
+@property (nonatomic, assign) IBInspectable CGFloat autoDuration;                   /**< 自动滚动时间间隔 默认3s */
 
-@property (nonatomic, assign, getter=isCycleScrollEnable) IBInspectable BOOL cycleScrollEnable;       /**< 是否首尾循环 默认是YES */
+@property (nonatomic, assign) IBInspectable BOOL cycleScrollEnable;                 /**< 是否首尾循环 默认是YES */
 
-@property (nonatomic, assign) BannerViewDirection bannerViewScrollDirection;            /**< 滚动方向 默认水平向左 */
+@property (nonatomic, assign) BannerViewDirection bannerViewScrollDirection;        /**< 滚动方向 默认水平向左 */
 
-@property (nonatomic, assign, getter=isBannerGestureEnable) BOOL bannerGestureEnable;   /**< 手势是否可用 默认可用YES */
+@property (nonatomic, assign) BOOL bannerGestureEnable;                             /**< 手势是否可用 默认可用YES */
+
+@property (nonatomic, assign) IBInspectable BOOL showFooter;                        /**< 显示footerView 默认是 NO 设置为YES 后将 autoScroll和cycleScrollEnable 自动置为NO*/
 
 //////////////  自定义样式接口  //////////////////
 @property (nonatomic, copy) NSString *placeholderImageName;                             /** 默认图片名 */
@@ -108,8 +111,19 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 @property (nonatomic, assign) CGFloat titleEdgeMargin;                                  /**< 文字边缘间距 默认是10 */
 
+@property (nonatomic, copy) NSString *footerIndicateImageName;                          /**< footer 指示图片名字 默认是自带的 */
+
+@property (nonatomic, copy) NSString *footerNormalTitle;                                /**< footer 常态Title 默认 "拖动查看详情" */
+
+@property (nonatomic, copy) NSString *footerTriggerTitle;                               /**< footer Trigger Title 默认 "释放查看详情" */
+
+@property (nonatomic, strong) UIFont *footerTitleFont;                                  /**< footer Font 默认 12 */
+
+@property (nonatomic, strong) UIColor *footerTitleColor;                                /**< footer TitleColoe 默认是 darkGrayColor */
+
 @property (nonatomic, copy) void(^didScroll2IndexBlock)(NSInteger index);
 @property (nonatomic, copy) void(^didSelectItemAtIndexBlock)(NSInteger index);
+@property (nonatomic, copy) void(^didEndTriggerFooterBlock)();
 
 /**
  创建bannerView实例的方法
@@ -160,6 +174,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 /** 自定义 View */
 - (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index;
 
+/** Footer 高度 默认是 64 */
+- (CGFloat)bannerViewFooterViewHeight:(YJBannerView *)bannerView;
+
 @end
 
 @protocol YJBannerViewDelegate <NSObject>
@@ -173,6 +190,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 /** 点击回调 */
 - (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index;
+
+/** BannerView Footer 回调 */
+- (void)bannerViewFooterDidEndTrigger:(YJBannerView *)bannerView;
 
 @end
 

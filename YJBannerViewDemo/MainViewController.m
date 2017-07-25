@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "YJBannerView.h"
 #import "HeadLinesCell.h"
+#import "DetailViewController.h"
 
 static CGFloat const midMargin = 15.0f;
 
@@ -123,6 +124,12 @@ static CGFloat const midMargin = 15.0f;
     [alert show];
 }
 
+- (void)bannerViewFooterDidEndTrigger:(YJBannerView *)bannerView{
+    DetailViewController *vc = [[DetailViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
 #pragma mark - lazy
 - (NSMutableArray *)imageDataSources{
     if (!_imageDataSources) {
@@ -178,8 +185,8 @@ static CGFloat const midMargin = 15.0f;
         _goodDetailBannerView.pageControlStyle = PageControlCustom;
         _goodDetailBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
         _goodDetailBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
-        _goodDetailBannerView.cycleScrollEnable = NO;
-        _goodDetailBannerView.autoScroll = NO;
+        _goodDetailBannerView.footerTitleColor = [UIColor redColor];
+        _goodDetailBannerView.showFooter = YES;
         
         
     }

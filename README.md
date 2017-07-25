@@ -1,5 +1,3 @@
-# [YJBannerView](https://github.com/YJManager/YJBannerViewOC) 
-
 <!--&middot;--> 
 [![Travis](https://img.shields.io/travis/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![Language](https://img.shields.io/badge/Language-Objective--C-FF7F24.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
@@ -9,10 +7,21 @@
 [![GitHub tag](https://img.shields.io/github/tag/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![license](https://img.shields.io/github/license/YJManager/YJBannerViewOC.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 
-`YJBannerView` YJAutoScrollBanner. Objective-C版 无限循环Banner、文字轮播器、支持自定义Cell, 可以配置出多种样式。
+# YJBannerView 
+- 使用简单、功能丰富的 `Objective-C版` 轮播控件, 基于 `UICollectionView` 实现, 多种场景均支持使用.
 
 ## 效果
 <img src="https://github.com/YJManager/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/bannerView.gif" width="300" height="533" />
+
+
+## Features
+
+- [x] 自带PageControl的位置、样式配置, 也支持自定义        - [x] 支持上、下、左、右四个方向自动、手动动滚动
+- [x] 支持自动滚动时间设置                               - [x] 支持首尾循环滚动的开启关闭
+- [x] 支持滚动相关手势的开关                              - [x] 支持非首尾循环的Footer样式和进入详情回调
+- [x] 支持ContentMode的设置                             - [x] 支持Banner标题的设置自定义
+- [x] 支持自定义UICollectionViewCell                    - [x] 支持自定义 UIView 填充BannerView
+- [x] 支持在Storyboard\xib中创建并配置其属性              - [x] 不依赖三方SDWebImage或者AFNetworking设置图片
 
 ## Adding YJBannerView to your project (添加 YJBannerView 到你的项目)
 
