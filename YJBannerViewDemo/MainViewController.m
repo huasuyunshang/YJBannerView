@@ -89,7 +89,7 @@ static CGFloat const midMargin = 15.0f;
     return nil;
 }
 
--(void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
+- (void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
     
     if (bannerView == self.headlinesBannerView) {
         HeadLinesCell *cell = (HeadLinesCell *)customCell;
@@ -98,6 +98,14 @@ static CGFloat const midMargin = 15.0f;
     
     }
 }
+
+/**
+- (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index{
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 100)];
+    customView.backgroundColor = kRANDOM_COLOR;
+    return customView;
+}
+ */
 
 #pragma mark - Delegate
 - (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{

@@ -18,9 +18,11 @@
 @end
 
 @implementation YJBannerViewCell
+@synthesize customView = _customView;
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        self.clipsToBounds = YES;
         [self _setUpMainView];
     }
     return self;
@@ -32,6 +34,7 @@
     [self.contentView addSubview:self.titleLabel];
 }
 
+#pragma mark - Setter && Getter
 - (void)setTitleLabelBackgroundColor:(UIColor *)titleLabelBackgroundColor{
     _titleLabelBackgroundColor = titleLabelBackgroundColor;
     self.titleLabelBgView.backgroundColor = titleLabelBackgroundColor;
@@ -55,6 +58,17 @@
 - (void)setShowImageViewContentMode:(UIViewContentMode)showImageViewContentMode{
     _showImageViewContentMode = showImageViewContentMode;
     self.showImageView.contentMode = showImageViewContentMode;
+}
+
+- (void)setCustomView:(UIView *)customView{
+    
+    if (_customView) {
+        [_customView removeFromSuperview];
+    }
+    _customView = customView;
+    
+    [self.contentView addSubview:_customView];
+    [self.contentView bringSubviewToFront:_customView];
 }
 
 - (void)layoutSubviews{

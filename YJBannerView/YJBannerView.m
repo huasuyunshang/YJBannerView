@@ -80,6 +80,14 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super initWithCoder:aDecoder]) {
+        [self _initSetting];
+        [self addSubview:self.collectionView];
+    }
+    return self;
+}
+
 - (void)awakeFromNib{
     [super awakeFromNib];
     [self _initSetting];
@@ -331,8 +339,15 @@ static NSString *const bannerViewCellId = @"YJBannerView";
     YJBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:bannerViewCellId forIndexPath:indexPath];
     long itemIndex = [self _showIndexWithCurrentCellIndex:indexPath.item];
     
+    // 自定义 Cell
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)] && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self]) {
         [self.dataSource bannerView:self customCell:cell index:itemIndex];
+        return cell;
+    }
+    
+    // 自定义 View
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerView:viewForItemAtIndex:)] && [self.dataSource bannerView:self viewForItemAtIndex:itemIndex]) {
+        cell.customView = [self.dataSource bannerView:self viewForItemAtIndex:itemIndex];
         return cell;
     }
     

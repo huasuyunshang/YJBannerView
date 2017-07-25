@@ -47,59 +47,23 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 
 @class YJBannerView;
-@protocol YJBannerViewDataSource <NSObject>
-
-@required
-/** 兼容 http(s):// 和 本地图片Name */
-- (NSArray *)bannerViewImages:(YJBannerView *)bannerView;
-
-@optional
-/** 文字数据源 */
-- (NSArray *)bannerViewTitles:(YJBannerView *)bannerView;
-
-/** 自定义Cell */
-- (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView;
-
-/** 自定义 Cell 方法传递 */
-- (void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index;
-
-@end
-
-@protocol YJBannerViewDelegate <NSObject>
-
-@optional
-/** 正在滚动的位置 */
-- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex;
-
-/** 滚动到 index */
-- (void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index;
-
-/** 点击回调 */
-- (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index;
-
-@end
-
-/////////////////////////////////////////////////////////////
-// 主要功能: 1.使用默认样式的 BannerView                      //
-//          2.自定义 BannerView 的样式                      //
-//          3.自定义 PageControl 样式                       //
-////////////////////////////////////////////////////////////
+@protocol YJBannerViewDataSource, YJBannerViewDelegate;
 
 @interface YJBannerView : UIView
     
 @property (nonatomic, strong, readonly) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong, readonly) UICollectionView           *collectionView;
 
-@property (nonatomic, weak) id<YJBannerViewDataSource> dataSource;  /**< 数据源代理 */
-@property (nonatomic, weak) id<YJBannerViewDelegate> delegate;      /**< 代理      */
+@property (nonatomic, weak) IBOutlet id<YJBannerViewDataSource> dataSource;  /**< 数据源代理 */
+@property (nonatomic, weak) IBOutlet id<YJBannerViewDelegate> delegate;      /**< 代理      */
 
 
 //////////// 动态控制部分 //////////////////
-@property (nonatomic, assign) CGFloat autoDuration;                                     /**< 自动滚动时间间隔 默认3s */
+@property (nonatomic, assign, getter=isAutoScroll) IBInspectable BOOL autoScroll;                     /**< 是否自动 默认YES */
 
-@property (nonatomic, assign, getter=isAutoScroll) BOOL autoScroll;                     /**< 是否自动 默认YES */
+@property (nonatomic, assign) IBInspectable CGFloat autoDuration;                                     /**< 自动滚动时间间隔 默认3s */
 
-@property (nonatomic, assign, getter=isCycleScrollEnable) BOOL cycleScrollEnable;       /**< 是否首尾循环 默认是YES */
+@property (nonatomic, assign, getter=isCycleScrollEnable) IBInspectable BOOL cycleScrollEnable;       /**< 是否首尾循环 默认是YES */
 
 @property (nonatomic, assign) BannerViewDirection bannerViewScrollDirection;            /**< 滚动方向 默认水平向左 */
 
@@ -175,3 +139,40 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 - (void)adjustBannerViewWhenViewWillAppear;
 
 @end
+
+#pragma mark - 协议部分
+@protocol YJBannerViewDataSource <NSObject>
+
+@required
+/** 兼容 http(s):// 和 本地图片Name */
+- (NSArray *)bannerViewImages:(YJBannerView *)bannerView;
+
+@optional
+/** 文字数据源 */
+- (NSArray *)bannerViewTitles:(YJBannerView *)bannerView;
+
+/** 自定义Cell */
+- (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView;
+
+/** 自定义 Cell 方法传递 */
+- (void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index;
+
+/** 自定义 View */
+- (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index;
+
+@end
+
+@protocol YJBannerViewDelegate <NSObject>
+
+@optional
+/** 正在滚动的位置 */
+- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex;
+
+/** 滚动到 index */
+- (void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index;
+
+/** 点击回调 */
+- (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index;
+
+@end
+

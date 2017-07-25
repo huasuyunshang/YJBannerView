@@ -183,11 +183,11 @@
 		631C28371ED55EA200F31057 /* YJBannerView */ = {
 			isa = PBXGroup;
 			children = (
+				631C28381ED55F8900F31057 /* YJBannerView.h */,
+				631C28391ED55F8900F31057 /* YJBannerView.m */,
 				631C28431ED5830300F31057 /* PageControls */,
 				631C283F1ED57F2100F31057 /* Tools */,
 				631C283B1ED578AC00F31057 /* Views */,
-				631C28381ED55F8900F31057 /* YJBannerView.h */,
-				631C28391ED55F8900F31057 /* YJBannerView.m */,
 			);
 			path = YJBannerView;
 			sourceTree = "<group>";
