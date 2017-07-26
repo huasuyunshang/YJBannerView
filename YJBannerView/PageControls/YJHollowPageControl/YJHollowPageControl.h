@@ -18,7 +18,7 @@
 
 @interface YJHollowPageControl : UIControl
 
-@property (nonatomic, assign) CGSize dotSize; /**< 圆点大小 默认8x8 */
+@property (nonatomic, assign) CGSize dotSize; /**< 圆点大小 默认8*8 */
 
 @property (nonatomic, strong) UIImage *dotImage; /**< 普通样式 */
 @property (nonatomic, strong) UIImage *currentDotImage; /**< 选中样式 */

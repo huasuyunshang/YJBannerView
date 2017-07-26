@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 @property (nonatomic, assign) BOOL bannerGestureEnable;                             /**< 手势是否可用 默认可用YES */
 
-@property (nonatomic, assign) IBInspectable BOOL showFooter;                        /**< 显示footerView 默认是 NO 设置为YES 后将 autoScroll和cycleScrollEnable 自动置为NO*/
+@property (nonatomic, assign) IBInspectable BOOL showFooter;                        /**< 显示footerView 默认是 NO 设置为YES 后将 autoScroll和cycleScrollEnable 自动置为NO 只支持水平向左 */
 
 //////////////  自定义样式接口  //////////////////
 @property (nonatomic, copy) NSString *placeholderImageName;                             /** 默认图片名 */

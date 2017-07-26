@@ -62,10 +62,11 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
         [self setAutoScroll:self.autoScroll];
     } else {
         
-        if ([self _imageDataSources].count == 0) {
-            self.showFooter = NO;
-            self.collectionView.scrollEnabled = NO;
-        }
+        if ([self _imageDataSources].count == 0) { self.showFooter = NO; }
+        
+        BOOL isCan = ([self _imageDataSources].count == 0)?NO:(self.showFooter?YES:NO);
+        
+        self.collectionView.scrollEnabled = isCan;
         [self setAutoScroll:NO];
         
     }
@@ -223,6 +224,10 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 }
 
 -(void)setBannerViewScrollDirection:(BannerViewDirection)bannerViewScrollDirection{
+    
+    if (self.showFooter && bannerViewScrollDirection != BannerViewDirectionLeft) {
+        bannerViewScrollDirection = BannerViewDirectionLeft;
+    }
 
     _bannerViewScrollDirection = bannerViewScrollDirection;
     
@@ -266,11 +271,17 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
     _showFooter = showFooter;
     
     if (_showFooter) {
+        
+        self.bannerViewScrollDirection = BannerViewDirectionLeft;
         self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -[self _bannerViewFooterHeight]);
-        self.collectionView.alwaysBounceHorizontal = YES;
     }else{
         self.collectionView.contentInset = UIEdgeInsetsZero;
-        self.collectionView.alwaysBounceHorizontal = NO;
+    }
+    
+    if (self.bannerViewScrollDirection == BannerViewDirectionLeft) {
+        self.collectionView.alwaysBounceHorizontal = _showFooter;
+    }else {
+        self.collectionView.accessibilityViewIsModal = _showFooter;
     }
 }
 

@@ -50,9 +50,9 @@ static CGFloat const kAnimateDuration = 1;
     _dotColor = [UIColor whiteColor];
     _currentDotColor = [UIColor whiteColor];
     self.backgroundColor    = [UIColor clearColor];
-    self.layer.cornerRadius = CGRectGetWidth(self.frame) / 2;
+    self.layer.cornerRadius = CGRectGetWidth(self.frame) * 0.5;
     self.layer.borderColor  = [UIColor whiteColor].CGColor;
-    self.layer.borderWidth  = 2;
+    self.layer.borderWidth  = 1.5;
     self.resizeScale = 1.4f;
 }
 

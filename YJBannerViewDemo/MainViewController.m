@@ -131,6 +131,8 @@ static CGFloat const midMargin = 15.0f;
         titleString = @"今日头条";
     }else if (bannerView == self.goodDetailBannerView){
         titleString = @"商品详情";
+    }else if (bannerView == self.customBannerView){
+        titleString = @"自定义类型";
     }
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:titleString message:showMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
@@ -147,7 +149,6 @@ static CGFloat const midMargin = 15.0f;
 -(YJBannerView *)normalBannerView{
     if (!_normalBannerView) {
         _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
-        _normalBannerView.pageControlAliment = PageControlAlimentRight;
         _normalBannerView.autoDuration = 2.5f;
     }
     return _normalBannerView;
@@ -155,7 +156,7 @@ static CGFloat const midMargin = 15.0f;
 
 - (UILabel *)headlinesLabel{
     if (!_headlinesLabel) {
-        _headlinesLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.normalBannerView.frame) + 5, 70, 30)];
+        _headlinesLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.normalBannerView.frame) + 8, 70, 24)];
         _headlinesLabel.font = [UIFont boldSystemFontOfSize:15];
         _headlinesLabel.textAlignment = NSTextAlignmentLeft;
         _headlinesLabel.backgroundColor = [UIColor clearColor];
@@ -184,10 +185,7 @@ static CGFloat const midMargin = 15.0f;
         _goodDetailBannerView.pageControlStyle = PageControlCustom;
         _goodDetailBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
         _goodDetailBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
-//        _goodDetailBannerView.footerTitleColor = [UIColor redColor];
         _goodDetailBannerView.showFooter = YES;
-        
-        
     }
     return _goodDetailBannerView;
 }
