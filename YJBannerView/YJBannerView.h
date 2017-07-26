@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 /** 自定义 View */
 - (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index;
 
-/** Footer 高度 默认是 64 */
+/** Footer 高度 默认是 49.0 */
 - (CGFloat)bannerViewFooterViewHeight:(YJBannerView *)bannerView;
 
 @end

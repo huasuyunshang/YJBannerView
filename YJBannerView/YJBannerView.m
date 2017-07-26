@@ -15,7 +15,7 @@
 static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
-#define BANNER_FOOTER_HEIGHT 64.0
+#define BANNER_FOOTER_HEIGHT 49.0
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     UICollectionView *_collectionView;
@@ -61,8 +61,13 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
         self.collectionView.scrollEnabled = YES;
         [self setAutoScroll:self.autoScroll];
     } else {
-        self.collectionView.scrollEnabled = NO;
+        
+        if ([self _imageDataSources].count == 0) {
+            self.showFooter = NO;
+            self.collectionView.scrollEnabled = NO;
+        }
         [self setAutoScroll:NO];
+        
     }
     
     [self _setupPageControl];
@@ -124,6 +129,7 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
     _saveScrollViewGestures = self.collectionView.gestureRecognizers;
     _cycleScrollEnable = YES;
     
+    _showFooter = NO;
     _footerIndicateImageName = @"YJBannerView.bundle/yjbanner_arrow.png";
     _footerNormalTitle = @"拖动查看详情";
     _footerTriggerTitle = @"释放查看详情";
@@ -261,8 +267,10 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
     
     if (_showFooter) {
         self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -[self _bannerViewFooterHeight]);
+        self.collectionView.alwaysBounceHorizontal = YES;
     }else{
         self.collectionView.contentInset = UIEdgeInsetsZero;
+        self.collectionView.alwaysBounceHorizontal = NO;
     }
 }
 

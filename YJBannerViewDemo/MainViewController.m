@@ -10,13 +10,13 @@
 #import "YJBannerView.h"
 #import "HeadLinesCell.h"
 #import "DetailViewController.h"
+#import "MainViewModel.h"
 
 static CGFloat const midMargin = 15.0f;
 
 @interface MainViewController () <YJBannerViewDataSource, YJBannerViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *imageDataSources; /**< 图片数据源 */
-@property (nonatomic, strong) NSMutableArray *titlesDataSources; /**< 标题数据 */
+@property (nonatomic, strong) MainViewModel *viewModel;
 @property (nonatomic, strong) YJBannerView *normalBannerView; /**< 普通的banner */
 @property (nonatomic, strong) UILabel *headlinesLabel; /**< 头条tag*/
 @property (nonatomic, strong) YJBannerView *headlinesBannerView; /**< 头条BannerView */
@@ -36,6 +36,15 @@ static CGFloat const midMargin = 15.0f;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.normalBannerView adjustBannerViewWhenViewWillAppear];
+    [self.headlinesBannerView adjustBannerViewWhenViewWillAppear];
+    [self.goodDetailBannerView adjustBannerViewWhenViewWillAppear];
+    [self.customBannerView adjustBannerViewWhenViewWillAppear];
+}
+
 - (void)_setUpMainView{
     
     UIScrollView *containerScrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
@@ -51,20 +60,6 @@ static CGFloat const midMargin = 15.0f;
 }
 
 - (void)_loadDataSources{
-    
-    NSArray *imagesURLStrings = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788490274&di=0b9453aab06d2ea5a77a47d0d78cfa83&imgtype=0&src=http%3A%2F%2Fwww.16sucai.com%2Fuploadfile%2F2013%2F0407%2F20130407085208429.jpg",
-                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788516621&di=4efa056fe4234193736eb7d4dd48a262&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F87%2F10%2F42N58PICFdP_1024.jpg",
-                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788546756&di=2a5e74dcbf61882752005d729c07d39b&imgtype=0&src=http%3A%2F%2Fwww.djhnjllm.com%2Fstatic%2Fupload%2Fimage%2F2013%2F2%2F25%2F0039716899204936.jpg",
-                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495788599948&di=d6cef2c314498aa0d78202753a6b2493&imgtype=0&src=http%3A%2F%2Fimg3.redocn.com%2Ftupian%2F20151216%2Fshishangnvzhuangwangzhanbanner_5607161.jpg",
-                                  @"localImage01.jpeg"
-                                  ];
-    for (NSInteger i = 0; i < imagesURLStrings.count; i++) {
-        [self.imageDataSources addObject:imagesURLStrings[i]];
-    }
-    
-    for (NSInteger i = 0; i < imagesURLStrings.count; i++) {
-        [self.titlesDataSources addObject:[NSString stringWithFormat:@"我是标题%ld", (long)i]];
-    }
 
     // 刷新数据
     [self.normalBannerView reloadData];
@@ -76,11 +71,29 @@ static CGFloat const midMargin = 15.0f;
 
 #pragma mark - DataSources
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
-    return self.imageDataSources;
+    if (bannerView == self.normalBannerView) {
+        return self.viewModel.normalBannerViewImages;
+    }else if (bannerView == self.headlinesBannerView){
+        return self.viewModel.hotTitles;
+    }else if (bannerView == self.goodDetailBannerView){
+        return self.viewModel.goodDetailBannerViewImages;
+    }else if (bannerView == self.customBannerView){
+        return self.viewModel.customBannerViewImages;
+    }
+    return nil;
 }
 
 - (NSArray *)bannerViewTitles:(YJBannerView *)bannerView{
-    return self.titlesDataSources;
+    if (bannerView == self.normalBannerView) {
+        return @[@"我是第一个标题"];
+    }else if (bannerView == self.headlinesBannerView){
+        return @[];
+    }else if (bannerView == self.goodDetailBannerView){
+        return @[];
+    }else if (bannerView == self.customBannerView){
+        return @[];
+    }
+    return nil;
 }
 
 - (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView{
@@ -94,7 +107,7 @@ static CGFloat const midMargin = 15.0f;
     
     if (bannerView == self.headlinesBannerView) {
         HeadLinesCell *cell = (HeadLinesCell *)customCell;
-        [cell cellWithHeadHotLineCellData:@"打折活动开始了~~快来抢购啊"];
+        [cell cellWithHeadHotLineCellData:self.viewModel.hotTitles[index]];
     }else{
     
     }
@@ -131,20 +144,6 @@ static CGFloat const midMargin = 15.0f;
 }
 
 #pragma mark - lazy
-- (NSMutableArray *)imageDataSources{
-    if (!_imageDataSources) {
-        _imageDataSources = [NSMutableArray array];
-    }
-    return _imageDataSources;
-}
-
-- (NSMutableArray *)titlesDataSources{
-    if (!_titlesDataSources) {
-        _titlesDataSources = [NSMutableArray array];
-    }
-    return _titlesDataSources;
-}
-
 -(YJBannerView *)normalBannerView{
     if (!_normalBannerView) {
         _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
@@ -185,7 +184,7 @@ static CGFloat const midMargin = 15.0f;
         _goodDetailBannerView.pageControlStyle = PageControlCustom;
         _goodDetailBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
         _goodDetailBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
-        _goodDetailBannerView.footerTitleColor = [UIColor redColor];
+//        _goodDetailBannerView.footerTitleColor = [UIColor redColor];
         _goodDetailBannerView.showFooter = YES;
         
         
@@ -199,6 +198,13 @@ static CGFloat const midMargin = 15.0f;
         _customBannerView.pageControlStyle = PageControlCustom;
     }
     return _customBannerView;
+}
+
+- (MainViewModel *)viewModel{
+    if (!_viewModel) {
+        _viewModel = [[MainViewModel alloc] init];
+    }
+    return _viewModel;
 }
 
 @end

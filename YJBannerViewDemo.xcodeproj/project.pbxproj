@@ -31,13 +31,15 @@
 		631ECE391F272B5600ED0D14 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 631ECE371F272B5600ED0D14 /* YJBannerView.bundle */; };
 		631ECE3D1F272DA600ED0D14 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE3B1F272DA600ED0D14 /* DetailViewController.m */; };
 		631ECE3E1F272DA600ED0D14 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE3B1F272DA600ED0D14 /* DetailViewController.m */; };
+		631ECE421F28602100ED0D14 /* MainViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 631ECE401F28602100ED0D14 /* MainViewModel.h */; };
+		631ECE431F28602100ED0D14 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE411F28602100ED0D14 /* MainViewModel.m */; };
+		631ECE441F28602100ED0D14 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE411F28602100ED0D14 /* MainViewModel.m */; };
 		635E7F2F1EE5657600EF8405 /* banner_Current@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2B1EE5657600EF8405 /* banner_Current@2x.png */; };
 		635E7F301EE5657600EF8405 /* banner_Current@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2C1EE5657600EF8405 /* banner_Current@3x.png */; };
 		635E7F311EE5657600EF8405 /* banner_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2D1EE5657600EF8405 /* banner_Normal@2x.png */; };
 		635E7F321EE5657600EF8405 /* banner_Normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2E1EE5657600EF8405 /* banner_Normal@3x.png */; };
 		638AA9B21F26EC340015892D /* YJBannerViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 638AA9B01F26EC340015892D /* YJBannerViewFooter.m */; };
 		638AA9B31F26EC340015892D /* YJBannerViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 638AA9B01F26EC340015892D /* YJBannerViewFooter.m */; };
-		638AA9B51F26F9080015892D /* banner_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 638AA9B41F26F9080015892D /* banner_arrow@2x.png */; };
 		63A991A61F25C58B005333B7 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A991A51F25C58B005333B7 /* placeholder@2x.png */; };
 		63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A991A91F25CB0B005333B7 /* HeadLinesCell.m */; };
 		63A991AC1F25CB0B005333B7 /* HeadLinesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A991A91F25CB0B005333B7 /* HeadLinesCell.m */; };
@@ -79,13 +81,14 @@
 		631ECE371F272B5600ED0D14 /* YJBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJBannerView.bundle; sourceTree = "<group>"; };
 		631ECE3A1F272DA600ED0D14 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		631ECE3B1F272DA600ED0D14 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		631ECE401F28602100ED0D14 /* MainViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
+		631ECE411F28602100ED0D14 /* MainViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewModel.m; sourceTree = "<group>"; };
 		635E7F2B1EE5657600EF8405 /* banner_Current@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_Current@2x.png"; sourceTree = "<group>"; };
 		635E7F2C1EE5657600EF8405 /* banner_Current@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_Current@3x.png"; sourceTree = "<group>"; };
 		635E7F2D1EE5657600EF8405 /* banner_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_Normal@2x.png"; sourceTree = "<group>"; };
 		635E7F2E1EE5657600EF8405 /* banner_Normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_Normal@3x.png"; sourceTree = "<group>"; };
 		638AA9AF1F26EC340015892D /* YJBannerViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewFooter.h; sourceTree = "<group>"; };
 		638AA9B01F26EC340015892D /* YJBannerViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewFooter.m; sourceTree = "<group>"; };
-		638AA9B41F26F9080015892D /* banner_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_arrow@2x.png"; sourceTree = "<group>"; };
 		63A991A51F25C58B005333B7 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		63A991A81F25CB0B005333B7 /* HeadLinesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadLinesCell.h; sourceTree = "<group>"; };
 		63A991A91F25CB0B005333B7 /* HeadLinesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadLinesCell.m; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 		631C281C1ED55D3B00F31057 /* YJBannerViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				631ECE3F1F28600A00ED0D14 /* ViewModel */,
 				63938C871F0BA6F4005BD255 /* Views */,
 				631C28511ED5947600F31057 /* Resources */,
 				631C28201ED55D3B00F31057 /* AppDelegate.h */,
@@ -236,7 +240,6 @@
 		631C28511ED5947600F31057 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				638AA9B41F26F9080015892D /* banner_arrow@2x.png */,
 				63AC6DA11F25F55E000438AD /* bannerView.gif */,
 				63A991A51F25C58B005333B7 /* placeholder@2x.png */,
 				635E7F2B1EE5657600EF8405 /* banner_Current@2x.png */,
@@ -251,6 +254,15 @@
 				63B7411B1ED6A1D200D9A282 /* pageControlDot@3x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		631ECE3F1F28600A00ED0D14 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				631ECE401F28602100ED0D14 /* MainViewModel.h */,
+				631ECE411F28602100ED0D14 /* MainViewModel.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		63938C871F0BA6F4005BD255 /* Views */ = {
@@ -293,6 +305,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631ECE421F28602100ED0D14 /* MainViewModel.h in Headers */,
 				6307D7451F0A38AB00CF1EAD /* YJBannerView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,7 +405,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				631ECE381F272B5600ED0D14 /* YJBannerView.bundle in Resources */,
-				638AA9B51F26F9080015892D /* banner_arrow@2x.png in Resources */,
 				63AC6DA21F25F55E000438AD /* bannerView.gif in Resources */,
 				63B7411F1ED6A1D200D9A282 /* pageControlDot@3x.png in Resources */,
 				63B7411E1ED6A1D200D9A282 /* pageControlDot@2x.png in Resources */,
@@ -472,6 +484,7 @@
 				6307D7481F0A38C300CF1EAD /* YJAnimatedDotView.m in Sources */,
 				6307D7491F0A38C300CF1EAD /* YJDotView.m in Sources */,
 				631ECE3E1F272DA600ED0D14 /* DetailViewController.m in Sources */,
+				631ECE441F28602100ED0D14 /* MainViewModel.m in Sources */,
 				63A991AC1F25CB0B005333B7 /* HeadLinesCell.m in Sources */,
 				6307D74A1F0A38C300CF1EAD /* UIView+YJBannerViewExt.m in Sources */,
 				6307D74B1F0A38C300CF1EAD /* YJBannerViewCell.m in Sources */,
@@ -492,6 +505,7 @@
 				63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */,
 				63B741261ED6CD3900D9A282 /* YJAbstractDotView.m in Sources */,
 				631C283E1ED578CC00F31057 /* YJBannerViewCell.m in Sources */,
+				631ECE431F28602100ED0D14 /* MainViewModel.m in Sources */,
 				631ECE3D1F272DA600ED0D14 /* DetailViewController.m in Sources */,
 				631C28361ED55E7500F31057 /* MainViewController.m in Sources */,
 				638AA9B21F26EC340015892D /* YJBannerViewFooter.m in Sources */,

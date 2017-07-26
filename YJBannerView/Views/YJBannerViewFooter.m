@@ -37,13 +37,13 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    CGFloat arrowX = self.bounds.size.width * 0.5 - YJ_ARROW_SIZE - 2;
-    CGFloat arrowY = self.bounds.size.height * 0.5 - YJ_ARROW_SIZE * 0.5;
+    CGFloat arrowX = self.bounds.size.width * 0.5 - YJ_ARROW_SIZE - 2.5;
+    CGFloat arrowY = (self.bounds.size.height - YJ_ARROW_SIZE) * 0.5;
     CGFloat arrowW = YJ_ARROW_SIZE;
     CGFloat arrowH = YJ_ARROW_SIZE;
     self.arrowView.frame = CGRectMake(arrowX, arrowY, arrowW, arrowH);
     
-    CGFloat labelX = self.bounds.size.width * 0.5 + 2;
+    CGFloat labelX = self.bounds.size.width * 0.5 + 2.5;
     CGFloat labelY = 0;
     CGFloat labelW = YJ_ARROW_SIZE;
     CGFloat labelH = self.bounds.size.height;
@@ -57,14 +57,14 @@
     switch (state) {
         case YJBannerViewStatusIdle:{
             self.label.text = self.idleTitle;
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.25 animations:^{
                 self.arrowView.transform = CGAffineTransformMakeRotation(0);
             }];
         }
             break;
         case YJBannerViewStatusTrigger:{
             self.label.text = self.triggerTitle;
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.25 animations:^{
                 self.arrowView.transform = CGAffineTransformMakeRotation(M_PI);
             }];
         }

@@ -39,7 +39,7 @@
 - (UILabel *)headTagLabel{
     if (!_headTagLabel) {
         _headTagLabel = [[UILabel alloc] init];
-        _headTagLabel.font = [UIFont boldSystemFontOfSize:14];
+        _headTagLabel.font = [UIFont boldSystemFontOfSize:12];
         _headTagLabel.textAlignment = NSTextAlignmentCenter;
         _headTagLabel.backgroundColor = [UIColor orangeColor];
         _headTagLabel.textColor = [UIColor whiteColor];
@@ -53,7 +53,7 @@
 - (UILabel *)contentLabel{
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc] init];
-        _contentLabel.font = [UIFont systemFontOfSize:15];
+        _contentLabel.font = [UIFont systemFontOfSize:13];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.backgroundColor = [UIColor clearColor];
         _contentLabel.textColor = [UIColor blackColor];
@@ -64,9 +64,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    self.headTagLabel.frame = CGRectMake(0, 8, 40, 24);
+    self.headTagLabel.frame = CGRectMake(0, 10, 40, 20);
     
-    self.contentLabel.frame = CGRectMake(45, 0, self.bounds.size.width - 45, 40);
+    self.contentLabel.frame = CGRectMake(45, 0, self.bounds.size.width - 50, 40);
 }
 
 @end

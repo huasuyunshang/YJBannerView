@@ -16,12 +16,18 @@
 
 ## Features
 
-- [x] 自带PageControl的位置、样式配置, 也支持自定义        - [x] 支持上、下、左、右四个方向自动、手动动滚动
-- [x] 支持自动滚动时间设置                               - [x] 支持首尾循环滚动的开启关闭
-- [x] 支持滚动相关手势的开关                              - [x] 支持非首尾循环的Footer样式和进入详情回调
-- [x] 支持ContentMode的设置                             - [x] 支持Banner标题的设置自定义
-- [x] 支持自定义UICollectionViewCell                    - [x] 支持自定义 UIView 填充BannerView
-- [x] 支持在Storyboard\xib中创建并配置其属性              - [x] 不依赖三方SDWebImage或者AFNetworking设置图片
+- [x] 自带PageControl的位置、样式配置, 也支持自定义        
+- [x] 支持上、下、左、右四个方向自动、手动动滚动
+- [x] 支持自动滚动时间设置                               
+- [x] 支持首尾循环滚动的开启关闭
+- [x] 支持滚动相关手势的开关                             
+- [x] 支持非首尾循环的Footer样式和进入详情回调
+- [x] 支持ContentMode的设置                            
+- [x] 支持Banner标题的设置自定义
+- [x] 支持自定义UICollectionViewCell                    
+- [x] 支持自定义 UIView 填充BannerView
+- [x] 支持在Storyboard\xib中创建并配置其属性             
+- [x] 不依赖三方SDWebImage或者AFNetworking设置图片
 
 ## Adding YJBannerView to your project (添加 YJBannerView 到你的项目)
 
