@@ -23,7 +23,7 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = kRANDOM_COLOR;
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"详情页";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeCurrentController)];
     [self _setUpDetailMainView];

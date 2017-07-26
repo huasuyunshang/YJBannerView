@@ -20,7 +20,7 @@
     2017/7/14   版本2.1.4  代码功能及结构优化
     2017/7/21   版本2.1.5  代码功能优化
     2017/7/25   版本2.1.6  1.新增cycleScrollEnable控制是否需要首尾相连; 2.新增bannerGestureEnable 手势是否可用 3.新增bannerView:didScrollCurrentIndex:代理方法, 可以自定义PageControl
-    2017/7/26   版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
+    2017/7/27   版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
  */
 
 /** 指示器的位置 */

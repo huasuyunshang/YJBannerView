@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
     s.author       = { "houmanager" => "houmanager@Hotmail.com" }
     s.platform     = :ios, "7.0"
     s.source       = { :git => "https://github.com/YJManager/YJBannerViewOC.git", :tag => "#{version}"}
-    s.source_files  = "YJBannerView/**/*.{h,m,boundle}"
+    s.source_files  = "YJBannerView/**/*.{h,m,bundle}"
     s.requires_arc = true
 
     # s.dependency 'SDWebImage', '~> 4.0.0'
