@@ -10,7 +10,7 @@
 # YJBannerView 
 - 使用简单、功能丰富的 `Objective-C版` 轮播控件, 基于 `UICollectionView` 实现, 多种场景均支持使用.
 
-## 效果
+## Effect
 <img src="https://github.com/YJManager/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/bannerView3.gif" width="300" height="563" />
 
 ## Features
