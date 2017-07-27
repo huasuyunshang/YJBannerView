@@ -12,6 +12,7 @@
 
 ## 效果
 <img src="https://github.com/YJManager/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/bannerView3.gif" width="300" height="563" />
+
 ## Features
 
 - [x] 支持自带PageControl样式配置, 也支持自定义        
