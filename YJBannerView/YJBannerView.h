@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/** 
- 
+/**
  ********* 当前版本: 2.1.7 ********
 
 版本记录:
@@ -20,7 +19,7 @@
     2017/7/14   版本2.1.4  代码功能及结构优化
     2017/7/21   版本2.1.5  代码功能优化
     2017/7/25   版本2.1.6  1.新增cycleScrollEnable控制是否需要首尾相连; 2.新增bannerGestureEnable 手势是否可用 3.新增bannerView:didScrollCurrentIndex:代理方法, 可以自定义PageControl
-    2017/7/27   版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
+    2017/7/28   版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
  */
 
 /** 指示器的位置 */
@@ -55,8 +54,8 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, strong, readonly) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong, readonly) UICollectionView           *collectionView;
 
-@property (nonatomic, weak) IBOutlet id<YJBannerViewDataSource> dataSource;  /**< 数据源代理 */
-@property (nonatomic, weak) IBOutlet id<YJBannerViewDelegate> delegate;      /**< 代理      */
+@property (nonatomic, weak) IBOutlet id<YJBannerViewDataSource> dataSource;         /**< 数据源代理 */
+@property (nonatomic, weak) IBOutlet id<YJBannerViewDelegate> delegate;             /**< 代理      */
 
 
 //////////// 动态控制部分 //////////////////
@@ -73,53 +72,53 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, assign) IBInspectable BOOL showFooter;                        /**< 显示footerView 默认是 NO 设置为YES 后将 autoScroll和cycleScrollEnable 自动置为NO 只支持水平向左 */
 
 //////////////  自定义样式接口  //////////////////
-@property (nonatomic, copy) NSString *placeholderImageName;                             /** 默认图片名 */
+@property (nonatomic, copy) NSString *placeholderImageName;                         /** 默认图片名 */
 
-@property (nonatomic, copy) NSString *bannerViewSelectorString;                         /**< 自定义设置网络和默认图片的方法 */
+@property (nonatomic, copy) NSString *bannerViewSelectorString;                     /**< 自定义设置网络和默认图片的方法 */
 
-@property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode;             /**< 填充样式 默认UIViewContentModeScaleToFill */
+@property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode;         /**< 填充样式 默认UIViewContentModeScaleToFill */
 
-@property (nonatomic, assign) PageControlAliment pageControlAliment;                    /**< 分页控件的位置 默认是Center */
+@property (nonatomic, assign) PageControlAliment pageControlAliment;                /**< 分页控件的位置 默认是Center */
 
-@property (nonatomic, assign) PageControlStyle pageControlStyle;                        /**< 分页控件样式 默认System */
+@property (nonatomic, assign) PageControlStyle pageControlStyle;                    /**< 分页控件样式 默认System */
 
-@property (nonatomic, assign) CGFloat pageControlBottomMargin;                          /**< 分页控件距离底部的间距 默认10 */
+@property (nonatomic, assign) CGFloat pageControlBottomMargin;                      /**< 分页控件距离底部的间距 默认10 */
 
-@property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin;                  /**< 分页控件水平方向上的边缘间距 默认10 */
+@property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin;              /**< 分页控件水平方向上的边缘间距 默认10 */
 
-@property (nonatomic, assign) CGFloat pageControlPadding;                               /**< 分页控件水平方向上间距 默认 5 */
+@property (nonatomic, assign) CGFloat pageControlPadding;                           /**< 分页控件水平方向上间距 默认 5 系统样式无效 */
 
-@property (nonatomic, assign) CGSize pageControlDotSize;                                /**< 分页控件小圆标大小 默认 8*8*/
+@property (nonatomic, assign) CGSize pageControlDotSize;                            /**< 分页控件小圆标大小 默认 8*8*/
 
-@property (nonatomic, strong) UIColor *pageControlNormalColor;                          /**< 分页控件正常颜色 */
+@property (nonatomic, strong) UIColor *pageControlNormalColor;                      /**< 分页控件正常颜色 */
 
-@property (nonatomic, strong) UIColor *pageControlHighlightColor;                       /**< 前分页控件小圆标颜色 */
+@property (nonatomic, strong) UIColor *pageControlHighlightColor;                   /**< 前分页控件小圆标颜色 */
 
-@property (nonatomic, strong) UIImage *customPageControlNormalImage;                    /**< 分页小圆点正常的图片 */
+@property (nonatomic, strong) UIImage *customPageControlNormalImage;                /**< 分页小圆点正常的图片 */
 
-@property (nonatomic, strong) UIImage *customPageControlHighlightImage;                 /**< 当前分页控件图片 */
+@property (nonatomic, strong) UIImage *customPageControlHighlightImage;             /**< 当前分页控件图片 */
 
-@property (nonatomic, strong) UIFont *titleFont;                                        /**< 文字大小 */
+@property (nonatomic, strong) UIFont *titleFont;                                    /**< 文字大小 */
 
-@property (nonatomic, strong) UIColor *titleTextColor;                                  /**< 文字颜色 */
+@property (nonatomic, strong) UIColor *titleTextColor;                              /**< 文字颜色 */
 
-@property (nonatomic, assign) NSTextAlignment titleAlignment;                           /**< 文字对齐方式 */
+@property (nonatomic, assign) NSTextAlignment titleAlignment;                       /**< 文字对齐方式 */
 
-@property (nonatomic, strong) UIColor *titleBackgroundColor;                            /**< 文字背景颜色 */
+@property (nonatomic, strong) UIColor *titleBackgroundColor;                        /**< 文字背景颜色 */
 
-@property (nonatomic, assign) CGFloat titleHeight;                                      /**< 文字高度 */
+@property (nonatomic, assign) CGFloat titleHeight;                                  /**< 文字高度 */
 
-@property (nonatomic, assign) CGFloat titleEdgeMargin;                                  /**< 文字边缘间距 默认是10 */
+@property (nonatomic, assign) CGFloat titleEdgeMargin;                              /**< 文字边缘间距 默认是10 */
 
-@property (nonatomic, copy) NSString *footerIndicateImageName;                          /**< footer 指示图片名字 默认是自带的 */
+@property (nonatomic, copy) NSString *footerIndicateImageName;                      /**< footer 指示图片名字 默认是自带的 */
 
-@property (nonatomic, copy) NSString *footerNormalTitle;                                /**< footer 常态Title 默认 "拖动查看详情" */
+@property (nonatomic, copy) NSString *footerNormalTitle;                            /**< footer 常态Title 默认 "拖动查看详情" */
 
-@property (nonatomic, copy) NSString *footerTriggerTitle;                               /**< footer Trigger Title 默认 "释放查看详情" */
+@property (nonatomic, copy) NSString *footerTriggerTitle;                           /**< footer Trigger Title 默认 "释放查看详情" */
 
-@property (nonatomic, strong) UIFont *footerTitleFont;                                  /**< footer Font 默认 12 */
+@property (nonatomic, strong) UIFont *footerTitleFont;                              /**< footer Font 默认 12 */
 
-@property (nonatomic, strong) UIColor *footerTitleColor;                                /**< footer TitleColoe 默认是 darkGrayColor */
+@property (nonatomic, strong) UIColor *footerTitleColor;                            /**< footer TitleColoe 默认是 darkGrayColor */
 
 @property (nonatomic, copy) void(^didScroll2IndexBlock)(NSInteger index);
 @property (nonatomic, copy) void(^didSelectItemAtIndexBlock)(NSInteger index);

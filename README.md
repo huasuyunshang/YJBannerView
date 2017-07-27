@@ -13,7 +13,6 @@
 ## 效果
 <img src="https://github.com/YJManager/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/bannerView3.gif" width="300" height="563" />
 
-
 ## Features
 
 - [x] 支持自带PageControl样式配置, 也支持自定义        
@@ -31,40 +30,25 @@
 - [x] 支持CocoaPods
 - [x] 支持Carthage
 
-## Adding YJBannerView to your project (添加 YJBannerView 到你的项目)
 
-### CocoaPods
+## Installation
 
-[CocoaPods](http://cocoapods.org) is the recommended way to add `YJBannerView` to your project.
+### Cocoapods
 
-a. Add a pod entry for `YJBannerView` to your Podfile </br>
+YJBannerView is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
+
 ```ruby
     pod 'YJBannerView'
 ```
-b. Install the pod(s) by running </br>
-```ruby
-    pod install
-```
-c. Include `YJBannerView` wherever you need it with </br>
-```ruby
-    #import "YJBannerView.h"
-```
 
 ### Carthage
-
-a. Add YJBannerView to your Cartfile. </br>
 ```ruby
     github "YJManager/YJBannerViewOC"
 ```
-b. Run 
-```ruby
-    carthage update
-```
-c. Follow the rest of the [standard Carthage installation instructions](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application) to add YJBannerView to your project.
 
-### 使用方法
+## Usage
 
-#### 1.创建BannerView:
+### 1.创建BannerView:
 ```objc
 -(YJBannerView *)normalBannerView{
     if (!_normalBannerView) {
@@ -75,7 +59,7 @@ c. Follow the rest of the [standard Carthage installation instructions](https://
     return _normalBannerView;
 }
 ```
-#### 2.实现数据源方法和代理:
+### 2.实现数据源方法和代理:
 ```objc
 // 将网络图片或者本地图片 或者混合数组
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
