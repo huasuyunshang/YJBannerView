@@ -26,8 +26,6 @@
 		631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28391ED55F8900F31057 /* YJBannerView.m */; };
 		631C283E1ED578CC00F31057 /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C283D1ED578CC00F31057 /* YJBannerViewCell.m */; };
 		631C28421ED57F5D00F31057 /* UIView+YJBannerViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */; };
-		631ECE381F272B5600ED0D14 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 631ECE371F272B5600ED0D14 /* YJBannerView.bundle */; };
-		631ECE391F272B5600ED0D14 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 631ECE371F272B5600ED0D14 /* YJBannerView.bundle */; };
 		631ECE3D1F272DA600ED0D14 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE3B1F272DA600ED0D14 /* DetailViewController.m */; };
 		631ECE431F28602100ED0D14 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE411F28602100ED0D14 /* MainViewModel.m */; };
 		635E7F2F1EE5657600EF8405 /* banner_Current@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2B1EE5657600EF8405 /* banner_Current@2x.png */; };
@@ -47,6 +45,8 @@
 		63B741261ED6CD3900D9A282 /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */; };
 		63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */; };
 		63B7412C1ED6CDF900D9A282 /* YJDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7412B1ED6CDF900D9A282 /* YJDotView.m */; };
+		63F97E551F2B37A600956AE2 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F97E541F2B37A600956AE2 /* YJBannerView.bundle */; };
+		63F97E561F2B37A600956AE2 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F97E541F2B37A600956AE2 /* YJBannerView.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +72,6 @@
 		631C28401ED57F5D00F31057 /* UIView+YJBannerViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJBannerViewExt.h"; sourceTree = "<group>"; };
 		631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJBannerViewExt.m"; sourceTree = "<group>"; };
 		631C28541ED5952800F31057 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		631ECE371F272B5600ED0D14 /* YJBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJBannerView.bundle; sourceTree = "<group>"; };
 		631ECE3A1F272DA600ED0D14 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		631ECE3B1F272DA600ED0D14 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		631ECE401F28602100ED0D14 /* MainViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
@@ -99,6 +98,7 @@
 		63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJAnimatedDotView.m; sourceTree = "<group>"; };
 		63B7412A1ED6CDF900D9A282 /* YJDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJDotView.h; sourceTree = "<group>"; };
 		63B7412B1ED6CDF900D9A282 /* YJDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJDotView.m; sourceTree = "<group>"; };
+		63F97E541F2B37A600956AE2 /* YJBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJBannerView.bundle; sourceTree = "<group>"; };
 		96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YJBannerViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,10 +195,10 @@
 			children = (
 				631C28381ED55F8900F31057 /* YJBannerView.h */,
 				631C28391ED55F8900F31057 /* YJBannerView.m */,
+				63F97E531F2B37A600956AE2 /* Resource */,
 				631C28431ED5830300F31057 /* PageControls */,
 				631C283F1ED57F2100F31057 /* Tools */,
 				631C283B1ED578AC00F31057 /* Views */,
-				631ECE371F272B5600ED0D14 /* YJBannerView.bundle */,
 			);
 			path = YJBannerView;
 			sourceTree = "<group>";
@@ -280,6 +280,14 @@
 				63B7412B1ED6CDF900D9A282 /* YJDotView.m */,
 			);
 			path = YJHollowPageControl;
+			sourceTree = "<group>";
+		};
+		63F97E531F2B37A600956AE2 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63F97E541F2B37A600956AE2 /* YJBannerView.bundle */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		6AC03DC18FC0A9FC3BFB5F02 /* Pods */ = {
@@ -388,7 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				631ECE391F272B5600ED0D14 /* YJBannerView.bundle in Resources */,
+				63F97E561F2B37A600956AE2 /* YJBannerView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,11 +404,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				631ECE381F272B5600ED0D14 /* YJBannerView.bundle in Resources */,
 				63B7411F1ED6A1D200D9A282 /* pageControlDot@3x.png in Resources */,
 				63B7411E1ED6A1D200D9A282 /* pageControlDot@2x.png in Resources */,
 				631C282D1ED55D3B00F31057 /* LaunchScreen.storyboard in Resources */,
 				631C282A1ED55D3B00F31057 /* Assets.xcassets in Resources */,
+				63F97E551F2B37A600956AE2 /* YJBannerView.bundle in Resources */,
 				635E7F321EE5657600EF8405 /* banner_Normal@3x.png in Resources */,
 				638CAEC91F28A55B00CE5E99 /* bannerView3.gif in Resources */,
 				635E7F301EE5657600EF8405 /* banner_Current@3x.png in Resources */,
