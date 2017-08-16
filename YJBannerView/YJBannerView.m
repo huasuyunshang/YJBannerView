@@ -16,6 +16,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
 #define BANNER_FOOTER_HEIGHT 49.0
+static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     UICollectionView *_collectionView;
@@ -287,7 +288,7 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 
 #pragma mark - Getter
 - (NSInteger)totalItemsCount{
-    return self.cycleScrollEnable?([self _imageDataSources].count * 500):([self _imageDataSources].count);
+    return self.cycleScrollEnable?([self _imageDataSources].count * totalCollectionViewCellCount):([self _imageDataSources].count);
 }
 
 - (BOOL)autoScroll{
@@ -634,17 +635,21 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
     if (self.bannerViewScrollDirection == BannerViewDirectionLeft || self.bannerViewScrollDirection == BannerViewDirectionTop) {
         [self _scrollToIndex:currentIndex + 1];
     }else if (self.bannerViewScrollDirection == BannerViewDirectionRight || self.bannerViewScrollDirection == BannerViewDirectionBottom){
-        [self _scrollToIndex:currentIndex - 1];
+        if ((currentIndex - 1) < 0) { // 小于零
+            currentIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(currentIndex - 1) inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        }else{
+            [self _scrollToIndex:currentIndex - 1];
+        }
     }
 }
 
 - (void)_scrollToIndex:(int)targetIndex{
     
-    if (targetIndex >= self.totalItemsCount) {
+    if (targetIndex >= self.totalItemsCount) {  // 超过最大
         targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }else{
-        targetIndex = (targetIndex > 0)?targetIndex:0;
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
     }
 }

@@ -194,6 +194,10 @@ static CGFloat const midMargin = 15.0f;
     if (!_customBannerView) {
         _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _customBannerView.pageControlStyle = PageControlCustom;
+        _customBannerView.pageControlDotSize = CGSizeMake(6, 6);
+        _customBannerView.pageControlNormalColor = [UIColor orangeColor];
+        _customBannerView.pageControlHighlightColor = [UIColor redColor];
+//        _customBannerView.bannerViewScrollDirection = BannerViewDirectionRight;
     }
     return _customBannerView;
 }
