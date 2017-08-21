@@ -21,7 +21,7 @@
     2017/7/25   版本2.1.6  1.新增cycleScrollEnable控制是否需要首尾相连; 2.新增bannerGestureEnable 手势是否可用 3.新增bannerView:didScrollCurrentIndex:代理方法, 可以自定义PageControl
     2017/7/28   版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
     2017/7/30   版本2.2.0   稳定版本
-    2017/8/1    版本2.2.1   1.
+    2017/8/21   版本2.2.1   1. 当数据源不为零时, 隐藏背景图片
  */
 
 /** 指示器的位置 */

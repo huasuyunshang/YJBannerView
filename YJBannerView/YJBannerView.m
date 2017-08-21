@@ -58,6 +58,9 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     
     [self invalidateTimer];
     
+    // 当数据源大于零时隐藏
+    self.backgroundImageView.hidden = ([self _imageDataSources].count > 0);
+    
     if ([self _imageDataSources].count > 1) {
         self.collectionView.scrollEnabled = YES;
         [self setAutoScroll:self.autoScroll];
@@ -701,6 +704,7 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     if (!_backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _backgroundImageView.contentMode = self.bannerImageViewContentMode;
+        _backgroundImageView.hidden = YES;
         [self insertSubview:_backgroundImageView belowSubview:self.collectionView];
     }
     return _backgroundImageView;
