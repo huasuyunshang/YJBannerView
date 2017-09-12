@@ -43,7 +43,7 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
 
 ### Carthage
 ```ruby
-    github "YJManager/YJBannerViewOC"
+    github "stackhou/YJBannerViewOC"
 ```
 
 ## Usage
