@@ -3,7 +3,7 @@
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2015/5/24.
-//  Copyright © 2015年 地址:https://github.com/YJManager/YJBannerViewOC . All rights reserved.
+//  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,17 +11,8 @@
 /**
  ********* 当前版本: 2.2.1 ********
 
-版本记录:
-    2015/5/10   版本1.0   是以静态库.a的方式使用 Cocoapods 引入功能
-    2016/10/17  版本2.0   是以源码的方式使用 Cocoapods 引入功能
-    2017/5/29   版本2.1   自动滚动时间间隔调整为3s、动画变化比例调整为1.0、设置标题默认边间距为10, 可任意设置, 支持Carthage
-    2017/7/3    版本2.1.1  修改通过传递UIImageView设置网络图片的方法给BannerView设置图片, 不再依赖 SDWebImage
-    2017/7/14   版本2.1.4  代码功能及结构优化
-    2017/7/21   版本2.1.5  代码功能优化
-    2017/7/25   版本2.1.6  1.新增cycleScrollEnable控制是否需要首尾相连; 2.新增bannerGestureEnable 手势是否可用 3.新增bannerView:didScrollCurrentIndex:代理方法, 可以自定义PageControl
-    2017/7/28   版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
-    2017/7/30   版本2.2.0   稳定版本
-    2017/8/21   版本2.2.1   1. 当数据源不为零时, 隐藏背景图片
+版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
+ 
  */
 
 /** 指示器的位置 */
