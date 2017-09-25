@@ -4,7 +4,7 @@
 [![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg)](https://github.com/stackhou/YJBannerViewOC.git)
 [![CocoaPods](https://img.shields.io/cocoapods/v/YJBannerView.svg)](https://github.com/stackhou/YJBannerViewOC.git)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/stackhou/YJBannerViewOC.git)
-[![CocoaPods](https://img.shields.io/cocoapods/at/YJBannerView.svg)](https://github.com/stackhou/YJBannerViewOC.git)
+<!-- [![CocoaPods](https://img.shields.io/cocoapods/at/YJBannerView.svg)](https://github.com/stackhou/YJBannerViewOC.git) -->
 
 # YJBannerView 
 - 使用简单、功能丰富的 `Objective-C版` 轮播控件,  基于 `UICollectionView` 实现, 多种场景均支持使用.
@@ -104,6 +104,7 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
    * 2017/7/28   	版本2.1.7  1.新增FooterView 2.新增自定义View bannerView:viewForItemAtIndex: 方法
    * 2017/7/30   	版本2.2.0   调优、降低内存消耗
    *  2017/8/21  	版本2.2.1   当数据源不为零时, 隐藏背景图片
+   *  2017/9/25       	版本2.2.2  当网络加载时间很长时 PlaceHolder 显示优化
 
 ## License
 

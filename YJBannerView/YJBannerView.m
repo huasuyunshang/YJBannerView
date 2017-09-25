@@ -704,7 +704,6 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     if (!_backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _backgroundImageView.contentMode = self.bannerImageViewContentMode;
-        _backgroundImageView.hidden = YES;
         [self insertSubview:_backgroundImageView belowSubview:self.collectionView];
     }
     return _backgroundImageView;
