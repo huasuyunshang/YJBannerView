@@ -23,6 +23,9 @@ static CGFloat const midMargin = 15.0f;
 @property (nonatomic, strong) YJBannerView *goodDetailBannerView; /**< 商品详情 */
 @property (nonatomic, strong) YJBannerView *customBannerView; /**< 自定义 */
 
+@property (nonatomic, strong) UIView *testCreateTimeView; /**< 创建View的时间测试 */
+@property (nonatomic, strong) UILabel *testCreateTimeLabel; /**< 创建Label的时间测试 */
+
 @end
 
 @implementation MainViewController
@@ -49,8 +52,24 @@ static CGFloat const midMargin = 15.0f;
     
     UIScrollView *containerScrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:containerScrollView];
+    
+    // 创建测试View的时间
+    CFAbsoluteTime testViewStartTime = CFAbsoluteTimeGetCurrent();
+    [containerScrollView addSubview:self.testCreateTimeView];
+    CFTimeInterval testViewTime = fabs((CFAbsoluteTimeGetCurrent() - testViewStartTime));
+    NSLog(@"创建一个 UIView 时间 = %f 秒", testViewTime);
+    
+    // 创建测试Label的时间
+    CFAbsoluteTime testLabelStartTime = CFAbsoluteTimeGetCurrent();
+    [containerScrollView addSubview:self.testCreateTimeLabel];
+    CFTimeInterval testLabelTime = fabs((CFAbsoluteTimeGetCurrent() - testLabelStartTime));
+    NSLog(@"创建一个 UILabel 时间 = %f 秒", testLabelTime);
 
+    CFAbsoluteTime normalBannerStartTime = CFAbsoluteTimeGetCurrent();
     [containerScrollView addSubview:self.normalBannerView];
+    CFTimeInterval normalBannerTime = fabs((CFAbsoluteTimeGetCurrent() - normalBannerStartTime));
+    NSLog(@"创建一个 YJBannerView 的时间 = %f 秒", normalBannerTime);
+    
     [containerScrollView addSubview:self.headlinesLabel];
     [containerScrollView addSubview:self.headlinesBannerView];
     [containerScrollView addSubview:self.goodDetailBannerView];
@@ -148,8 +167,12 @@ static CGFloat const midMargin = 15.0f;
 #pragma mark - lazy
 -(YJBannerView *)normalBannerView{
     if (!_normalBannerView) {
+        
+//        _normalBannerView = [[YJBannerView alloc] initWithFrame:CGRectMake(10, 20, 30, 40)];
+        
         _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _normalBannerView.autoDuration = 2.5f;
+        _normalBannerView.titleFont = [UIFont systemFontOfSize:20];
     }
     return _normalBannerView;
 }
@@ -200,6 +223,22 @@ static CGFloat const midMargin = 15.0f;
 //        _customBannerView.bannerViewScrollDirection = BannerViewDirectionRight;
     }
     return _customBannerView;
+}
+
+#pragma mark - 两个测试View
+- (UIView *)testCreateTimeView{
+    if (!_testCreateTimeView) {
+        _testCreateTimeView = [[UIView alloc] initWithFrame:CGRectMake(10, 20, 30, 40)];
+    }
+    return _testCreateTimeView;
+}
+
+- (UILabel *)testCreateTimeLabel{
+    if (!_testCreateTimeLabel) {
+        _testCreateTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 30, 40)];
+        _testCreateTimeLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _testCreateTimeLabel;
 }
 
 - (MainViewModel *)viewModel{

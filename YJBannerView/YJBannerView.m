@@ -35,6 +35,9 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 @implementation YJBannerView
 @synthesize autoScroll = _autoScroll;
 @synthesize cycleScrollEnable = _cycleScrollEnable;
+@synthesize bannerImageViewContentMode = _bannerImageViewContentMode;
+@synthesize pageControlNormalColor = _pageControlNormalColor;
+@synthesize pageControlHighlightColor = _pageControlHighlightColor;
 
 #pragma mark - Public
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame
@@ -52,7 +55,6 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     }
     return bannerView;
 }
-
 
 - (void)reloadData{
     
@@ -120,26 +122,17 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     _pageControlBottomMargin = 10.0f;
     _pageControlHorizontalEdgeMargin = 10.0f;
     _pageControlPadding = 5.0f;
-    _pageControlNormalColor = [UIColor lightGrayColor];
-    _pageControlHighlightColor = [UIColor whiteColor];
-    _bannerImageViewContentMode = UIViewContentModeScaleToFill;
     
-    _titleFont = [UIFont systemFontOfSize:14.0f];
-    _titleTextColor = [UIColor whiteColor];
-    _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]; // 黑0.5
     _titleHeight = 30.0f;
     _titleEdgeMargin = 10.0f;
     _titleAlignment = NSTextAlignmentLeft;
     _bannerGestureEnable = YES;
-    _saveScrollViewGestures = self.collectionView.gestureRecognizers;
     _cycleScrollEnable = YES;
     
     _showFooter = NO;
     _footerIndicateImageName = @"YJBannerView.bundle/yjbanner_arrow.png";
     _footerNormalTitle = @"拖动查看详情";
     _footerTriggerTitle = @"释放查看详情";
-    _footerTitleFont = [UIFont systemFontOfSize:12.0f];
-    _footerTitleColor = [UIColor darkGrayColor];
 }
 
 #pragma mark - Setter && Getter
@@ -306,6 +299,69 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
         return NO;
     }
     return _cycleScrollEnable;
+}
+
+- (UIFont *)titleFont{
+    if (!_titleFont) {
+        _titleFont = [UIFont systemFontOfSize:14.0f];
+    }
+    return _titleFont;
+}
+
+- (UIColor *)titleTextColor{
+    if (!_titleTextColor) {
+        _titleTextColor = [UIColor whiteColor];
+    }
+    return _titleTextColor;
+}
+
+- (UIColor *)titleBackgroundColor{
+    if (!_titleBackgroundColor) {
+        _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]; // 黑0.5
+    }
+    return _titleBackgroundColor;
+}
+
+- (UIFont *)footerTitleFont{
+    if (!_footerTitleFont) {
+        _footerTitleFont = [UIFont systemFontOfSize:12.0f];
+    }
+    return _footerTitleFont;
+}
+
+- (UIColor *)footerTitleColor{
+    if (!_footerTitleColor) {
+        _footerTitleColor = [UIColor darkGrayColor];
+    }
+    return _footerTitleColor;
+}
+
+- (UIViewContentMode)bannerImageViewContentMode{
+    if (!_bannerImageViewContentMode) {
+        _bannerImageViewContentMode = UIViewContentModeScaleToFill;
+    }
+    return _bannerImageViewContentMode;
+}
+
+- (UIColor *)pageControlNormalColor{
+    if (!_pageControlNormalColor) {
+        _pageControlNormalColor = [UIColor lightGrayColor];
+    }
+    return _pageControlNormalColor;
+}
+
+- (UIColor *)pageControlHighlightColor{
+    if (!_pageControlHighlightColor) {
+        _pageControlHighlightColor = [UIColor whiteColor];
+    }
+    return _pageControlHighlightColor;
+}
+
+- (NSArray *)saveScrollViewGestures{
+    if (!_saveScrollViewGestures) {
+        _saveScrollViewGestures = self.collectionView.gestureRecognizers;
+    }
+    return _saveScrollViewGestures;
 }
 
 #pragma mark - layoutSubviews
