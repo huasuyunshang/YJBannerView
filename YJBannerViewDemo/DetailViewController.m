@@ -9,11 +9,15 @@
 #import "DetailViewController.h"
 #import "YJBannerView.h"
 #import "MainViewModel.h"
+#import "NSArray+YJBannerView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DetailViewController () <YJBannerViewDataSource, YJBannerViewDelegate>
 
 @property (nonatomic, strong) YJBannerView *detailBannerView;
 @property (nonatomic, strong) MainViewModel *viewModel;
+@property (nonatomic, strong) YJBannerView *customBannerView; /**< 自定义View 适用于不同尺寸的显示 */
+@property (nonatomic, strong) NSMutableArray *saveBannerCustomViews; /**< 保存自定义BannerView */
 
 @end
 
@@ -34,6 +38,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[self colorFromHexRGB:@"2fbff7"] alpha:1] forBarMetrics:UIBarMetricsDefault];
 
     [self.detailBannerView adjustBannerViewWhenViewWillAppear];
+    [self.customBannerView adjustBannerViewWhenViewWillAppear];
 }
 
 - (void)closeCurrentController {
@@ -43,13 +48,44 @@
 - (void)_setUpDetailMainView{
     
     [self.view addSubview:self.detailBannerView];
+    [self.view addSubview:self.customBannerView];
     
     [self.detailBannerView reloadData];
+    
+    // 每次刷新前清空自定义View
+    [self.saveBannerCustomViews removeAllObjects];
+    [self.customBannerView reloadData];
 }
 
 #pragma mark - DataSource
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
     return self.viewModel.customBannerViewImages;
+}
+
+- (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index{
+    
+    if (bannerView == self.customBannerView) {
+        
+        UIImageView *itemView = [self.saveBannerCustomViews objectSafeAtIndex:index];
+        if (!itemView) {
+            itemView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 180)];
+            itemView.backgroundColor = [UIColor orangeColor];
+            [self.saveBannerCustomViews addObject:itemView];
+        }
+        
+        if (index % 2 == 0) {
+            itemView.frame = CGRectMake(0, -40, kSCREEN_WIDTH, 220);
+            itemView.backgroundColor = [UIColor redColor];
+        }
+        
+        NSString *imgPath = [self.viewModel.customBannerViewImages objectAtIndex:index];
+        
+        [itemView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        
+        return itemView;
+    }
+    
+    return nil;
 }
 
 #pragma mark - Lazy
@@ -65,6 +101,23 @@
         _viewModel = [[MainViewModel alloc] init];
     }
     return _viewModel;
+}
+
+- (YJBannerView *)customBannerView{
+    if (!_customBannerView) {
+        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 190, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _customBannerView.pageControlStyle = PageControlCustom;
+        _customBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+        _customBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
+    }
+    return _customBannerView;
+}
+
+- (NSMutableArray *)saveBannerCustomViews{
+    if (!_saveBannerCustomViews) {
+        _saveBannerCustomViews = [NSMutableArray array];
+    }
+    return _saveBannerCustomViews;
 }
 
 - (UIImage *)createImageWithColor:(UIColor *)color alpha:(CGFloat)alpha{

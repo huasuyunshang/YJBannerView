@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- ********* 当前版本: 2.2.2 ********
+ ********* 当前版本: 2.3.0 ********
 
 版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
  
