@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- ********* 当前版本: 2.3.0 ********
+ ********* 当前版本: 2.3.1 ********
 
 版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
  
@@ -138,6 +138,11 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
  */
 - (void)reloadData;
 
+/** 停止定时器接口 */
+- (void)invalidateTimerWhenAutoScroll;
+
+/** 重新开启定时器 */
+- (void)startTimerWhenAutoScroll;
 
 /**
  解决卡屏问题, 在控制器viewWillAppear时调用此方法
@@ -150,7 +155,12 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @protocol YJBannerViewDataSource <NSObject>
 
 @required
-/** 兼容 http(s):// 和 本地图片Name */
+/**
+ 显示Banner数据源代理方法
+
+ @param bannerView 当前Banner
+ @return 兼容 http(s):// 和 本地图片Name 类型: NSString 数组
+ */
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView;
 
 @optional

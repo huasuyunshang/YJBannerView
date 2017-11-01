@@ -8,7 +8,7 @@
 
 #import "YJAnimatedDotView.h"
 
-static CGFloat const kAnimateDuration = 1;
+static CGFloat const kAnimateDuration = 0;
 
 @implementation YJAnimatedDotView
 

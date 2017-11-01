@@ -42,10 +42,17 @@ static CGFloat const midMargin = 15.0f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self.normalBannerView startTimerWhenAutoScroll];
+    
     [self.normalBannerView adjustBannerViewWhenViewWillAppear];
     [self.headlinesBannerView adjustBannerViewWhenViewWillAppear];
     [self.goodDetailBannerView adjustBannerViewWhenViewWillAppear];
     [self.customBannerView adjustBannerViewWhenViewWillAppear];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.normalBannerView invalidateTimerWhenAutoScroll];
 }
 
 - (void)_setUpMainView{
@@ -91,6 +98,7 @@ static CGFloat const midMargin = 15.0f;
 #pragma mark - DataSources
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
     if (bannerView == self.normalBannerView) {
+//        NSLog(@"-->%@", @"-------");
         return self.viewModel.normalBannerViewImages;
     }else if (bannerView == self.headlinesBannerView){
         return self.viewModel.hotTitles;
@@ -216,8 +224,8 @@ static CGFloat const midMargin = 15.0f;
 - (YJBannerView *)customBannerView{
     if (!_customBannerView) {
         _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
-        _customBannerView.pageControlStyle = PageControlCustom;
-        _customBannerView.pageControlDotSize = CGSizeMake(6, 6);
+        _customBannerView.pageControlStyle = PageControlHollow;
+        _customBannerView.pageControlDotSize = CGSizeMake(15, 15);
         _customBannerView.pageControlNormalColor = [UIColor orangeColor];
         _customBannerView.pageControlHighlightColor = [UIColor redColor];
 //        _customBannerView.bannerViewScrollDirection = BannerViewDirectionRight;

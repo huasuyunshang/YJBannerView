@@ -563,15 +563,12 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if (self.autoScroll) {
-        [self invalidateTimer];
-    }
+    [self invalidateTimerWhenAutoScroll];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (self.autoScroll) {
-        [self _setupTimer];
-    }
+    
+    [self startTimerWhenAutoScroll];
     
     if (self.showFooter) {
         CGFloat footerDisplayOffset = (self.collectionView.contentOffset.x - (self.flowLayout.itemSize.width * (self.totalItemsCount - 1)));
@@ -685,6 +682,20 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     
     [_timer invalidate];
     _timer = nil;
+}
+
+/** 停止定时器接口 */
+- (void)invalidateTimerWhenAutoScroll{
+    if (self.autoScroll) {
+        [self invalidateTimer];
+    }
+}
+
+/** 重新开启定时器 */
+- (void)startTimerWhenAutoScroll{
+    if (self.autoScroll) {
+        [self _setupTimer];
+    }
 }
 
 - (void)_automaticScrollAction{
