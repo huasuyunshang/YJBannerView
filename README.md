@@ -1,4 +1,6 @@
-<!--&middot;--> 
+![Logo](https://ws2.sinaimg.cn/large/006tNc79ly1fl3joaz995j31kw09htj4.jpg)
+
+<!--&middot;-->
 [![Travis](https://img.shields.io/travis/stackhou/YJBannerViewOC.svg?style=flat)](https://github.com/stackhou/YJBannerViewOC.git)
 [![Language](https://img.shields.io/badge/Language-Objective--C-FF7F24.svg?style=flat)](https://github.com/YJManager/YJBannerViewOC.git)
 [![CocoaPods](https://img.shields.io/cocoapods/p/YJBannerView.svg)](https://github.com/stackhou/YJBannerViewOC.git)
