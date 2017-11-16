@@ -109,6 +109,7 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
    *  2017/9/25       	版本2.2.2  当网络加载时间很长时 PlaceHolder 显示优化
    *  2017/9/30       版本2.3.0  调优 创建该控件由原来的120毫秒 优化到只需要60毫秒左右，和创建一个UILabel相当。
    * 2017/11/1        版本2.3.1  增加停止定时器和重新开启定时器API
+   * 2017/11/16       版本2.3.2 修复当数据为空时刷新后再次有数据刷新不滚动问题
 
 ## 优化表现
 

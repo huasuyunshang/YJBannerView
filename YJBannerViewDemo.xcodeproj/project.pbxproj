@@ -26,6 +26,7 @@
 		631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28391ED55F8900F31057 /* YJBannerView.m */; };
 		631C283E1ED578CC00F31057 /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C283D1ED578CC00F31057 /* YJBannerViewCell.m */; };
 		631C28421ED57F5D00F31057 /* UIView+YJBannerViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */; };
+		631DED321FB1B0EA00C22606 /* DynamicBgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631DED311FB1B0EA00C22606 /* DynamicBgViewController.m */; };
 		631ECE3D1F272DA600ED0D14 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE3B1F272DA600ED0D14 /* DetailViewController.m */; };
 		631ECE431F28602100ED0D14 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE411F28602100ED0D14 /* MainViewModel.m */; };
 		635E7F2F1EE5657600EF8405 /* banner_Current@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2B1EE5657600EF8405 /* banner_Current@2x.png */; };
@@ -74,6 +75,8 @@
 		631C28401ED57F5D00F31057 /* UIView+YJBannerViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJBannerViewExt.h"; sourceTree = "<group>"; };
 		631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJBannerViewExt.m"; sourceTree = "<group>"; };
 		631C28541ED5952800F31057 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		631DED301FB1B0EA00C22606 /* DynamicBgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicBgViewController.h; sourceTree = "<group>"; };
+		631DED311FB1B0EA00C22606 /* DynamicBgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicBgViewController.m; sourceTree = "<group>"; };
 		631ECE3A1F272DA600ED0D14 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		631ECE3B1F272DA600ED0D14 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		631ECE401F28602100ED0D14 /* MainViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				631C28351ED55E7500F31057 /* MainViewController.m */,
 				631ECE3A1F272DA600ED0D14 /* DetailViewController.h */,
 				631ECE3B1F272DA600ED0D14 /* DetailViewController.m */,
+				631DED301FB1B0EA00C22606 /* DynamicBgViewController.h */,
+				631DED311FB1B0EA00C22606 /* DynamicBgViewController.m */,
 				631C281D1ED55D3B00F31057 /* Supporting Files */,
 			);
 			path = YJBannerViewDemo;
@@ -525,6 +530,7 @@
 				631ECE3D1F272DA600ED0D14 /* DetailViewController.m in Sources */,
 				631C28361ED55E7500F31057 /* MainViewController.m in Sources */,
 				638AA9B21F26EC340015892D /* YJBannerViewFooter.m in Sources */,
+				631DED321FB1B0EA00C22606 /* DynamicBgViewController.m in Sources */,
 				63B7412C1ED6CDF900D9A282 /* YJDotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

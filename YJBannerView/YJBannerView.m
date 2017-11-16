@@ -73,8 +73,8 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
         BOOL isCan = ([self _imageDataSources].count == 0)?NO:(self.showFooter?YES:NO);
         
         self.collectionView.scrollEnabled = isCan;
-        [self setAutoScroll:NO];
         
+        [self invalidateTimerWhenAutoScroll];
     }
     
     [self _setupPageControl];

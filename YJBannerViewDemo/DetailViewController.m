@@ -11,6 +11,7 @@
 #import "MainViewModel.h"
 #import "NSArray+YJBannerView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "DynamicBgViewController.h"
 
 @interface DetailViewController () <YJBannerViewDataSource, YJBannerViewDelegate>
 
@@ -86,6 +87,13 @@
     }
     
     return nil;
+}
+
+- (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
+    
+    DynamicBgViewController *vc = [[DynamicBgViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 #pragma mark - Lazy
