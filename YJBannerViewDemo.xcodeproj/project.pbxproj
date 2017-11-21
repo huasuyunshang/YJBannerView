@@ -48,6 +48,9 @@
 		63B741261ED6CD3900D9A282 /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */; };
 		63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */; };
 		63B7412C1ED6CDF900D9A282 /* YJDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7412B1ED6CDF900D9A282 /* YJDotView.m */; };
+		63EADD6A1FC403890041E6EE /* YJBannerViewCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */; };
+		63EADD6B1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */; };
+		63EADD6C1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */; };
 		63F97E551F2B37A600956AE2 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F97E541F2B37A600956AE2 /* YJBannerView.bundle */; };
 		63F97E561F2B37A600956AE2 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F97E541F2B37A600956AE2 /* YJBannerView.bundle */; };
 /* End PBXBuildFile section */
@@ -107,6 +110,8 @@
 		63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJAnimatedDotView.m; sourceTree = "<group>"; };
 		63B7412A1ED6CDF900D9A282 /* YJDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJDotView.h; sourceTree = "<group>"; };
 		63B7412B1ED6CDF900D9A282 /* YJDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJDotView.m; sourceTree = "<group>"; };
+		63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCollectionView.h; sourceTree = "<group>"; };
+		63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCollectionView.m; sourceTree = "<group>"; };
 		63F97E541F2B37A600956AE2 /* YJBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJBannerView.bundle; sourceTree = "<group>"; };
 		96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YJBannerViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -222,6 +227,8 @@
 				631C283D1ED578CC00F31057 /* YJBannerViewCell.m */,
 				638AA9AF1F26EC340015892D /* YJBannerViewFooter.h */,
 				638AA9B01F26EC340015892D /* YJBannerViewFooter.m */,
+				63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */,
+				63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6307D7451F0A38AB00CF1EAD /* YJBannerView.h in Headers */,
+				63EADD6A1FC403890041E6EE /* YJBannerViewCollectionView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +514,7 @@
 				6307D7481F0A38C300CF1EAD /* YJAnimatedDotView.m in Sources */,
 				6307D7491F0A38C300CF1EAD /* YJDotView.m in Sources */,
 				6307D74A1F0A38C300CF1EAD /* UIView+YJBannerViewExt.m in Sources */,
+				63EADD6C1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */,
 				6307D74B1F0A38C300CF1EAD /* YJBannerViewCell.m in Sources */,
 				6307D74C1F0A38C300CF1EAD /* YJBannerView.m in Sources */,
 			);
@@ -521,6 +530,7 @@
 				63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */,
 				638D31BF1F7F4C760052566B /* UIImage+YJBannerView.m in Sources */,
 				631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */,
+				63EADD6B1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */,
 				631C281F1ED55D3B00F31057 /* main.m in Sources */,
 				63B741231ED6C5F800D9A282 /* YJHollowPageControl.m in Sources */,
 				63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */,

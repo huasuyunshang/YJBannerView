@@ -11,6 +11,7 @@
 #import "UIView+YJBannerViewExt.h"
 #import "YJHollowPageControl.h"
 #import "YJBannerViewFooter.h"
+#import "YJBannerViewCollectionView.h"
 
 static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
@@ -785,9 +786,9 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     return _flowLayout;
 }
 
-- (UICollectionView *)collectionView{
+- (YJBannerViewCollectionView *)collectionView{
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
+        _collectionView = [[YJBannerViewCollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
         _collectionView.pagingEnabled = YES;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.showsVerticalScrollIndicator = NO;

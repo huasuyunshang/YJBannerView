@@ -151,7 +151,7 @@ static CGFloat const midMargin = 15.0f;
 #pragma mark - Delegate
 - (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
     NSString *titleString = @"";
-    NSString *showMessage = [NSString stringWithFormat:@"点击了第%ld个", index];
+    NSString *showMessage = [NSString stringWithFormat:@"点击了第%ld个", (long)index];
     if (bannerView == self.normalBannerView) {
         titleString = @"第一个BannerView";
     }else if (bannerView == self.headlinesBannerView){

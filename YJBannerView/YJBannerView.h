@@ -39,13 +39,13 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 };
 
 
-@class YJBannerView;
+@class YJBannerView, YJBannerViewCollectionView;
 @protocol YJBannerViewDataSource, YJBannerViewDelegate;
 
 @interface YJBannerView : UIView
     
 @property (nonatomic, strong, readonly) UICollectionViewFlowLayout *flowLayout;
-@property (nonatomic, strong, readonly) UICollectionView           *collectionView;
+@property (nonatomic, strong, readonly) YJBannerViewCollectionView *collectionView;
 
 @property (nonatomic, weak) IBOutlet id<YJBannerViewDataSource> dataSource;         /**< 数据源代理 */
 @property (nonatomic, weak) IBOutlet id<YJBannerViewDelegate> delegate;             /**< 代理      */
