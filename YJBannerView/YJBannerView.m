@@ -20,7 +20,7 @@ static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
-    UICollectionView *_collectionView;
+    YJBannerViewCollectionView *_collectionView;
     UICollectionViewFlowLayout *_flowLayout;
 }
 
@@ -139,7 +139,9 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 #pragma mark - Setter && Getter
 - (void)setPlaceholderImageName:(NSString *)placeholderImageName{
     _placeholderImageName = placeholderImageName;
-    self.backgroundImageView.image = [UIImage imageNamed:placeholderImageName];
+    if (placeholderImageName.length > 0) {
+        self.backgroundImageView.image = [UIImage imageNamed:placeholderImageName];
+    }
 }
 
 - (void)setPageControlDotSize:(CGSize)pageControlDotSize{
@@ -269,7 +271,6 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     _showFooter = showFooter;
     
     if (_showFooter) {
-        
         self.bannerViewScrollDirection = BannerViewDirectionLeft;
         self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -[self _bannerViewFooterHeight]);
     }else{
