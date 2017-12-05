@@ -4,9 +4,9 @@ Pod::Spec.new do |s|
 
     s.name         = "YJBannerView"
     s.version      = version
-    s.summary      = "YJBannerView 是一款超级好用的 BannerView 轮播控件, Author's email:houmanager@Hotmail.com 工作地点:BeiJing"
+    s.summary      = "YJBannerView 轮播控件, Author's email:houmanager@Hotmail.com"
     s.description      = <<-DESC
-                        YJBannerView 是一款超级好用的 BannerView 轮播控件, Author's email:houmanager@Hotmail.com 工作地点:BeiJing. 欢迎一起交流.
+                        YJBannerView 轮播控件, Author's email:houmanager@Hotmail.com. Form Beijing
                             DESC
     s.homepage     = "https://github.com/stackhou/YJBannerViewOC"
     s.license      = { :type => "MIT", :file => "LICENSE" }
