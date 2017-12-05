@@ -162,6 +162,7 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
         }
     } else {
         dotView = [[UIImageView alloc] initWithImage:self.dotImage];
+        dotView.contentMode = UIViewContentModeScaleAspectFit;
         dotView.frame = CGRectMake(0, 0, self.dotSize.width, self.dotSize.height);
     }
     

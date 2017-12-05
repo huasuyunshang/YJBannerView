@@ -94,6 +94,8 @@
 - (void)cellWithSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImageName:(NSString *)placeholderImageName title:(NSString *)title{
 
     if (imagePath) {
+        
+        UIImage *placeholderImage = (placeholderImageName.length > 0)?[UIImage imageNamed:placeholderImageName]:nil;
         self.showImageView.hidden = NO;
         if ([imagePath isKindOfClass:[NSString class]]) {
             if ([imagePath hasPrefix:@"http"]) {
@@ -103,20 +105,22 @@
                 if ([self.showImageView respondsToSelector:selector]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                    [self.showImageView performSelector:selector withObject:[NSURL URLWithString:imagePath] withObject:[UIImage imageNamed:placeholderImageName]];
+                    [self.showImageView performSelector:selector withObject:[NSURL URLWithString:imagePath] withObject:placeholderImage];
 #pragma clang diagnostic pop
                 }
             } else {
-                UIImage *image = [UIImage imageNamed:imagePath];
-                if (!image) {
-                    image = [UIImage imageWithContentsOfFile:imagePath];
+                if (imagePath.length > 0) {
+                    UIImage *image = [UIImage imageNamed:imagePath];
+                    if (!image) {
+                        image = [UIImage imageWithContentsOfFile:imagePath];
+                    }
+                    self.showImageView.image = image;
                 }
-                self.showImageView.image = image;
             }
         } else if ([imagePath isKindOfClass:[UIImage class]]) {
             self.showImageView.image = (UIImage *)imagePath;
         }else{
-            self.showImageView.image = [UIImage imageNamed:placeholderImageName];
+            self.showImageView.image = placeholderImage;
         }
     }else{
         self.showImageView.hidden = YES;
