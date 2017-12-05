@@ -11,7 +11,6 @@
 #import "UIView+YJBannerViewExt.h"
 #import "YJHollowPageControl.h"
 #import "YJBannerViewFooter.h"
-#import "YJBannerViewCollectionView.h"
 
 static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";

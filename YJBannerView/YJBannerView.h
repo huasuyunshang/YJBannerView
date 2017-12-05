@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YJBannerViewCollectionView.h"
 
 /**
- ********* 当前版本: 2.3.3 ********
+ ********* 当前版本: 2.3.4 ********
 
 版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
  
@@ -39,7 +40,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 };
 
 
-@class YJBannerView, YJBannerViewCollectionView;
+@class YJBannerView;
 @protocol YJBannerViewDataSource, YJBannerViewDelegate;
 
 @interface YJBannerView : UIView
