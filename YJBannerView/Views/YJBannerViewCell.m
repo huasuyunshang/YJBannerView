@@ -91,11 +91,9 @@
 }
 
 #pragma mark - 刷新数据
-- (void)cellWithSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImageName:(NSString *)placeholderImageName title:(NSString *)title{
+- (void)cellWithSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImage:(UIImage *)placeholderImage title:(NSString *)title{
 
     if (imagePath) {
-        
-        UIImage *placeholderImage = (placeholderImageName.length > 0)?[UIImage imageNamed:placeholderImageName]:nil;
         self.showImageView.hidden = NO;
         if ([imagePath isKindOfClass:[NSString class]]) {
             if ([imagePath hasPrefix:@"http"]) {

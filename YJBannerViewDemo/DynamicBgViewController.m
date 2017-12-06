@@ -59,7 +59,7 @@
 
 - (YJBannerView *)bannerView{
     if (!_bannerView) {
-        _bannerView = [YJBannerView bannerViewWithFrame:CGRectMake(15, 40, kSCREEN_WIDTH - 30, 140) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _bannerView = [YJBannerView bannerViewWithFrame:CGRectMake(15, 40, kSCREEN_WIDTH - 30, 140) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _bannerView.layer.cornerRadius = 5.0f;
         _bannerView.layer.masksToBounds = YES;
     }

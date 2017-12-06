@@ -10,7 +10,7 @@
 #import "YJBannerViewCollectionView.h"
 
 /**
- ********* 当前版本: 2.3.4 ********
+ ********* 当前版本: 2.3.5 ********
 
 版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
  
@@ -66,7 +66,8 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, assign) IBInspectable BOOL showFooter;                        /**< 显示footerView 默认是 NO 设置为YES 后将 autoScroll和cycleScrollEnable 自动置为NO 只支持水平向左 */
 
 //////////////  自定义样式接口  //////////////////
-@property (nonatomic, copy) NSString *placeholderImageName;                         /** 默认图片名 */
+@property (nonatomic, strong) UIImage *placeholderImage;                            /**< 默认图片 */
+@property (nonatomic, strong) UIImage *emptyImage;                                  /**< 空数据图片 */
 
 @property (nonatomic, copy) NSString *bannerViewSelectorString;                     /**< 自定义设置网络和默认图片的方法 */
 
@@ -124,14 +125,16 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
  @param frame bannerView的Frame
  @param dataSource 数据源代理
  @param delegate 普通代理
- @param placeholderImageName 默认图片
+ @param emptyImage 空数据图片
+ @param placeholderImage 默认图片
  @param selectorString 必须是 UIImageView 设置图片和placeholderImage的方法 如: @"sd_setImageWithURL:placeholderImage:", 分别接收NSURL和UIImage两个参数
  @return YJBannerView 实例
  */
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame
                            dataSource:(id<YJBannerViewDataSource>)dataSource
                              delegate:(id<YJBannerViewDelegate>)delegate
-                 placeholderImageName:(NSString *)placeholderImageName
+                           emptyImage:(UIImage *)emptyImage
+                     placeholderImage:(UIImage *)placeholderImage
                        selectorString:(NSString *)selectorString;
 
 /**
