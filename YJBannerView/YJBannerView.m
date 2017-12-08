@@ -11,7 +11,6 @@
 #import "UIView+YJBannerViewExt.h"
 #import "YJHollowPageControl.h"
 #import "YJBannerViewFooter.h"
-#import "YJBannerViewCollectionView.h"
 
 static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
@@ -44,16 +43,17 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame
                            dataSource:(id<YJBannerViewDataSource>)dataSource
                              delegate:(id<YJBannerViewDelegate>)delegate
-                 placeholderImageName:(NSString *)placeholderImageName
+                           emptyImage:(UIImage *)emptyImage
+                     placeholderImage:(UIImage *)placeholderImage
                        selectorString:(NSString *)selectorString{
     
     YJBannerView *bannerView = [[YJBannerView alloc] initWithFrame:frame];
     bannerView.dataSource = dataSource;
     bannerView.delegate = delegate;
     bannerView.bannerViewSelectorString = selectorString;
-    if (placeholderImageName) {
-        bannerView.placeholderImageName = placeholderImageName;
-    }
+    bannerView.emptyImage = emptyImage;
+    bannerView.placeholderImage = placeholderImage;
+
     return bannerView;
 }
 
@@ -137,10 +137,10 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 }
 
 #pragma mark - Setter && Getter
-- (void)setPlaceholderImageName:(NSString *)placeholderImageName{
-    _placeholderImageName = placeholderImageName;
-    if (placeholderImageName.length > 0) {
-        self.backgroundImageView.image = [UIImage imageNamed:placeholderImageName];
+- (void)setEmptyImage:(UIImage *)emptyImage{
+    _emptyImage = emptyImage;
+    if (emptyImage) {
+        self.backgroundImageView.image = emptyImage;
     }
 }
 
@@ -486,7 +486,7 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
         cell.clipsToBounds = YES;
     }
     
-    [cell cellWithSelectorString:self.bannerViewSelectorString imagePath:imagePath placeholderImageName:self.placeholderImageName title:title];
+    [cell cellWithSelectorString:self.bannerViewSelectorString imagePath:imagePath placeholderImage:self.placeholderImage title:title];
 
     return cell;
 }

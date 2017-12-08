@@ -60,7 +60,11 @@
 
 #pragma mark - DataSource
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
-    return self.viewModel.customBannerViewImages;
+    if (bannerView == self.detailBannerView) {
+        return self.viewModel.customBannerViewImages;
+    }else{
+        return nil;
+    }
 }
 
 - (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index{
@@ -99,7 +103,7 @@
 #pragma mark - Lazy
 - (YJBannerView *)detailBannerView{
     if (!_detailBannerView) {
-        _detailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _detailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
     }
     return _detailBannerView;
 }
@@ -113,7 +117,7 @@
 
 - (YJBannerView *)customBannerView{
     if (!_customBannerView) {
-        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 190, kSCREEN_WIDTH, 180) dataSource:self delegate:self placeholderImageName:@"placeholder" selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 190, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _customBannerView.pageControlStyle = PageControlCustom;
         _customBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
         _customBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];

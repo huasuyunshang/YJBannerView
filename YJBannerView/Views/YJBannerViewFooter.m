@@ -87,7 +87,7 @@
 
 - (void)setIndicateImageName:(NSString *)IndicateImageName{
     _IndicateImageName = IndicateImageName;
-    if (_IndicateImageName && self.arrowView.image == nil) {
+    if (_IndicateImageName.length > 0 && self.arrowView.image == nil) {
         self.arrowView.image = [UIImage imageNamed:_IndicateImageName];
     }
 }
