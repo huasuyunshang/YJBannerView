@@ -6,15 +6,21 @@
 //  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "YJBannerViewCollectionView.h"
-
 /**
+ __   __  _ ____                            __     ___
+ \ \ / / | | __ )  __ _ _ __  _ __   ___ _ __ \   / (_) _____      __
+  \ V /  | |  _ \ / _` | '_ \| '_ \ / _ \ '__\ \ / /| |/ _ \ \ /\ / /
+   | | |_| | |_) | (_| | | | | | | |  __/ |   \ V / | |  __/\ V  V /
+   |_|\___/|____/ \__,_|_| |_|_| |_|\___|_|    \_/  |_|\___| \_/\_/
+ 
  ********* 当前版本: 2.3.5 ********
-
-版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
+ 
+ 版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
  
  */
+
+#import <UIKit/UIKit.h>
+#import "YJBannerViewCollectionView.h"
 
 /** 指示器的位置 */
 typedef NS_ENUM(NSInteger, PageControlAliment) {
