@@ -25,7 +25,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
 #define BANNER_FOOTER_HEIGHT 49.0
-static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
+static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     YJBannerViewCollectionView *_collectionView;
@@ -95,6 +95,12 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     }
     
     [self.collectionView reloadData];
+    
+    if ([self _imageDataSources].count > 1) {
+        
+    } else {
+        [self adjustBannerViewWhenViewWillAppear];
+    }
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -295,7 +301,7 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
 
 #pragma mark - Getter
 - (NSInteger)totalItemsCount{
-    return self.cycleScrollEnable?([self _imageDataSources].count * totalCollectionViewCellCount):([self _imageDataSources].count);
+    return self.cycleScrollEnable?(([self _imageDataSources].count > 1)?([self _imageDataSources].count * totalCollectionViewCellCount):[self _imageDataSources].count):([self _imageDataSources].count);
 }
 
 - (BOOL)autoScroll{
@@ -454,7 +460,11 @@ static NSInteger const totalCollectionViewCellCount = 500; // 重复的次数
     
     long targetIndex = [self _currentIndex];
     if (targetIndex < self.totalItemsCount) {
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        
+        NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
+        if (targetIndex < itemCount) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        }
     }
 }
 
