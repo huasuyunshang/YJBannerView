@@ -38,6 +38,7 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
 @property (nonatomic, strong) NSArray *saveScrollViewGestures;          /**< 保存手势 */
 @property (nonatomic, strong) YJBannerViewFooter *bannerFooter;
+@property (nonatomic, strong) NSArray *showNewDatasource; /**< 新的显示数据源 */
 
 @end
 
@@ -70,6 +71,8 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
     
     [self invalidateTimer];
     
+    self.showNewDatasource = [self _getImageDataSources];
+    
     // 当数据源大于零时隐藏
     self.backgroundImageView.hidden = ([self _imageDataSources].count > 0);
     
@@ -95,7 +98,6 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
     }
     
     [self.collectionView reloadData];
-    [self adjustBannerViewWhenViewWillAppear];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -389,7 +391,11 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
     
     if (self.collectionView.contentOffset.x == 0 &&  self.totalItemsCount) {
         int targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        
+        NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
+        if (targetIndex < itemCount) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        }
     }
     
     CGSize size = CGSizeZero;
@@ -507,7 +513,7 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
 
 // 设置Footer的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    return CGSizeMake([self _bannerViewFooterHeight], self.frame.size.height);
+    return CGSizeMake(self.showFooter?[self _bannerViewFooterHeight]:0.0f, self.frame.size.height);
 }
 
 // Footer
@@ -723,7 +729,11 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
     }else if (self.bannerViewScrollDirection == BannerViewDirectionRight || self.bannerViewScrollDirection == BannerViewDirectionBottom){
         if ((currentIndex - 1) < 0) { // 小于零
             currentIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(currentIndex - 1) inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+            
+            NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
+            if ((currentIndex - 1) < itemCount) {
+                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(currentIndex - 1) inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+            }
         }else{
             [self _scrollToIndex:currentIndex - 1];
         }
@@ -732,11 +742,16 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
 
 - (void)_scrollToIndex:(int)targetIndex{
     
+    NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
     if (targetIndex >= self.totalItemsCount) {  // 超过最大
         targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        if (targetIndex < itemCount) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        }
     }else{
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+        if (targetIndex < itemCount) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+        }
     }
 }
 
@@ -760,6 +775,11 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
 
 /** 显示图片的数组 */
 - (NSArray *)_imageDataSources{
+    return self.showNewDatasource;
+}
+
+/** 从代理方法获取新数据 */
+- (NSArray *)_getImageDataSources{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewImages:)]) {
         return [self.dataSource bannerViewImages:self];
     }
