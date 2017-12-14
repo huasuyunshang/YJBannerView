@@ -95,12 +95,7 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
     }
     
     [self.collectionView reloadData];
-    
-    if ([self _imageDataSources].count > 1) {
-        
-    } else {
-        [self adjustBannerViewWhenViewWillAppear];
-    }
+    [self adjustBannerViewWhenViewWillAppear];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
