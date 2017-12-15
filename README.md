@@ -30,6 +30,7 @@
 - [x] 不依赖其他三方SDWebImage或者AFNetworking设置图片
 - [x] 支持CocoaPods
 - [x] 支持Carthage
+- [x] 支持获取当前位置的自身偏移量
 
 
 ## Installation
@@ -108,6 +109,7 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
 2017-12-05 | 2.3.4 | 规范图片加载流程
 2017-12-06 | 2.3.5 | 区分没有数据的占位图片和图片未加载的占位图片
 2017-12-14 | 2.3.6 | 数据安全保护和数据更新速度优化
+2017-12-15 | 2.3.7 | 增加当前滚动位置相对偏移量API
 
 ## 优化表现
 
