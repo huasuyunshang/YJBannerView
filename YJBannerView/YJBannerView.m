@@ -25,7 +25,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
 #define BANNER_FOOTER_HEIGHT 49.0
-static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
+static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     YJBannerViewCollectionView *_collectionView;

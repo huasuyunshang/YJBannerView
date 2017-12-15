@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, assign) BOOL bannerGestureEnable;                             /**< 手势是否可用 默认可用YES */
 
 @property (nonatomic, assign) IBInspectable BOOL showFooter;                        /**< 显示footerView 默认是 NO 设置为YES 后将 autoScroll和cycleScrollEnable 自动置为NO 只支持水平向左 */
-@property (nonatomic, assign) NSInteger repeatCount;                                /**< 数据源重复次数 默认是300 若循环必须大于2的偶数 */
+@property (nonatomic, assign) NSInteger repeatCount;                                /**< 数据源重复次数 默认是200 若循环必须大于2的偶数 */
 
 //////////////  自定义样式接口  //////////////////
 @property (nonatomic, strong) UIImage *placeholderImage;                            /**< 默认图片 */
