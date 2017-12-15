@@ -387,12 +387,8 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     self.collectionView.frame = self.bounds;
     
     if (self.collectionView.contentOffset.x == 0 &&  self.totalItemsCount) {
-        int targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-        
-        NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
-        if (targetIndex < itemCount) {
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-        }
+        NSInteger targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
+        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
     }
     
     CGSize size = CGSizeZero;
@@ -458,11 +454,7 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     
     long targetIndex = [self _currentIndex];
     if (targetIndex < self.totalItemsCount) {
-        
-        NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
-        if (targetIndex < itemCount) {
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-        }
+        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
     }
 }
 
@@ -553,17 +545,12 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     
     // 手动退拽时左右两端
     if (scrollView == self.collectionView && scrollView.isDragging && self.cycleScrollEnable) {
-        NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
         NSInteger targetIndex = self.totalItemsCount * 0.5;
         if (itemIndex == 0) { // 顶头
-            if (targetIndex < itemCount) {
-                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-            }
+            [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
         }else if (itemIndex == (self.totalItemsCount - 1)){ // 尾巴
             targetIndex -= 1;
-            if (targetIndex < itemCount) {
-                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-            }
+            [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
         }
     }
     
@@ -743,11 +730,7 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     }else if (self.bannerViewScrollDirection == BannerViewDirectionRight || self.bannerViewScrollDirection == BannerViewDirectionBottom){
         if ((currentIndex - 1) < 0) { // 小于零
             currentIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-            
-            NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
-            if ((currentIndex - 1) < itemCount) {
-                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(currentIndex - 1) inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-            }
+            [self _scrollCollectionViewToItemAtIndex:(currentIndex - 1) animated:NO];
         }else{
             [self _scrollToIndex:currentIndex - 1];
         }
@@ -756,16 +739,11 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
 
 - (void)_scrollToIndex:(int)targetIndex{
     
-    NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
     if (targetIndex >= self.totalItemsCount) {  // 超过最大
         targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-        if (targetIndex < itemCount) {
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-        }
+        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
     }else{
-        if (targetIndex < itemCount) {
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-        }
+        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:YES];
     }
 }
 
@@ -830,6 +808,14 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
         self.collectionView.alwaysBounceHorizontal = showFooter;
     }else {
         self.collectionView.accessibilityViewIsModal = showFooter;
+    }
+}
+
+/** 滚动 CollectionView 到指定位置 */
+- (void)_scrollCollectionViewToItemAtIndex:(NSInteger)targetIndex animated:(BOOL)animated{
+    NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
+    if (targetIndex < itemCount) {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
 }
 
