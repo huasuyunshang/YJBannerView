@@ -104,6 +104,7 @@
 - (YJBannerView *)detailBannerView{
     if (!_detailBannerView) {
         _detailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _detailBannerView.autoScroll = NO;
     }
     return _detailBannerView;
 }

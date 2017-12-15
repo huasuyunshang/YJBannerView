@@ -91,10 +91,10 @@ static CGFloat const midMargin = 15.0f;
 - (void)_loadDataSources{
 
     // 刷新数据
-    [self.normalBannerView reloadData];
-    [self.headlinesBannerView reloadData];
+//    [self.normalBannerView reloadData];
+//    [self.headlinesBannerView reloadData];
     [self.goodDetailBannerView reloadData];
-    [self.customBannerView reloadData];
+//    [self.customBannerView reloadData];
 }
 
 

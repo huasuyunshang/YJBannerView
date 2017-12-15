@@ -43,6 +43,9 @@
 
 - (void)savaImageColor:(UIImage *)image{
     
+    
+//    UIColor *color = [[NSArray arrayOfColorsFromImage:image withFlatScheme:YES] lastObject];
+    
     UIColor *color = [UIColor colorWithAverageColorFromImage:image];
     [self.showImageColors addObject:color];
     
@@ -58,11 +61,36 @@
 }
 
 - (void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index{
-    NSLog(@"-->%ld", index);
+//    NSLog(@"滚动到-->%ld", index);
     
-    [UIView animateWithDuration:0.5 animations:^{
-        self.bannerBgView.backgroundColor = [self.showImageColors objectAtIndex:index];
+//    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction  animations:^{
+//        self.bannerBgView.backgroundColor = [self.showImageColors objectAtIndex:index];
+//    } completion:^(BOOL finished) {
+//
+//    }];
+}
+
+- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex contentOffset:(CGFloat)contentOffset{
+    
+//    NSLog(@"当前页面-->%ld", currentIndex);
+    
+    CGFloat showItemW = bannerView.frame.size.width;
+//    NSLog(@"showItemW-->%f", contentOffset);
+    CGFloat halfWidth = fabs(contentOffset - showItemW * 0.5);
+    CGFloat alpah = halfWidth / (showItemW * 0.5);
+    NSLog(@"alpah-->%f", alpah);
+    if (alpah <= 1) {
+        alpah = 1;
+    }
+    
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction  animations:^{
+        UIColor *showColor = [self.showImageColors objectAtIndex:currentIndex];
+        self.bannerBgView.backgroundColor = [showColor colorWithAlphaComponent:alpah];;
+
+    } completion:^(BOOL finished) {
+
     }];
+    
     
 }
 
@@ -71,6 +99,7 @@
     if (!_bannerBgView) {
         _bannerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 240)];
         [_bannerBgView addSubview:self.bannerView];
+        _bannerBgView.userInteractionEnabled = YES;
     }
     return _bannerBgView;
 }
@@ -80,6 +109,8 @@
         _bannerView = [YJBannerView bannerViewWithFrame:CGRectMake(15, 40, kSCREEN_WIDTH - 30, 140) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _bannerView.layer.cornerRadius = 5.0f;
         _bannerView.layer.masksToBounds = YES;
+//        _bannerView.repeatCount = 2;
+//        _bannerView.autoScroll = NO;
     }
     return _bannerView;
 }

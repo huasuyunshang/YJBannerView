@@ -38,7 +38,8 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
 @property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
 @property (nonatomic, strong) NSArray *saveScrollViewGestures;          /**< 保存手势 */
 @property (nonatomic, strong) YJBannerViewFooter *bannerFooter;
-@property (nonatomic, strong) NSArray *showNewDatasource; /**< 新的显示数据源 */
+@property (nonatomic, strong) NSArray *showNewDatasource;               /**< 新的显示数据源 */
+@property (nonatomic, assign) CGFloat lastContentOffset;                /**< 每次滚动完成的偏移量 */
 
 @end
 
@@ -574,10 +575,6 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
         pageControl.currentPage = indexOnPageControl;
     }
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didScrollCurrentIndex:)]) {
-        [self.delegate bannerView:self didScrollCurrentIndex:indexOnPageControl];
-    }
-    
     // Footer
     if (self.showFooter) {
         static CGFloat lastOffset;
@@ -593,6 +590,20 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
             }
             lastOffset = footerDisplayOffset - [self _bannerViewFooterHeight];
         }
+    }
+    
+    // 传递偏移量
+    [self _saveInitializationContentOffsetJudgeZero:YES];
+    CGFloat contentOffset = 0.0f;
+    if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+        contentOffset = self.collectionView.contentOffset.x;
+    } else {
+        contentOffset = self.collectionView.contentOffset.y;
+    }
+    CGFloat distance = fabs(self.lastContentOffset - contentOffset);
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didScrollCurrentIndex:contentOffset:)]) {
+        [self.delegate bannerView:self didScrollCurrentIndex:indexOnPageControl contentOffset:distance];
     }
 }
 
@@ -634,6 +645,8 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     if (self.didScroll2IndexBlock) {
         self.didScroll2IndexBlock(indexOnPageControl);
     }
+    
+    [self _saveInitializationContentOffsetJudgeZero:NO];
 }
 
 #pragma mark - 私有功能方法
@@ -827,6 +840,28 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
     if (targetIndex < itemCount) {
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:animated];
+    }
+}
+
+/** 保存当前的偏移量 */
+- (void)_saveInitializationContentOffsetJudgeZero:(BOOL)judgeZero{
+    
+    if (self.collectionView.width_bannerView == 0 || self.collectionView.height_bannerView == 0) { return; }
+    if (judgeZero) {
+        if (self.lastContentOffset == 0) {
+            
+            if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+                self.lastContentOffset = self.collectionView.contentOffset.x;
+            } else {
+                self.lastContentOffset = self.collectionView.contentOffset.y;
+            }
+        }
+    }else{
+        if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+            self.lastContentOffset = self.collectionView.contentOffset.x;
+        } else {
+            self.lastContentOffset = self.collectionView.contentOffset.y;
+        }
     }
 }
 

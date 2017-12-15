@@ -194,8 +194,8 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @protocol YJBannerViewDelegate <NSObject>
 
 @optional
-/** 正在滚动的位置 */
-- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex;
+/** 正在滚动的位置及偏移量 */
+- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex contentOffset:(CGFloat)contentOffset;
 
 /** 滚动到 index */
 - (void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index;
