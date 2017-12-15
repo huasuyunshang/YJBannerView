@@ -155,6 +155,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 /** 重新开启定时器 */
 - (void)startTimerWhenAutoScroll;
 
+/** 调整滚动到指定位置 */
+- (void)adjustBannerViewScrollToIndex:(NSInteger)index animated:(BOOL)animated;
+
 /**
  解决卡屏问题, 在控制器viewWillAppear时调用此方法
  */

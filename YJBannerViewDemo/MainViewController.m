@@ -55,6 +55,9 @@ static CGFloat const midMargin = 15.0f;
     [self.normalBannerView invalidateTimerWhenAutoScroll];
 }
 
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+}
+
 - (void)_setUpMainView{
     
     UIScrollView *containerScrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
@@ -150,6 +153,11 @@ static CGFloat const midMargin = 15.0f;
 
 #pragma mark - Delegate
 - (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
+    
+    [self.normalBannerView adjustBannerViewScrollToIndex:3 animated:NO];
+
+    return;
+    
     NSString *titleString = @"";
     NSString *showMessage = [NSString stringWithFormat:@"点击了第%ld个", (long)index];
     if (bannerView == self.normalBannerView) {
@@ -181,7 +189,7 @@ static CGFloat const midMargin = 15.0f;
         _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _normalBannerView.autoDuration = 2.5f;
         _normalBannerView.titleFont = [UIFont systemFontOfSize:20];
-        _normalBannerView.repeatCount = 2;
+//        _normalBannerView.repeatCount = 2;
     }
     return _normalBannerView;
 }
