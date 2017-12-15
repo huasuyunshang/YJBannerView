@@ -89,9 +89,9 @@ static CGFloat const midMargin = 15.0f;
 
     // 刷新数据
     [self.normalBannerView reloadData];
-    [self.headlinesBannerView reloadData];
-    [self.goodDetailBannerView reloadData];
-    [self.customBannerView reloadData];
+//    [self.headlinesBannerView reloadData];
+//    [self.goodDetailBannerView reloadData];
+//    [self.customBannerView reloadData];
 }
 
 
@@ -181,6 +181,7 @@ static CGFloat const midMargin = 15.0f;
         _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _normalBannerView.autoDuration = 2.5f;
         _normalBannerView.titleFont = [UIFont systemFontOfSize:20];
+        _normalBannerView.repeatCount = 4;
     }
     return _normalBannerView;
 }

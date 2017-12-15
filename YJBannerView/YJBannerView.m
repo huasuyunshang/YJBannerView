@@ -25,7 +25,7 @@ static NSString *const bannerViewCellId = @"YJBannerView";
 static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
 #define BANNER_FOOTER_HEIGHT 49.0
-static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
+static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     YJBannerViewCollectionView *_collectionView;
@@ -90,6 +90,7 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
         [self invalidateTimerWhenAutoScroll];
     }
     
+    [self _setFooterViewCanShow:self.showFooter];
     [self _setupPageControl];
     
     // 注册自定义cell
@@ -279,26 +280,22 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
     self.backgroundImageView.contentMode = bannerImageViewContentMode;
 }
 
-- (void)setShowFooter:(BOOL)showFooter{
-    _showFooter = showFooter;
-    
-    if (_showFooter) {
-        self.bannerViewScrollDirection = BannerViewDirectionLeft;
-        self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -[self _bannerViewFooterHeight]);
+- (NSInteger)repeatCount{
+    if (_repeatCount <= 0) {
+        return totalCollectionViewCellCount;
     }else{
-        self.collectionView.contentInset = UIEdgeInsetsZero;
-    }
-    
-    if (self.bannerViewScrollDirection == BannerViewDirectionLeft) {
-        self.collectionView.alwaysBounceHorizontal = _showFooter;
-    }else {
-        self.collectionView.accessibilityViewIsModal = _showFooter;
+        if (_repeatCount % 2 != 0) { // 非偶数
+            return _repeatCount + 1;
+        }else{
+            return _repeatCount;
+        }
     }
 }
 
 #pragma mark - Getter
 - (NSInteger)totalItemsCount{
-    return self.cycleScrollEnable?(([self _imageDataSources].count > 1)?([self _imageDataSources].count * totalCollectionViewCellCount):[self _imageDataSources].count):([self _imageDataSources].count);
+    
+    return self.cycleScrollEnable?(([self _imageDataSources].count > 1)?([self _imageDataSources].count * self.repeatCount):[self _imageDataSources].count):([self _imageDataSources].count);
 }
 
 - (BOOL)autoScroll{
@@ -513,15 +510,15 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
 
 // 设置Footer的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    return CGSizeMake(self.showFooter?[self _bannerViewFooterHeight]:0.0f, self.frame.size.height);
+    return CGSizeMake((self.showFooter && [self _imageDataSources].count != 0)?[self _bannerViewFooterHeight]:0.0f, self.frame.size.height);
 }
 
 // Footer
-- (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath{
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     
     if(kind == UICollectionElementKindSectionFooter){
         
-        YJBannerViewFooter *footer = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:bannerViewFooterId forIndexPath:theIndexPath];
+        YJBannerViewFooter *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:bannerViewFooterId forIndexPath:indexPath];
         self.bannerFooter = footer;
         
         footer.IndicateImageName = self.footerIndicateImageName;
@@ -529,8 +526,8 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
         footer.footerTitleColor = self.footerTitleColor;
         footer.idleTitle = self.footerNormalTitle;
         footer.triggerTitle = self.footerTriggerTitle;
-
-        footer.hidden = !self.showFooter;
+        
+        footer.hidden = !(self.showFooter && [self _imageDataSources].count != 0);
         
         return footer;
     }
@@ -554,6 +551,23 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
     int itemIndex = [self _currentIndex];
     int indexOnPageControl = [self _showIndexWithCurrentCellIndex:itemIndex];
     
+    // 手动退拽时左右两端
+    if (scrollView == self.collectionView && scrollView.isDragging && self.cycleScrollEnable) {
+        NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
+        NSInteger targetIndex = self.totalItemsCount * 0.5;
+        if (itemIndex == 0) { // 顶头
+            if (targetIndex < itemCount) {
+                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+            }
+        }else if (itemIndex == (self.totalItemsCount - 1)){ // 尾巴
+            targetIndex -= 1;
+            if (targetIndex < itemCount) {
+                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+            }
+        }
+    }
+    
+    // pageControl
     if ([self.pageControl isKindOfClass:[YJHollowPageControl class]]) {
         YJHollowPageControl *pageControl = (YJHollowPageControl *)_pageControl;
         pageControl.currentPage = indexOnPageControl;
@@ -800,6 +814,23 @@ static NSInteger const totalCollectionViewCellCount = 250; // 重复的次数
         return [self.dataSource bannerViewFooterViewHeight:self];
     }
     return BANNER_FOOTER_HEIGHT;
+}
+
+/** reload 时控制尾巴的显示和消失 */
+- (void)_setFooterViewCanShow:(BOOL)showFooter{
+    
+    if (showFooter) {
+        self.bannerViewScrollDirection = BannerViewDirectionLeft;
+        self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -[self _bannerViewFooterHeight]);
+    }else{
+        self.collectionView.contentInset = UIEdgeInsetsZero;
+    }
+    
+    if (self.bannerViewScrollDirection == BannerViewDirectionLeft) {
+        self.collectionView.alwaysBounceHorizontal = showFooter;
+    }else {
+        self.collectionView.accessibilityViewIsModal = showFooter;
+    }
 }
 
 #pragma mark - Lazy
