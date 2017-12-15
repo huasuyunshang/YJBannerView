@@ -35,7 +35,6 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
 @property (nonatomic, weak) UIControl *pageControl;                     /**< 分页指示器 */
 @property (nonatomic, weak) NSTimer *timer;                             /**< 定时器 */
 @property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
-@property (nonatomic, strong) UIImageView *backgroundImageView;         /**< 数据为空时的背景图 */
 @property (nonatomic, strong) NSArray *saveScrollViewGestures;          /**< 保存手势 */
 @property (nonatomic, strong) YJBannerViewFooter *bannerFooter;
 @property (nonatomic, strong) NSArray *showNewDatasource;               /**< 新的显示数据源 */
@@ -870,6 +869,7 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     if (!_backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _backgroundImageView.contentMode = self.bannerImageViewContentMode;
+        _backgroundImageView.clipsToBounds = YES;
         [self insertSubview:_backgroundImageView belowSubview:self.collectionView];
     }
     return _backgroundImageView;

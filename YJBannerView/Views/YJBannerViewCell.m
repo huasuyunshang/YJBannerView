@@ -31,7 +31,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.clipsToBounds = YES;
         [self _setUpMainView];
     }
     return self;

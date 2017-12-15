@@ -50,7 +50,8 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @protocol YJBannerViewDataSource, YJBannerViewDelegate;
 
 @interface YJBannerView : UIView
-    
+
+@property (nonatomic, strong) UIImageView *backgroundImageView;                     /**< 数据为空时的背景图 */
 @property (nonatomic, strong, readonly) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong, readonly) YJBannerViewCollectionView *collectionView;
 
