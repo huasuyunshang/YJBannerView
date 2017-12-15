@@ -9,5 +9,6 @@ target 'YJBannerViewDemo' do
    pod 'SDWebImage'
    pod 'YJCommonMacro'
   # pod 'MJRefresh'
+  pod 'ChameleonFramework'
 
 end

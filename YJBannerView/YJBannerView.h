@@ -13,7 +13,7 @@
    | | |_| | |_) | (_| | | | | | | |  __/ |   \ V / | |  __/\ V  V /
    |_|\___/|____/ \__,_|_| |_|_| |_|\___|_|    \_/  |_|\___| \_/\_/
  
- ********* 当前版本: 2.3.6 ********
+ ********* 当前版本: 2.3.7 ********
  
  版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
  
@@ -22,14 +22,14 @@
 #import <UIKit/UIKit.h>
 #import "YJBannerViewCollectionView.h"
 
-/** 指示器的位置 */
+/** 指示器位置 */
 typedef NS_ENUM(NSInteger, PageControlAliment) {
     PageControlAlimentLeft = 0,     // 居左
     PageControlAlimentCenter,       // 居中
     PageControlAlimentRight         // 居右
 };
 
-/** 指示器的样式 */
+/** 指示器样式 */
 typedef NS_ENUM(NSInteger, PageControlStyle) {
     PageControlNone = 0,            // 无
     PageControlSystem,              // 系统自带
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, strong, readonly) YJBannerViewCollectionView *collectionView;
 
 @property (nonatomic, weak) IBOutlet id<YJBannerViewDataSource> dataSource;         /**< 数据源代理 */
-@property (nonatomic, weak) IBOutlet id<YJBannerViewDelegate> delegate;             /**< 代理      */
+@property (nonatomic, weak) IBOutlet id<YJBannerViewDelegate> delegate;             /**< 代理 */
 
 
 //////////// 动态控制部分 //////////////////
@@ -78,37 +78,37 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 @property (nonatomic, copy) NSString *bannerViewSelectorString;                     /**< 自定义设置网络和默认图片的方法 */
 
-@property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode;         /**< 填充样式 默认UIViewContentModeScaleToFill */
+@property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode;         /**< 填充样式 默认UIViewContentModeScaleAspectFill */
 
-@property (nonatomic, assign) PageControlAliment pageControlAliment;                /**< 分页控件的位置 默认是Center */
+@property (nonatomic, assign) PageControlAliment pageControlAliment;                /**< 指示器的位置 默认是Center */
 
-@property (nonatomic, assign) PageControlStyle pageControlStyle;                    /**< 分页控件样式 默认System */
+@property (nonatomic, assign) PageControlStyle pageControlStyle;                    /**< 指示器样式 默认System */
 
-@property (nonatomic, assign) CGFloat pageControlBottomMargin;                      /**< 分页控件距离底部的间距 默认10 */
+@property (nonatomic, assign) CGFloat pageControlBottomMargin;                      /**< 指示器距离底部的间距 默认10 */
 
-@property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin;              /**< 分页控件水平方向上的边缘间距 默认10 */
+@property (nonatomic, assign) CGFloat pageControlHorizontalEdgeMargin;              /**< 指示器水平方向上的边缘间距 默认10 */
 
-@property (nonatomic, assign) CGFloat pageControlPadding;                           /**< 分页控件水平方向上间距 默认 5 系统样式无效 */
+@property (nonatomic, assign) CGFloat pageControlPadding;                           /**< 指示器水平方向上间距 默认 5 系统样式无效 */
 
-@property (nonatomic, assign) CGSize pageControlDotSize;                            /**< 分页控件小圆标大小 默认 8*8*/
+@property (nonatomic, assign) CGSize pageControlDotSize;                            /**< 指示器圆标大小 默认 8*8*/
 
-@property (nonatomic, strong) UIColor *pageControlNormalColor;                      /**< 分页控件正常颜色 */
+@property (nonatomic, strong) UIColor *pageControlNormalColor;                      /**< 指示器正常颜色 */
 
-@property (nonatomic, strong) UIColor *pageControlHighlightColor;                   /**< 前分页控件小圆标颜色 */
+@property (nonatomic, strong) UIColor *pageControlHighlightColor;                   /**< 指示器小圆标颜色 */
 
-@property (nonatomic, strong) UIImage *customPageControlNormalImage;                /**< 分页小圆点正常的图片 */
+@property (nonatomic, strong) UIImage *customPageControlNormalImage;                /**< 指示器小圆点正常的图片 */
 
 @property (nonatomic, strong) UIImage *customPageControlHighlightImage;             /**< 当前分页控件图片 */
 
-@property (nonatomic, strong) UIFont *titleFont;                                    /**< 文字大小 */
+@property (nonatomic, strong) UIFont *titleFont;                                    /**< 文字大小 默认14.0f */
 
-@property (nonatomic, strong) UIColor *titleTextColor;                              /**< 文字颜色 */
+@property (nonatomic, strong) UIColor *titleTextColor;                              /**< 文字颜色 默认 whiteColor */
 
-@property (nonatomic, assign) NSTextAlignment titleAlignment;                       /**< 文字对齐方式 */
+@property (nonatomic, assign) NSTextAlignment titleAlignment;                       /**< 文字对齐方式 默认 Left */
 
-@property (nonatomic, strong) UIColor *titleBackgroundColor;                        /**< 文字背景颜色 */
+@property (nonatomic, strong) UIColor *titleBackgroundColor;                        /**< 文字背景颜色 默认 黑0.5 */
 
-@property (nonatomic, assign) CGFloat titleHeight;                                  /**< 文字高度 */
+@property (nonatomic, assign) CGFloat titleHeight;                                  /**< 文字高度 默认30 */
 
 @property (nonatomic, assign) CGFloat titleEdgeMargin;                              /**< 文字边缘间距 默认是10 */
 
@@ -144,9 +144,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
                      placeholderImage:(UIImage *)placeholderImage
                        selectorString:(NSString *)selectorString;
 
-/**
- 刷新BannerView数据
- */
+/** 刷新BannerView数据 */
 - (void)reloadData;
 
 /** 停止定时器接口 */
@@ -158,9 +156,7 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 /** 调整滚动到指定位置 */
 - (void)adjustBannerViewScrollToIndex:(NSInteger)index animated:(BOOL)animated;
 
-/**
- 解决卡屏问题, 在控制器viewWillAppear时调用此方法
- */
+/** 解决卡屏问题, 在控制器viewWillAppear时调用此方法 */
 - (void)adjustBannerViewWhenViewWillAppear;
 
 @end

@@ -154,9 +154,13 @@ static CGFloat const midMargin = 15.0f;
 #pragma mark - Delegate
 - (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
     
-    [self.normalBannerView adjustBannerViewScrollToIndex:3 animated:NO];
-
+    [self.normalBannerView reloadData];
+    
     return;
+    
+//    [self.normalBannerView adjustBannerViewScrollToIndex:3 animated:NO];
+//
+//    return;
     
     NSString *titleString = @"";
     NSString *showMessage = [NSString stringWithFormat:@"点击了第%ld个", (long)index];

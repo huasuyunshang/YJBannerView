@@ -236,7 +236,7 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
     }
 }
 
--(void)setBannerViewScrollDirection:(BannerViewDirection)bannerViewScrollDirection{
+- (void)setBannerViewScrollDirection:(BannerViewDirection)bannerViewScrollDirection{
     
     if (self.showFooter && bannerViewScrollDirection != BannerViewDirectionLeft) {
         bannerViewScrollDirection = BannerViewDirectionLeft;
@@ -349,7 +349,7 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
 
 - (UIViewContentMode)bannerImageViewContentMode{
     if (!_bannerImageViewContentMode) {
-        _bannerImageViewContentMode = UIViewContentModeScaleToFill;
+        _bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     }
     return _bannerImageViewContentMode;
 }
@@ -535,7 +535,6 @@ static NSInteger const totalCollectionViewCellCount = 300; // 重复的次数
         
         return footer;
     }
-    
     return nil;
 }
 

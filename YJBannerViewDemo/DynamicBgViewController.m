@@ -8,11 +8,15 @@
 
 #import "DynamicBgViewController.h"
 #import "YJBannerView.h"
+#import <ChameleonFramework/Chameleon.h>
+#import <UIImageView+WebCache.h>
 
 @interface DynamicBgViewController () <YJBannerViewDataSource, YJBannerViewDelegate>
 
 @property (nonatomic, strong) UIView *bannerBgView;
 @property (nonatomic, strong) YJBannerView *bannerView; /**< banner */
+@property (nonatomic, strong) NSArray *showImagePaths;
+@property (nonatomic, strong) NSMutableArray *showImageColors; /**< 要显示的图片 */
 
 @end
 
@@ -27,23 +31,37 @@
 - (void)_setUpDynamicBgMainView{
     
     [self.view addSubview:self.bannerBgView];
-    [self.bannerView reloadData];
+    [self.showImageColors removeAllObjects];
+    for (NSInteger i = 0; i < self.showImagePaths.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.showImagePaths[i]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            [self savaImageColor:image];
+        }];
+        [self.view addSubview:imageView];
+    }
+}
+
+- (void)savaImageColor:(UIImage *)image{
+    
+    UIColor *color = [UIColor colorWithAverageColorFromImage:image];
+    [self.showImageColors addObject:color];
+    
+    if (self.showImageColors.count == self.showImagePaths.count) {
+        self.bannerBgView.backgroundColor = [self.showImageColors objectAtIndex:0];
+        [self.bannerView reloadData];
+    }
 }
 
 #pragma mark - DataSource
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
-    return @[@"http://img.zcool.cn/community/01430a572eaaf76ac7255f9ca95d2b.jpg",
-             @"http://img.zcool.cn/community/0137e656cc5df16ac7252ce6828afb.jpg",
-             @"http://img.zcool.cn/community/01e5445654513e32f87512f6f748f0.png@900w_1l_2o_100sh.jpg",
-             @"http://www.aykj.net/front/images/subBanner/baiduV2.jpg"
-             ];
+    return self.showImagePaths;
 }
 
 - (void)bannerView:(YJBannerView *)bannerView didScroll2Index:(NSInteger)index{
     NSLog(@"-->%ld", index);
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.bannerBgView.backgroundColor = kRANDOM_COLOR;
+        self.bannerBgView.backgroundColor = [self.showImageColors objectAtIndex:index];
     }];
     
 }
@@ -64,6 +82,22 @@
         _bannerView.layer.masksToBounds = YES;
     }
     return _bannerView;
+}
+
+- (NSArray *)showImagePaths{
+    
+    return @[@"http://img.zcool.cn/community/01430a572eaaf76ac7255f9ca95d2b.jpg",
+             @"http://img.zcool.cn/community/0137e656cc5df16ac7252ce6828afb.jpg",
+             @"http://img.zcool.cn/community/01e5445654513e32f87512f6f748f0.png@900w_1l_2o_100sh.jpg",
+             @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513327933031&di=d3626251a1d506e10093bb714fe8c773&imgtype=0&src=http%3A%2F%2Fpic74.nipic.com%2Ffile%2F20150803%2F20546783_180157153760_2.jpg"
+             ];
+}
+
+- (NSMutableArray *)showImageColors{
+    if (!_showImageColors) {
+        _showImageColors = [NSMutableArray array];
+    }
+    return _showImageColors;
 }
 
 - (void)didReceiveMemoryWarning {

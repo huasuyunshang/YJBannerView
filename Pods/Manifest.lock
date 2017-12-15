@@ -1,17 +1,22 @@
 PODS:
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - YJCommonMacro (0.0.4)
 
 DEPENDENCIES:
+  - ChameleonFramework
   - SDWebImage
   - YJCommonMacro
 
 SPEC CHECKSUMS:
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   YJCommonMacro: 4d62941dcf4bd89241148932cef793687c729cd6
 
-PODFILE CHECKSUM: d7adfc72629c32a36eb20c47e261234be69f6245
+PODFILE CHECKSUM: 317d1fd047b67b01fbf9d3ddf43bb46d610a2333
 
 COCOAPODS: 1.2.1
