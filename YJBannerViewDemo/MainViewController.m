@@ -91,10 +91,10 @@ static CGFloat const midMargin = 15.0f;
 - (void)_loadDataSources{
 
     // 刷新数据
-//    [self.normalBannerView reloadData];
-//    [self.headlinesBannerView reloadData];
+    [self.normalBannerView reloadData];
+    [self.headlinesBannerView reloadData];
     [self.goodDetailBannerView reloadData];
-//    [self.customBannerView reloadData];
+    [self.customBannerView reloadData];
 }
 
 
@@ -237,11 +237,15 @@ static CGFloat const midMargin = 15.0f;
 - (YJBannerView *)customBannerView{
     if (!_customBannerView) {
         _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
-        _customBannerView.pageControlStyle = PageControlHollow;
+        _customBannerView.pageControlStyle = PageControlCustom;
         _customBannerView.pageControlDotSize = CGSizeMake(15, 15);
-        _customBannerView.pageControlNormalColor = [UIColor orangeColor];
-        _customBannerView.pageControlHighlightColor = [UIColor redColor];
-//        _customBannerView.bannerViewScrollDirection = BannerViewDirectionRight;
+//        _customBannerView.pageControlNormalColor = [UIColor orangeColor];
+//        _customBannerView.pageControlHighlightColor = [UIColor redColor];
+        _customBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlN"];
+        _customBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlS"];
+        _customBannerView.pageControlPadding = 10;
+        _customBannerView.pageControlAliment = PageControlAlimentRight;
+        _customBannerView.pageControlBottomMargin = 6.0;
     }
     return _customBannerView;
 }

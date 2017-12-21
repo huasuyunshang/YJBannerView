@@ -100,6 +100,11 @@
     
 }
 
+- (void)bannerView:(YJBannerView *)bannerView didScrollCurrentIndex:(NSInteger)currentIndex contentOffset:(CGFloat)contentOffset{
+    
+    
+}
+
 #pragma mark - Lazy
 - (YJBannerView *)detailBannerView{
     if (!_detailBannerView) {
