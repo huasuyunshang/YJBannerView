@@ -3,7 +3,7 @@
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2015/5/24.
-//  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
+//  Copyright © 2015年 Address:https://github.com/stackhou . All rights reserved.
 //
 
 #import "YJHollowPageControl.h"
@@ -97,16 +97,16 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
 }
 
 /**
- *  Update frame control to fit current number of pages. It will apply required size if authorize and required.
- *
- *  @param overrideExistingFrame BOOL to allow frame to be overriden. Meaning the required size will be apply no mattter what.
+ Update frame to fit current number of pages.
+
+ @param newFrame override Existing Frame
  */
-- (void)updateFrame:(BOOL)overrideExistingFrame{
+- (void)updateFrame:(BOOL)newFrame{
     CGPoint center = self.center;
     CGSize requiredSize = [self sizeForNumberOfPages:self.numberOfPages];
     
     // We apply requiredSize only if authorize to and necessary
-    if (overrideExistingFrame || ((CGRectGetWidth(self.frame) < requiredSize.width || CGRectGetHeight(self.frame) < requiredSize.height) && !overrideExistingFrame)) {
+    if (newFrame || ((CGRectGetWidth(self.frame) < requiredSize.width || CGRectGetHeight(self.frame) < requiredSize.height) && !newFrame)) {
         self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), requiredSize.width, requiredSize.height);
         if (self.shouldResizeFromCenter) {
             self.center = center;
@@ -129,12 +129,12 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
     dot.frame = CGRectMake(x, y, self.dotSize.width, self.dotSize.height);
 }
 
-- (void)setCurrentDotColor:(UIColor *)currentDotColor{
-    _currentDotColor = currentDotColor;
+- (void)setDotCurrentColor:(UIColor *)currentDotColor{
+    _dotCurrentColor = currentDotColor;
 }
 
-- (void)setDotColor:(UIColor *)dotColor{
-    _dotColor = dotColor;
+- (void)setDotNormalColor:(UIColor *)dotColor{
+    _dotNormalColor = dotColor;
 }
 
 
@@ -153,15 +153,15 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
             if (self.resizeScale > 0) {
                 ((YJAnimatedDotView *)dotView).resizeScale = self.resizeScale;
             }
-            if (self.dotColor) {
-                ((YJAnimatedDotView *)dotView).dotColor = self.dotColor;
+            if (self.dotNormalColor) {
+                ((YJAnimatedDotView *)dotView).dotColor = self.dotNormalColor;
             }
-            if (self.currentDotColor){
-                ((YJAnimatedDotView *)dotView).currentDotColor = self.currentDotColor;
+            if (self.dotCurrentColor){
+                ((YJAnimatedDotView *)dotView).currentDotColor = self.dotCurrentColor;
             }
         }
     } else {
-        dotView = [[UIImageView alloc] initWithImage:self.dotImage];
+        dotView = [[UIImageView alloc] initWithImage:self.dotNormalImage];
         dotView.contentMode = UIViewContentModeScaleAspectFit;
         dotView.frame = CGRectMake(0, 0, self.dotSize.width, self.dotSize.height);
     }
@@ -190,9 +190,9 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
         } else {
             NSLog(@"Custom view : %@ must implement an 'changeActivityState' method or you can subclass %@ to help you.", self.dotViewClass, [YJAbstractDotView class]);
         }
-    } else if (self.dotImage && self.currentDotImage) {
+    } else if (self.dotNormalImage && self.dotCurrentImage) {
         UIImageView *dotView = (UIImageView *)[self.dots objectAtIndex:index];
-        dotView.image = (active) ? self.currentDotImage : self.dotImage;
+        dotView.image = (active) ? self.dotCurrentImage : self.dotNormalImage;
     }
 }
 
@@ -238,14 +238,14 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
     [self changeActivity:YES atIndex:_currentPage];
 }
 
-- (void)setDotImage:(UIImage *)dotImage{
-    _dotImage = dotImage;
+- (void)setDotNormalImage:(UIImage *)dotImage{
+    _dotNormalImage = dotImage;
     [self resetDotViews];
     self.dotViewClass = nil;
 }
 
-- (void)setCurrentDotImage:(UIImage *)currentDotimage{
-    _currentDotImage = currentDotimage;
+- (void)setDotCurrentImage:(UIImage *)currentDotimage{
+    _dotCurrentImage = currentDotimage;
     [self resetDotViews];
     self.dotViewClass = nil;
 }
@@ -258,8 +258,8 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
 
 #pragma mark - Getter
 - (CGSize)dotSize{
-    if (self.dotImage && CGSizeEqualToSize(_dotSize, CGSizeZero)) {
-        _dotSize = self.dotImage.size;
+    if (self.dotNormalImage && CGSizeEqualToSize(_dotSize, CGSizeZero)) {
+        _dotSize = self.dotNormalImage.size;
     } else if (self.dotViewClass && CGSizeEqualToSize(_dotSize, CGSizeZero)) {
         _dotSize = kDefaultDotSize;
         return _dotSize;

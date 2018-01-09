@@ -3,7 +3,7 @@
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2015/5/24.
-//  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
+//  Copyright © 2015年 Address:https://github.com/stackhou . All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

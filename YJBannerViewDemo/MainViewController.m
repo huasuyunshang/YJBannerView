@@ -3,7 +3,7 @@
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2015/5/24.
-//  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
+//  Copyright © 2015年 Address:https://github.com/stackhou . All rights reserved.
 //
 
 #import "MainViewController.h"
@@ -11,6 +11,7 @@
 #import "HeadLinesCell.h"
 #import "DetailViewController.h"
 #import "MainViewModel.h"
+#import "YJCustomView.h"
 
 static CGFloat const midMargin = 15.0f;
 
@@ -44,10 +45,10 @@ static CGFloat const midMargin = 15.0f;
     
     [self.normalBannerView startTimerWhenAutoScroll];
     
-    [self.normalBannerView adjustBannerViewWhenViewWillAppear];
-    [self.headlinesBannerView adjustBannerViewWhenViewWillAppear];
-    [self.goodDetailBannerView adjustBannerViewWhenViewWillAppear];
-    [self.customBannerView adjustBannerViewWhenViewWillAppear];
+    [self.normalBannerView adjustBannerViewWhenCardScreen];
+    [self.headlinesBannerView adjustBannerViewWhenCardScreen];
+    [self.goodDetailBannerView adjustBannerViewWhenCardScreen];
+    [self.customBannerView adjustBannerViewWhenCardScreen];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -130,6 +131,10 @@ static CGFloat const midMargin = 15.0f;
     if (bannerView == self.headlinesBannerView) {
         return [HeadLinesCell class];
     }
+    
+    if (bannerView == self.goodDetailBannerView) {
+//        return [YJCustomView class];
+    }
     return nil;
 }
 
@@ -138,8 +143,12 @@ static CGFloat const midMargin = 15.0f;
     if (bannerView == self.headlinesBannerView) {
         HeadLinesCell *cell = (HeadLinesCell *)customCell;
         [cell cellWithHeadHotLineCellData:self.viewModel.hotTitles[index]];
-    }else{
+    }
     
+    if (bannerView == self.goodDetailBannerView) {
+        if (index == 0) {
+            
+        }
     }
 }
 
@@ -238,14 +247,14 @@ static CGFloat const midMargin = 15.0f;
     if (!_customBannerView) {
         _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _customBannerView.pageControlStyle = PageControlCustom;
-        _customBannerView.pageControlDotSize = CGSizeMake(15, 15);
+        _customBannerView.pageControlDotSize = CGSizeMake(10, 2);
 //        _customBannerView.pageControlNormalColor = [UIColor orangeColor];
 //        _customBannerView.pageControlHighlightColor = [UIColor redColor];
         _customBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlN"];
         _customBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlS"];
         _customBannerView.pageControlPadding = 10;
         _customBannerView.pageControlAliment = PageControlAlimentRight;
-        _customBannerView.pageControlBottomMargin = 6.0;
+        _customBannerView.pageControlBottomMargin = 10;
     }
     return _customBannerView;
 }

@@ -3,7 +3,7 @@
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2015/5/24.
-//  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
+//  Copyright © 2015年 Address:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
 //
 
 /**
@@ -21,24 +21,24 @@
 #import "YJHollowPageControl.h"
 #import "YJBannerViewFooter.h"
 
-static NSString *const bannerViewCellId = @"YJBannerView";
-static NSString *const bannerViewFooterId = @"YJBannerViewFooter";
+static NSString *const bannerViewCellId     = @"YJBannerView";
+static NSString *const bannerViewFooterId   = @"YJBannerViewFooter";
+static NSInteger const totalCollectionViewCellCount = 200;
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
 #define BANNER_FOOTER_HEIGHT 49.0
-static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 
 @interface YJBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     YJBannerViewCollectionView *_collectionView;
     UICollectionViewFlowLayout *_flowLayout;
 }
 
-@property (nonatomic, weak) UIControl *pageControl;                     /**< 分页指示器 */
-@property (nonatomic, weak) NSTimer *timer;                             /**< 定时器 */
-@property (nonatomic, assign) NSInteger totalItemsCount;                /**< 数量 */
-@property (nonatomic, strong) NSArray *saveScrollViewGestures;          /**< 保存手势 */
+@property (nonatomic, weak) UIControl *pageControl;
+@property (nonatomic, weak) NSTimer *timer;
+@property (nonatomic, assign) NSInteger totalBannerItemsCount;
+@property (nonatomic, strong) NSArray *saveScrollViewGestures;
 @property (nonatomic, strong) YJBannerViewFooter *bannerFooter;
-@property (nonatomic, strong) NSArray *showNewDatasource;               /**< 新的显示数据源 */
-@property (nonatomic, assign) CGFloat lastContentOffset;                /**< 每次滚动完成的偏移量 */
+@property (nonatomic, strong) NSArray *showNewDatasource;
+@property (nonatomic, assign) CGFloat lastContentOffset;
 
 @end
 
@@ -49,7 +49,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 @synthesize pageControlNormalColor = _pageControlNormalColor;
 @synthesize pageControlHighlightColor = _pageControlHighlightColor;
 
-#pragma mark - Public
+#pragma mark - Public API
 + (YJBannerView *)bannerViewWithFrame:(CGRect)frame
                            dataSource:(id<YJBannerViewDataSource>)dataSource
                              delegate:(id<YJBannerViewDelegate>)delegate
@@ -70,10 +70,9 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 - (void)reloadData{
     
     [self invalidateTimer];
-    
     self.showNewDatasource = [self _getImageDataSources];
     
-    // 当数据源大于零时隐藏
+    // Hidden when data source is greater than zero
     self.backgroundImageView.hidden = ([self _imageDataSources].count > 0);
     
     if ([self _imageDataSources].count > 1) {
@@ -93,7 +92,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     [self _setFooterViewCanShow:self.showFooter];
     [self _setupPageControl];
     
-    // 注册自定义cell
+    // regist Custom Cell
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self]) {
         [self.collectionView registerClass:[self.dataSource bannerViewCustomCellClass:self] forCellWithReuseIdentifier:bannerViewCellId];
     }
@@ -124,7 +123,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     [self addSubview:self.collectionView];
 }
 
-/** 初始化默认设置 */
+/** Initialize the default settings */
 - (void)_initSetting{
     
     self.backgroundColor = [UIColor whiteColor];
@@ -181,7 +180,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     
     if ([self.pageControl isKindOfClass:[YJHollowPageControl class]]) {
         YJHollowPageControl *pageControl = (YJHollowPageControl *)_pageControl;
-        pageControl.dotColor = pageControlNormalColor;
+        pageControl.dotNormalColor = pageControlNormalColor;
     }else if ([self.pageControl isKindOfClass:[UIPageControl class]]) {
         UIPageControl *pageControl = (UIPageControl *)_pageControl;
         pageControl.pageIndicatorTintColor = pageControlNormalColor;
@@ -194,7 +193,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     
     if ([self.pageControl isKindOfClass:[YJHollowPageControl class]]) {
         YJHollowPageControl *pageControl = (YJHollowPageControl *)_pageControl;
-        pageControl.currentDotColor = pageControlHighlightColor;
+        pageControl.dotCurrentColor = pageControlHighlightColor;
     } else if ([self.pageControl isKindOfClass:[UIPageControl class]]){
         UIPageControl *pageControl = (UIPageControl *)_pageControl;
         pageControl.currentPageIndicatorTintColor = pageControlHighlightColor;
@@ -218,9 +217,9 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     if ([self.pageControl isKindOfClass:[YJHollowPageControl class]]) {
         YJHollowPageControl *pageControl = (YJHollowPageControl *)_pageControl;
         if (isCurrentPageDot) {
-            pageControl.currentDotImage = image;
+            pageControl.dotCurrentImage = image;
         } else {
-            pageControl.dotImage = image;
+            pageControl.dotNormalImage = image;
         }
     }
 }
@@ -228,9 +227,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 - (void)setAutoScroll:(BOOL)autoScroll{
     
     _autoScroll = autoScroll;
-    
     [self invalidateTimer];
-    
     if (autoScroll) {
         [self _setupTimer];
     }
@@ -254,7 +251,6 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 - (void)setAutoDuration:(CGFloat)autoDuration{
     
     _autoDuration = autoDuration;
-    
     [self setAutoScroll:self.autoScroll];
 }
 
@@ -284,7 +280,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     if (_repeatCount <= 0) {
         return totalCollectionViewCellCount;
     }else{
-        if (_repeatCount % 2 != 0) { // 非偶数
+        if (_repeatCount % 2 != 0) {
             return _repeatCount + 1;
         }else{
             return _repeatCount;
@@ -293,7 +289,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 }
 
 #pragma mark - Getter
-- (NSInteger)totalItemsCount{
+- (NSInteger)totalBannerItemsCount{
     
     return self.cycleScrollEnable?(([self _imageDataSources].count > 1)?([self _imageDataSources].count * self.repeatCount):[self _imageDataSources].count):([self _imageDataSources].count);
 }
@@ -328,7 +324,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 
 - (UIColor *)titleBackgroundColor{
     if (!_titleBackgroundColor) {
-        _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]; // 黑0.5
+        _titleBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     }
     return _titleBackgroundColor;
 }
@@ -386,9 +382,9 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     
     self.collectionView.frame = self.bounds;
     
-    if (self.collectionView.contentOffset.x == 0 &&  self.totalItemsCount) {
-        NSInteger targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
+    if (self.collectionView.contentOffset.x == 0 &&  self.totalBannerItemsCount) {
+        NSInteger targetIndex = self.cycleScrollEnable?(self.totalBannerItemsCount * 0.5):(0);
+        [self _scrollBannerViewToSpecifiedPositionIndex:targetIndex animated:NO];
     }
     
     CGSize size = CGSizeZero;
@@ -406,16 +402,11 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
         size = CGSizeMake([self _imageDataSources].count * self.pageControlDotSize.width * 1.5, self.pageControlDotSize.height);
     }
     CGFloat x = (self.width_bannerView - size.width) * 0.5;
-    if (self.pageControlAliment == PageControlAlimentLeft) { // 靠左
-        
+    if (self.pageControlAliment == PageControlAlimentLeft) {
         x = 0.0f;
-        
-    }else if (self.pageControlAliment == PageControlAlimentCenter){ // 居中
-    
-    }else if (self.pageControlAliment == PageControlAlimentRight){ // 靠右
-        
+    }else if (self.pageControlAliment == PageControlAlimentCenter){
+    }else if (self.pageControlAliment == PageControlAlimentRight){
         x = self.collectionView.width_bannerView - size.width;
-        
     }
     
     CGFloat y = self.collectionView.height_bannerView - size.height;
@@ -442,9 +433,8 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     }
 }
 
-#pragma mark - 解决兼容优化问题
+#pragma mark - Resolve compatibility optimization issues
 - (void)willMoveToSuperview:(UIView *)newSuperview{
-    
     if (!newSuperview) {
         [self invalidateTimer];
     }
@@ -456,37 +446,37 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     if (index >= 0 && index < self.showNewDatasource.count) {
         if (self.autoScroll) { [self invalidateTimer]; }
         
-        [self _scrollToIndex:((int)(self.totalItemsCount * 0.5 + index)) animated:animated];
+        [self _scrollToIndex:((int)(self.totalBannerItemsCount * 0.5 + index)) animated:animated];
         
         if (self.autoScroll) { [self _setupTimer]; }
     }
 }
 
-- (void)adjustBannerViewWhenViewWillAppear{
+- (void)adjustBannerViewWhenCardScreen{
     
-    long targetIndex = [self _currentIndex];
-    if (targetIndex < self.totalItemsCount) {
-        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
+    long targetIndex = [self _currentPageIndex];
+    if (targetIndex < self.totalBannerItemsCount) {
+        [self _scrollBannerViewToSpecifiedPositionIndex:targetIndex animated:NO];
     }
 }
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.totalItemsCount;
+    return self.totalBannerItemsCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     YJBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:bannerViewCellId forIndexPath:indexPath];
-    long itemIndex = [self _showIndexWithCurrentCellIndex:indexPath.item];
+    long itemIndex = [self _getRealIndexFromCurrentCellIndex:indexPath.item];
     
-    // 自定义 Cell
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)] && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self]) {
+    // Custom Cell
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self] && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)]) {
         [self.dataSource bannerView:self customCell:cell index:itemIndex];
         return cell;
     }
     
-    // 自定义 View
+    // Custom View
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerView:viewForItemAtIndex:)] && [self.dataSource bannerView:self viewForItemAtIndex:itemIndex]) {
         cell.customView = [self.dataSource bannerView:self viewForItemAtIndex:itemIndex];
         return cell;
@@ -502,9 +492,9 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
         cell.titleLabelTextAlignment = self.titleAlignment;
         cell.titleLabelTextColor = self.titleTextColor;
         cell.titleLabelTextFont = self.titleFont;
-        cell.isConfigured = YES;
         cell.showImageViewContentMode = self.bannerImageViewContentMode;
         cell.clipsToBounds = YES;
+        cell.isConfigured = YES;
     }
     
     [cell cellWithSelectorString:self.bannerViewSelectorString imagePath:imagePath placeholderImage:self.placeholderImage title:title];
@@ -512,7 +502,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     return cell;
 }
 
-// 设置Footer的尺寸
+// Setting Footer Size
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     return CGSizeMake((self.showFooter && [self _imageDataSources].count != 0)?[self _bannerViewFooterHeight]:0.0f, self.frame.size.height);
 }
@@ -541,27 +531,27 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 #pragma mark - UIScrollViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didSelectItemAtIndex:)]) {
-        [self.delegate bannerView:self didSelectItemAtIndex:[self _showIndexWithCurrentCellIndex:indexPath.item]];
+        [self.delegate bannerView:self didSelectItemAtIndex:[self _getRealIndexFromCurrentCellIndex:indexPath.item]];
     }
     if (self.didSelectItemAtIndexBlock) {
-        self.didSelectItemAtIndexBlock([self _showIndexWithCurrentCellIndex:indexPath.item]);
+        self.didSelectItemAtIndexBlock([self _getRealIndexFromCurrentCellIndex:indexPath.item]);
     }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     if (![self _imageDataSources].count) return;
-    int itemIndex = [self _currentIndex];
-    int indexOnPageControl = [self _showIndexWithCurrentCellIndex:itemIndex];
+    int itemIndex = [self _currentPageIndex];
+    int indexOnPageControl = [self _getRealIndexFromCurrentCellIndex:itemIndex];
     
     // 手动退拽时左右两端
     if (scrollView == self.collectionView && scrollView.isDragging && self.cycleScrollEnable) {
-        NSInteger targetIndex = self.totalItemsCount * 0.5;
-        if (itemIndex == 0) { // 顶头
-            [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
-        }else if (itemIndex == (self.totalItemsCount - 1)){ // 尾巴
+        NSInteger targetIndex = self.totalBannerItemsCount * 0.5;
+        if (itemIndex == 0) { // top
+            [self _scrollBannerViewToSpecifiedPositionIndex:targetIndex animated:NO];
+        }else if (itemIndex == (self.totalBannerItemsCount - 1)){ // bottom
             targetIndex -= 1;
-            [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
+            [self _scrollBannerViewToSpecifiedPositionIndex:targetIndex animated:NO];
         }
     }
     
@@ -577,7 +567,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     // Footer
     if (self.showFooter) {
         static CGFloat lastOffset;
-        CGFloat footerDisplayOffset = (self.collectionView.contentOffset.x - (self.flowLayout.itemSize.width * (self.totalItemsCount - 1)));
+        CGFloat footerDisplayOffset = (self.collectionView.contentOffset.x - (self.flowLayout.itemSize.width * (self.totalBannerItemsCount - 1)));
         
         if (footerDisplayOffset > 0){
             if (footerDisplayOffset > [self _bannerViewFooterHeight]) {
@@ -591,7 +581,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
         }
     }
     
-    // 传递偏移量
+    // contentOffset
     [self _saveInitializationContentOffsetJudgeZero:YES];
     CGFloat contentOffset = 0.0f;
     if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
@@ -615,7 +605,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     [self startTimerWhenAutoScroll];
     
     if (self.showFooter) {
-        CGFloat footerDisplayOffset = (self.collectionView.contentOffset.x - (self.flowLayout.itemSize.width * (self.totalItemsCount - 1)));
+        CGFloat footerDisplayOffset = (self.collectionView.contentOffset.x - (self.flowLayout.itemSize.width * (self.totalBannerItemsCount - 1)));
         
         if (footerDisplayOffset > [self _bannerViewFooterHeight]) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(bannerViewFooterDidEndTrigger:)]) {
@@ -635,8 +625,8 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     if (![self _imageDataSources].count) return;
-    int itemIndex = [self _currentIndex];
-    int indexOnPageControl = [self _showIndexWithCurrentCellIndex:itemIndex];
+    int itemIndex = [self _currentPageIndex];
+    int indexOnPageControl = [self _getRealIndexFromCurrentCellIndex:itemIndex];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(bannerView:didScroll2Index:)]) {
         [self.delegate bannerView:self didScroll2Index:indexOnPageControl];
@@ -648,8 +638,8 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     [self _saveInitializationContentOffsetJudgeZero:NO];
 }
 
-#pragma mark - 私有功能方法
-/** 安装PageControl */
+#pragma mark - Private function method
+/** install PageControl */
 - (void)_setupPageControl{
     
     if (_pageControl) [_pageControl removeFromSuperview];
@@ -658,7 +648,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     
     if ([self _imageDataSources].count == 1) {return;}
     
-    int indexOnPageControl = [self _showIndexWithCurrentCellIndex:[self _currentIndex]];
+    int indexOnPageControl = [self _getRealIndexFromCurrentCellIndex:[self _currentPageIndex]];
     
     switch (self.pageControlStyle) {
         case PageControlNone:{
@@ -678,8 +668,8 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
         case PageControlHollow:{
             YJHollowPageControl *pageControl = [[YJHollowPageControl alloc] init];
             pageControl.numberOfPages = [self _imageDataSources].count;
-            pageControl.dotColor = self.pageControlNormalColor;
-            pageControl.currentDotColor = self.pageControlHighlightColor;
+            pageControl.dotNormalColor = self.pageControlNormalColor;
+            pageControl.dotCurrentColor = self.pageControlHighlightColor;
             pageControl.userInteractionEnabled = NO;
             pageControl.resizeScale = 1.0;
             pageControl.spacing = self.pageControlPadding;
@@ -692,8 +682,8 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
             
             YJHollowPageControl *pageControl = [[YJHollowPageControl alloc] init];
             pageControl.numberOfPages = [self _imageDataSources].count;
-            pageControl.dotColor = self.pageControlNormalColor;
-            pageControl.currentDotColor = self.pageControlHighlightColor;
+            pageControl.dotNormalColor = self.pageControlNormalColor;
+            pageControl.dotCurrentColor = self.pageControlHighlightColor;
             pageControl.userInteractionEnabled = NO;
             pageControl.resizeScale = 1.0;
             pageControl.spacing = self.pageControlPadding;
@@ -714,7 +704,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     }
 }
 
-/** 安装定时器 */
+/** install Timer */
 - (void)_setupTimer{
     
     [self invalidateTimer];
@@ -723,21 +713,21 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
-/** 停止定时器 */
+/** stop timer */
 - (void)invalidateTimer{
     
     [_timer invalidate];
     _timer = nil;
 }
 
-/** 停止定时器接口 */
+/** stop timer api */
 - (void)invalidateTimerWhenAutoScroll{
     if (self.autoScroll) {
         [self invalidateTimer];
     }
 }
 
-/** 重新开启定时器 */
+/** restart timer api */
 - (void)startTimerWhenAutoScroll{
     if (self.autoScroll) {
         [self _setupTimer];
@@ -746,14 +736,14 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 
 - (void)_automaticScrollAction{
     
-    if (self.totalItemsCount == 0) return;
-    int currentIndex = [self _currentIndex];
+    if (self.totalBannerItemsCount == 0) return;
+    int currentIndex = [self _currentPageIndex];
     if (self.bannerViewScrollDirection == BannerViewDirectionLeft || self.bannerViewScrollDirection == BannerViewDirectionTop) {
         [self _scrollToIndex:(currentIndex + 1) animated:YES];
     }else if (self.bannerViewScrollDirection == BannerViewDirectionRight || self.bannerViewScrollDirection == BannerViewDirectionBottom){
         if ((currentIndex - 1) < 0) { // 小于零
-            currentIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-            [self _scrollCollectionViewToItemAtIndex:(currentIndex - 1) animated:NO];
+            currentIndex = self.cycleScrollEnable?(self.totalBannerItemsCount * 0.5):(0);
+            [self _scrollBannerViewToSpecifiedPositionIndex:(currentIndex - 1) animated:NO];
         }else{
             [self _scrollToIndex:(currentIndex - 1) animated:YES];
         }
@@ -762,16 +752,16 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
 
 - (void)_scrollToIndex:(int)targetIndex animated:(BOOL)animated{
     
-    if (targetIndex >= self.totalItemsCount) {  // 超过最大
-        targetIndex = self.cycleScrollEnable?(self.totalItemsCount * 0.5):(0);
-        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:NO];
+    if (targetIndex >= self.totalBannerItemsCount) {  // 超过最大
+        targetIndex = self.cycleScrollEnable?(self.totalBannerItemsCount * 0.5):(0);
+        [self _scrollBannerViewToSpecifiedPositionIndex:targetIndex animated:NO];
     }else{
-        [self _scrollCollectionViewToItemAtIndex:targetIndex animated:animated];
+        [self _scrollBannerViewToSpecifiedPositionIndex:targetIndex animated:animated];
     }
 }
 
-/** 当前的页数 */
-- (int)_currentIndex{
+/** current page index */
+- (int)_currentPageIndex{
     
     if (self.collectionView.width_bannerView == 0 || self.collectionView.height_bannerView == 0) {return 0;}
     int index = 0;
@@ -783,17 +773,16 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     return MAX(0, index);
 }
 
-/** 当前是排第几个 */
-- (int)_showIndexWithCurrentCellIndex:(NSInteger)cellIndex{
+/** current real index */
+- (int)_getRealIndexFromCurrentCellIndex:(NSInteger)cellIndex{
     return (int)cellIndex % [self _imageDataSources].count;
 }
 
-/** 显示图片的数组 */
 - (NSArray *)_imageDataSources{
     return self.showNewDatasource;
 }
 
-/** 从代理方法获取新数据 */
+/** Get new data from the proxy method */
 - (NSArray *)_getImageDataSources{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewImages:)]) {
         return [self.dataSource bannerViewImages:self];
@@ -801,7 +790,7 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     return @[];
 }
 
-/** 显示的标题数组 */
+/** Get new data from the proxy method */
 - (NSArray *)_titlesDataSources{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewTitles:)]) {
         return [self.dataSource bannerViewTitles:self];
@@ -834,15 +823,15 @@ static NSInteger const totalCollectionViewCellCount = 200; // 重复的次数
     }
 }
 
-/** 滚动 CollectionView 到指定位置 */
-- (void)_scrollCollectionViewToItemAtIndex:(NSInteger)targetIndex animated:(BOOL)animated{
+/** Scroll the CollectionView to the specified location */
+- (void)_scrollBannerViewToSpecifiedPositionIndex:(NSInteger)targetIndex animated:(BOOL)animated{
     NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
     if (targetIndex < itemCount) {
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:animated];
     }
 }
 
-/** 保存当前的偏移量 */
+/** Save the current offset */
 - (void)_saveInitializationContentOffsetJudgeZero:(BOOL)judgeZero{
     
     if (self.collectionView.width_bannerView == 0 || self.collectionView.height_bannerView == 0) { return; }

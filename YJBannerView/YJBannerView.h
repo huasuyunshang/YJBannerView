@@ -3,7 +3,7 @@
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2015/5/24.
-//  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
+//  Copyright © 2015年 Address:https://github.com/stackhou . All rights reserved.
 //
 
 /**
@@ -13,9 +13,9 @@
    | | |_| | |_) | (_| | | | | | | |  __/ |   \ V / | |  __/\ V  V /
    |_|\___/|____/ \__,_|_| |_|_| |_|\___|_|    \_/  |_|\___| \_/\_/
  
- ********* 当前版本: 2.3.7 ********
+*********  Current-Version : 2.3.7 ************
  
- 版本记录: 点击查看 https://github.com/stackhou/YJBannerViewOC
+ Version record: https://github.com/stackhou/YJBannerViewOC
  
  */
 
@@ -58,8 +58,6 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, weak) IBOutlet id<YJBannerViewDataSource> dataSource;         /**< 数据源代理 */
 @property (nonatomic, weak) IBOutlet id<YJBannerViewDelegate> delegate;             /**< 代理 */
 
-
-//////////// 动态控制部分 //////////////////
 @property (nonatomic, assign) IBInspectable BOOL autoScroll;                        /**< 是否自动 默认YES */
 
 @property (nonatomic, assign) IBInspectable CGFloat autoDuration;                   /**< 自动滚动时间间隔 默认3s */
@@ -73,7 +71,6 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 @property (nonatomic, assign) IBInspectable BOOL showFooter;                        /**< 显示footerView 默认是 NO 设置为YES 后将 autoScroll和cycleScrollEnable 自动置为NO 只支持水平向左 */
 @property (nonatomic, assign) NSInteger repeatCount;                                /**< 数据源重复次数 默认是200 若循环必须大于2的偶数 */
 
-//////////////  自定义样式接口  //////////////////
 @property (nonatomic, strong) UIImage *placeholderImage;                            /**< 默认图片 */
 @property (nonatomic, strong) UIImage *emptyImage;                                  /**< 空数据图片 */
 
@@ -157,8 +154,8 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 /** 调整滚动到指定位置 */
 - (void)adjustBannerViewScrollToIndex:(NSInteger)index animated:(BOOL)animated;
 
-/** 解决卡屏问题, 在控制器viewWillAppear时调用此方法 */
-- (void)adjustBannerViewWhenViewWillAppear;
+/** 如果卡屏请在控制器 viewWillAppear 内调用此方法 */
+- (void)adjustBannerViewWhenCardScreen;
 
 @end
 

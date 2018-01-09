@@ -3,7 +3,7 @@
 //  YJBannerViewDemo
 //
 //  Created by YJHou on 2015/5/24.
-//  Copyright © 2015年 地址:https://github.com/stackhou/YJBannerViewOC . All rights reserved.
+//  Copyright © 2015年 Address:https://github.com/stackhou . All rights reserved.
 //
 
 #import "DetailViewController.h"
@@ -38,8 +38,8 @@
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[self colorFromHexRGB:@"2fbff7"] alpha:1] forBarMetrics:UIBarMetricsDefault];
 
-    [self.detailBannerView adjustBannerViewWhenViewWillAppear];
-    [self.customBannerView adjustBannerViewWhenViewWillAppear];
+    [self.detailBannerView adjustBannerViewWhenCardScreen];
+    [self.customBannerView adjustBannerViewWhenCardScreen];
 }
 
 - (void)closeCurrentController {
