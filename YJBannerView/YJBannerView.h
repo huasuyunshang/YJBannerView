@@ -175,14 +175,17 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 /** 文字数据源 */
 - (NSArray *)bannerViewTitles:(YJBannerView *)bannerView;
 
-/** 自定义Cell */
-- (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView;
+/**
+ 自定义 View 要同时配合实现以下3个方法
 
-/** 自定义 Cell 方法传递 */
-- (void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index;
-
-/** 自定义 View */
-- (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index;
+ @param bannerView 当前的Banner
+ @return 需要注册的自定义View类的集合. e.g.: @[[CustomViewA class], [CustomViewB class]]
+ */
+- (NSArray *)bannerViewRegistCustomCellClass:(YJBannerView *)bannerView;
+/** 根据 Index 选择使用哪个 reuseIdentifier */
+- (Class)bannerView:(YJBannerView *)bannerView reuseIdentifierIndex:(NSInteger)index;
+/** 自定义 View 刷新数据或者其他配置 */
+- (BOOL)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index;
 
 /** Footer 高度 默认是 49.0 */
 - (CGFloat)bannerViewFooterViewHeight:(YJBannerView *)bannerView;

@@ -10,4 +10,10 @@
 
 @interface YJCustomView : UICollectionViewCell
 
+@property (nonatomic, strong) UIImageView *imgView; /**< 图片 */
+@property (nonatomic, strong) UIButton *button; /**< 按钮 */
+@property (nonatomic, copy  ) void(^playBlock)(UIButton *);
+
+- (void)cellWithcoverForFeed:(NSString *)coverForFeed;
+
 @end

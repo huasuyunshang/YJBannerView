@@ -21,8 +21,8 @@
 #import "YJHollowPageControl.h"
 #import "YJBannerViewFooter.h"
 
-static NSString *const bannerViewCellId     = @"YJBannerView";
-static NSString *const bannerViewFooterId   = @"YJBannerViewFooter";
+static NSString *const bannerViewCellId         = @"YJBannerView";
+static NSString *const bannerViewFooterId       = @"YJBannerViewFooter";
 static NSInteger const totalCollectionViewCellCount = 200;
 #define kPageControlDotDefaultSize CGSizeMake(8, 8)
 #define BANNER_FOOTER_HEIGHT 49.0
@@ -92,9 +92,12 @@ static NSInteger const totalCollectionViewCellCount = 200;
     [self _setFooterViewCanShow:self.showFooter];
     [self _setupPageControl];
     
-    // regist Custom Cell
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self]) {
-        [self.collectionView registerClass:[self.dataSource bannerViewCustomCellClass:self] forCellWithReuseIdentifier:bannerViewCellId];
+    // Regist Custom Cell
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewRegistCustomCellClass:)] && [self.dataSource bannerViewRegistCustomCellClass:self]) {
+        NSArray *clazzs = [self.dataSource bannerViewRegistCustomCellClass:self];
+        for (Class clazz in clazzs) {
+            [self.collectionView registerClass:clazz forCellWithReuseIdentifier:NSStringFromClass(clazz)];
+        }
     }
     
     [self.collectionView reloadData];
@@ -471,15 +474,15 @@ static NSInteger const totalCollectionViewCellCount = 200;
     long itemIndex = [self _getRealIndexFromCurrentCellIndex:indexPath.item];
     
     // Custom Cell
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewCustomCellClass:)] && [self.dataSource bannerViewCustomCellClass:self] && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)]) {
-        [self.dataSource bannerView:self customCell:cell index:itemIndex];
-        return cell;
-    }
-    
-    // Custom View
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerView:viewForItemAtIndex:)] && [self.dataSource bannerView:self viewForItemAtIndex:itemIndex]) {
-        cell.customView = [self.dataSource bannerView:self viewForItemAtIndex:itemIndex];
-        return cell;
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewRegistCustomCellClass:)] && [self.dataSource bannerViewRegistCustomCellClass:self] && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)] && [self.dataSource respondsToSelector:@selector(bannerView:reuseIdentifierIndex:)]) {
+        
+        NSString *reuseIdentifier = NSStringFromClass([self.dataSource bannerView:self reuseIdentifierIndex:itemIndex]);
+        if (reuseIdentifier.length > 0) {
+            UICollectionViewCell *customCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+            
+            BOOL isReturn = [self.dataSource bannerView:self customCell:customCell index:itemIndex];
+            if (isReturn && customCell) { return customCell; }
+        }
     }
     
     NSString *imagePath = (itemIndex < [self _imageDataSources].count)?[self _imageDataSources][itemIndex]:nil;

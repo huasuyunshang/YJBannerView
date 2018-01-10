@@ -18,7 +18,6 @@
 @end
 
 @implementation YJBannerViewCell
-@synthesize customView = _customView;
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -57,17 +56,6 @@
 - (void)setShowImageViewContentMode:(UIViewContentMode)showImageViewContentMode{
     _showImageViewContentMode = showImageViewContentMode;
     self.showImageView.contentMode = showImageViewContentMode;
-}
-
-- (void)setCustomView:(UIView *)customView{
-    
-    if (_customView) {
-        [_customView removeFromSuperview];
-    }
-    _customView = customView;
-    
-    [self.contentView addSubview:_customView];
-    [self.contentView bringSubviewToFront:_customView];
 }
 
 - (void)layoutSubviews{

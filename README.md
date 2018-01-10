@@ -12,7 +12,10 @@
 - 使用简单、功能丰富的 `Objective-C版` 轮播控件,  基于 `UICollectionView` 实现, 多种场景均支持使用.
 
 ## 效果样例
-<img src="https://github.com/stackhou/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/bannerDemo.gif" width="300" height="563" />
+普通 | 自定义View 
+---- | --- 
+<img src="https://github.com/stackhou/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/bannerDemo.gif" width="300" height="563" /> | <img src="https://github.com/stackhou/YJBannerViewOC/blob/master/YJBannerViewDemo/Resources/videoDemo01.gif" width="300" height="563" /> 
+
 
 ## Features
 
@@ -24,7 +27,6 @@
 - [x] 支持ContentMode的设置                            
 - [x] 支持Banner标题的设置自定义
 - [x] 支持自定义UICollectionViewCell                    
-- [x] 支持自定义 UIView 填充BannerView
 - [x] 支持在Storyboard\xib中创建并配置其属性   
 - [x] 支持非首尾循环的Footer样式和进入详情回调
 - [x] 不依赖其他三方SDWebImage或者AFNetworking设置图片
@@ -110,6 +112,7 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
 2017-12-06 | 2.3.5 | 区分没有数据的占位图片和图片未加载的占位图片
 2017-12-14 | 2.3.6 | 数据安全保护和数据更新速度优化
 2017-12-15 | 2.3.7 | 增加当前滚动位置相对偏移量API
+2018-01-10 | ---- | 优化自定义View的实现方式，支持自由选择显示类型
 
 ## 优化表现
 

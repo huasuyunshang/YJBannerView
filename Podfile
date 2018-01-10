@@ -10,5 +10,6 @@ target 'YJBannerViewDemo' do
    pod 'YJCommonMacro'
   # pod 'MJRefresh'
   pod 'ChameleonFramework'
+  pod 'ZFPlayer'
 
 end

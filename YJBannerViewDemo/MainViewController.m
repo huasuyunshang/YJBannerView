@@ -12,10 +12,12 @@
 #import "DetailViewController.h"
 #import "MainViewModel.h"
 #import "YJCustomView.h"
+#import "YJCustomViewB.h"
+#import <ZFPlayer.h>
 
 static CGFloat const midMargin = 15.0f;
 
-@interface MainViewController () <YJBannerViewDataSource, YJBannerViewDelegate>
+@interface MainViewController () <YJBannerViewDataSource, YJBannerViewDelegate, ZFPlayerDelegate>
 
 @property (nonatomic, strong) MainViewModel *viewModel;
 @property (nonatomic, strong) YJBannerView *normalBannerView; /**< 普通的banner */
@@ -26,6 +28,7 @@ static CGFloat const midMargin = 15.0f;
 
 @property (nonatomic, strong) UIView *testCreateTimeView; /**< 创建View的时间测试 */
 @property (nonatomic, strong) UILabel *testCreateTimeLabel; /**< 创建Label的时间测试 */
+@property (nonatomic, strong) ZFPlayerView        *playerView;
 
 @end
 
@@ -49,6 +52,12 @@ static CGFloat const midMargin = 15.0f;
     [self.headlinesBannerView adjustBannerViewWhenCardScreen];
     [self.goodDetailBannerView adjustBannerViewWhenCardScreen];
     [self.customBannerView adjustBannerViewWhenCardScreen];
+}
+
+// 页面消失时候
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.playerView resetPlayer];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -127,49 +136,92 @@ static CGFloat const midMargin = 15.0f;
     return nil;
 }
 
-- (Class)bannerViewCustomCellClass:(YJBannerView *)bannerView{
+- (NSArray *)bannerViewRegistCustomCellClass:(YJBannerView *)bannerView{
     if (bannerView == self.headlinesBannerView) {
-        return [HeadLinesCell class];
+        return @[[HeadLinesCell class]];
     }
     
     if (bannerView == self.goodDetailBannerView) {
-//        return [YJCustomView class];
+        return @[[YJCustomView class], [YJCustomViewB class]];
     }
     return nil;
 }
 
-- (void)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
-    
+- (Class)bannerView:(YJBannerView *)bannerView reuseIdentifierIndex:(NSInteger)index{
+    if (bannerView == self.headlinesBannerView) {
+        return [HeadLinesCell class];
+    }else if (bannerView == self.goodDetailBannerView){
+        if (index == 0) {
+            return [YJCustomView class];
+        }else if (index == 1){
+            return [YJCustomViewB class];
+        }
+    }
+    return nil;
+}
+
+- (BOOL)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
+    __weak typeof(self) weakSelf = self;
     if (bannerView == self.headlinesBannerView) {
         HeadLinesCell *cell = (HeadLinesCell *)customCell;
         [cell cellWithHeadHotLineCellData:self.viewModel.hotTitles[index]];
+        return YES;
     }
     
     if (bannerView == self.goodDetailBannerView) {
         if (index == 0) {
             
+            // 分辨率字典（key:分辨率名称，value：分辨率url)
+//            NSMutableDictionary *dic = @{}.mutableCopy;
+            YJCustomView *cell = (YJCustomView *)customCell;
+            [cell cellWithcoverForFeed:@""];
+            
+            __weak typeof(cell) weakCell = cell;
+            cell.playBlock = ^(UIButton *btn) {
+                NSLog(@"-->%@", @"开始播放");
+                ZFPlayerModel *playerModel = [[ZFPlayerModel alloc] init];
+                playerModel.title            = @"";
+                NSString *locaPath = [[NSBundle mainBundle] pathForResource:@"avdemo01" ofType:@"mp4"];
+                playerModel.videoURL         = [NSURL fileURLWithPath:locaPath];
+//                playerModel.videoURL         = [NSURL URLWithString:@"http://120.25.226.186:32812/resources/videos/minion_01.mp4"];
+                playerModel.placeholderImageURLString = @"";
+                playerModel.scrollView       = bannerView.collectionView;
+                playerModel.indexPath        = [NSIndexPath indexPathForRow:index inSection:0];
+                // 赋值分辨率字典
+//                playerModel.resolutionDic    = dic;
+                // player的父视图tag
+                playerModel.fatherViewTag    = weakCell.imgView.tag;
+                
+                // 设置播放控制层和model
+                [weakSelf.playerView playerControlView:nil playerModel:playerModel];
+                // 下载功能
+                weakSelf.playerView.hasDownload = NO;
+                // 自动播放
+                [weakSelf.playerView autoPlayTheVideo];
+            };
+            
+            return YES;
+        }else{
+            return NO;
         }
     }
+    return NO;
 }
-
-/**
-- (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index{
-    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 100)];
-    customView.backgroundColor = kRANDOM_COLOR;
-    return customView;
-}
- */
 
 #pragma mark - Delegate
 - (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
     
-    [self.normalBannerView reloadData];
-    
-    return;
+//    [self.normalBannerView reloadData];
+//
+//    return;
     
 //    [self.normalBannerView adjustBannerViewScrollToIndex:3 animated:NO];
 //
 //    return;
+    
+    if (bannerView == self.goodDetailBannerView) {
+        return;
+    }
     
     NSString *titleString = @"";
     NSString *showMessage = [NSString stringWithFormat:@"点击了第%ld个", (long)index];
@@ -239,6 +291,7 @@ static CGFloat const midMargin = 15.0f;
         _goodDetailBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
         _goodDetailBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
         _goodDetailBannerView.showFooter = YES;
+        _goodDetailBannerView.pageControlBottomMargin = 5.0f;
     }
     return _goodDetailBannerView;
 }
@@ -247,14 +300,14 @@ static CGFloat const midMargin = 15.0f;
     if (!_customBannerView) {
         _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _customBannerView.pageControlStyle = PageControlCustom;
-        _customBannerView.pageControlDotSize = CGSizeMake(10, 2);
+        _customBannerView.pageControlDotSize = CGSizeMake(10, 5);
 //        _customBannerView.pageControlNormalColor = [UIColor orangeColor];
 //        _customBannerView.pageControlHighlightColor = [UIColor redColor];
         _customBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlN"];
         _customBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlS"];
-        _customBannerView.pageControlPadding = 10;
+        _customBannerView.pageControlPadding = 8;
         _customBannerView.pageControlAliment = PageControlAlimentRight;
-        _customBannerView.pageControlBottomMargin = 10;
+        _customBannerView.pageControlBottomMargin = 6;
     }
     return _customBannerView;
 }
@@ -280,6 +333,40 @@ static CGFloat const midMargin = 15.0f;
         _viewModel = [[MainViewModel alloc] init];
     }
     return _viewModel;
+}
+
+- (ZFPlayerView *)playerView {
+    if (!_playerView) {
+        _playerView = [ZFPlayerView sharedPlayerView];
+        _playerView.delegate = self;
+        _playerView.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
+        // 当cell播放视频由全屏变为小屏时候，不回到中间位置
+        _playerView.cellPlayerOnCenter = NO;
+        
+        // 当cell划出屏幕的时候停止播放
+        // _playerView.stopPlayWhileCellNotVisable = YES;
+        //（可选设置）可以设置视频的填充模式，默认为（等比例填充，直到一个维度到达区域边界）
+        // _playerView.playerLayerGravity = ZFPlayerLayerGravityResizeAspect;
+        // 静音
+        // _playerView.mute = YES;
+        // 移除屏幕移除player
+        // _playerView.stopPlayWhileCellNotVisable = YES;
+        ZFPlayerShared.isLockScreen = YES;
+        ZFPlayerShared.isStatusBarHidden = NO;
+    }
+    return _playerView;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    // 这里设置横竖屏不同颜色的statusbar
+    if (ZFPlayerShared.isLandscape) {
+        return UIStatusBarStyleLightContent;
+    }
+    return UIStatusBarStyleDefault;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return ZFPlayerShared.isStatusBarHidden;
 }
 
 @end

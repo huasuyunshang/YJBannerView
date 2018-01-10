@@ -17,13 +17,13 @@
                            @"http://img.zcool.cn/community/01e5445654513e32f87512f6f748f0.png@900w_1l_2o_100sh.jpg",
                            @"http://www.aykj.net/front/images/subBanner/baiduV2.jpg"
                            ];
-    NSMutableArray *arrays = [NSMutableArray array];
-    for (NSInteger i = 0; i < arc4random() % imageUrls.count; i++) {
-        [arrays addObject:imageUrls[i]];
-    }
-    NSLog(@"正常的个数-->%ld", arrays.count);
+//    NSMutableArray *arrays = [NSMutableArray array];
+//    for (NSInteger i = 0; i < arc4random() % imageUrls.count; i++) {
+//        [arrays addObject:imageUrls[i]];
+//    }
+//    NSLog(@"正常的个数-->%ld", arrays.count);
 
-    return arrays;
+    return imageUrls;
 }
 
 - (NSArray *)hotTitles{
