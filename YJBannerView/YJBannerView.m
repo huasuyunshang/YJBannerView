@@ -474,14 +474,15 @@ static NSInteger const totalCollectionViewCellCount = 200;
     long itemIndex = [self _getRealIndexFromCurrentCellIndex:indexPath.item];
     
     // Custom Cell
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewRegistCustomCellClass:)] && [self.dataSource bannerViewRegistCustomCellClass:self] && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)] && [self.dataSource respondsToSelector:@selector(bannerView:reuseIdentifierIndex:)]) {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(bannerViewRegistCustomCellClass:)] && [self.dataSource bannerViewRegistCustomCellClass:self] && [self.dataSource respondsToSelector:@selector(bannerView:customCell:index:)] && [self.dataSource respondsToSelector:@selector(bannerView:reuseIdentifierForIndex:)]) {
         
-        NSString *reuseIdentifier = NSStringFromClass([self.dataSource bannerView:self reuseIdentifierIndex:itemIndex]);
+        NSString *reuseIdentifier = NSStringFromClass([self.dataSource bannerView:self reuseIdentifierForIndex:itemIndex]);
         if (reuseIdentifier.length > 0) {
             UICollectionViewCell *customCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
             
-            BOOL isReturn = [self.dataSource bannerView:self customCell:customCell index:itemIndex];
-            if (isReturn && customCell) { return customCell; }
+            if ([self.dataSource bannerView:self customCell:customCell index:itemIndex]) {
+                return customCell;
+            }
         }
     }
     

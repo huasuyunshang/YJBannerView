@@ -147,7 +147,7 @@ static CGFloat const midMargin = 15.0f;
     return nil;
 }
 
-- (Class)bannerView:(YJBannerView *)bannerView reuseIdentifierIndex:(NSInteger)index{
+- (Class)bannerView:(YJBannerView *)bannerView reuseIdentifierForIndex:(NSInteger)index{
     if (bannerView == self.headlinesBannerView) {
         return [HeadLinesCell class];
     }else if (bannerView == self.goodDetailBannerView){
@@ -160,12 +160,12 @@ static CGFloat const midMargin = 15.0f;
     return nil;
 }
 
-- (BOOL)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
+- (UICollectionViewCell *)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
     __weak typeof(self) weakSelf = self;
     if (bannerView == self.headlinesBannerView) {
         HeadLinesCell *cell = (HeadLinesCell *)customCell;
         [cell cellWithHeadHotLineCellData:self.viewModel.hotTitles[index]];
-        return YES;
+        return cell;
     }
     
     if (bannerView == self.goodDetailBannerView) {
@@ -200,12 +200,12 @@ static CGFloat const midMargin = 15.0f;
                 [weakSelf.playerView autoPlayTheVideo];
             };
             
-            return YES;
+            return cell;
         }else{
-            return NO;
+            return nil;
         }
     }
-    return NO;
+    return nil;
 }
 
 #pragma mark - Delegate

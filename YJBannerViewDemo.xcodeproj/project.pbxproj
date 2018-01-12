@@ -56,6 +56,8 @@
 		63B741261ED6CD3900D9A282 /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */; };
 		63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */; };
 		63B7412C1ED6CDF900D9A282 /* YJDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7412B1ED6CDF900D9A282 /* YJDotView.m */; };
+		63CA832D20087AF600E7CB36 /* YJCustomGapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA832C20087AF600E7CB36 /* YJCustomGapCell.m */; };
+		63CA833020087BF900E7CB36 /* UIImageView+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA832F20087BF900E7CB36 /* UIImageView+YJBannerView.m */; };
 		63EADD6A1FC403890041E6EE /* YJBannerViewCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */; };
 		63EADD6B1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */; };
 		63EADD6C1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */; };
@@ -128,6 +130,10 @@
 		63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJAnimatedDotView.m; sourceTree = "<group>"; };
 		63B7412A1ED6CDF900D9A282 /* YJDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJDotView.h; sourceTree = "<group>"; };
 		63B7412B1ED6CDF900D9A282 /* YJDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJDotView.m; sourceTree = "<group>"; };
+		63CA832B20087AF600E7CB36 /* YJCustomGapCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJCustomGapCell.h; sourceTree = "<group>"; };
+		63CA832C20087AF600E7CB36 /* YJCustomGapCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJCustomGapCell.m; sourceTree = "<group>"; };
+		63CA832E20087BF900E7CB36 /* UIImageView+YJBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YJBannerView.h"; sourceTree = "<group>"; };
+		63CA832F20087BF900E7CB36 /* UIImageView+YJBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YJBannerView.m"; sourceTree = "<group>"; };
 		63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCollectionView.h; sourceTree = "<group>"; };
 		63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCollectionView.m; sourceTree = "<group>"; };
 		63F97E541F2B37A600956AE2 /* YJBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJBannerView.bundle; sourceTree = "<group>"; };
@@ -308,6 +314,8 @@
 				638D31BD1F7F4C760052566B /* UIImage+YJBannerView.m */,
 				638D31C11F7F6D870052566B /* NSArray+YJBannerView.h */,
 				638D31C21F7F6D870052566B /* NSArray+YJBannerView.m */,
+				63CA832E20087BF900E7CB36 /* UIImageView+YJBannerView.h */,
+				63CA832F20087BF900E7CB36 /* UIImageView+YJBannerView.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -321,6 +329,8 @@
 				63ADB84720045AC9008B02EB /* YJCustomView.m */,
 				637F33DB20046E4200DAEFE7 /* YJCustomViewB.h */,
 				637F33DC20046E4200DAEFE7 /* YJCustomViewB.m */,
+				63CA832B20087AF600E7CB36 /* YJCustomGapCell.h */,
+				63CA832C20087AF600E7CB36 /* YJCustomGapCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -564,7 +574,9 @@
 				63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */,
 				638D31BF1F7F4C760052566B /* UIImage+YJBannerView.m in Sources */,
 				631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */,
+				63CA833020087BF900E7CB36 /* UIImageView+YJBannerView.m in Sources */,
 				63EADD6B1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */,
+				63CA832D20087AF600E7CB36 /* YJCustomGapCell.m in Sources */,
 				63ADB84820045AC9008B02EB /* YJCustomView.m in Sources */,
 				631C281F1ED55D3B00F31057 /* main.m in Sources */,
 				63B741231ED6C5F800D9A282 /* YJHollowPageControl.m in Sources */,

@@ -183,9 +183,9 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
  */
 - (NSArray *)bannerViewRegistCustomCellClass:(YJBannerView *)bannerView;
 /** 根据 Index 选择使用哪个 reuseIdentifier */
-- (Class)bannerView:(YJBannerView *)bannerView reuseIdentifierIndex:(NSInteger)index;
+- (Class)bannerView:(YJBannerView *)bannerView reuseIdentifierForIndex:(NSInteger)index;
 /** 自定义 View 刷新数据或者其他配置 */
-- (BOOL)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index;
+- (UICollectionViewCell *)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index;
 
 /** Footer 高度 默认是 49.0 */
 - (CGFloat)bannerViewFooterViewHeight:(YJBannerView *)bannerView;
