@@ -276,3 +276,47 @@ static NSInteger const kDefaultSpacingBetweenDots = 8;
 }
 
 @end
+
+
+@implementation YJDotView
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [self _initializationSetting];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self _initializationSetting];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self _initializationSetting];
+    }
+    return self;
+}
+
+- (void)_initializationSetting{
+    self.backgroundColor    = [UIColor clearColor];
+    self.layer.cornerRadius = CGRectGetWidth(self.frame) * 0.5;
+    self.layer.borderColor  = [UIColor whiteColor].CGColor;
+    self.layer.borderWidth  = 2;
+}
+
+- (void)changeActivityState:(BOOL)active{
+    if (active) {
+        self.backgroundColor = [UIColor whiteColor];
+    } else {
+        self.backgroundColor = [UIColor clearColor];
+    }
+}
+
+@end

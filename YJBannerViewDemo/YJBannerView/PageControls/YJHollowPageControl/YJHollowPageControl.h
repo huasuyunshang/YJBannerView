@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YJAbstractDotView.h"
 
 @class YJHollowPageControl;
 @protocol YJHollowPageControlDelegate <NSObject>
@@ -35,5 +36,10 @@
 @property (nonatomic, assign) CGFloat resizeScale; /**< 调整比例 */
 
 - (CGSize)sizeForNumberOfPages:(NSInteger)pageCount;
+
+@end
+
+
+@interface YJDotView : YJAbstractDotView
 
 @end

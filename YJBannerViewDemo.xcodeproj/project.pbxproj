@@ -8,23 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		23FAAC23B313EE8EFABF932C /* libPods-YJBannerViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */; };
-		6307D7451F0A38AB00CF1EAD /* YJBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 631C28381ED55F8900F31057 /* YJBannerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6307D7461F0A38C300CF1EAD /* YJHollowPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741221ED6C5F800D9A282 /* YJHollowPageControl.m */; };
-		6307D7471F0A38C300CF1EAD /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */; };
-		6307D7481F0A38C300CF1EAD /* YJAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */; };
-		6307D7491F0A38C300CF1EAD /* YJDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7412B1ED6CDF900D9A282 /* YJDotView.m */; };
-		6307D74A1F0A38C300CF1EAD /* UIView+YJBannerViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */; };
-		6307D74B1F0A38C300CF1EAD /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C283D1ED578CC00F31057 /* YJBannerViewCell.m */; };
-		6307D74C1F0A38C300CF1EAD /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28391ED55F8900F31057 /* YJBannerView.m */; };
 		631C281F1ED55D3B00F31057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C281E1ED55D3B00F31057 /* main.m */; };
 		631C28221ED55D3B00F31057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28211ED55D3B00F31057 /* AppDelegate.m */; };
 		631C28281ED55D3B00F31057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 631C28261ED55D3B00F31057 /* Main.storyboard */; };
 		631C282A1ED55D3B00F31057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631C28291ED55D3B00F31057 /* Assets.xcassets */; };
 		631C282D1ED55D3B00F31057 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 631C282B1ED55D3B00F31057 /* LaunchScreen.storyboard */; };
 		631C28361ED55E7500F31057 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28351ED55E7500F31057 /* MainViewController.m */; };
-		631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28391ED55F8900F31057 /* YJBannerView.m */; };
-		631C283E1ED578CC00F31057 /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C283D1ED578CC00F31057 /* YJBannerViewCell.m */; };
-		631C28421ED57F5D00F31057 /* UIView+YJBannerViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */; };
 		631DED321FB1B0EA00C22606 /* DynamicBgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631DED311FB1B0EA00C22606 /* DynamicBgViewController.m */; };
 		631ECE3D1F272DA600ED0D14 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE3B1F272DA600ED0D14 /* DetailViewController.m */; };
 		631ECE431F28602100ED0D14 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 631ECE411F28602100ED0D14 /* MainViewModel.m */; };
@@ -39,31 +28,29 @@
 		635E7F311EE5657600EF8405 /* banner_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2D1EE5657600EF8405 /* banner_Normal@2x.png */; };
 		635E7F321EE5657600EF8405 /* banner_Normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635E7F2E1EE5657600EF8405 /* banner_Normal@3x.png */; };
 		637F33DD20046E4200DAEFE7 /* YJCustomViewB.m in Sources */ = {isa = PBXBuildFile; fileRef = 637F33DC20046E4200DAEFE7 /* YJCustomViewB.m */; };
-		638AA9B21F26EC340015892D /* YJBannerViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 638AA9B01F26EC340015892D /* YJBannerViewFooter.m */; };
-		638AA9B31F26EC340015892D /* YJBannerViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 638AA9B01F26EC340015892D /* YJBannerViewFooter.m */; };
 		638CAEC91F28A55B00CE5E99 /* bannerView3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 638CAEC81F28A55B00CE5E99 /* bannerView3.gif */; };
 		638D31BF1F7F4C760052566B /* UIImage+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638D31BD1F7F4C760052566B /* UIImage+YJBannerView.m */; };
 		638D31C41F7F6D870052566B /* NSArray+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638D31C21F7F6D870052566B /* NSArray+YJBannerView.m */; };
 		63A34CC8200DE5E100522115 /* iPhoneDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A34CC7200DE5E000522115 /* iPhoneDefault.png */; };
 		63A991A61F25C58B005333B7 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A991A51F25C58B005333B7 /* placeholder@2x.png */; };
 		63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A991A91F25CB0B005333B7 /* HeadLinesCell.m */; };
+		63AA16B72010662A004BB8A3 /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16A22010662A004BB8A3 /* YJAbstractDotView.m */; };
+		63AA16B82010662A004BB8A3 /* YJAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16A42010662A004BB8A3 /* YJAnimatedDotView.m */; };
+		63AA16BA2010662A004BB8A3 /* YJHollowPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16A82010662A004BB8A3 /* YJHollowPageControl.m */; };
+		63AA16BB2010662A004BB8A3 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63AA16AA2010662A004BB8A3 /* YJBannerView.bundle */; };
+		63AA16BC2010662A004BB8A3 /* UIView+YJBannerViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16AD2010662A004BB8A3 /* UIView+YJBannerViewExt.m */; };
+		63AA16BD2010662A004BB8A3 /* YJBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16B02010662A004BB8A3 /* YJBannerViewCell.m */; };
+		63AA16BE2010662A004BB8A3 /* YJBannerViewCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16B22010662A004BB8A3 /* YJBannerViewCollectionView.m */; };
+		63AA16BF2010662A004BB8A3 /* YJBannerViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16B42010662A004BB8A3 /* YJBannerViewFooter.m */; };
+		63AA16C02010662A004BB8A3 /* YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16B62010662A004BB8A3 /* YJBannerView.m */; };
 		63ADB84820045AC9008B02EB /* YJCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADB84720045AC9008B02EB /* YJCustomView.m */; };
 		63B633852005C3D800950DB4 /* video_list_cell_big_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B633842005C3D800950DB4 /* video_list_cell_big_icon.png */; };
 		63B7411C1ED6A1D200D9A282 /* pageControlCurrentDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B741181ED6A1D200D9A282 /* pageControlCurrentDot@2x.png */; };
 		63B7411D1ED6A1D200D9A282 /* pageControlCurrentDot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B741191ED6A1D200D9A282 /* pageControlCurrentDot@3x.png */; };
 		63B7411E1ED6A1D200D9A282 /* pageControlDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B7411A1ED6A1D200D9A282 /* pageControlDot@2x.png */; };
 		63B7411F1ED6A1D200D9A282 /* pageControlDot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B7411B1ED6A1D200D9A282 /* pageControlDot@3x.png */; };
-		63B741231ED6C5F800D9A282 /* YJHollowPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741221ED6C5F800D9A282 /* YJHollowPageControl.m */; };
-		63B741261ED6CD3900D9A282 /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */; };
-		63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */; };
-		63B7412C1ED6CDF900D9A282 /* YJDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7412B1ED6CDF900D9A282 /* YJDotView.m */; };
 		63CA832D20087AF600E7CB36 /* YJCustomGapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA832C20087AF600E7CB36 /* YJCustomGapCell.m */; };
 		63CA833020087BF900E7CB36 /* UIImageView+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA832F20087BF900E7CB36 /* UIImageView+YJBannerView.m */; };
-		63EADD6A1FC403890041E6EE /* YJBannerViewCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */; };
-		63EADD6B1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */; };
-		63EADD6C1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */; };
-		63F97E551F2B37A600956AE2 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F97E541F2B37A600956AE2 /* YJBannerView.bundle */; };
-		63F97E561F2B37A600956AE2 /* YJBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F97E541F2B37A600956AE2 /* YJBannerView.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,12 +68,6 @@
 		631C282E1ED55D3B00F31057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		631C28341ED55E7500F31057 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		631C28351ED55E7500F31057 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		631C28381ED55F8900F31057 /* YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerView.h; sourceTree = "<group>"; };
-		631C28391ED55F8900F31057 /* YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerView.m; sourceTree = "<group>"; };
-		631C283C1ED578CC00F31057 /* YJBannerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCell.h; sourceTree = "<group>"; };
-		631C283D1ED578CC00F31057 /* YJBannerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCell.m; sourceTree = "<group>"; };
-		631C28401ED57F5D00F31057 /* UIView+YJBannerViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJBannerViewExt.h"; sourceTree = "<group>"; };
-		631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJBannerViewExt.m"; sourceTree = "<group>"; };
 		631C28541ED5952800F31057 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		631DED301FB1B0EA00C22606 /* DynamicBgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicBgViewController.h; sourceTree = "<group>"; };
 		631DED311FB1B0EA00C22606 /* DynamicBgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicBgViewController.m; sourceTree = "<group>"; };
@@ -106,8 +87,6 @@
 		635E7F2E1EE5657600EF8405 /* banner_Normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_Normal@3x.png"; sourceTree = "<group>"; };
 		637F33DB20046E4200DAEFE7 /* YJCustomViewB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJCustomViewB.h; sourceTree = "<group>"; };
 		637F33DC20046E4200DAEFE7 /* YJCustomViewB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJCustomViewB.m; sourceTree = "<group>"; };
-		638AA9AF1F26EC340015892D /* YJBannerViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewFooter.h; sourceTree = "<group>"; };
-		638AA9B01F26EC340015892D /* YJBannerViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewFooter.m; sourceTree = "<group>"; };
 		638CAEC81F28A55B00CE5E99 /* bannerView3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = bannerView3.gif; sourceTree = "<group>"; };
 		638D31BC1F7F4C760052566B /* UIImage+YJBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YJBannerView.h"; sourceTree = "<group>"; };
 		638D31BD1F7F4C760052566B /* UIImage+YJBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YJBannerView.m"; sourceTree = "<group>"; };
@@ -117,6 +96,23 @@
 		63A991A51F25C58B005333B7 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		63A991A81F25CB0B005333B7 /* HeadLinesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadLinesCell.h; sourceTree = "<group>"; };
 		63A991A91F25CB0B005333B7 /* HeadLinesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadLinesCell.m; sourceTree = "<group>"; };
+		63AA16A12010662A004BB8A3 /* YJAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJAbstractDotView.h; sourceTree = "<group>"; };
+		63AA16A22010662A004BB8A3 /* YJAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJAbstractDotView.m; sourceTree = "<group>"; };
+		63AA16A32010662A004BB8A3 /* YJAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJAnimatedDotView.h; sourceTree = "<group>"; };
+		63AA16A42010662A004BB8A3 /* YJAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJAnimatedDotView.m; sourceTree = "<group>"; };
+		63AA16A72010662A004BB8A3 /* YJHollowPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJHollowPageControl.h; sourceTree = "<group>"; };
+		63AA16A82010662A004BB8A3 /* YJHollowPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJHollowPageControl.m; sourceTree = "<group>"; };
+		63AA16AA2010662A004BB8A3 /* YJBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJBannerView.bundle; sourceTree = "<group>"; };
+		63AA16AC2010662A004BB8A3 /* UIView+YJBannerViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YJBannerViewExt.h"; sourceTree = "<group>"; };
+		63AA16AD2010662A004BB8A3 /* UIView+YJBannerViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YJBannerViewExt.m"; sourceTree = "<group>"; };
+		63AA16AF2010662A004BB8A3 /* YJBannerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCell.h; sourceTree = "<group>"; };
+		63AA16B02010662A004BB8A3 /* YJBannerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCell.m; sourceTree = "<group>"; };
+		63AA16B12010662A004BB8A3 /* YJBannerViewCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCollectionView.h; sourceTree = "<group>"; };
+		63AA16B22010662A004BB8A3 /* YJBannerViewCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCollectionView.m; sourceTree = "<group>"; };
+		63AA16B32010662A004BB8A3 /* YJBannerViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerViewFooter.h; sourceTree = "<group>"; };
+		63AA16B42010662A004BB8A3 /* YJBannerViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewFooter.m; sourceTree = "<group>"; };
+		63AA16B52010662A004BB8A3 /* YJBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJBannerView.h; sourceTree = "<group>"; };
+		63AA16B62010662A004BB8A3 /* YJBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJBannerView.m; sourceTree = "<group>"; };
 		63ADB84620045AC9008B02EB /* YJCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJCustomView.h; sourceTree = "<group>"; };
 		63ADB84720045AC9008B02EB /* YJCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJCustomView.m; sourceTree = "<group>"; };
 		63B633842005C3D800950DB4 /* video_list_cell_big_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_list_cell_big_icon.png; sourceTree = "<group>"; };
@@ -124,21 +120,10 @@
 		63B741191ED6A1D200D9A282 /* pageControlCurrentDot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlCurrentDot@3x.png"; sourceTree = "<group>"; };
 		63B7411A1ED6A1D200D9A282 /* pageControlDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlDot@2x.png"; sourceTree = "<group>"; };
 		63B7411B1ED6A1D200D9A282 /* pageControlDot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlDot@3x.png"; sourceTree = "<group>"; };
-		63B741211ED6C5F800D9A282 /* YJHollowPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJHollowPageControl.h; sourceTree = "<group>"; };
-		63B741221ED6C5F800D9A282 /* YJHollowPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJHollowPageControl.m; sourceTree = "<group>"; };
-		63B741241ED6CD3900D9A282 /* YJAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJAbstractDotView.h; sourceTree = "<group>"; };
-		63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJAbstractDotView.m; sourceTree = "<group>"; };
-		63B741271ED6CDD100D9A282 /* YJAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJAnimatedDotView.h; sourceTree = "<group>"; };
-		63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJAnimatedDotView.m; sourceTree = "<group>"; };
-		63B7412A1ED6CDF900D9A282 /* YJDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJDotView.h; sourceTree = "<group>"; };
-		63B7412B1ED6CDF900D9A282 /* YJDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJDotView.m; sourceTree = "<group>"; };
 		63CA832B20087AF600E7CB36 /* YJCustomGapCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJCustomGapCell.h; sourceTree = "<group>"; };
 		63CA832C20087AF600E7CB36 /* YJCustomGapCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJCustomGapCell.m; sourceTree = "<group>"; };
 		63CA832E20087BF900E7CB36 /* UIImageView+YJBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YJBannerView.h"; sourceTree = "<group>"; };
 		63CA832F20087BF900E7CB36 /* UIImageView+YJBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YJBannerView.m"; sourceTree = "<group>"; };
-		63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJBannerViewCollectionView.h; sourceTree = "<group>"; };
-		63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJBannerViewCollectionView.m; sourceTree = "<group>"; };
-		63F97E541F2B37A600956AE2 /* YJBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YJBannerView.bundle; sourceTree = "<group>"; };
 		96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YJBannerViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,7 +167,6 @@
 		631C28111ED55D3B00F31057 = {
 			isa = PBXGroup;
 			children = (
-				631C28371ED55EA200F31057 /* YJBannerView */,
 				631C281C1ED55D3B00F31057 /* YJBannerViewDemo */,
 				6307D7391F0A389000CF1EAD /* YJBannerViewFramework */,
 				631C281B1ED55D3B00F31057 /* Products */,
@@ -203,6 +187,7 @@
 		631C281C1ED55D3B00F31057 /* YJBannerViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				63AA169E2010662A004BB8A3 /* YJBannerView */,
 				638D31BB1F7F4C620052566B /* Categories */,
 				631ECE3F1F28600A00ED0D14 /* ViewModel */,
 				63938C871F0BA6F4005BD255 /* Views */,
@@ -231,49 +216,6 @@
 				631C28541ED5952800F31057 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		631C28371ED55EA200F31057 /* YJBannerView */ = {
-			isa = PBXGroup;
-			children = (
-				631C28381ED55F8900F31057 /* YJBannerView.h */,
-				631C28391ED55F8900F31057 /* YJBannerView.m */,
-				63F97E531F2B37A600956AE2 /* Resource */,
-				631C28431ED5830300F31057 /* PageControls */,
-				631C283F1ED57F2100F31057 /* Tools */,
-				631C283B1ED578AC00F31057 /* Views */,
-			);
-			path = YJBannerView;
-			sourceTree = "<group>";
-		};
-		631C283B1ED578AC00F31057 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				631C283C1ED578CC00F31057 /* YJBannerViewCell.h */,
-				631C283D1ED578CC00F31057 /* YJBannerViewCell.m */,
-				638AA9AF1F26EC340015892D /* YJBannerViewFooter.h */,
-				638AA9B01F26EC340015892D /* YJBannerViewFooter.m */,
-				63EADD681FC403890041E6EE /* YJBannerViewCollectionView.h */,
-				63EADD691FC403890041E6EE /* YJBannerViewCollectionView.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		631C283F1ED57F2100F31057 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				631C28401ED57F5D00F31057 /* UIView+YJBannerViewExt.h */,
-				631C28411ED57F5D00F31057 /* UIView+YJBannerViewExt.m */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
-		631C28431ED5830300F31057 /* PageControls */ = {
-			isa = PBXGroup;
-			children = (
-				63B741201ED6C5CA00D9A282 /* YJHollowPageControl */,
-			);
-			path = PageControls;
 			sourceTree = "<group>";
 		};
 		631C28511ED5947600F31057 /* Resources */ = {
@@ -338,27 +280,68 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		63B741201ED6C5CA00D9A282 /* YJHollowPageControl */ = {
+		63AA169E2010662A004BB8A3 /* YJBannerView */ = {
 			isa = PBXGroup;
 			children = (
-				63B741211ED6C5F800D9A282 /* YJHollowPageControl.h */,
-				63B741221ED6C5F800D9A282 /* YJHollowPageControl.m */,
-				63B741241ED6CD3900D9A282 /* YJAbstractDotView.h */,
-				63B741251ED6CD3900D9A282 /* YJAbstractDotView.m */,
-				63B741271ED6CDD100D9A282 /* YJAnimatedDotView.h */,
-				63B741281ED6CDD100D9A282 /* YJAnimatedDotView.m */,
-				63B7412A1ED6CDF900D9A282 /* YJDotView.h */,
-				63B7412B1ED6CDF900D9A282 /* YJDotView.m */,
+				63AA16B52010662A004BB8A3 /* YJBannerView.h */,
+				63AA16B62010662A004BB8A3 /* YJBannerView.m */,
+				63AA169F2010662A004BB8A3 /* PageControls */,
+				63AA16A92010662A004BB8A3 /* Resource */,
+				63AA16AB2010662A004BB8A3 /* Tools */,
+				63AA16AE2010662A004BB8A3 /* Views */,
+			);
+			path = YJBannerView;
+			sourceTree = "<group>";
+		};
+		63AA169F2010662A004BB8A3 /* PageControls */ = {
+			isa = PBXGroup;
+			children = (
+				63AA16A02010662A004BB8A3 /* YJHollowPageControl */,
+			);
+			path = PageControls;
+			sourceTree = "<group>";
+		};
+		63AA16A02010662A004BB8A3 /* YJHollowPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				63AA16A12010662A004BB8A3 /* YJAbstractDotView.h */,
+				63AA16A22010662A004BB8A3 /* YJAbstractDotView.m */,
+				63AA16A32010662A004BB8A3 /* YJAnimatedDotView.h */,
+				63AA16A42010662A004BB8A3 /* YJAnimatedDotView.m */,
+				63AA16A72010662A004BB8A3 /* YJHollowPageControl.h */,
+				63AA16A82010662A004BB8A3 /* YJHollowPageControl.m */,
 			);
 			path = YJHollowPageControl;
 			sourceTree = "<group>";
 		};
-		63F97E531F2B37A600956AE2 /* Resource */ = {
+		63AA16A92010662A004BB8A3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				63F97E541F2B37A600956AE2 /* YJBannerView.bundle */,
+				63AA16AA2010662A004BB8A3 /* YJBannerView.bundle */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		63AA16AB2010662A004BB8A3 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				63AA16AC2010662A004BB8A3 /* UIView+YJBannerViewExt.h */,
+				63AA16AD2010662A004BB8A3 /* UIView+YJBannerViewExt.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		63AA16AE2010662A004BB8A3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				63AA16AF2010662A004BB8A3 /* YJBannerViewCell.h */,
+				63AA16B02010662A004BB8A3 /* YJBannerViewCell.m */,
+				63AA16B12010662A004BB8A3 /* YJBannerViewCollectionView.h */,
+				63AA16B22010662A004BB8A3 /* YJBannerViewCollectionView.m */,
+				63AA16B32010662A004BB8A3 /* YJBannerViewFooter.h */,
+				63AA16B42010662A004BB8A3 /* YJBannerViewFooter.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		6AC03DC18FC0A9FC3BFB5F02 /* Pods */ = {
@@ -377,8 +360,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6307D7451F0A38AB00CF1EAD /* YJBannerView.h in Headers */,
-				63EADD6A1FC403890041E6EE /* YJBannerViewCollectionView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +449,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F97E561F2B37A600956AE2 /* YJBannerView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,8 +464,8 @@
 				631C282D1ED55D3B00F31057 /* LaunchScreen.storyboard in Resources */,
 				631FD8E71FEB51D400673F75 /* pageControlS@3x.png in Resources */,
 				631C282A1ED55D3B00F31057 /* Assets.xcassets in Resources */,
-				63F97E551F2B37A600956AE2 /* YJBannerView.bundle in Resources */,
 				635E7F321EE5657600EF8405 /* banner_Normal@3x.png in Resources */,
+				63AA16BB2010662A004BB8A3 /* YJBannerView.bundle in Resources */,
 				638CAEC91F28A55B00CE5E99 /* bannerView3.gif in Resources */,
 				635E7F301EE5657600EF8405 /* banner_Current@3x.png in Resources */,
 				631C28281ED55D3B00F31057 /* Main.storyboard in Resources */,
@@ -556,15 +536,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6307D7461F0A38C300CF1EAD /* YJHollowPageControl.m in Sources */,
-				638AA9B31F26EC340015892D /* YJBannerViewFooter.m in Sources */,
-				6307D7471F0A38C300CF1EAD /* YJAbstractDotView.m in Sources */,
-				6307D7481F0A38C300CF1EAD /* YJAnimatedDotView.m in Sources */,
-				6307D7491F0A38C300CF1EAD /* YJDotView.m in Sources */,
-				6307D74A1F0A38C300CF1EAD /* UIView+YJBannerViewExt.m in Sources */,
-				63EADD6C1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */,
-				6307D74B1F0A38C300CF1EAD /* YJBannerViewCell.m in Sources */,
-				6307D74C1F0A38C300CF1EAD /* YJBannerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,27 +544,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				638D31C41F7F6D870052566B /* NSArray+YJBannerView.m in Sources */,
-				631C28421ED57F5D00F31057 /* UIView+YJBannerViewExt.m in Sources */,
 				631C28221ED55D3B00F31057 /* AppDelegate.m in Sources */,
-				63B741291ED6CDD100D9A282 /* YJAnimatedDotView.m in Sources */,
 				638D31BF1F7F4C760052566B /* UIImage+YJBannerView.m in Sources */,
-				631C283A1ED55F8900F31057 /* YJBannerView.m in Sources */,
+				63AA16B72010662A004BB8A3 /* YJAbstractDotView.m in Sources */,
 				63CA833020087BF900E7CB36 /* UIImageView+YJBannerView.m in Sources */,
-				63EADD6B1FC403890041E6EE /* YJBannerViewCollectionView.m in Sources */,
 				63CA832D20087AF600E7CB36 /* YJCustomGapCell.m in Sources */,
+				63AA16BC2010662A004BB8A3 /* UIView+YJBannerViewExt.m in Sources */,
+				63AA16BF2010662A004BB8A3 /* YJBannerViewFooter.m in Sources */,
 				63ADB84820045AC9008B02EB /* YJCustomView.m in Sources */,
 				631C281F1ED55D3B00F31057 /* main.m in Sources */,
-				63B741231ED6C5F800D9A282 /* YJHollowPageControl.m in Sources */,
+				63AA16B82010662A004BB8A3 /* YJAnimatedDotView.m in Sources */,
+				63AA16BE2010662A004BB8A3 /* YJBannerViewCollectionView.m in Sources */,
 				63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */,
-				63B741261ED6CD3900D9A282 /* YJAbstractDotView.m in Sources */,
-				631C283E1ED578CC00F31057 /* YJBannerViewCell.m in Sources */,
+				63AA16BD2010662A004BB8A3 /* YJBannerViewCell.m in Sources */,
 				631ECE431F28602100ED0D14 /* MainViewModel.m in Sources */,
+				63AA16BA2010662A004BB8A3 /* YJHollowPageControl.m in Sources */,
 				631ECE3D1F272DA600ED0D14 /* DetailViewController.m in Sources */,
 				631C28361ED55E7500F31057 /* MainViewController.m in Sources */,
-				638AA9B21F26EC340015892D /* YJBannerViewFooter.m in Sources */,
+				63AA16C02010662A004BB8A3 /* YJBannerView.m in Sources */,
 				637F33DD20046E4200DAEFE7 /* YJCustomViewB.m in Sources */,
 				631DED321FB1B0EA00C22606 /* DynamicBgViewController.m in Sources */,
-				63B7412C1ED6CDF900D9A282 /* YJDotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

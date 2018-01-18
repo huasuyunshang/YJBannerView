@@ -112,9 +112,9 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
 2017-12-06 | 2.3.5 | 区分没有数据的占位图片和图片未加载的占位图片
 2017-12-14 | 2.3.6 | 数据安全保护和数据更新速度优化
 2017-12-15 | 2.3.7 | 增加当前滚动位置相对偏移量API
-2018-01-10 | ---- | 优化自定义View的实现方式，支持自由选择显示类型
+2018-01-18 | 2.3.8 | 优化自定义View的实现方式，支持不同位置的Banner自由选择显示类型
 
-## 优化表现
+## 性能表现
 
 - 简单设置时：
 
@@ -125,48 +125,6 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
 ![](https://ws2.sinaimg.cn/large/006tKfTcly1fk1lktrc6fj30bu03q750.jpg)
 
 ---
-# 特殊需求
-
-## 需求：
-UI设计APP的 BannerView 轮播图的图片每个Item尺寸不同，比如：设计 BannerView 的可视区域大小是 375 x 420px, 而图片来源一些是375 x 420px, 而另一些是 375 x 450px 的, 对于高度为 450px 的图片就会有 y 方向上的压缩，造成变形。
-
-## 解决办法：
-将不同尺寸的图片资源用不同的控件放置，控件A放置 375 x 420px的图片，控件B放置 375 x 450 的图片，将这些控件放置在轮播组件上。Frame 分别设置成(0, 0, 375, 420) 和 (0, -30, 375, 450)。
-
-## 代码
-实现自定义View的代理方法即可传递不同尺寸的 View
-
-```objc
-- (UIView *)bannerView:(YJBannerView *)bannerView viewForItemAtIndex:(NSInteger)index{
-
-    if (bannerView == self.customBannerView) {
-
-        UIImageView *itemView = [self.saveBannerCustomViews objectSafeAtIndex:index];
-        if (!itemView) {
-            itemView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 180)];
-            itemView.backgroundColor = [UIColor orangeColor];
-            [self.saveBannerCustomViews addObject:itemView];
-        }
-
-        if (index % 2 == 0) {
-            itemView.frame = CGRectMake(0, -40, kSCREEN_WIDTH, 220);
-            itemView.backgroundColor = [UIColor redColor];
-        }
-
-        NSString *imgPath = [self.viewModel.customBannerViewImages objectAtIndex:index];
-
-        [itemView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-
-        return itemView;
-    }
-
-    return nil;
-}
-```
-
-## 效果
-
-<img src="https://ws3.sinaimg.cn/large/006tKfTcly1fk1lcagzrlj30c20nydnn.jpg" width="300" height="563" />
 
 ## License
 
