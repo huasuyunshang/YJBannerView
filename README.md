@@ -166,8 +166,7 @@ UI设计APP的 BannerView 轮播图的图片每个Item尺寸不同，比如：�
 
 ## 效果
 
-![](https://ws3.sinaimg.cn/large/006tKfTcly1fk1lcagzrlj30c20nydnn.jpg)
-
+<img src="https://ws3.sinaimg.cn/large/006tKfTcly1fk1lcagzrlj30c20nydnn.jpg" width="300" height="563" />
 
 ## License
 

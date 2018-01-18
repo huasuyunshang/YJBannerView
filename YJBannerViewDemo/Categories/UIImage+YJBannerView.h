@@ -10,4 +10,6 @@
 
 @interface UIImage (YJBannerView)
 
++ (UIImage *)getImageWithSize:(CGSize)size logoWidth:(CGFloat)logoWidth bgColor:(UIColor *)color;
+
 @end

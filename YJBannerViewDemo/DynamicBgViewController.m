@@ -10,6 +10,7 @@
 #import "YJBannerView.h"
 #import <ChameleonFramework/Chameleon.h>
 #import <UIImageView+WebCache.h>
+#import "UIImage+YJBannerView.h"
 
 @interface DynamicBgViewController () <YJBannerViewDataSource, YJBannerViewDelegate>
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) YJBannerView *bannerView; /**< banner */
 @property (nonatomic, strong) NSArray *showImagePaths;
 @property (nonatomic, strong) NSMutableArray *showImageColors; /**< 要显示的图片 */
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -26,6 +28,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self _setUpDynamicBgMainView];
+//    [self timer];
 }
 
 - (void)_setUpDynamicBgMainView{
@@ -78,7 +81,7 @@
 //    NSLog(@"showItemW-->%f", contentOffset);
     CGFloat halfWidth = fabs(contentOffset - showItemW * 0.5);
     CGFloat alpah = halfWidth / (showItemW * 0.5);
-    NSLog(@"alpah-->%f", alpah);
+//    NSLog(@"alpah-->%f", alpah);
     if (alpah <= 1) {
         alpah = 1;
     }
@@ -92,6 +95,30 @@
     }];
     
     
+}
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    [self _automaticScrollAction];
+}
+
+- (void)_automaticScrollAction{
+    
+    NSArray *iconNames = @[@"Test1", @"Test2"];
+    NSString *iconName = iconNames[arc4random() % iconNames.count];
+    UIImage *image = [UIImage imageNamed:iconName];
+    NSLog(@"image-->%@", image);
+    if ([UIApplication sharedApplication].supportsAlternateIcons) { // 支持
+        [[UIApplication sharedApplication] setAlternateIconName:iconName completionHandler:^(NSError * _Nullable error) {
+            // 记得回主线程
+            if (!error) {
+                NSLog(@"-->%@", @"设置成功");
+            }else{
+                NSLog(@"-->%@--%@", @"设置失败", error.localizedDescription);
+            }
+        }];
+    }else{
+     NSLog(@"-->%@", @"不好意思，你的设备不支持");
+    }
 }
 
 #pragma mark - Lazy
@@ -131,8 +158,18 @@
     return _showImageColors;
 }
 
+- (NSTimer *)timer{
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(_automaticScrollAction) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    }
+    return _timer;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+
 
 @end

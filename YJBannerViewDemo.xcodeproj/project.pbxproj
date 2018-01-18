@@ -44,6 +44,7 @@
 		638CAEC91F28A55B00CE5E99 /* bannerView3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 638CAEC81F28A55B00CE5E99 /* bannerView3.gif */; };
 		638D31BF1F7F4C760052566B /* UIImage+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638D31BD1F7F4C760052566B /* UIImage+YJBannerView.m */; };
 		638D31C41F7F6D870052566B /* NSArray+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638D31C21F7F6D870052566B /* NSArray+YJBannerView.m */; };
+		63A34CC8200DE5E100522115 /* iPhoneDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A34CC7200DE5E000522115 /* iPhoneDefault.png */; };
 		63A991A61F25C58B005333B7 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A991A51F25C58B005333B7 /* placeholder@2x.png */; };
 		63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A991A91F25CB0B005333B7 /* HeadLinesCell.m */; };
 		63ADB84820045AC9008B02EB /* YJCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ADB84720045AC9008B02EB /* YJCustomView.m */; };
@@ -112,6 +113,7 @@
 		638D31BD1F7F4C760052566B /* UIImage+YJBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YJBannerView.m"; sourceTree = "<group>"; };
 		638D31C11F7F6D870052566B /* NSArray+YJBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+YJBannerView.h"; sourceTree = "<group>"; };
 		638D31C21F7F6D870052566B /* NSArray+YJBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+YJBannerView.m"; sourceTree = "<group>"; };
+		63A34CC7200DE5E000522115 /* iPhoneDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhoneDefault.png; sourceTree = "<group>"; };
 		63A991A51F25C58B005333B7 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		63A991A81F25CB0B005333B7 /* HeadLinesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadLinesCell.h; sourceTree = "<group>"; };
 		63A991A91F25CB0B005333B7 /* HeadLinesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadLinesCell.m; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		631C28511ED5947600F31057 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63A34CC7200DE5E000522115 /* iPhoneDefault.png */,
 				63373A3C2005DB5400163A83 /* vediobgImage.png */,
 				63B633842005C3D800950DB4 /* video_list_cell_big_icon.png */,
 				63373C162004963800F0340C /* avdemo01.mp4 */,
@@ -487,6 +490,7 @@
 				635E7F301EE5657600EF8405 /* banner_Current@3x.png in Resources */,
 				631C28281ED55D3B00F31057 /* Main.storyboard in Resources */,
 				63B633852005C3D800950DB4 /* video_list_cell_big_icon.png in Resources */,
+				63A34CC8200DE5E100522115 /* iPhoneDefault.png in Resources */,
 				63373C172004963900F0340C /* avdemo01.mp4 in Resources */,
 				63A991A61F25C58B005333B7 /* placeholder@2x.png in Resources */,
 				635E7F311EE5657600EF8405 /* banner_Normal@2x.png in Resources */,
