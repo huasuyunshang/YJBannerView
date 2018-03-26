@@ -11,6 +11,7 @@
 #import <ChameleonFramework/Chameleon.h>
 #import <UIImageView+WebCache.h>
 #import "UIImage+YJBannerView.h"
+#import "XIBTypeViewController.h"
 
 @interface DynamicBgViewController () <YJBannerViewDataSource, YJBannerViewDelegate>
 
@@ -93,8 +94,12 @@
     } completion:^(BOOL finished) {
 
     }];
+}
+
+- (void)bannerView:(YJBannerView *)bannerView didSelectItemAtIndex:(NSInteger)index{
     
-    
+    XIBTypeViewController *vc = [[XIBTypeViewController alloc] initWithNibName:@"XIBTypeViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
@@ -124,7 +129,7 @@
 #pragma mark - Lazy
 - (UIView *)bannerBgView{
     if (!_bannerBgView) {
-        _bannerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 240)];
+        _bannerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kYJSCREEN_WIDTH, 240)];
         [_bannerBgView addSubview:self.bannerView];
         _bannerBgView.userInteractionEnabled = YES;
     }
@@ -133,7 +138,7 @@
 
 - (YJBannerView *)bannerView{
     if (!_bannerView) {
-        _bannerView = [YJBannerView bannerViewWithFrame:CGRectMake(15, 40, kSCREEN_WIDTH - 30, 140) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _bannerView = [YJBannerView bannerViewWithFrame:CGRectMake(15, 40, kYJSCREEN_WIDTH - 30, 140) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _bannerView.layer.cornerRadius = 5.0f;
         _bannerView.layer.masksToBounds = YES;
 //        _bannerView.repeatCount = 2;

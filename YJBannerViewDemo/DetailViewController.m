@@ -109,7 +109,7 @@
 #pragma mark - Lazy
 - (YJBannerView *)detailBannerView{
     if (!_detailBannerView) {
-        _detailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _detailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 0, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _detailBannerView.autoScroll = NO;
         _detailBannerView.repeatCount = 10;
     }
@@ -125,7 +125,7 @@
 
 - (YJBannerView *)customBannerView{
     if (!_customBannerView) {
-        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 190, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 190, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _customBannerView.pageControlStyle = PageControlCustom;
         _customBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
         _customBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];

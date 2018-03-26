@@ -32,6 +32,8 @@
 		638D31BF1F7F4C760052566B /* UIImage+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638D31BD1F7F4C760052566B /* UIImage+YJBannerView.m */; };
 		638D31C41F7F6D870052566B /* NSArray+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638D31C21F7F6D870052566B /* NSArray+YJBannerView.m */; };
 		63A34CC8200DE5E100522115 /* iPhoneDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A34CC7200DE5E000522115 /* iPhoneDefault.png */; };
+		63A369EE2068DBB90083D1F1 /* XIBTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A369EC2068DBB90083D1F1 /* XIBTypeViewController.m */; };
+		63A369EF2068DBB90083D1F1 /* XIBTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63A369ED2068DBB90083D1F1 /* XIBTypeViewController.xib */; };
 		63A991A61F25C58B005333B7 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A991A51F25C58B005333B7 /* placeholder@2x.png */; };
 		63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A991A91F25CB0B005333B7 /* HeadLinesCell.m */; };
 		63AA16B72010662A004BB8A3 /* YJAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA16A22010662A004BB8A3 /* YJAbstractDotView.m */; };
@@ -93,6 +95,9 @@
 		638D31C11F7F6D870052566B /* NSArray+YJBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+YJBannerView.h"; sourceTree = "<group>"; };
 		638D31C21F7F6D870052566B /* NSArray+YJBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+YJBannerView.m"; sourceTree = "<group>"; };
 		63A34CC7200DE5E000522115 /* iPhoneDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhoneDefault.png; sourceTree = "<group>"; };
+		63A369EB2068DBB90083D1F1 /* XIBTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XIBTypeViewController.h; sourceTree = "<group>"; };
+		63A369EC2068DBB90083D1F1 /* XIBTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XIBTypeViewController.m; sourceTree = "<group>"; };
+		63A369ED2068DBB90083D1F1 /* XIBTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XIBTypeViewController.xib; sourceTree = "<group>"; };
 		63A991A51F25C58B005333B7 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		63A991A81F25CB0B005333B7 /* HeadLinesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadLinesCell.h; sourceTree = "<group>"; };
 		63A991A91F25CB0B005333B7 /* HeadLinesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadLinesCell.m; sourceTree = "<group>"; };
@@ -200,6 +205,9 @@
 				631ECE3B1F272DA600ED0D14 /* DetailViewController.m */,
 				631DED301FB1B0EA00C22606 /* DynamicBgViewController.h */,
 				631DED311FB1B0EA00C22606 /* DynamicBgViewController.m */,
+				63A369EB2068DBB90083D1F1 /* XIBTypeViewController.h */,
+				63A369EC2068DBB90083D1F1 /* XIBTypeViewController.m */,
+				63A369ED2068DBB90083D1F1 /* XIBTypeViewController.xib */,
 				631C281D1ED55D3B00F31057 /* Supporting Files */,
 			);
 			path = YJBannerViewDemo;
@@ -460,6 +468,7 @@
 				631FD8E51FEB51D400673F75 /* pageControlS@2x.png in Resources */,
 				63B7411E1ED6A1D200D9A282 /* pageControlDot@2x.png in Resources */,
 				63373A3D2005DB5400163A83 /* vediobgImage.png in Resources */,
+				63A369EF2068DBB90083D1F1 /* XIBTypeViewController.xib in Resources */,
 				631FD8E81FEB51D400673F75 /* pageControlN@3x.png in Resources */,
 				631C282D1ED55D3B00F31057 /* LaunchScreen.storyboard in Resources */,
 				631FD8E71FEB51D400673F75 /* pageControlS@3x.png in Resources */,
@@ -549,6 +558,7 @@
 				63AA16B72010662A004BB8A3 /* YJAbstractDotView.m in Sources */,
 				63CA833020087BF900E7CB36 /* UIImageView+YJBannerView.m in Sources */,
 				63CA832D20087AF600E7CB36 /* YJCustomGapCell.m in Sources */,
+				63A369EE2068DBB90083D1F1 /* XIBTypeViewController.m in Sources */,
 				63AA16BC2010662A004BB8A3 /* UIView+YJBannerViewExt.m in Sources */,
 				63AA16BF2010662A004BB8A3 /* YJBannerViewFooter.m in Sources */,
 				63ADB84820045AC9008B02EB /* YJCustomView.m in Sources */,

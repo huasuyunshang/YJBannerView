@@ -95,7 +95,7 @@ static CGFloat const midMargin = 15.0f;
     [containerScrollView addSubview:self.goodDetailBannerView];
     [containerScrollView addSubview:self.customBannerView];
     
-    containerScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, CGRectGetMaxY(self.customBannerView.frame) + midMargin);
+    containerScrollView.contentSize = CGSizeMake(kYJSCREEN_WIDTH, CGRectGetMaxY(self.customBannerView.frame) + midMargin);
 }
 
 - (void)_loadDataSources{
@@ -251,7 +251,7 @@ static CGFloat const midMargin = 15.0f;
         
 //        _normalBannerView = [[YJBannerView alloc] initWithFrame:CGRectMake(10, 20, 30, 40)];
         
-        _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _normalBannerView.autoDuration = 2.5f;
         _normalBannerView.titleFont = [UIFont systemFontOfSize:20];
 //        _normalBannerView.repeatCount = 2;
@@ -276,7 +276,7 @@ static CGFloat const midMargin = 15.0f;
 
 - (YJBannerView *)headlinesBannerView{
     if (!_headlinesBannerView) {
-        _headlinesBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(90, CGRectGetMaxY(self.normalBannerView.frame), kSCREEN_WIDTH - 60, 40) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:nil];
+        _headlinesBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(90, CGRectGetMaxY(self.normalBannerView.frame), kYJSCREEN_WIDTH - 60, 40) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:nil];
         _headlinesBannerView.bannerViewScrollDirection = BannerViewDirectionTop;
         _headlinesBannerView.bannerGestureEnable = NO;
         _headlinesBannerView.pageControlStyle = PageControlNone;
@@ -286,7 +286,7 @@ static CGFloat const midMargin = 15.0f;
 
 - (YJBannerView *)goodDetailBannerView{
     if (!_goodDetailBannerView) {
-        _goodDetailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.headlinesBannerView.frame), kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _goodDetailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.headlinesBannerView.frame), kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _goodDetailBannerView.pageControlStyle = PageControlCustom;
         _goodDetailBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
         _goodDetailBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
@@ -298,7 +298,7 @@ static CGFloat const midMargin = 15.0f;
 
 - (YJBannerView *)customBannerView{
     if (!_customBannerView) {
-        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _customBannerView.pageControlStyle = PageControlCustom;
         _customBannerView.pageControlDotSize = CGSizeMake(10, 5);
 //        _customBannerView.pageControlNormalColor = [UIColor orangeColor];

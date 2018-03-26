@@ -3,11 +3,11 @@ PODS:
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
   - Masonry (1.1.0)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
-  - YJCommonMacro (0.0.4)
-  - ZFPlayer (2.1.5):
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+  - YJCommonMacro (0.0.6)
+  - ZFPlayer (2.1.6):
     - Masonry
 
 DEPENDENCIES:
@@ -19,9 +19,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  YJCommonMacro: 4d62941dcf4bd89241148932cef793687c729cd6
-  ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  YJCommonMacro: 0c419c99725961d37ed36f8adb2851bd851d607d
+  ZFPlayer: 833cb3974b619bfd01a0ec1ebaabfe6f629e85b4
 
 PODFILE CHECKSUM: 10a907c4c7a37ab5ffa4ac89b0999c633f729525
 
