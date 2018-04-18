@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23FAAC23B313EE8EFABF932C /* libPods-YJBannerViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */; };
 		631C281F1ED55D3B00F31057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C281E1ED55D3B00F31057 /* main.m */; };
 		631C28221ED55D3B00F31057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28211ED55D3B00F31057 /* AppDelegate.m */; };
 		631C28281ED55D3B00F31057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 631C28261ED55D3B00F31057 /* Main.storyboard */; };
@@ -53,6 +52,7 @@
 		63B7411F1ED6A1D200D9A282 /* pageControlDot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B7411B1ED6A1D200D9A282 /* pageControlDot@3x.png */; };
 		63CA832D20087AF600E7CB36 /* YJCustomGapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA832C20087AF600E7CB36 /* YJCustomGapCell.m */; };
 		63CA833020087BF900E7CB36 /* UIImageView+YJBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA832F20087BF900E7CB36 /* UIImageView+YJBannerView.m */; };
+		ED29399BCD60F294B869D7AF /* Pods_YJBannerViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B983404A0D1022A483655F1C /* Pods_YJBannerViewDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +81,7 @@
 		631FD8E21FEB51D300673F75 /* pageControlN@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlN@2x.png"; sourceTree = "<group>"; };
 		631FD8E31FEB51D300673F75 /* pageControlS@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlS@3x.png"; sourceTree = "<group>"; };
 		631FD8E41FEB51D400673F75 /* pageControlN@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pageControlN@3x.png"; sourceTree = "<group>"; };
+		6320AC45208727990005ED99 /* YJBannerViewDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YJBannerViewDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		63373A3C2005DB5400163A83 /* vediobgImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vediobgImage.png; sourceTree = "<group>"; };
 		63373C162004963800F0340C /* avdemo01.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = avdemo01.mp4; sourceTree = "<group>"; };
 		635E7F2B1EE5657600EF8405 /* banner_Current@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_Current@2x.png"; sourceTree = "<group>"; };
@@ -129,8 +130,8 @@
 		63CA832C20087AF600E7CB36 /* YJCustomGapCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJCustomGapCell.m; sourceTree = "<group>"; };
 		63CA832E20087BF900E7CB36 /* UIImageView+YJBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YJBannerView.h"; sourceTree = "<group>"; };
 		63CA832F20087BF900E7CB36 /* UIImageView+YJBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YJBannerView.m"; sourceTree = "<group>"; };
-		96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YJBannerViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		B983404A0D1022A483655F1C /* Pods_YJBannerViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YJBannerViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23FAAC23B313EE8EFABF932C /* libPods-YJBannerViewDemo.a in Frameworks */,
+				ED29399BCD60F294B869D7AF /* Pods_YJBannerViewDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,7 +156,7 @@
 		02AE8556712D82BC167622C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				96AA199FCEA414F0C96AB43E /* libPods-YJBannerViewDemo.a */,
+				B983404A0D1022A483655F1C /* Pods_YJBannerViewDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,6 +223,7 @@
 				631C282E1ED55D3B00F31057 /* Info.plist */,
 				631C281E1ED55D3B00F31057 /* main.m */,
 				631C28541ED5952800F31057 /* PrefixHeader.pch */,
+				6320AC45208727990005ED99 /* YJBannerViewDemo-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -401,7 +403,6 @@
 				631C28171ED55D3B00F31057 /* Frameworks */,
 				631C28181ED55D3B00F31057 /* Resources */,
 				4B9F942BA6A9DB8C98D7B555 /* [CP] Embed Pods Frameworks */,
-				A677284EB908269119F9A43A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -429,6 +430,7 @@
 					631C28191ED55D3B00F31057 = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 33K3DU6932;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -499,28 +501,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/ZFPlayer/ZFPlayer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFPlayer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A677284EB908269119F9A43A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DD40E4DB53499FEADA776CBC /* [CP] Check Pods Manifest.lock */ = {
@@ -529,13 +525,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YJBannerViewDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -746,6 +745,7 @@
 			baseConfigurationReference = 031719509DF64E8623B4EA8B /* Pods-YJBannerViewDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 33K3DU6932;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -756,6 +756,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.houmanager.de;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YJBannerViewDemo/YJBannerViewDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -764,6 +767,7 @@
 			baseConfigurationReference = 9D5E6C0798F81F51AC0244AA /* Pods-YJBannerViewDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 33K3DU6932;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -774,6 +778,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.houmanager.de;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YJBannerViewDemo/YJBannerViewDemo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

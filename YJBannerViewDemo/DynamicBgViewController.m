@@ -9,7 +9,7 @@
 #import "DynamicBgViewController.h"
 #import "YJBannerView.h"
 #import <ChameleonFramework/Chameleon.h>
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+YJBannerView.h"
 #import "XIBTypeViewController.h"
 

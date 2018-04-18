@@ -8,7 +8,7 @@
 
 #import "YJCustomView.h"
 #import <AVKit/AVKit.h>
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface YJCustomView ()
 

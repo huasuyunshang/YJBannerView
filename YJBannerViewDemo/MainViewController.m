@@ -13,7 +13,7 @@
 #import "MainViewModel.h"
 #import "YJCustomView.h"
 #import "YJCustomViewB.h"
-#import <ZFPlayer.h>
+#import <ZFPlayer/ZFPlayer.h>
 
 static CGFloat const midMargin = 15.0f;
 

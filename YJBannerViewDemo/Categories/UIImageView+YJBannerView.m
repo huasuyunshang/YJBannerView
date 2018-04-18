@@ -7,7 +7,7 @@
 //
 
 #import "UIImageView+YJBannerView.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation UIImageView (YJBannerView)
 

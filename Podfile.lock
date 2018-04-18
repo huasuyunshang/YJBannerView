@@ -16,6 +16,14 @@ DEPENDENCIES:
   - YJCommonMacro
   - ZFPlayer
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - ChameleonFramework
+    - Masonry
+    - SDWebImage
+    - YJCommonMacro
+    - ZFPlayer
+
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -23,6 +31,6 @@ SPEC CHECKSUMS:
   YJCommonMacro: 0c419c99725961d37ed36f8adb2851bd851d607d
   ZFPlayer: 833cb3974b619bfd01a0ec1ebaabfe6f629e85b4
 
-PODFILE CHECKSUM: 10a907c4c7a37ab5ffa4ac89b0999c633f729525
+PODFILE CHECKSUM: f22ad6be51cc1f0f1c856516c7309d5d912f406b
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.0
