@@ -22,33 +22,31 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dwn-Nu-PDn">
-                    <rect key="frame" x="0.0" y="140" width="375" height="527"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="axJ-Xf-mLg"/>
                         <outlet property="delegate" destination="-1" id="5q6-dB-LH5"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fca-5f-Xnl" customClass="YJBannerView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="9OC-EE-ZDJ"/>
-                        <outlet property="delegate" destination="-1" id="9Gn-x9-shd"/>
-                    </connections>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Dwn-Nu-PDn" firstAttribute="top" secondItem="Fca-5f-Xnl" secondAttribute="bottom" id="AuV-xI-cKT"/>
-                <constraint firstItem="Fca-5f-Xnl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LZ7-2K-cIp"/>
                 <constraint firstAttribute="bottom" secondItem="Dwn-Nu-PDn" secondAttribute="bottom" id="QHA-qr-HBf"/>
-                <constraint firstItem="Dwn-Nu-PDn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="140" id="TCp-Bc-O57"/>
+                <constraint firstItem="Dwn-Nu-PDn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TCp-Bc-O57"/>
                 <constraint firstItem="Dwn-Nu-PDn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Z1C-fF-7OV"/>
-                <constraint firstAttribute="trailing" secondItem="Fca-5f-Xnl" secondAttribute="trailing" id="ktd-sV-oEc"/>
                 <constraint firstAttribute="trailing" secondItem="Dwn-Nu-PDn" secondAttribute="trailing" id="n9n-YF-Rtx"/>
-                <constraint firstItem="Fca-5f-Xnl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vAN-K9-P67"/>
             </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="Fca-5f-Xnl" customClass="YJBannerView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="dataSource" destination="-1" id="9OC-EE-ZDJ"/>
+                <outlet property="delegate" destination="-1" id="9Gn-x9-shd"/>
+            </connections>
+            <point key="canvasLocation" x="-1" y="-761"/>
         </view>
     </objects>
 </document>

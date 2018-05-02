@@ -34,6 +34,8 @@
     // 模拟数据加载完毕
     [self.bannerView reloadData];
     
+    self.tableView.tableHeaderView = self.bannerView;
+    
 }
 
 #pragma mark - UITableViewDataSource
