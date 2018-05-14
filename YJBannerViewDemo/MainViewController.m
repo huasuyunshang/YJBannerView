@@ -14,6 +14,8 @@
 #import "YJCustomView.h"
 #import "YJCustomViewB.h"
 #import <ZFPlayer/ZFPlayer.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 static CGFloat const midMargin = 15.0f;
 
@@ -24,11 +26,13 @@ static CGFloat const midMargin = 15.0f;
 @property (nonatomic, strong) UILabel *headlinesLabel; /**< 头条tag*/
 @property (nonatomic, strong) YJBannerView *headlinesBannerView; /**< 头条BannerView */
 @property (nonatomic, strong) YJBannerView *goodDetailBannerView; /**< 商品详情 */
+@property (nonatomic, strong) YJBannerView *goodDetailVideoBannerView; /**< 商品详情带视频无限循环 */
 @property (nonatomic, strong) YJBannerView *customBannerView; /**< 自定义 */
 
 @property (nonatomic, strong) UIView *testCreateTimeView; /**< 创建View的时间测试 */
 @property (nonatomic, strong) UILabel *testCreateTimeLabel; /**< 创建Label的时间测试 */
 @property (nonatomic, strong) ZFPlayerView        *playerView;
+@property (nonatomic, strong) AVPlayer *player;
 
 @end
 
@@ -51,6 +55,7 @@ static CGFloat const midMargin = 15.0f;
     [self.normalBannerView adjustBannerViewWhenCardScreen];
     [self.headlinesBannerView adjustBannerViewWhenCardScreen];
     [self.goodDetailBannerView adjustBannerViewWhenCardScreen];
+    [self.goodDetailVideoBannerView adjustBannerViewWhenCardScreen];
     [self.customBannerView adjustBannerViewWhenCardScreen];
 }
 
@@ -93,6 +98,7 @@ static CGFloat const midMargin = 15.0f;
     [containerScrollView addSubview:self.headlinesLabel];
     [containerScrollView addSubview:self.headlinesBannerView];
     [containerScrollView addSubview:self.goodDetailBannerView];
+    [containerScrollView addSubview:self.goodDetailVideoBannerView];
     [containerScrollView addSubview:self.customBannerView];
     
     containerScrollView.contentSize = CGSizeMake(kYJSCREEN_WIDTH, CGRectGetMaxY(self.customBannerView.frame) + midMargin);
@@ -104,6 +110,7 @@ static CGFloat const midMargin = 15.0f;
     [self.normalBannerView reloadData];
     [self.headlinesBannerView reloadData];
     [self.goodDetailBannerView reloadData];
+    [self.goodDetailVideoBannerView reloadData];
     [self.customBannerView reloadData];
 }
 
@@ -111,11 +118,12 @@ static CGFloat const midMargin = 15.0f;
 #pragma mark - DataSources
 - (NSArray *)bannerViewImages:(YJBannerView *)bannerView{
     if (bannerView == self.normalBannerView) {
-//        NSLog(@"-->%@", @"-------");
         return self.viewModel.normalBannerViewImages;
     }else if (bannerView == self.headlinesBannerView){
         return self.viewModel.hotTitles;
     }else if (bannerView == self.goodDetailBannerView){
+        return self.viewModel.goodDetailBannerViewImages;
+    }else if (bannerView == self.goodDetailVideoBannerView){
         return self.viewModel.goodDetailBannerViewImages;
     }else if (bannerView == self.customBannerView){
         return self.viewModel.customBannerViewImages;
@@ -130,12 +138,15 @@ static CGFloat const midMargin = 15.0f;
         return @[];
     }else if (bannerView == self.goodDetailBannerView){
         return @[];
+    }else if (bannerView == self.goodDetailVideoBannerView){
+        return @[];
     }else if (bannerView == self.customBannerView){
         return @[];
     }
     return nil;
 }
 
+// 注册自定义Cell
 - (NSArray *)bannerViewRegistCustomCellClass:(YJBannerView *)bannerView{
     if (bannerView == self.headlinesBannerView) {
         return @[[HeadLinesCell class]];
@@ -144,9 +155,14 @@ static CGFloat const midMargin = 15.0f;
     if (bannerView == self.goodDetailBannerView) {
         return @[[YJCustomView class], [YJCustomViewB class]];
     }
+    
+    if (bannerView == self.goodDetailVideoBannerView) {
+        return @[[YJCustomView class]];
+    }
     return nil;
 }
 
+// 自定义cell的复用标识
 - (Class)bannerView:(YJBannerView *)bannerView reuseIdentifierForIndex:(NSInteger)index{
     if (bannerView == self.headlinesBannerView) {
         return [HeadLinesCell class];
@@ -156,10 +172,15 @@ static CGFloat const midMargin = 15.0f;
         }else if (index == 1){
             return [YJCustomViewB class];
         }
+    }else if (bannerView == self.goodDetailVideoBannerView){
+        if ((index % self.viewModel.goodDetailBannerViewImages.count) == 0) {
+            return [YJCustomView class];
+        }
     }
     return nil;
 }
 
+// 自定义cell传值设置显示数据
 - (UICollectionViewCell *)bannerView:(YJBannerView *)bannerView customCell:(UICollectionViewCell *)customCell index:(NSInteger)index{
     __weak typeof(self) weakSelf = self;
     if (bannerView == self.headlinesBannerView) {
@@ -205,6 +226,37 @@ static CGFloat const midMargin = 15.0f;
             return nil;
         }
     }
+    
+    // 带视频无限循环的
+    if (bannerView == self.goodDetailVideoBannerView) {
+        if ((index % self.viewModel.goodDetailBannerViewImages.count) == 0) {
+            
+            // 分辨率字典（key:分辨率名称，value：分辨率url)
+            //            NSMutableDictionary *dic = @{}.mutableCopy;
+            YJCustomView *cell = (YJCustomView *)customCell;
+            [cell cellWithcoverForFeed:@""];
+            
+            __weak typeof(cell) weakCell = cell;
+            
+            cell.playBlock = ^(UIButton *btn) {
+                NSLog(@"-->%@", @"开始播放");
+                
+                AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:weakSelf.player];
+                layer.frame = CGRectMake(0, 0, kYJSCREEN_WIDTH, 180);
+                layer.backgroundColor = [UIColor blackColor].CGColor;
+                //设置播放窗口和当前视图之间的比例显示内容
+                layer.videoGravity = AVLayerVideoGravityResizeAspect;
+                
+                //添加播放视图到self.view
+                [weakCell.contentView.layer addSublayer:layer];
+                [weakSelf.player play];
+            };
+            
+            return cell;
+        }else{
+            return nil;
+        }
+    }
     return nil;
 }
 
@@ -219,7 +271,7 @@ static CGFloat const midMargin = 15.0f;
 //
 //    return;
     
-    if (bannerView == self.goodDetailBannerView) {
+    if (bannerView == self.goodDetailBannerView || bannerView == self.goodDetailVideoBannerView) {
         return;
     }
     
@@ -284,6 +336,7 @@ static CGFloat const midMargin = 15.0f;
     return _headlinesBannerView;
 }
 
+// 带一个视频不是无限循环的
 - (YJBannerView *)goodDetailBannerView{
     if (!_goodDetailBannerView) {
         _goodDetailBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.headlinesBannerView.frame), kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
@@ -296,9 +349,21 @@ static CGFloat const midMargin = 15.0f;
     return _goodDetailBannerView;
 }
 
+// 带视频无限循环的
+- (YJBannerView *)goodDetailVideoBannerView{
+    if (!_goodDetailVideoBannerView) {
+        _goodDetailVideoBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _goodDetailVideoBannerView.pageControlStyle = PageControlCustom;
+        _goodDetailVideoBannerView.customPageControlHighlightImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+        _goodDetailVideoBannerView.customPageControlNormalImage = [UIImage imageNamed:@"pageControlDot"];
+        _goodDetailVideoBannerView.pageControlBottomMargin = 5.0f;
+    }
+    return _goodDetailVideoBannerView;
+}
+
 - (YJBannerView *)customBannerView{
     if (!_customBannerView) {
-        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailBannerView.frame) + 15, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
+        _customBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.goodDetailVideoBannerView.frame) + 15, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _customBannerView.pageControlStyle = PageControlCustom;
         _customBannerView.pageControlDotSize = CGSizeMake(10, 5);
 //        _customBannerView.pageControlNormalColor = [UIColor orangeColor];
@@ -355,6 +420,18 @@ static CGFloat const midMargin = 15.0f;
         ZFPlayerShared.isStatusBarHidden = NO;
     }
     return _playerView;
+}
+
+- (AVPlayer *)player{
+    if (!_player) {
+        NSString *playString = @"http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4";
+        NSURL *url = [NSURL URLWithString:playString];
+        AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
+        _player = [[AVPlayer alloc] initWithPlayerItem:item];
+        //设置播放的默认音量值
+        self.player.volume = 1.0f;
+    }
+    return _player;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
