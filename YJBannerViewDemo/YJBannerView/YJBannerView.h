@@ -13,7 +13,7 @@
    | | |_| | |_) | (_| | | | | | | |  __/ |   \ V / | |  __/\ V  V /
    |_|\___/|____/ \__,_|_| |_|_| |_|\___|_|    \_/  |_|\___| \_/\_/
  
-*********  Current-Version : 2.3.8 ************
+*********  Current-Version : 2.3.9 ************
  
  Version record: https://github.com/stackhou/YJBannerViewOC
  

@@ -1,4 +1,4 @@
-version = "2.3.8";
+version = "2.3.9";
 
 Pod::Spec.new do |s|
 
@@ -8,11 +8,11 @@ Pod::Spec.new do |s|
     s.description      = <<-DESC
                         YJBannerView 轮播控件, Author's email:houmanager@Hotmail.com. Form Beijing
                             DESC
-    s.homepage     = "https://github.com/stackhou/YJBannerViewOC"
+    s.homepage     = "https://github.com/stackhou/YJBannerView"
     s.license      = { :type => "MIT", :file => "LICENSE" }
     s.author       = { "houmanager" => "houmanager@Hotmail.com" }
     s.platform     = :ios, "7.0"
-    s.source       = { :git => "https://github.com/stackhou/YJBannerViewOC.git", :tag => "#{version}"}
+    s.source       = { :git => "https://github.com/stackhou/YJBannerView.git", :tag => "#{version}"}
     s.source_files  = "YJBannerViewDemo/YJBannerView/**/*.{h,m}"
     s.resource     = 'YJBannerViewDemo/YJBannerView/Resource/YJBannerView.bundle'
     s.requires_arc = true
