@@ -114,6 +114,7 @@ YJBannerView is available through [CocoaPods](http://cocoapods.org). To install 
 2017-12-15 | 2.3.7 | 增加当前滚动位置相对偏移量API
 2018-01-18 | 2.3.8 | 优化自定义View的实现方式，支持不同位置的Banner自由选择显示类型
 2018-06-21 | 2.3.9 | 更新 Cocoapods 配置 Source 的修正
+2018-07-09 | 2.4.0 | 修改手势在iOS 8.1上面的 Crash Bug
 
 ## 性能表现
 

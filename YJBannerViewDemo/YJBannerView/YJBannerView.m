@@ -263,12 +263,16 @@ static NSInteger const totalCollectionViewCellCount = 200;
         self.collectionView.canCancelContentTouches = YES;
         for (NSInteger i = 0; i < self.saveScrollViewGestures.count; i++) {
             UIGestureRecognizer *gesture = self.saveScrollViewGestures[i];
-            [self.collectionView addGestureRecognizer:gesture];
+            if (![self.collectionView.gestureRecognizers containsObject:gesture]) {
+                [self.collectionView addGestureRecognizer:gesture];
+            }
         }
     }else if (_bannerGestureEnable && !bannerGestureEnable){
         self.collectionView.canCancelContentTouches = NO;
         for (UIGestureRecognizer *gesture in self.collectionView.gestureRecognizers) {
-            [self.collectionView removeGestureRecognizer:gesture];
+            if ([gesture isKindOfClass:[UIPanGestureRecognizer class]]) {
+                [self.collectionView removeGestureRecognizer:gesture];
+            }
         }
     }
     _bannerGestureEnable = bannerGestureEnable;
@@ -369,7 +373,7 @@ static NSInteger const totalCollectionViewCellCount = 200;
 
 - (NSArray *)saveScrollViewGestures{
     if (!_saveScrollViewGestures) {
-        _saveScrollViewGestures = self.collectionView.gestureRecognizers;
+        _saveScrollViewGestures = [self.collectionView.gestureRecognizers copy];
     }
     return _saveScrollViewGestures;
 }
