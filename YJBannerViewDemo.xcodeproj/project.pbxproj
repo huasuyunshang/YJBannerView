@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00A4F92420F46E890050F517 /* YJBackgroundTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 00A4F92220F46E890050F517 /* YJBackgroundTask.h */; };
+		00A4F92520F46E890050F517 /* YJBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A4F92320F46E890050F517 /* YJBackgroundTask.m */; };
+		00A4F92620F46E890050F517 /* YJBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A4F92320F46E890050F517 /* YJBackgroundTask.m */; };
 		631C281F1ED55D3B00F31057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C281E1ED55D3B00F31057 /* main.m */; };
 		631C28221ED55D3B00F31057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C28211ED55D3B00F31057 /* AppDelegate.m */; };
 		631C28281ED55D3B00F31057 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 631C28261ED55D3B00F31057 /* Main.storyboard */; };
@@ -56,6 +59,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00A4F92220F46E890050F517 /* YJBackgroundTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJBackgroundTask.h; sourceTree = "<group>"; };
+		00A4F92320F46E890050F517 /* YJBackgroundTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YJBackgroundTask.m; sourceTree = "<group>"; };
 		031719509DF64E8623B4EA8B /* Pods-YJBannerViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YJBannerViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YJBannerViewDemo/Pods-YJBannerViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		6307D7381F0A389000CF1EAD /* YJBannerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YJBannerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6307D73A1F0A389000CF1EAD /* YJBannerViewFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJBannerViewFramework.h; sourceTree = "<group>"; };
@@ -200,6 +205,8 @@
 				631C28511ED5947600F31057 /* Resources */,
 				631C28201ED55D3B00F31057 /* AppDelegate.h */,
 				631C28211ED55D3B00F31057 /* AppDelegate.m */,
+				00A4F92220F46E890050F517 /* YJBackgroundTask.h */,
+				00A4F92320F46E890050F517 /* YJBackgroundTask.m */,
 				631C28341ED55E7500F31057 /* MainViewController.h */,
 				631C28351ED55E7500F31057 /* MainViewController.m */,
 				631ECE3A1F272DA600ED0D14 /* DetailViewController.h */,
@@ -370,6 +377,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A4F92420F46E890050F517 /* YJBackgroundTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,6 +552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A4F92620F46E890050F517 /* YJBackgroundTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +572,7 @@
 				63ADB84820045AC9008B02EB /* YJCustomView.m in Sources */,
 				631C281F1ED55D3B00F31057 /* main.m in Sources */,
 				63AA16B82010662A004BB8A3 /* YJAnimatedDotView.m in Sources */,
+				00A4F92520F46E890050F517 /* YJBackgroundTask.m in Sources */,
 				63AA16BE2010662A004BB8A3 /* YJBannerViewCollectionView.m in Sources */,
 				63A991AB1F25CB0B005333B7 /* HeadLinesCell.m in Sources */,
 				63AA16BD2010662A004BB8A3 /* YJBannerViewCell.m in Sources */,
