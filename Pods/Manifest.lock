@@ -1,4 +1,5 @@
 PODS:
+  - Bugly (2.5.0)
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
@@ -11,13 +12,15 @@ PODS:
     - Masonry
 
 DEPENDENCIES:
+  - Bugly
   - ChameleonFramework
   - SDWebImage
   - YJCommonMacro
   - ZFPlayer
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
+    - Bugly
     - ChameleonFramework
     - Masonry
     - SDWebImage
@@ -25,12 +28,13 @@ SPEC REPOS:
     - ZFPlayer
 
 SPEC CHECKSUMS:
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   YJCommonMacro: 0c419c99725961d37ed36f8adb2851bd851d607d
   ZFPlayer: 833cb3974b619bfd01a0ec1ebaabfe6f629e85b4
 
-PODFILE CHECKSUM: f22ad6be51cc1f0f1c856516c7309d5d912f406b
+PODFILE CHECKSUM: 8a58904dd82e6b35a1cbd9f0d286bc666d5c3451
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

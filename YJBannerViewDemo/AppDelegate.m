@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "YJBackgroundTask.h"
+#import <Bugly/Bugly.h>
 
 @interface AppDelegate ()
 
@@ -18,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self _initBugly];
     /**
      运行后，用两个手指头在状态栏上同时点击下就可以显示出这个调试的悬浮层。
      可以看到大概有这样几个选项，
@@ -47,25 +49,41 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    [[YJBackgroundTask sharedInstance] beginBackgroundTaskWithLastTime:5 completion:^{
-        NSLog(@"-->%@", @"7之前是10分钟，7之后是3分钟，后台结束了");
-    }];
+//    [[YJBackgroundTask sharedInstance] beginBackgroundTaskWithLastTime:5 completion:^{
+//        NSLog(@"-->%@", @"7之前是10分钟，7之后是3分钟，后台结束了");
+//    }];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+//    [[YJBackgroundTask sharedInstance] endBackgroundTask];
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+//    [[YJBackgroundTask sharedInstance] endBackgroundTask];
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     NSLog(@"-->%@", @"applicationWillTerminate");
+}
+
+#pragma mark - 初始化Bugly
+- (void)_initBugly {
+    @try{
+        // 初始化SDK并设置属性
+        BuglyConfig *bugluConfig = [[BuglyConfig alloc] init];
+        bugluConfig.channel = @"YJGithub";
+        bugluConfig.version = [NSString stringWithFormat:@"%@(%@)", [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"]];
+        bugluConfig.deviceIdentifier = @"110201";
+        [Bugly startWithAppId:@"4c6b4a76b9" config:bugluConfig];
+        [Bugly setUserValue:@"201101010" forKey:@"imeiAndIdfa"];
+    }@catch(NSException* e) {
+    }
 }
 
 

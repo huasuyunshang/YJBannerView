@@ -19,4 +19,9 @@ singleton_interface(YJBackgroundTask)
  */
 - (void)beginBackgroundTaskWithLastTime:(NSTimeInterval)lastTime completion:(void (^)())completion ;
 
+/**
+ 结束后台运行
+ */
+- (void)endBackgroundTask;
+
 @end

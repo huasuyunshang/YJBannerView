@@ -8,6 +8,12 @@
 
 #import "YJBackgroundTask.h"
 
+@interface YJBackgroundTask ()
+
+@property (nonatomic, assign) UIBackgroundTaskIdentifier taskId;
+
+@end
+
 @implementation YJBackgroundTask
 singleton_implementation(YJBackgroundTask)
 
@@ -19,8 +25,9 @@ singleton_implementation(YJBackgroundTask)
         [app endBackgroundTask:taskId];
         taskId = UIBackgroundTaskInvalid;
     }];
+    self.taskId = taskId;
     
-    while (YES) {
+    while (self.taskId != UIBackgroundTaskInvalid) {
         NSTimeInterval remainingTime = app.backgroundTimeRemaining;
         if (remainingTime <= lastTime) {
             if (completion) {
@@ -30,11 +37,19 @@ singleton_implementation(YJBackgroundTask)
         }
         
         [NSThread sleepForTimeInterval:1.0];
-        NSLog(@"-->%.f", remainingTime);
+        NSLog(@"倒计时-->%.f", remainingTime);
     }
     
     [app endBackgroundTask:taskId];
     taskId = UIBackgroundTaskInvalid;
+}
+
+- (void)endBackgroundTask{
+    if (self.taskId) {
+        UIApplication *app = [UIApplication sharedApplication];
+        [app endBackgroundTask:self.taskId];
+        self.taskId = UIBackgroundTaskInvalid;
+    }
 }
 
 @end
