@@ -62,7 +62,7 @@
     [super layoutSubviews];
     
     CGFloat titleBgViewlH = self.titleLabelHeight;
-    self.showImageView.frame = self.bounds;
+    self.showImageView.frame = CGRectMake(-2, 0, self.bounds.size.width+4, self.bounds.size.height);
     titleBgViewlH = self.titleLabelHeight;
     
     CGFloat titlBgViewX   = 0.0f;
