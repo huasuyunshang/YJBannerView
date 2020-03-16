@@ -17,6 +17,8 @@
 @property (nonatomic, assign) CGFloat titleLabelEdgeMargin;
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
 @property (nonatomic, assign) UIViewContentMode showImageViewContentMode; /**< 填充样式 默认UIViewContentModeScaleToFill */
+@property(nonatomic,assign) BOOL isCornerRadius; //是否添加圆角
+@property(nonatomic,assign) CGFloat cornerRadius; //圆角
 @property (nonatomic, assign) BOOL isConfigured;
 
 - (void)cellWithSelectorString:(NSString *)selectorString imagePath:(NSString *)imagePath placeholderImage:(UIImage *)placeholderImage title:(NSString *)title;

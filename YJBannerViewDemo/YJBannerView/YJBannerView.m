@@ -501,6 +501,8 @@ static NSInteger const totalCollectionViewCellCount = 200;
         cell.titleLabelTextColor = self.titleTextColor;
         cell.titleLabelTextFont = self.titleFont;
         cell.showImageViewContentMode = self.bannerImageViewContentMode;
+        cell.cornerRadius = self.bannerRadius;
+        cell.isCornerRadius = self.bannerIsRadius;
         cell.clipsToBounds = YES;
         cell.isConfigured = YES;
     }

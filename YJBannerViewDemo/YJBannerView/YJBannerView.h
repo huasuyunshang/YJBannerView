@@ -120,6 +120,10 @@ typedef NS_ENUM(NSInteger, BannerViewDirection) {
 
 @property (nonatomic, strong) UIColor *footerTitleColor;                            /**< footer TitleColoe 默认是 darkGrayColor */
 
+@property (nonatomic, assign) BOOL bannerIsRadius;                            /**< Banner是否需要添加圆角,默认为NO */
+
+@property (nonatomic, assign) CGFloat bannerRadius;                            /**< Banner圆角 */
+
 @property (nonatomic, copy) void(^didScroll2IndexBlock)(NSInteger index);
 @property (nonatomic, copy) void(^didSelectItemAtIndexBlock)(NSInteger index);
 @property (nonatomic, copy) void(^didEndTriggerFooterBlock)();
