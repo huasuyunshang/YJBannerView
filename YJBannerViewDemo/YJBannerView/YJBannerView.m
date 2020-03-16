@@ -152,6 +152,18 @@ static NSInteger const totalCollectionViewCellCount = 200;
 }
 
 #pragma mark - Setter && Getter
+
+- (void)setBannerIsRadius:(BOOL)bannerIsRadius{
+    _bannerIsRadius = bannerIsRadius;
+    _backgroundImageView.layer.cornerRadius = _bannerRadius;
+    _backgroundImageView.layer.masksToBounds = bannerIsRadius;
+}
+
+- (void)setBannerRadius:(CGFloat)bannerRadius{
+    _bannerRadius = bannerRadius;
+}
+
+
 - (void)setEmptyImage:(UIImage *)emptyImage{
     _emptyImage = emptyImage;
     if (emptyImage) {
