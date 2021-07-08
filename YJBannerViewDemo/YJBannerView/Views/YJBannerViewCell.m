@@ -58,6 +58,12 @@
     self.showImageView.contentMode = showImageViewContentMode;
 }
 
+- (void)setIsCornerRadius:(BOOL)isCornerRadius{
+    _isCornerRadius = isCornerRadius;
+    self.contentView.layer.masksToBounds = isCornerRadius;
+    self.contentView.layer.cornerRadius = self.cornerRadius;
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     

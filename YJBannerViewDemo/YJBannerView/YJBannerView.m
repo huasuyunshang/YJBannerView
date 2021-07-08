@@ -152,6 +152,18 @@ static NSInteger const totalCollectionViewCellCount = 200;
 }
 
 #pragma mark - Setter && Getter
+
+- (void)setBannerIsRadius:(BOOL)bannerIsRadius{
+    _bannerIsRadius = bannerIsRadius;
+    _backgroundImageView.layer.cornerRadius = _bannerRadius;
+    _backgroundImageView.layer.masksToBounds = bannerIsRadius;
+}
+
+- (void)setBannerRadius:(CGFloat)bannerRadius{
+    _bannerRadius = bannerRadius;
+}
+
+
 - (void)setEmptyImage:(UIImage *)emptyImage{
     _emptyImage = emptyImage;
     if (emptyImage) {
@@ -501,6 +513,8 @@ static NSInteger const totalCollectionViewCellCount = 200;
         cell.titleLabelTextColor = self.titleTextColor;
         cell.titleLabelTextFont = self.titleFont;
         cell.showImageViewContentMode = self.bannerImageViewContentMode;
+        cell.cornerRadius = self.bannerRadius;
+        cell.isCornerRadius = self.bannerIsRadius;
         cell.clipsToBounds = YES;
         cell.isConfigured = YES;
     }

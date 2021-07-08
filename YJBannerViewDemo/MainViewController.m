@@ -306,6 +306,10 @@ static CGFloat const midMargin = 15.0f;
         _normalBannerView = [YJBannerView bannerViewWithFrame:CGRectMake(0, 20, kYJSCREEN_WIDTH, 180) dataSource:self delegate:self emptyImage:[UIImage imageNamed:@"placeholder"] placeholderImage:[UIImage imageNamed:@"placeholder"] selectorString:@"sd_setImageWithURL:placeholderImage:"];
         _normalBannerView.autoDuration = 2.5f;
         _normalBannerView.titleFont = [UIFont systemFontOfSize:20];
+        //banner添加圆角功能
+        _normalBannerView.bannerRadius = 20;
+        _normalBannerView.bannerIsRadius = YES;
+        _normalBannerView.pageControlBottomMargin = -20;
 //        _normalBannerView.repeatCount = 2;
     }
     return _normalBannerView;
